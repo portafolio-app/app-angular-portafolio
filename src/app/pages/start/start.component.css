@@ -1,0 +1,25 @@
+ /* Estilo del logo */
+ .logo-text {
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  stroke-dasharray: 2200; /* Longitud total del trazo */
+  stroke-dashoffset: 2200; /* Empezar oculto */
+  animation: drawText 5s forwards, fillText 2ms 2.5s forwards;
+}
+
+/* Animación para "dibujar" el texto */
+@keyframes drawText {
+  100% {
+    stroke-dashoffset: 0; /* Desenlazar el trazo */
+  }
+}
+
+/* Animación para rellenar el texto con el color verde */
+@keyframes fillText {
+  0% {
+    fill: none;
+  }
+  100% {
+    fill: #00FF00; /* Color verde brillante */
+  }
+}

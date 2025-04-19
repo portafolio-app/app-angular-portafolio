@@ -1,0 +1,79 @@
+<nav
+  class="fixed top-0 start-0 w-full z-50 bg-white dark:bg-gray-900 shadow-md h-16 md:h-20 flex items-center border-b border-gray-200 dark:border-gray-700 transition-all duration-300">
+  <div class="max-w-screen-xl w-full flex items-center justify-between px-6 mx-auto">
+
+    <!-- LOGO -->
+    <a routerLink="/" class="flex items-center">
+      <span class="text-2xl font-bold text-gray-900 dark:text-gray-100 transition-all duration-300">
+        JCV
+      </span>
+    </a>
+
+    <!-- Menú de navegación -->
+    <div [ngClass]="{'hidden': !isMenuOpen, 'md:flex': true}" id="navbar" class="md:flex md:items-center">
+      <ul class="flex space-x-8 text-lg font-medium">
+        <li>
+          <a routerLink="/"
+            class="relative text-gray-900 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300">
+            Home
+            <span
+              class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 hover:w-full"></span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/proyectos"
+            class="relative text-gray-900 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300">
+            Proyectos
+            <span
+              class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 hover:w-full"></span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/about"
+            class="relative text-gray-900 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300">
+            Sobre mí
+            <span
+              class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 hover:w-full"></span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/services"
+            class="relative text-gray-900 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300">
+            Servicios
+            <span
+              class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 hover:w-full"></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Botón de cambio de tema -->
+    <button (click)="toggleTheme()" aria-label="Cambiar tema"
+      class="text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-lg transition-all duration-300">
+      <svg *ngIf="isDarkMode" class="w-6 h-6 transition-all duration-300 ease-in-out" fill="none" stroke="currentColor"
+        stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.071-7.071l-1.414 1.414M6.343 17.657l-1.414 1.414M17.657 17.657l1.414 1.414M6.343 6.343L4.929 4.929M12 6a6 6 0 100 12 6 6 0 000-12z">
+        </path>
+      </svg>
+      <svg *ngIf="!isDarkMode" class="w-6 h-6 transition-all duration-300 ease-in-out" fill="none" stroke="currentColor"
+        stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 1021 12.79z"></path>
+      </svg>
+    </button>
+
+    <!-- Botón menú móvil -->
+    <button (click)="toggleMenu()" id="menu-toggle" aria-label="Abrir menú"
+      class="md:hidden text-gray-600 dark:text-gray-400 p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 transition-all duration-300">
+      <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+      </svg>
+    </button>
+
+  </div>
+</nav>
+
+<!-- Contenedor que empuja el contenido debajo del navbar -->
+<div class="pt-16 md:pt-20">
+  <router-outlet></router-outlet>
+</div>

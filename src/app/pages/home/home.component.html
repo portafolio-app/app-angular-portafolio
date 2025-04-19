@@ -1,0 +1,198 @@
+<app-navbard  [isDarkMode]="isDarkMode" (themeToggle)="toggleTheme()"></app-navbard>
+<section  class="relative min-h-screen flex items-center bg-gradient-to-r from-gray-100 to-white dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-white">
+
+  <div class="grid max-w-screen-xl mx-auto grid-cols-1 lg:grid-cols-2 px-6 lg:px-12 gap-10 items-center w-full relative">
+    <!-- Contenido de texto -->
+    <div class="text-center lg:text-left animate__animated animate__fadeInLeft animate__delay-1s">
+      <h1 #typewriter class="text-4xl font-extrabold md:text-5xl lg:text-6xl mt-4 opacity-0 animate__animated animate__fadeInLeft">
+        Jorge Luis <span class="text-blue-500">Castillo Vega</span>
+      </h1>
+      <p class="mt-6 text-xl font-medium text-gray-800 dark:text-gray-200 leading-relaxed animate__animated animate__fadeInLeft animate__delay-2s">
+        Apasionado por crear soluciones tecnológicas eficientes y escalables, optimizando rendimiento y experiencia de usuario.
+      </p>
+
+      <!-- Redes Sociales -->
+      <div class="mt-6 flex justify-center lg:justify-start space-x-6 animate__animated animate__fadeInLeft animate__delay-3s">
+        <a href="https://github.com/tu_usuario" target="_blank"
+          class="w-14 h-14 flex items-center justify-center rounded-full bg-transparent border-2 border-gray-800 dark:border-gray-100 p-3 transition-transform transform hover:scale-110 hover:shadow-lg">
+          <i class="fab fa-github text-gray-800 dark:text-gray-100 text-3xl font-bold"></i>
+        </a>
+
+        <a href="https://www.linkedin.com/in/tu_usuario" target="_blank"
+          class="w-14 h-14 flex items-center justify-center rounded-full bg-transparent border-2 border-gray-800 dark:border-gray-100 p-3 transition-transform transform hover:scale-110 hover:shadow-lg">
+          <i class="fab fa-linkedin text-gray-800 dark:text-gray-100 text-3xl font-bold"></i>
+        </a>
+
+        <a href="mailto:tuemail@example.com"
+          class="w-14 h-14 flex items-center justify-center rounded-full bg-transparent border-2 border-gray-800 dark:border-gray-100 p-3 transition-transform transform hover:scale-110 hover:shadow-lg">
+          <i class="fas fa-envelope text-gray-800 dark:text-gray-100 text-3xl font-bold"></i>
+        </a>
+
+        <div>
+          <a href="CV_JorgeCastilloVega.pdf" download
+            class="px-6 py-3 flex text-gray-800 dark:text-gray-100 items-center justify-center rounded-full bg-transparent border-2 border-gray-800 dark:border-gray-100 p-3 transition-transform transform hover:scale-110 hover:shadow-lg">
+            📄 Descargar CV
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenedor de la imagen con animación de deslizamiento desde la derecha -->
+    <div class="relative mx-auto w-[400px] h-[300px] animate__animated animate__fadeInRight animate__delay-1s">
+      <!-- Imagen de fondo difuminada -->
+      <img src="1.jpg"
+        class="absolute top-6 left-6 w-[400px] h-[300px] object-cover rounded-xl shadow-xl opacity-70 blur-sm"
+        alt="Background image">
+
+      <!-- Imagen principal con borde -->
+      <img src="2.jpg" class="relative w-[400px] h-[300px] object-cover rounded-xl shadow-2xl border-2 border-gray-300"
+        alt="Highlighted image">
+    </div>
+  </div>
+</section>
+
+<section  class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white py-16">
+  <div class="max-w-screen-xl mx-auto px-6 lg:px-12">
+    <h2 class="text-4xl font-extrabold text-green-500 text-center">Proyectos</h2>
+    <p class="mt-3 text-lg text-gray-700 dark:text-gray-300 text-center">
+      Algunos de los proyectos en los que he trabajado recientemente.
+    </p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+
+      <!-- Proyecto 1 -->
+      <div
+        class="bg-gray-100 dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-300 dark:border-gray-700 hover:shadow-xl transition-transform transform hover:scale-105">
+        <div class="p-6 flex flex-col justify-between h-full">
+          <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">E-commerce Angular</h3>
+          <p class="text-gray-700 dark:text-gray-400 mt-2">Tienda en línea con carrito de compras y autenticación.</p>
+          <div class="flex flex-wrap mt-4 gap-2">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg" alt="Angular"
+              class="w-8 h-8 tooltip" title="Angular">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
+              alt="Tailwind" class="w-8 h-8 tooltip" title="Tailwind CSS">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase"
+              class="w-8 h-8 tooltip" title="Firebase">
+          </div>
+          <div class="mt-4 flex space-x-4">
+            <a href="https://github.com/tuusuario/ecommerce-angular" target="_blank"
+              class="px-4 py-2 text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition">Ver
+              Código</a>
+            <a href="https://ecommerce-demo.vercel.app" target="_blank"
+              class="px-4 py-2 text-white bg-green-600 dark:bg-green-500 rounded-lg hover:bg-green-500 dark:hover:bg-green-400 transition">Demo
+              en Vivo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proyecto 2 -->
+      <div
+        class="bg-gray-100 dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-300 dark:border-gray-700 hover:shadow-xl transition-transform transform hover:scale-105">
+        <div class="p-6 flex flex-col justify-between h-full">
+          <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">Gestor de Tareas</h3>
+          <p class="text-gray-700 dark:text-gray-400 mt-2">Aplicación para gestionar tareas con drag & drop.</p>
+          <div class="flex flex-wrap mt-4 gap-2">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg" alt="Angular"
+              class="w-8 h-8 tooltip" title="Angular">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg"
+              alt="Bootstrap" class="w-8 h-8 tooltip" title="Bootstrap">
+          </div>
+          <div class="mt-4 flex space-x-4">
+            <a href="https://github.com/tuusuario/task-manager" target="_blank"
+              class="px-4 py-2 text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition">Ver
+              Código</a>
+            <a href="https://taskmanager-demo.vercel.app" target="_blank"
+              class="px-4 py-2 text-white bg-green-600 dark:bg-green-500 rounded-lg hover:bg-green-500 dark:hover:bg-green-400 transition">Demo
+              en Vivo</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section
+  class="py-16 bg-gradient-to-b from-gray-100 to-white dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-white">
+  <div class="max-w-screen-xl mx-auto px-6 lg:px-12 text-center">
+    <h2 class="text-4xl font-extrabold text-teal-500">Conocimientos</h2>
+    <p class="mt-3 text-lg text-gray-700 dark:text-gray-300">Tecnologías en las que tengo experiencia, organizadas por
+      categoría.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
+
+      <!-- Frontend -->
+      <div
+        class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-300 dark:border-gray-700 hover:shadow-teal-500/50 transition">
+        <h3 class="text-xl font-semibold text-teal-500 dark:text-teal-400 mb-6">Frontend</h3>
+        <div class="flex flex-wrap justify-center gap-4">
+          <ng-container *ngFor="let tech of frontend">
+            <div
+              class="p-4 bg-gray-100 dark:bg-gray-700 rounded-xl relative group transition hover:scale-105 hover:bg-gray-200 dark:hover:bg-gray-600">
+              <img [src]="tech.icon" class="w-8 h-8">
+              <div
+                class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-3 py-1 text-sm text-white dark:text-gray-900 bg-black/80 dark:bg-gray-200 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-90 group-hover:scale-100">
+                {{ tech.name }}
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <!-- Backend -->
+      <div
+        class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-300 dark:border-gray-700 hover:shadow-green-500/50 transition">
+        <h3 class="text-xl font-semibold text-green-500 dark:text-green-400 mb-6">Backend</h3>
+        <div class="flex flex-wrap justify-center gap-4">
+          <ng-container *ngFor="let tech of backend">
+            <div
+              class="p-4 bg-gray-100 dark:bg-gray-700 rounded-xl relative group transition hover:scale-105 hover:bg-gray-200 dark:hover:bg-gray-600">
+              <img [src]="tech.icon" class="w-8 h-8">
+              <div
+                class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-3 py-1 text-sm text-white dark:text-gray-900 bg-black/80 dark:bg-gray-200 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-90 group-hover:scale-100">
+                {{ tech.name }}
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <!-- Bases de Datos -->
+      <div
+        class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-300 dark:border-gray-700 hover:shadow-yellow-500/50 transition">
+        <h3 class="text-xl font-semibold text-yellow-500 dark:text-yellow-400 mb-6">Bases de Datos</h3>
+        <div class="flex flex-wrap justify-center gap-4">
+          <ng-container *ngFor="let tech of databases">
+            <div
+              class="p-4 bg-gray-100 dark:bg-gray-700 rounded-xl relative group transition hover:scale-105 hover:bg-gray-200 dark:hover:bg-gray-600">
+              <img [src]="tech.icon" class="w-8 h-8">
+              <div
+                class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-3 py-1 text-sm text-white dark:text-gray-900 bg-black/80 dark:bg-gray-200 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-90 group-hover:scale-100">
+                {{ tech.name }}
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <!-- Herramientas -->
+      <div
+        class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-300 dark:border-gray-700 hover:shadow-purple-500/50 transition">
+        <h3 class="text-xl font-semibold text-purple-500 dark:text-purple-400 mb-6">Herramientas</h3>
+        <div class="flex flex-wrap justify-center gap-4">
+          <ng-container *ngFor="let tech of tools">
+            <div
+              class="p-4 bg-gray-100 dark:bg-gray-700 rounded-xl relative group transition hover:scale-105 hover:bg-gray-200 dark:hover:bg-gray-600">
+              <img [src]="tech.icon" class="w-8 h-8">
+              <div
+                class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-3 py-1 text-sm text-white dark:text-gray-900 bg-black/80 dark:bg-gray-200 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-90 group-hover:scale-100">
+                {{ tech.name }}
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
