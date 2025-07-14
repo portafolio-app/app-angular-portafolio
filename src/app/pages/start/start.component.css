@@ -1,10 +1,10 @@
- /* Estilo del logo */
- .logo-text {
+/* Estilo del logo */
+.logo-text {
   font-family: 'Arial', sans-serif;
   font-weight: bold;
   stroke-dasharray: 2200; /* Longitud total del trazo */
   stroke-dashoffset: 2200; /* Empezar oculto */
-  animation: drawText 5s forwards, fillText 2ms 2.5s forwards;
+  animation: drawText 5s forwards, fillText 2s 2.5s forwards, fadeInText 1s 0s forwards;
 }
 
 /* Animación para "dibujar" el texto */
@@ -21,5 +21,15 @@
   }
   100% {
     fill: #00FF00; /* Color verde brillante */
+  }
+}
+
+/* Animación para que el texto se desvanezca y entre de forma suave */
+@keyframes fadeInText {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

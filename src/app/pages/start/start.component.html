@@ -1,10 +1,11 @@
-<section class="w-screen h-screen bg-black flex justify-center items-center animate__animated" [ngClass]="animationClass">
+<section class="w-screen h-screen bg-black flex justify-center items-center overflow-hidden">
   <div class="relative w-full h-full flex justify-center items-center">
     <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
       <text
         x="50%"
         y="50%"
-        class="logo-text"
+        class="logo-text text-white animate__animated"
+        [ngClass]="animationClass"
         text-anchor="middle"
         dominant-baseline="middle"
         font-size="13vw"
@@ -17,3 +18,14 @@
     </svg>
   </div>
 </section>
+
+<!-- Aquí el botón de "Enter", se mostrará cuando isButtonVisible sea true -->
+<div class="absolute bottom-10 flex justify-center w-full">
+  <button
+    *ngIf="isButtonVisible"
+    class="px-6 py-3 text-white bg-green-500 hover:bg-green-600 rounded-full transition duration-300 ease-in-out transform hover:scale-110"
+    (click)="navigateToHome()"
+  >
+    Enter
+  </button>
+</div>

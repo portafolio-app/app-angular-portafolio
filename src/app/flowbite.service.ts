@@ -6,13 +6,20 @@ import { isPlatformBrowser } from '@angular/common';
   providedIn: 'root'
 })
 export class FlowbiteService {
+  private flowbiteLoaded = false;
+
   constructor(@Inject(PLATFORM_ID) private platformId: any) {}
 
-  loadFlowbite(callback: (flowbite: any) => void) {
+  loadFlowbite(): Promise<any> {
     if (isPlatformBrowser(this.platformId)) {
-      import('flowbite').then(flowbite => {
-        callback(flowbite);
-      });
+      if (!this.flowbiteLoaded) {
+        return import('flowbite').then((flowbite) => {
+          this.flowbiteLoaded = true;
+          return flowbite;
+        });
+      }
+      return Promise.resolve(null); 
     }
+    return Promise.resolve(null);
   }
 }

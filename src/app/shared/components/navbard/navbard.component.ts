@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./navbard.component.css'],
 })
 export class NavbardComponent  {
- 
+
   isMenuOpen: boolean = false;
   showContent: boolean = false;  // Variable para controlar la visibilidad del contenido
 

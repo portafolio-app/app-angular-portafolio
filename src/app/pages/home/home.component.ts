@@ -10,19 +10,31 @@ import {
 import { RouterModule } from '@angular/router';
 import Typewriter from 'typewriter-effect/dist/core';
 import { NavbardComponent } from '../../shared/components/navbard/navbard.component';
+import { ThemeService } from '../../core/services/ThemeService';
+import { CardProyectosComponent } from '../../shared/components/card-proyectos/card-proyectos.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule,NavbardComponent],
+  imports: [CommonModule, RouterModule, NavbardComponent,CardProyectosComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements AfterViewInit {
-
   @ViewChild('typewriter', { static: false }) typewriterElement!: ElementRef;
+  isDarkMode: boolean = false;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private themeService: ThemeService
+  ) {}
+
+  ngOnInit(): void {
+    // Suscribirse al observable para obtener el estado del tema
+    this.themeService.isDarkMode$.subscribe((isDarkMode) => {
+      this.isDarkMode = isDarkMode;
+    });
+  }
 
   ngAfterViewInit(): void {
     // Solo ejecuta si está en el navegador
@@ -33,11 +45,14 @@ export class HomeComponent implements AfterViewInit {
         this.typewriterElement.nativeElement.classList.add('animate__fadeIn');
 
         // Iniciar la animación del typewriter
-        const typewriter = new Typewriter(this.typewriterElement.nativeElement, {
-          loop: false,
-          delay: 75,
-          cursor: '|',
-        });
+        const typewriter = new Typewriter(
+          this.typewriterElement.nativeElement,
+          {
+            loop: false,
+            delay: 75,
+            cursor: '|',
+          }
+        );
 
         // Definir el comportamiento del typewriter
         typewriter
@@ -47,13 +62,18 @@ export class HomeComponent implements AfterViewInit {
           .pauseFor(500)
           .deleteChars(13)
           .pauseFor(500)
-          .typeString('<span class="text-green-500">Desarrollador Software</span>')
+          .typeString(
+            '<span class="text-green-500">Desarrollador Software</span>'
+          )
           .start();
       }
     }
-
   }
 
+  // Método para alternar entre modo oscuro y claro
+  toggleTheme(): void {
+    this.themeService.toggleTheme(); // Llamamos al servicio para cambiar el tema
+  }
 
   frontend = [
     {
