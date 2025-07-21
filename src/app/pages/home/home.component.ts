@@ -12,13 +12,20 @@ import Typewriter from 'typewriter-effect/dist/core';
 import { NavbardComponent } from '../../shared/components/navbard/navbard.component';
 import { ThemeService } from '../../core/services/ThemeService';
 import { CardProyectosComponent } from '../../shared/components/card-proyectos/card-proyectos.component';
+import { FooterComponent } from '../../shared/components/footer/footer.component';
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, NavbardComponent,CardProyectosComponent],
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  imports: [
+    CommonModule,
+    RouterModule,
+    NavbardComponent,
+    CardProyectosComponent,
+    FooterComponent
+  ],
+  templateUrl: './home.component.html'
 })
 export class HomeComponent implements AfterViewInit {
   @ViewChild('typewriter', { static: false }) typewriterElement!: ElementRef;
@@ -30,49 +37,60 @@ export class HomeComponent implements AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    // Suscribirse al observable para obtener el estado del tema
     this.themeService.isDarkMode$.subscribe((isDarkMode) => {
       this.isDarkMode = isDarkMode;
     });
   }
 
   ngAfterViewInit(): void {
-    // Solo ejecuta si está en el navegador
-    if (isPlatformBrowser(this.platformId)) {
-      // Verificamos si el elemento está disponible antes de manipularlo
-      if (this.typewriterElement) {
-        // Agregar la clase de animación 'fadeIn' después de que el componente haya sido renderizado
-        this.typewriterElement.nativeElement.classList.add('animate__fadeIn');
+    // Llamamos al método para aplicar el efecto de scroll
+    this.initScrollAnimations();
 
-        // Iniciar la animación del typewriter
-        const typewriter = new Typewriter(
-          this.typewriterElement.nativeElement,
-          {
-            loop: false,
-            delay: 75,
-            cursor: '|',
-          }
-        );
+    // Typewriter animation (sin cambios)
+    if (this.typewriterElement) {
+      this.typewriterElement.nativeElement.classList.add('animate__fadeIn');
+      const typewriter = new Typewriter(this.typewriterElement.nativeElement, {
+        loop: false,
+        delay: 75,
+        cursor: '|',
+      });
 
-        // Definir el comportamiento del typewriter
-        typewriter
-          .typeString('Jorge Luis ')
-          .pauseFor(500)
-          .typeString('<span class="text-green-500">Castillo Vega</span>')
-          .pauseFor(500)
-          .deleteChars(13)
-          .pauseFor(500)
-          .typeString(
-            '<span class="text-green-500">Desarrollador Software</span>'
-          )
-          .start();
-      }
+      typewriter
+        .typeString('Jorge Luis ')
+        .pauseFor(500)
+        .typeString('<span class="text-green-500">Castillo Vega</span>')
+        .pauseFor(500)
+        .deleteChars(13)
+        .pauseFor(500)
+        .typeString(
+          '<span class="text-green-500">Desarrollador Software</span>'
+        )
+        .start();
     }
   }
+  initScrollAnimations(): void {
+    const elements = document.querySelectorAll('.scroll-animate');
 
-  // Método para alternar entre modo oscuro y claro
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate__fadeIn');
+          } else {
+            entry.target.classList.remove('animate__fadeIn');
+          }
+        });
+      },
+      {
+        threshold: 0.5,
+      }
+    );
+
+    elements.forEach((element) => observer.observe(element));
+  }
+
   toggleTheme(): void {
-    this.themeService.toggleTheme(); // Llamamos al servicio para cambiar el tema
+    this.themeService.toggleTheme();
   }
 
   frontend = [
