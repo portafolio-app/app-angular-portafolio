@@ -1,225 +1,310 @@
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12 animate__animated animate__fadeInUp">
-  <!-- Proyecto 1: Sistema de Ventas de Productos Electrónicos -->
-  <div
-    class="bg-gray-100 dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-300 dark:border-gray-700 hover:shadow-2xl transition-transform transform hover:scale-105"
-    role="region" aria-labelledby="proyecto-1">
-    <div class="p-6 flex flex-col justify-between h-full">
-      <!-- Imagen de vista previa -->
-      <img src="https://via.placeholder.com/500x300?text=Sistema+de+Ventas+Electrónicos"
-        alt="Vista previa Sistema de Ventas" class="w-full h-48 object-cover rounded-md mb-4">
+<div class="max-w-7xl mx-auto px-4 py-12">
 
-      <!-- Título y descripción -->
-      <h3 id="proyecto-1" class="text-2xl font-semibold text-gray-900 dark:text-white">
-        Sistema de Ventas de Productos Electrónicos
-      </h3>
-      <p class="text-gray-700 dark:text-gray-400 mt-2">
-        Plataforma para gestionar ventas y productos electrónicos en línea, con carrito de compras y opciones de pago.
-      </p>
+  <header class="text-center mb-12">
+    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-3">{{ sectionTitle }}</h2>
+    <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">{{ sectionDescription }}</p>
 
-      <!-- Tecnologías -->
-      <div class="flex flex-wrap mt-4 gap-2">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg" alt="Angular"
-          class="w-8 h-8 tooltip" title="Angular">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
-          alt="Tailwind" class="w-8 h-8 tooltip" title="Tailwind CSS">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase"
-          class="w-8 h-8 tooltip" title="Firebase">
+    <!-- Simple Stats -->
+    <div *ngIf="!isLoading && !error" class="flex justify-center gap-8 mt-8">
+      <div class="text-center">
+        <div class="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{{ totalProjects }}</div>
+        <div class="text-sm text-gray-500">Proyectos</div>
+      </div>
+      <div class="text-center">
+        <div class="text-2xl font-bold text-teal-600 dark:text-teal-400">{{ featuredCount }}</div>
+        <div class="text-sm text-gray-500">Destacados</div>
+      </div>
+      <div class="text-center">
+        <div class="text-2xl font-bold text-green-600 dark:text-green-400">{{ totalTechnologies }}</div>
+        <div class="text-sm text-gray-500">Tecnologías</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Loading -->
+  <div *ngIf="isLoading" class="text-center py-16">
+    <div class="animate-spin w-8 h-8 border-2 border-emerald-600 border-t-transparent rounded-full mx-auto mb-4"></div>
+    <p class="text-gray-600 dark:text-gray-400">Cargando proyectos...</p>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="error && !isLoading" class="text-center py-16">
+    <div class="text-red-500 mb-4">
+      <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+    </div>
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Error al cargar proyectos</h3>
+    <p class="text-gray-600 dark:text-gray-400 mb-6">{{ error }}</p>
+    <button (click)="retryLoadProjects()"
+      class="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
+      Intentar de nuevo
+    </button>
+  </div>
+
+  <app-project-filter [projects]="allProjects" (filteredProjectsChanged)="onFilteredProjectsChanged($event)"
+    (filtersChanged)="onFiltersChanged($event)">
+  </app-project-filter>
+  
+  <main *ngIf="!isLoading && !error">
+    <!-- Featured Projects Section -->
+    <section *ngIf="showFeaturedOnly && featuredProjects.length > 0" class="mb-16">
+      <div class="flex items-center justify-between mb-8">
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Proyectos Destacados</h3>
+        <span class="text-sm text-emerald-600 dark:text-emerald-400 font-medium">{{ featuredProjects.length }}
+          proyectos</span>
       </div>
 
-      <!-- Botones -->
-      <div class="mt-4 flex space-x-4">
-        <a href="https://github.com/VCL-tt/sistema-ventas-electronicos" target="_blank" rel="noopener noreferrer"
-          class="px-4 py-2 text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-transform transform hover:scale-105"
-          aria-label="Ver código fuente del proyecto Sistema de Ventas de Productos Electrónicos">
-          Ver Código
-        </a>
-        <a href="https://ventas-demo.vercel.app" target="_blank" rel="noopener noreferrer"
-          class="px-4 py-2 text-white bg-green-600 dark:bg-green-500 rounded-lg hover:bg-green-500 dark:hover:bg-green-400 transition-transform transform hover:scale-105"
-          aria-label="Ver demo en vivo de Sistema de Ventas de Productos Electrónicos">
-          Demo en Vivo
-        </a>
+      <!-- Grid de proyectos destacados -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <article *ngFor="let project of featuredProjects; trackBy: trackByProject"
+          class="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-emerald-100 dark:border-emerald-900/30 hover:shadow-lg hover:border-emerald-200 dark:hover:border-emerald-800/50 transition-all duration-300">
+
+          <!-- Project Image -->
+          <div
+            class="relative aspect-video bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-t-xl overflow-hidden">
+            <img [src]="project.image" [alt]="project.title" class="w-full h-full object-cover"
+              (error)="handleImageError($event)" loading="lazy">
+
+            <!-- Elegant featured indicator -->
+            <div *ngIf="project.featured" class="absolute top-3 right-3">
+              <span
+                class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-xs px-3 py-1 rounded-full font-medium shadow-lg">
+                ✨ Destacado
+              </span>
+            </div>
+
+            <!-- Overlay gradient -->
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300">
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="p-6">
+            <!-- Title -->
+            <h4
+              class="text-lg font-semibold text-gray-900 dark:text-white mb-2 line-clamp-1 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
+              {{ project.title }}
+            </h4>
+
+            <!-- Description -->
+            <p class="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2 leading-relaxed">
+              {{ project.shortDescription }}
+            </p>
+
+            <!-- Technologies -->
+            <div class="flex flex-wrap gap-2 mb-5">
+              <span *ngFor="let tech of project.technologies.slice(0, 4)"
+                class="inline-flex items-center px-2.5 py-1 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs rounded-lg border border-emerald-200 dark:border-emerald-800">
+                <img [src]="tech.icon" [alt]="tech.name" class="w-3 h-3 mr-1.5" (error)="handleTechIconError($event)">
+                {{ tech.name }}
+              </span>
+              <span *ngIf="project.technologies.length > 4"
+                class="inline-flex items-center px-2.5 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 text-xs rounded-lg">
+                +{{ project.technologies.length - 4 }}
+              </span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex gap-2 mb-3">
+              <button *ngFor="let link of project.links.slice(0, 2)" (click)="onLinkClick(project, link, $event)"
+                [ngClass]="getLinkButtonClass(link.type)"
+                class="flex-1 px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 flex items-center justify-center hover:scale-105">
+                <i [class]="getLinkIcon(link.type)" class="mr-2 text-sm"></i>
+                {{ link.label }}
+              </button>
+            </div>
+
+            <button (click)="onViewDetails(project, $event)"
+              class="w-full px-3 py-2 text-sm text-emerald-700 dark:text-emerald-300 hover:text-emerald-800 dark:hover:text-emerald-200 bg-emerald-50 dark:bg-emerald-900/30 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 rounded-lg transition-all duration-200 border border-emerald-200 dark:border-emerald-800">
+              Ver más detalles
+            </button>
+          </div>
+        </article>
+      </div>
+
+      <!-- See All Button -->
+      <div class="text-center mt-12">
+        <button (click)="showAllProjects()"
+          class="px-8 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-medium rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl">
+          Ver todos los proyectos ({{ allProjects.length - featuredProjects.length }} más)
+        </button>
+      </div>
+    </section>
+
+    <!-- All Projects Section -->
+    <section *ngIf="!showFeaturedOnly">
+      <div class="flex items-center justify-between mb-8">
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Todos los Proyectos</h3>
+        <button (click)="showOnlyFeatured()"
+          class="text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300 text-sm font-medium bg-emerald-50 dark:bg-emerald-900/30 px-3 py-1.5 rounded-lg hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-all">
+          Solo destacados
+        </button>
+      </div>
+
+      <!-- Grid para todos los proyectos (más compacto) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <article *ngFor="let project of allProjects; trackBy: trackByProject"
+          class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md hover:border-emerald-200 dark:hover:border-emerald-800/50 transition-all duration-300">
+
+          <!-- Compact Project Image -->
+          <div
+            class="relative aspect-video bg-gradient-to-br from-gray-50 to-emerald-50 dark:from-gray-900 dark:to-emerald-900/20 rounded-t-lg overflow-hidden">
+            <img [src]="project.image" [alt]="project.title" class="w-full h-full object-cover"
+              (error)="handleImageError($event)" loading="lazy">
+
+            <!-- Subtle featured indicator -->
+            <div *ngIf="project.featured" class="absolute top-2 right-2">
+              <div class="w-2.5 h-2.5 bg-emerald-500 rounded-full shadow-sm"></div>
+            </div>
+          </div>
+
+          <!-- Compact Content -->
+          <div class="p-4">
+            <!-- Title -->
+            <h4
+              class="text-base font-semibold text-gray-900 dark:text-white mb-2 line-clamp-1 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
+              {{ project.title }}
+            </h4>
+
+            <!-- Description -->
+            <p class="text-gray-600 dark:text-gray-300 text-sm mb-3 line-clamp-2">
+              {{ project.shortDescription }}
+            </p>
+
+            <!-- Compact Technologies -->
+            <div class="flex flex-wrap gap-1 mb-3">
+              <img *ngFor="let tech of project.technologies.slice(0, 4)" [src]="tech.icon" [alt]="tech.name"
+                class="w-5 h-5 rounded-md p-0.5 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800"
+                [title]="tech.name" (error)="handleTechIconError($event)">
+              <span *ngIf="project.technologies.length > 4"
+                class="flex items-center text-xs text-emerald-600 dark:text-emerald-400 ml-1 font-medium">
+                +{{ project.technologies.length - 4 }}
+              </span>
+            </div>
+
+            <!-- Compact Buttons -->
+            <div class="flex gap-2">
+              <button *ngFor="let link of project.links.slice(0, 2)" (click)="onLinkClick(project, link, $event)"
+                [ngClass]="getLinkButtonClass(link.type)"
+                class="flex-1 px-2 py-1.5 text-xs font-medium rounded-md transition-all duration-200 hover:scale-105">
+                {{ link.label }}
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- No Projects State -->
+    <section *ngIf="allProjects.length === 0" class="text-center py-16">
+      <div
+        class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 rounded-full flex items-center justify-center">
+        <svg class="w-10 h-10 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor"
+          viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+          </path>
+        </svg>
+      </div>
+      <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">No hay proyectos disponibles</h3>
+      <p class="text-gray-600 dark:text-gray-400 mb-6">Los proyectos aparecerán aquí una vez que estén cargados.</p>
+      <button (click)="retryLoadProjects()"
+        class="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
+        Recargar
+      </button>
+    </section>
+  </main>
+
+  <!-- Modal para ver detalles del proyecto -->
+  <div *ngIf="selectedProject"
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 modal-backdrop"
+    (click)="closeModal()">
+
+    <div
+      class="bg-white dark:bg-gray-800 rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto modal-content shadow-2xl border border-emerald-200 dark:border-emerald-800"
+      (click)="$event.stopPropagation()">
+
+      <!-- Modal Header -->
+      <div
+        class="flex items-center justify-between p-6 border-b border-emerald-100 dark:border-emerald-900/30 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20">
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+          {{ selectedProject.title }}
+        </h3>
+        <button (click)="closeModal()"
+          class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 p-2 rounded-lg hover:bg-white dark:hover:bg-gray-700 transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Content -->
+      <div class="p-6">
+        <!-- Project Image -->
+        <div
+          class="aspect-video bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-lg overflow-hidden mb-6 border border-emerald-200 dark:border-emerald-800">
+          <img [src]="selectedProject.image" [alt]="selectedProject.title" class="w-full h-full object-cover"
+            (error)="handleImageError($event)">
+        </div>
+
+        <!-- Description -->
+        <div class="mb-6">
+          <h4 class="text-lg font-medium text-emerald-800 dark:text-emerald-200 mb-3 flex items-center">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+              </path>
+            </svg>
+            Descripción
+          </h4>
+          <p
+            class="text-gray-600 dark:text-gray-300 leading-relaxed bg-gray-50 dark:bg-gray-900/50 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+            {{ selectedProject.description || selectedProject.shortDescription }}
+          </p>
+        </div>
+
+        <!-- Technologies -->
+        <div class="mb-6">
+          <h4 class="text-lg font-medium text-emerald-800 dark:text-emerald-200 mb-3 flex items-center">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z">
+              </path>
+            </svg>
+            Tecnologías utilizadas
+          </h4>
+          <div class="flex flex-wrap gap-2">
+            <span *ngFor="let tech of selectedProject.technologies"
+              class="inline-flex items-center px-3 py-2 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-sm rounded-lg border border-emerald-200 dark:border-emerald-800">
+              <img [src]="tech.icon" [alt]="tech.name" class="w-4 h-4 mr-2" (error)="handleTechIconError($event)">
+              {{ tech.name }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Project Links -->
+        <div>
+          <h4 class="text-lg font-medium text-emerald-800 dark:text-emerald-200 mb-3 flex items-center">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
+              </path>
+            </svg>
+            Enlaces del proyecto
+          </h4>
+          <div class="flex flex-wrap gap-3">
+            <button *ngFor="let link of selectedProject.links" (click)="handleLinkClick(link)"
+              [ngClass]="getLinkButtonClass(link.type)"
+              class="px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 flex items-center hover:scale-105 shadow-sm">
+              <i [class]="getLinkIcon(link.type)" class="mr-2"></i>
+              {{ link.label }}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
-  <!-- Proyecto 2: Aplicación de Seguimiento en Tiempo Real de Buses -->
-  <div
-    class="bg-gray-100 dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-300 dark:border-gray-700 hover:shadow-2xl transition-transform transform hover:scale-105"
-    role="region" aria-labelledby="proyecto-2">
-    <div class="p-6 flex flex-col justify-between h-full">
-      <!-- Imagen de vista previa -->
-      <img src="assets/Ubicate.png" alt="Vista previa Aplicación de Seguimiento de Buses"
-        class="w-full h-48 object-cover rounded-md mb-4">
-
-      <!-- Título y descripción -->
-      <h3 id="proyecto-2" class="text-2xl font-semibold text-gray-900 dark:text-white">
-        Aplicación de Seguimiento en Tiempo Real de Buses
-      </h3>
-      <p class="text-gray-700 dark:text-gray-400 mt-2">
-        App móvil para seguir la ubicación en tiempo real de buses, usando Google Maps API y tecnología Kotlin en
-        Android Studio.
-      </p>
-
-      <!-- Tecnologías -->
-      <div class="flex flex-wrap mt-4 gap-2">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin"
-          class="w-8 h-8 tooltip" title="Kotlin">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" alt="Android"
-          class="w-8 h-8 tooltip" title="Android Studio">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google Maps"
-          class="w-8 h-8 tooltip" title="Google Maps API">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase"
-          class="w-8 h-8 tooltip" title="Firebase">
-      </div>
-
-      <!-- Botón -->
-      <div class="mt-4">
-        <a href="https://github.com/ubicate-app/app-ubicate-android.git" target="_blank" rel="noopener noreferrer"
-          class="px-4 py-2 text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-transform transform hover:scale-105"
-          aria-label="Ver código fuente y documentación del proyecto">
-          Ver Código y Documentación
-        </a>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Proyecto 3: Aplicación Móvil Prodent - Citas Médicas -->
-  <div
-    class="bg-gray-100 dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-300 dark:border-gray-700 hover:shadow-2xl transition-transform transform hover:scale-105"
-    role="region" aria-labelledby="proyecto-3">
-    <div class="p-6 flex flex-col justify-between h-full">
-      <!-- Imagen de vista previa -->
-      <img src="assets/banner-prodent.png" alt="Vista previa Prodent" class="w-full h-48 object-cover rounded-md mb-4">
-
-      <!-- Título y descripción -->
-      <h3 id="proyecto-3" class="text-2xl font-semibold text-gray-900 dark:text-white">
-        Aplicación Móvil Prodent - Citas Médicas
-      </h3>
-      <p class="text-gray-700 dark:text-gray-400 mt-2">
-        Aplicación móvil para gestionar citas médicas en diversas especialidades, que ofrece opciones para agendar,
-        recibir recordatorios y mantener contacto directo con los profesionales de salud, asegurando una atención
-        eficiente y organizada.
-      </p>
-
-      <!-- Tecnologías -->
-      <div class="flex flex-wrap mt-4 gap-2">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin"
-          class="w-8 h-8 tooltip" title="Kotlin">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" alt="Android"
-          class="w-8 h-8 tooltip" title="Android Studio">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase"
-          class="w-8 h-8 tooltip" title="Firebase">
-      </div>
-
-      <!-- Botones-->
-      <div class="mt-4 flex space-x-4">
-        <a href="https://github.com/App-Android-Prodent/App-Prodent.git" target="_blank" rel="noopener noreferrer"
-          class="px-4 py-2 text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-transform transform hover:scale-105"
-          aria-label="Ver código fuente del proyecto Prodent - Citas Médicas">
-          Ver Código
-        </a>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- Proyecto 4: Control de Dispositivos IoT con Arduino y Bluetooth -->
-  <div
-    class="bg-gray-100 dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-300 dark:border-gray-700 hover:shadow-2xl transition-transform transform hover:scale-105"
-    role="region" aria-labelledby="proyecto-4">
-    <div class="p-6 flex flex-col justify-between h-full">
-      <!-- Imagen de vista previa -->
-      <img src="https://via.placeholder.com/500x300?text=Control+de+Dispositivos+IoT+con+Arduino+%26+Bluetooth"
-        alt="Vista previa Control de Dispositivos IoT" class="w-full h-48 object-cover rounded-md mb-4">
-
-      <!-- Título y descripción -->
-      <h3 id="proyecto-4" class="text-2xl font-semibold text-gray-900 dark:text-white">
-        Control de Dispositivos IoT con Arduino y Bluetooth
-      </h3>
-      <p class="text-gray-700 dark:text-gray-400 mt-2">
-        Aplicación para controlar dispositivos IoT como carritos, luces, sensores y más, utilizando
-        <strong>Arduino</strong> y
-        comunicación <strong>Bluetooth</strong>. Desarrollado en <strong>Kotlin</strong> para Android y con soporte de
-        <strong>Firebase</strong> para el almacenamiento y comunicación en tiempo real.
-      </p>
-
-      <!-- Tecnologías -->
-      <div class="flex flex-wrap mt-4 gap-2">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin"
-          class="w-8 h-8 tooltip" title="Kotlin">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" alt="Android"
-          class="w-8 h-8 tooltip" title="Android Studio">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase"
-          class="w-8 h-8 tooltip" title="Firebase">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" alt="Arduino"
-          class="w-8 h-8 tooltip" title="Arduino">
-      </div>
-
-      <!-- Botones -->
-      <div class="mt-4 flex space-x-4">
-        <a href="https://github.com/tu-usuario/control-iot-arduino" target="_blank" rel="noopener noreferrer"
-          class="px-4 py-2 text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-transform transform hover:scale-105"
-          aria-label="Ver código fuente del proyecto Control de Dispositivos IoT con Arduino y Bluetooth">
-          Ver Código
-        </a>
-        <a href="https://demo-control-iot.vercel.app" target="_blank" rel="noopener noreferrer"
-          class="px-4 py-2 text-white bg-green-600 dark:bg-green-500 rounded-lg hover:bg-green-500 dark:hover:bg-green-400 transition-transform transform hover:scale-105"
-          aria-label="Ver demo en vivo de Control de Dispositivos IoT con Arduino y Bluetooth">
-          Demo en Vivo
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Proyecto 5: Seguridad de Login con JWT -->
-  <div
-    class="bg-gray-100 dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-300 dark:border-gray-700 hover:shadow-2xl transition-transform transform hover:scale-105"
-    role="region" aria-labelledby="proyecto-5">
-    <div class="p-6 flex flex-col justify-between h-full">
-      <!-- Imagen de vista previa -->
-      <img src="assets/jwt-autenticator.png" alt="Vista previa Login con JWT"
-        class="w-full h-48 object-cover rounded-md mb-4">
-
-      <!-- Título y descripción -->
-      <h3 id="proyecto-5" class="text-2xl font-semibold text-gray-900 dark:text-white">
-        Seguridad de Login con JWT y Autenticación Multifactor
-      </h3>
-      <p class="text-gray-700 dark:text-gray-400 mt-2">
-        Proyecto para implementar un sistema de autenticación con <strong>JSON Web Tokens (JWT)</strong> y
-        <strong>autenticación multifactor (MFA)</strong>.
-        Los usuarios pueden registrarse, iniciar sesión, y mantener su sesión activa de manera segura utilizando
-        <strong>JWT</strong> y un segundo factor de autenticación mediante una app como <strong>Google
-          Authenticator</strong>.
-      </p>
-
-      <!-- Tecnologías -->
-      <div class="flex flex-wrap mt-4 gap-2">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg" alt="Angular"
-          class="w-8 h-8 tooltip" title="Angular">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring Boot"
-          class="w-8 h-8 tooltip" title="Spring Boot">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase"
-          class="w-8 h-8 tooltip" title="Firebase">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
-          alt="Google Authenticator" class="w-8 h-8 tooltip" title="Google Authenticator">
-      </div>
-
-      <!-- Botones -->
-      <div class="mt-4 flex space-x-4">
-        <a href="https://github.com/App-Authenticator" target="_blank" rel="noopener noreferrer"
-          class="px-4 py-2 text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-transform transform hover:scale-105"
-          aria-label="Ver código fuente del proyecto Login con JWT">
-          Ver Código
-        </a>
-        <a href="https://jcv-code.netlify.app/auth" target="_blank" rel="noopener noreferrer"
-          class="px-4 py-2 text-white bg-green-600 dark:bg-green-500 rounded-lg hover:bg-green-500 dark:hover:bg-green-400 transition-transform transform hover:scale-105"
-          aria-label="Ver demo en vivo de Login con JWT">
-          Demo en Vivo
-        </a>
-      </div>
-    </div>
-  </div>
-
-
 </div>

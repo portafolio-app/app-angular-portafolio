@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,33 +9,79 @@ import { Router } from '@angular/router';
   templateUrl: './start.component.html',
   styleUrls: ['./start.component.css']
 })
-export class StartComponent implements OnInit {
-  animationClass = 'animate__fadeIn'; // al inicio entra con fadeIn
-  isButtonVisible = false; // Controla la visibilidad del botón
-  private fadeOutTimeout: any; // Para manejar el tiempo de la animación de salida
+export class StartComponent implements OnInit, OnDestroy {
+  isVisible = false;
+  isButtonVisible = false;
+  droplets: any[] = [];
+
+  private fadeOutTimeout: any;
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    // Mostrar animación durante 3 segundos, luego animar salida
+    // Aparición gradual
     setTimeout(() => {
-      this.animationClass = 'animate__fadeOut'; // animación de salida
+      this.isVisible = true;
+    }, 500);
 
-      // Después de la animación de entrada, mostrar el botón
-      setTimeout(() => {
-        this.isButtonVisible = true;
-      }, 2000); // Botón aparece después de 2s
+    // Generar droplets aleatorios
+    setTimeout(() => {
+      this.generateDroplets();
+    }, 2000);
 
-      // Esperamos que termine la animación de salida (~1s)
-      this.fadeOutTimeout = setTimeout(() => {
-        this.router.navigateByUrl('/home');
-      }, 1000); // duración del fadeOut
-    }, 3000); // tiempo que dura la pantalla inicial
+    // Mostrar botón
+    setTimeout(() => {
+      this.isButtonVisible = true;
+    }, 4000);
+
+    // Auto-navegación
+    this.fadeOutTimeout = setTimeout(() => {
+      this.navigateToHome();
+    }, 10000);
   }
 
-  // Método para manejar la navegación con el botón
+  ngOnDestroy(): void {
+    clearTimeout(this.fadeOutTimeout);
+  }
+
+  generateDroplets(): void {
+    // Crear 12 gotas distribuidas
+    for (let i = 0; i < 12; i++) {
+      this.droplets.push({
+        id: i,
+        left: Math.random() * 80 + 10, // 10% a 90%
+        delay: Math.random() * 3,
+        duration: 2 + Math.random() * 2,
+        size: 0.5 + Math.random() * 1
+      });
+    }
+  }
+
   navigateToHome(): void {
-    clearTimeout(this.fadeOutTimeout); // Limpiar el temporizador si el usuario hace clic
-    this.router.navigateByUrl('/home');
+    clearTimeout(this.fadeOutTimeout);
+    this.isVisible = false;
+
+    setTimeout(() => {
+      this.router.navigateByUrl('/home');
+    }, 600);
+  }
+
+  onLetterHover(event: any): void {
+    // Crear efecto de gota al hacer hover
+    const rect = event.target.getBoundingClientRect();
+    const droplet = {
+      id: Date.now(),
+      left: ((rect.left + rect.width / 2) / window.innerWidth) * 100,
+      delay: 0,
+      duration: 1.5,
+      size: 1.2
+    };
+
+    this.droplets.push(droplet);
+
+    // Remover después de la animación
+    setTimeout(() => {
+      this.droplets = this.droplets.filter(d => d.id !== droplet.id);
+    }, 2000);
   }
 }

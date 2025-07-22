@@ -4,51 +4,28 @@ import {
   Component,
   ElementRef,
   Inject,
-  OnInit,
   OnDestroy,
   PLATFORM_ID,
   ViewChild,
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import Typewriter from 'typewriter-effect/dist/core';
-import { NavbardComponent } from '../../shared/components/navbard/navbard.component';
-import { ThemeService } from '../../core/services/ThemeService';
-import { CardProyectosComponent } from '../../shared/components/card-proyectos/card-proyectos.component';
-import { FooterComponent } from '../../shared/components/footer/footer.component';
-import { StackTecnologicoComponent } from '../../shared/components/stack-tecnologico/stack-tecnologico.component';
-import { HeroComponent } from '../../shared/components/hero/hero.component';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-hero',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    NavbardComponent,
-    CardProyectosComponent,
-    FooterComponent,
-    StackTecnologicoComponent,
-    HeroComponent
-  ],
-  templateUrl: './home.component.html',
+  imports: [CommonModule, RouterModule],
+  templateUrl: './hero.component.html'
 })
-export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
+export class HeroComponent implements AfterViewInit, OnDestroy {
   @ViewChild('typewriter', { static: false }) typewriterElement!: ElementRef;
 
-  isDarkMode: boolean = false;
   private typewriterInstance: any;
   private observer: IntersectionObserver | null = null;
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private themeService: ThemeService
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
-
-  ngOnInit(): void {
-    this.themeService.isDarkMode$.subscribe((isDarkMode) => {
-      this.isDarkMode = isDarkMode;
-    });
-  }
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -112,10 +89,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         this.observer?.observe(element);
       });
     }
-  }
-
-  toggleTheme(): void {
-    this.themeService.toggleTheme();
   }
 
   ngOnDestroy(): void {
