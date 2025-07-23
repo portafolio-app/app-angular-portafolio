@@ -15,7 +15,7 @@ import Typewriter from 'typewriter-effect/dist/core';
   selector: 'app-hero',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './hero.component.html'
+  templateUrl: './hero.component.html',
 })
 export class HeroComponent implements AfterViewInit, OnDestroy {
   @ViewChild('typewriter', { static: false }) typewriterElement!: ElementRef;
@@ -23,9 +23,7 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
   private typewriterInstance: any;
   private observer: IntersectionObserver | null = null;
 
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -46,7 +44,9 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
       );
 
       this.typewriterInstance
-        .typeString('Jorge Luis ')
+        .typeString(
+          '<span class="text-gray-900 dark:text-white">Jorge Luis </span>'
+        )
         .pauseFor(500)
         .typeString(
           '<span class="text-green-600 dark:text-green-400">Castillo Vega</span>'
