@@ -39,6 +39,8 @@
 
     <!-- Subtítulo -->
     <p class="subtitle">Development Studio</p>
+
+   
   </div>
 
   <!-- Gotas animadas -->
@@ -60,15 +62,6 @@
          [style.left.%]="droplet.left"
          [style.animation-delay.s]="droplet.delay + droplet.duration - 0.3">
     </div>
-  </div>
-
-  <!-- Botón de entrada -->
-  <div class="button-container" [class.visible]="isButtonVisible">
-    <button class="enter-button" (click)="navigateToHome()">
-      <span class="button-text">Enter</span>
-      <div class="button-ripple"></div>
-      <div class="button-border"></div>
-    </button>
   </div>
 
   <!-- Elementos decorativos -->

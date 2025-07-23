@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,12 +11,19 @@ import { Router } from '@angular/router';
 })
 export class StartComponent implements OnInit, OnDestroy {
   isVisible = false;
-  isButtonVisible = false;
+  isHintVisible = false;
   droplets: any[] = [];
 
   private fadeOutTimeout: any;
 
   constructor(private router: Router) {}
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'Enter' && this.isVisible) {
+      this.navigateToHome();
+    }
+  }
 
   ngOnInit(): void {
     // Aparición gradual
@@ -29,15 +36,15 @@ export class StartComponent implements OnInit, OnDestroy {
       this.generateDroplets();
     }, 2000);
 
-    // Mostrar botón
+    // Mostrar hint en lugar del botón
     setTimeout(() => {
-      this.isButtonVisible = true;
+      this.isHintVisible = true;
     }, 4000);
 
-    // Auto-navegación
+    // Auto-navegación (más tiempo para que vean el hint)
     this.fadeOutTimeout = setTimeout(() => {
       this.navigateToHome();
-    }, 10000);
+    }, 12000);
   }
 
   ngOnDestroy(): void {

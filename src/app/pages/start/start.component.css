@@ -1,7 +1,7 @@
 /* Variables de diseño */
 :root {
   --primary-green: #00ff88;
-  --secondary-green: #00cc66;
+  --secondary-green: #0a4125;
   --dark-green: #004d26;
   --bg-dark: #0a0a0a;
   --bg-darker: #050505;
@@ -127,12 +127,13 @@
 .subtitle {
   font-family: 'Inter', sans-serif;
   font-size: 1.2rem;
-  color: rgba(46, 190, 10, 0.7);
+  color: #b0b0b0;
   margin: 0;
   opacity: 0;
   animation: fadeInUp 0.6s ease-out 2s forwards;
   letter-spacing: 0.3em;
   text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
 }
 
 @keyframes fadeInUp {
@@ -143,6 +144,56 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Indicador sutil para Enter */
+.enter-hint {
+  position: absolute;
+  bottom: -4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  text-align: center;
+}
+
+.enter-hint.visible {
+  opacity: 1;
+  animation: hintPulse 2s ease-in-out infinite;
+}
+
+.hint-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #ffffff;
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
+}
+
+.hint-pulse {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary-green), transparent);
+  margin: 0 auto;
+  animation: pulseLine 2s ease-in-out infinite;
+}
+
+@keyframes hintPulse {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 1; }
+}
+
+@keyframes pulseLine {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scaleX(1.2);
   }
 }
 
@@ -246,75 +297,6 @@
   }
 }
 
-/* Botón moderno */
-.button-container {
-  position: absolute;
-  bottom: 3rem;
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.button-container.visible {
-  opacity: 1;
-}
-
-.enter-button {
-  position: relative;
-  padding: 1rem 2.5rem;
-  background: transparent;
-  color: var(--primary-green);
-  border: 1px solid var(--primary-green);
-  border-radius: 50px;
-  font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  cursor: pointer;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-.enter-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
-}
-
-.button-text {
-  position: relative;
-  z-index: 2;
-}
-
-.button-ripple {
-  position: absolute;
-  inset: 0;
-  background: var(--primary-green);
-  opacity: 0;
-  transform: scale(0);
-  transition: all 0.3s ease;
-  border-radius: 50px;
-}
-
-.enter-button:hover .button-ripple {
-  opacity: 0.1;
-  transform: scale(1);
-}
-
-.button-border {
-  position: absolute;
-  inset: -1px;
-  background: linear-gradient(45deg, var(--primary-green), var(--secondary-green));
-  border-radius: 50px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: -1;
-}
-
-.enter-button:hover .button-border {
-  opacity: 1;
-}
-
 /* Elementos flotantes */
 .floating-elements {
   position: absolute;
@@ -361,9 +343,8 @@
     font-size: 1rem;
   }
 
-  .enter-button {
-    padding: 0.8rem 2rem;
-    font-size: 0.9rem;
+  .hint-text {
+    font-size: 0.8rem;
   }
 }
 
@@ -379,5 +360,13 @@
   .subtitle {
     font-size: 0.9rem;
     letter-spacing: 0.2em;
+  }
+
+  .enter-hint {
+    bottom: -3rem;
+  }
+
+  .hint-text {
+    font-size: 0.7rem;
   }
 }
