@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectionStrategy, Inject, PLATFORM_ID, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectionStrategy, Inject, PLATFORM_ID, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { CommonModule, isPlatformBrowser, DOCUMENT } from '@angular/common';
 import { Subject } from 'rxjs';
 import { takeUntil, catchError, of } from 'rxjs';
@@ -18,6 +18,9 @@ import { ProjectFilterComponent } from '../project-filter/project-filter.compone
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardProyectosComponent implements OnInit, OnDestroy {
+  // ViewChild para acceder al componente de filtro
+  @ViewChild(ProjectFilterComponent) filterComponent!: ProjectFilterComponent;
+
   // Inputs
   @Input() showFeaturedOnly: boolean = true;
   @Input() sectionTitle: string = 'Mis Proyectos';
@@ -216,6 +219,12 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
     this.currentPage = 1;
     this.showingAll = false;
     this.updateDisplayProjects();
+
+    // NUEVO: Limpiar filtros en el componente hijo
+    if (this.filterComponent) {
+      this.filterComponent.resetFilters();
+    }
+
     this.cdr.markForCheck();
   }
 
@@ -348,6 +357,60 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
   // Utility methods
   trackByProject(index: number, project: Project): string {
     return project.id;
+  }
+
+  // NUEVO: Método para obtener texto corto de botones
+  getShortButtonText(type: string, originalLabel: string): string {
+    switch (type) {
+      case 'github':
+        return 'Código';
+      case 'demo':
+        return 'Demo';
+      case 'documentation':
+        return 'Docs';
+      case 'download':
+        return 'Descargar';
+      case 'website':
+        return 'Web';
+      case 'repository':
+        return 'Repo';
+      default:
+        // Para etiquetas largas como "Ver Repositorio", acortarlas
+        if (originalLabel.toLowerCase().includes('repositorio')) {
+          return 'Repositorio';
+        }
+        if (originalLabel.toLowerCase().includes('código')) {
+          return 'Código';
+        }
+        return originalLabel.length > 8 ? originalLabel.substring(0, 8) + '...' : originalLabel;
+    }
+  }
+
+  // NUEVO: Método para obtener texto micro de botones (solo íconos o 1-2 caracteres)
+  getMicroButtonText(type: string): string {
+    switch (type) {
+      case 'github':
+        return 'Código';
+      case 'demo':
+        return 'Demo';
+      case 'documentation':
+        return 'Docs';
+      case 'download':
+        return 'DL';
+      case 'website':
+        return 'Web';
+      case 'repository':
+        return 'Repo';
+      default:
+        return '';
+    }
+  }
+
+  // NUEVO: Método para determinar si mostrar texto en botones según el espacio
+  shouldShowButtonText(): boolean {
+    // Podemos usar una lógica más sofisticada aquí basada en el contenedor
+    // Por ahora, siempre mostramos texto excepto en pantallas muy pequeñas
+    return true;
   }
 
   // Button styling
