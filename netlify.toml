@@ -1,6 +1,6 @@
 [build]
+  command = "npm run build"
   publish = "dist/portafolio_1.0_jcv/browser"
-  command = "npm run build:static"
 
 [build.environment]
   NODE_VERSION = "18"
