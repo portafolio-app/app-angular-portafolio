@@ -1,0 +1,36 @@
+/* src/styles/theme-variables.css */
+
+:root {
+  /* Colores principales - fáciles de cambiar */
+  --primary-color: #10b981;      /* green-500 */
+  --primary-dark: #059669;       /* green-600 */
+  --primary-light: #34d399;      /* green-400 */
+
+  --secondary-color: #14b8a6;    /* teal-500 */
+  --secondary-dark: #0d9488;     /* teal-600 */
+  --secondary-light: #2dd4bf;    /* teal-400 */
+
+  --accent-color: #10b981;       /* emerald-500 */
+  --accent-dark: #059669;        /* emerald-600 */
+  --accent-light: #34d399;       /* emerald-400 */
+}
+
+/* Clases de utilidad simples */
+.text-primary { color: var(--primary-color); }
+.text-primary-dark { color: var(--primary-dark); }
+.text-primary-light { color: var(--primary-light); }
+
+.bg-primary { background-color: var(--primary-color); }
+.bg-primary-dark { background-color: var(--primary-dark); }
+
+.text-secondary { color: var(--secondary-color); }
+.text-secondary-dark { color: var(--secondary-dark); }
+.text-secondary-light { color: var(--secondary-light); }
+
+.border-primary { border-color: var(--primary-color); }
+.border-accent { border-color: var(--accent-color); }
+
+/* Hover states */
+.hover\:bg-primary-dark:hover { background-color: var(--primary-dark); }
+.hover\:text-primary:hover { color: var(--primary-color); }
+.hover\:text-secondary:hover { color: var(--secondary-color); }

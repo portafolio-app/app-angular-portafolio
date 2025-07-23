@@ -1,5 +1,5 @@
 <section
-  class="min-h-screen flex items-center bg-gradient-to-br from-gray-50 to-white dark:from-gray-950 dark:to-gray-900">
+  class="min-h-screen flex items-center bg-gradient-to-br from-gray-50 to-white dark:from-slate-950 dark:via-gray-900 dark:to-slate-800">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
 
@@ -20,38 +20,60 @@
 
         <!-- Enlaces sociales y CTA -->
         <div
-          class="flex flex-wrap items-center justify-center lg:justify-start gap-3 md:gap-4 animate__animated animate__fadeInLeft animate__delay-1s">
-          <a href="https://github.com/VCL-tt" target="_blank"
-            class="group p-2.5 md:p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300">
+          class="flex items-center justify-center lg:justify-start gap-4 animate__animated animate__fadeInLeft animate__delay-1s">
+          <!-- GitHub -->
+          <a href="https://github.com/VCL-tt" target="_blank" rel="noopener noreferrer"
+            class="group relative p-3 rounded-xl bg-white/80 dark:bg-gray-800/90 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 hover:bg-gray-900 dark:hover:bg-gray-700 hover:border-gray-900 dark:hover:border-gray-600 shadow-md hover:shadow-xl hover:shadow-gray-500/25 dark:hover:shadow-gray-900/50 transition-all duration-300 hover:scale-110 hover:-translate-y-1">
             <i
-              class="fab fa-github text-lg md:text-xl text-gray-700 dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-400"></i>
+              class="fab fa-github text-lg text-gray-700 dark:text-gray-200 group-hover:text-white transition-colors duration-300"></i>
+            <!-- Efecto de brillo -->
+            <div
+              class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-20 bg-gradient-to-br from-white to-transparent transition-opacity duration-300">
+            </div>
           </a>
-          <a href="https://www.linkedin.com/in/jcastillov15" target="_blank"
-            class="group p-2.5 md:p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300">
+
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/in/jcastillov15" target="_blank" rel="noopener noreferrer"
+            class="group relative p-3 rounded-xl bg-white/80 dark:bg-gray-800/90 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 hover:bg-blue-600 dark:hover:bg-blue-700 hover:border-blue-600 dark:hover:border-blue-700 shadow-md hover:shadow-xl hover:shadow-blue-500/25 dark:hover:shadow-blue-900/50 transition-all duration-300 hover:scale-110 hover:-translate-y-1">
             <i
-              class="fab fa-linkedin text-lg md:text-xl text-gray-700 dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-400"></i>
+              class="fab fa-linkedin text-lg text-gray-700 dark:text-gray-200 group-hover:text-white transition-colors duration-300"></i>
+            <div
+              class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-20 bg-gradient-to-br from-white to-transparent transition-opacity duration-300">
+            </div>
           </a>
+
+          <!-- Email -->
           <a href="mailto:tuemail@example.com"
-            class="group p-2.5 md:p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300">
+            class="group relative p-3 rounded-xl bg-white/80 dark:bg-gray-800/90 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 hover:bg-green-600 dark:hover:bg-green-700 hover:border-green-600 dark:hover:border-green-700 shadow-md hover:shadow-xl hover:shadow-green-500/25 dark:hover:shadow-green-900/50 transition-all duration-300 hover:scale-110 hover:-translate-y-1">
             <i
-              class="fas fa-envelope text-lg md:text-xl text-gray-700 dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-400"></i>
+              class="fas fa-envelope text-lg text-gray-700 dark:text-gray-200 group-hover:text-white transition-colors duration-300"></i>
+            <div
+              class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-20 bg-gradient-to-br from-white to-transparent transition-opacity duration-300">
+            </div>
           </a>
-          <!--<a href="CV_JorgeCastilloVega.pdf" download
-            class="px-4 md:px-6 py-2.5 md:py-3 bg-green-600 hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 text-white font-medium rounded-lg transition-colors duration-300 flex items-center space-x-2 text-sm md:text-base">
-            <i class="fas fa-download"></i>
+
+          <!-- Separador elegante -->
+          <div class="w-px h-8 bg-gradient-to-b from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
+
+          <!-- Botón CV mejorado -->
+          <a href="CV_JorgeCastilloVega.pdf" download
+            class="group relative overflow-hidden px-5 py-3 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 dark:from-green-500 dark:to-emerald-500 dark:hover:from-green-600 dark:hover:to-emerald-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:shadow-green-500/30 dark:hover:shadow-green-900/50 transition-all duration-300 hover:scale-105 hover:-translate-y-1 flex items-center space-x-2.5 text-sm border border-green-500/20 dark:border-green-400/20">
+            <i class="fas fa-download text-sm group-hover:animate-bounce"></i>
             <span>Descargar CV</span>
-          </a>-->
+            <!-- Efecto shine -->
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700">
+            </div>
+          </a>
         </div>
+
       </div>
 
-      <!-- Imagen de perfil -->
       <div class="relative mt-8 lg:mt-0 lg:ml-8 animate__animated animate__fadeInRight">
         <div class="relative w-64 h-80 sm:w-72 sm:h-[22rem] md:w-80 md:h-96 mx-auto">
-          <!-- Sombra decorativa -->
           <div
             class="absolute top-3 left-3 md:top-4 md:left-4 w-full h-full bg-gradient-to-br from-green-100 to-green-200 dark:from-green-900/30 dark:to-green-800/20 rounded-2xl transform rotate-3">
           </div>
-          <!-- Contenedor de imagen -->
           <div
             class="relative w-full h-full bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-700">
             <img src="2.jpg" alt="Jorge Luis Castillo Vega" class="w-full h-full object-cover">

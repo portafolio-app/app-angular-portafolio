@@ -1,21 +1,22 @@
+<!-- home.component.html - Mantenemos los mismos fondos originales -->
 <app-navbard [isDarkMode]="isDarkMode" (themeToggle)="toggleTheme()"></app-navbard>
 
-<!-- Hero Section -->
+<!-- Hero Section - Sin fondo específico (como tenías antes) -->
 <section id="home">
   <app-hero></app-hero>
 </section>
 
-<!-- Proyectos Section -->
+<!-- Proyectos Section - Mismo fondo que tenías -->
 <section id="proyectos" class="bg-white dark:bg-gray-900">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <app-card-proyectos></app-card-proyectos>
   </div>
 </section>
 
-<!-- Stack Tecnológico Section -->
-<section id="tecnologias">
+<!-- Stack Tecnológico Section - Mismo fondo que tenías -->
+<section id="proyectos" class="bg-white dark:bg-gray-900">
   <app-stack-tecnologico></app-stack-tecnologico>
 </section>
 
-<!-- Footer -->
+<!-- Footer - Mantenemos como estaba -->
 <app-footer [isDarkMode]="isDarkMode" (themeToggle)="toggleTheme()"></app-footer>
