@@ -5,13 +5,6 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:netlify": "ng build --configuration netlify",
-    "build:static": "ng build --configuration netlify --output-mode=static",
-    "build:debug": "ng build --configuration netlify --verbose",
-    "build:verify": "npm run build:netlify && npm run verify:output",
-    "verify:output": "node -e \"const fs=require('fs'); const path='dist/portafolio_1.0_jcv'; console.log('Files in output:'); fs.readdirSync(path).forEach(f=>console.log(f)); console.log('Has index.html:', fs.existsSync(path+'/index.html')); console.log('Has _redirects:', fs.existsSync(path+'/_redirects'));\"",
-    "preview:netlify": "npm run build:netlify && npx http-server dist/portafolio_1.0_jcv -p 4200 -o",
-    "clean": "rm -rf dist",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:portafolio_1.0_jcv": "node dist/portafolio_1.0_jcv/server/server.mjs"
@@ -24,10 +17,13 @@
     "@angular/forms": "^19.2.0",
     "@angular/platform-browser": "^19.2.0",
     "@angular/platform-browser-dynamic": "^19.2.0",
+    "@angular/platform-server": "^19.2.0",
     "@angular/router": "^19.2.0",
+    "@angular/ssr": "^19.2.1",
     "@tailwindcss/postcss": "^4.0.12",
     "animate.css": "^4.1.1",
     "aos": "^2.3.4",
+    "express": "^4.18.2",
     "flowbite": "^3.1.2",
     "postcss": "^8.5.3",
     "rxjs": "~7.8.0",
@@ -42,9 +38,9 @@
     "@angular-devkit/build-angular": "^19.2.1",
     "@angular/cli": "^19.2.1",
     "@angular/compiler-cli": "^19.2.0",
+    "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^18.18.0",
-    "http-server": "^14.1.1",
     "jasmine-core": "~5.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -52,11 +48,5 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.7.2"
-  },
-  "optionalDependencies": {
-    "@angular/platform-server": "^19.2.0",
-    "@angular/ssr": "^19.2.1",
-    "@types/express": "^4.17.17",
-    "express": "^4.18.2"
   }
 }
