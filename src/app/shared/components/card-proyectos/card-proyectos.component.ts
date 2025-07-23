@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectionStrategy, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectionStrategy, Inject, PLATFORM_ID, ChangeDetectorRef } from '@angular/core';
 import { CommonModule, isPlatformBrowser, DOCUMENT } from '@angular/common';
 import { Subject } from 'rxjs';
 import { takeUntil, catchError, of } from 'rxjs';
@@ -23,6 +23,7 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
   @Input() sectionTitle: string = 'Mis Proyectos';
   @Input() sectionDescription: string = 'Una colección de proyectos que demuestran mis habilidades y experiencia en desarrollo de software';
   @Input() showFilters: boolean = true;
+  @Input() projectsPerPage: number = 10; // NUEVO: Proyectos por página
 
   // Outputs
   @Output() projectClicked = new EventEmitter<Project>();
@@ -31,15 +32,15 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
   // State
   allProjects: Project[] = [];
   filteredProjects: Project[] = [];
-  featuredProjects: Project[] = [];
-  displayProjects: Project[] = [];
+  displayProjects: Project[] = []; // Proyectos que se muestran actualmente
   selectedProject: Project | null = null;
   isLoading: boolean = false;
   error: string | null = null;
 
-  // Filter state - Simplificado
-  isFiltering: boolean = false;
-  hasActiveSearch: boolean = false; // Nuevo: indica si hay búsqueda activa
+  // Filter and pagination state
+  hasActiveSearch: boolean = false;
+  currentPage: number = 1; // NUEVO: Página actual
+  showingAll: boolean = false; // NUEVO: Si está mostrando todos los proyectos
 
   // Private
   private readonly destroy$ = new Subject<void>();
@@ -47,6 +48,7 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
 
   constructor(
     private projectsService: ProjectsDataService,
+    private cdr: ChangeDetectorRef, // NUEVO: Para detectar cambios
     @Inject(PLATFORM_ID) platformId: Object,
     @Inject(DOCUMENT) private document: Document
   ) {
@@ -89,30 +91,59 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
     return this.displayProjects.length;
   }
 
-  // Métodos para manejar filtros - Simplificados
+  // NUEVO: Computed properties para paginación
+  get availableProjects(): Project[] {
+    // Obtener proyectos base según filtros
+    const baseProjects = this.hasActiveSearch ? this.filteredProjects : this.allProjects;
+
+    // Si está en modo destacados y no hay búsqueda activa, filtrar solo destacados
+    if (this.showFeaturedOnly && !this.hasActiveSearch) {
+      return baseProjects.filter(p => p.featured);
+    }
+
+    return baseProjects;
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.availableProjects.length / this.projectsPerPage);
+  }
+
+  get hasMoreProjects(): boolean {
+    return this.availableProjects.length > this.displayProjects.length;
+  }
+
+  get remainingProjectsCount(): number {
+    return Math.max(0, this.availableProjects.length - this.displayProjects.length);
+  }
+
+  // Métodos para manejar filtros
   onFilteredProjectsChanged(filtered: Project[]): void {
     this.filteredProjects = filtered;
     this.hasActiveSearch = filtered.length !== this.allProjects.length;
-    this.isFiltering = this.hasActiveSearch;
+    this.currentPage = 1; // Reset página al filtrar
+    this.showingAll = false; // Reset vista al filtrar
     this.updateDisplayProjects();
+    this.cdr.markForCheck(); // NUEVO: Marcar para detección de cambios
   }
 
   onFiltersChanged(criteria: any): void {
-    // Este método puede ser opcional ahora, pero lo mantenemos por compatibilidad
-    this.isFiltering = !!(criteria?.searchQuery?.trim());
+    // Método opcional para compatibilidad
+    const hasSearch = !!(criteria?.searchQuery?.trim());
+    if (hasSearch !== this.hasActiveSearch) {
+      this.currentPage = 1;
+      this.showingAll = false;
+    }
   }
 
   private updateDisplayProjects(): void {
-    const sourceProjects = this.hasActiveSearch ? this.filteredProjects : this.allProjects;
+    const available = this.availableProjects;
 
-    if (this.showFeaturedOnly && !this.isFiltering) {
-      // Modo destacados sin filtros
-      this.displayProjects = sourceProjects.filter(p => p.featured);
-      this.featuredProjects = this.displayProjects;
+    if (this.showingAll) {
+      // Mostrar todos los proyectos disponibles
+      this.displayProjects = available;
     } else {
-      // Mostrar todos o filtrados
-      this.displayProjects = sourceProjects;
-      this.featuredProjects = sourceProjects.filter(p => p.featured);
+      // Mostrar solo los primeros N proyectos
+      this.displayProjects = available.slice(0, this.projectsPerPage);
     }
   }
 
@@ -126,6 +157,7 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
         console.error('Error loading projects:', error);
         this.error = this.getErrorMessage(error);
         this.isLoading = false;
+        this.cdr.markForCheck();
         return of([]);
       }),
       takeUntil(this.destroy$)
@@ -133,9 +165,11 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
       next: (projects: Project[]) => {
         this.allProjects = projects;
         this.filteredProjects = projects;
-        this.featuredProjects = projects.filter((p) => p.featured);
+        this.currentPage = 1;
+        this.showingAll = false;
         this.updateDisplayProjects();
         this.isLoading = false;
+        this.cdr.markForCheck();
       }
     });
   }
@@ -144,30 +178,50 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
     this.loadProjects();
   }
 
-  // View controls
+  // NUEVO: Métodos de paginación
+  loadMoreProjects(): void {
+    this.showingAll = true;
+    this.updateDisplayProjects();
+    this.cdr.markForCheck();
+  }
+
+  showLessProjects(): void {
+    this.showingAll = false;
+    this.currentPage = 1;
+    this.updateDisplayProjects();
+    this.cdr.markForCheck();
+  }
+
+  // View controls actualizados
   showAllProjects(): void {
     this.showFeaturedOnly = false;
+    this.currentPage = 1;
+    this.showingAll = false; // Reset al cambiar modo
     this.updateDisplayProjects();
+    this.cdr.markForCheck();
   }
 
   showOnlyFeatured(): void {
     this.showFeaturedOnly = true;
+    this.currentPage = 1;
+    this.showingAll = false; // Reset al cambiar modo
     this.updateDisplayProjects();
+    this.cdr.markForCheck();
   }
 
-  // Métodos para gestión de filtros - Simplificados
+  // Métodos para gestión de filtros
   clearAllFilters(): void {
     this.hasActiveSearch = false;
-    this.isFiltering = false;
     this.filteredProjects = this.allProjects;
+    this.currentPage = 1;
+    this.showingAll = false;
     this.updateDisplayProjects();
-
-    // Emitir evento para que el filtro se resetee
-    // Esto dependerá de cómo implementes la comunicación con el filtro
+    this.cdr.markForCheck();
   }
 
   toggleFilterVisibility(): void {
     this.showFilters = !this.showFilters;
+    this.cdr.markForCheck();
   }
 
   // Método helper para mostrar información de filtrado
@@ -181,6 +235,23 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
     const percentage = total > 0 ? Math.round((filtered / total) * 100) : 0;
 
     return `Mostrando ${filtered} de ${total} proyectos (${percentage}%)`;
+  }
+
+  // NUEVO: Método para obtener el título de la sección
+  getSectionTitle(): string {
+    if (this.hasActiveSearch) {
+      return `Resultados de búsqueda`;
+    }
+    return this.showFeaturedOnly ? 'Proyectos Destacados' : 'Todos los Proyectos';
+  }
+
+  // NUEVO: Método para obtener información de paginación
+  getPaginationInfo(): string {
+    if (this.showingAll) {
+      return `Mostrando todos los ${this.availableProjects.length} proyectos`;
+    }
+    const showing = Math.min(this.projectsPerPage, this.availableProjects.length);
+    return `Mostrando ${showing} de ${this.availableProjects.length} proyectos`;
   }
 
   // Project interactions
