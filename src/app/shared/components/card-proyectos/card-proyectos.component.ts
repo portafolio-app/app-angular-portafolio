@@ -7,8 +7,7 @@ import {
   Project,
   ProjectsDataService,
 } from '../../../core/services/projects-data.service';
-import { ProjectFilterComponent, ProjectFilterCriteria } from '../project-filter/project-filter.component';
-
+import { ProjectFilterComponent } from '../project-filter/project-filter.component';
 
 @Component({
   selector: 'app-card-proyectos',
@@ -23,7 +22,7 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
   @Input() showFeaturedOnly: boolean = true;
   @Input() sectionTitle: string = 'Mis Proyectos';
   @Input() sectionDescription: string = 'Una colección de proyectos que demuestran mis habilidades y experiencia en desarrollo de software';
-  @Input() showFilters: boolean = true; // NUEVO: Controlar visibilidad del filtro
+  @Input() showFilters: boolean = true;
 
   // Outputs
   @Output() projectClicked = new EventEmitter<Project>();
@@ -31,16 +30,16 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
 
   // State
   allProjects: Project[] = [];
-  filteredProjects: Project[] = []; // NUEVO: Proyectos filtrados
+  filteredProjects: Project[] = [];
   featuredProjects: Project[] = [];
-  displayProjects: Project[] = []; // NUEVO: Proyectos a mostrar
+  displayProjects: Project[] = [];
   selectedProject: Project | null = null;
   isLoading: boolean = false;
   error: string | null = null;
 
-  // Filter state
-  currentFilters: ProjectFilterCriteria = {}; // NUEVO: Filtros actuales
-  isFiltering: boolean = false; // NUEVO: Estado de filtrado
+  // Filter state - Simplificado
+  isFiltering: boolean = false;
+  hasActiveSearch: boolean = false; // Nuevo: indica si hay búsqueda activa
 
   // Private
   private readonly destroy$ = new Subject<void>();
@@ -51,7 +50,6 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
     @Inject(PLATFORM_ID) platformId: Object,
     @Inject(DOCUMENT) private document: Document
   ) {
-    // Verificar si estamos en el navegador
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
@@ -63,7 +61,6 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
 
-    // Solo manipular el DOM si estamos en el navegador
     if (this.isBrowser) {
       this.document.body.style.overflow = 'auto';
     }
@@ -75,14 +72,12 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
   }
 
   get featuredCount(): number {
-    // Si hay filtros activos, contar desde proyectos filtrados
-    const projects = this.hasActiveFilters() ? this.filteredProjects : this.allProjects;
+    const projects = this.hasActiveSearch ? this.filteredProjects : this.allProjects;
     return projects.filter(p => p.featured).length;
   }
 
   get totalTechnologies(): number {
-    // Si hay filtros activos, contar desde proyectos filtrados
-    const projects = this.hasActiveFilters() ? this.filteredProjects : this.allProjects;
+    const projects = this.hasActiveSearch ? this.filteredProjects : this.allProjects;
     const techSet = new Set<string>();
     projects.forEach((project: Project) => {
       project.technologies.forEach((tech: any) => techSet.add(tech.name));
@@ -94,27 +89,21 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
     return this.displayProjects.length;
   }
 
-  // NUEVO: Métodos para manejar filtros
+  // Métodos para manejar filtros - Simplificados
   onFilteredProjectsChanged(filtered: Project[]): void {
     this.filteredProjects = filtered;
+    this.hasActiveSearch = filtered.length !== this.allProjects.length;
+    this.isFiltering = this.hasActiveSearch;
     this.updateDisplayProjects();
   }
 
-  onFiltersChanged(criteria: ProjectFilterCriteria): void {
-    this.currentFilters = criteria;
-    this.isFiltering = this.hasActiveFilters();
-  }
-
-  private hasActiveFilters(): boolean {
-    return !!(
-      this.currentFilters.searchQuery?.trim() ||
-      this.currentFilters.selectedTechnology ||
-      this.currentFilters.featuredFilter
-    );
+  onFiltersChanged(criteria: any): void {
+    // Este método puede ser opcional ahora, pero lo mantenemos por compatibilidad
+    this.isFiltering = !!(criteria?.searchQuery?.trim());
   }
 
   private updateDisplayProjects(): void {
-    const sourceProjects = this.hasActiveFilters() ? this.filteredProjects : this.allProjects;
+    const sourceProjects = this.hasActiveSearch ? this.filteredProjects : this.allProjects;
 
     if (this.showFeaturedOnly && !this.isFiltering) {
       // Modo destacados sin filtros
@@ -127,7 +116,7 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Data loading actualizado
+  // Data loading
   loadProjects(): void {
     this.isLoading = true;
     this.error = null;
@@ -143,7 +132,7 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
     ).subscribe({
       next: (projects: Project[]) => {
         this.allProjects = projects;
-        this.filteredProjects = projects; // Inicialmente sin filtrar
+        this.filteredProjects = projects;
         this.featuredProjects = projects.filter((p) => p.featured);
         this.updateDisplayProjects();
         this.isLoading = false;
@@ -155,7 +144,7 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
     this.loadProjects();
   }
 
-  // View controls actualizados
+  // View controls
   showAllProjects(): void {
     this.showFeaturedOnly = false;
     this.updateDisplayProjects();
@@ -166,12 +155,15 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
     this.updateDisplayProjects();
   }
 
-  // NUEVO: Métodos para gestión de filtros
+  // Métodos para gestión de filtros - Simplificados
   clearAllFilters(): void {
-    this.currentFilters = {};
+    this.hasActiveSearch = false;
     this.isFiltering = false;
     this.filteredProjects = this.allProjects;
     this.updateDisplayProjects();
+
+    // Emitir evento para que el filtro se resetee
+    // Esto dependerá de cómo implementes la comunicación con el filtro
   }
 
   toggleFilterVisibility(): void {
@@ -180,7 +172,7 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
 
   // Método helper para mostrar información de filtrado
   getFilterSummary(): string {
-    if (!this.hasActiveFilters()) {
+    if (!this.hasActiveSearch) {
       return '';
     }
 
@@ -210,15 +202,12 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
     this.openModal(project);
   }
 
-  // Modal management - Compatible con SSR
+  // Modal management
   openModal(project: Project): void {
     this.selectedProject = project;
 
-    // Solo manipular el DOM si estamos en el navegador
     if (this.isBrowser) {
       this.document.body.style.overflow = 'hidden';
-
-      // Agregar listener para cerrar con ESC
       this.document.addEventListener('keydown', this.handleEscapeKey.bind(this));
     }
   }
@@ -226,32 +215,26 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
   closeModal(): void {
     this.selectedProject = null;
 
-    // Solo manipular el DOM si estamos en el navegador
     if (this.isBrowser) {
       this.document.body.style.overflow = 'auto';
-
-      // Remover listener de ESC
       this.document.removeEventListener('keydown', this.handleEscapeKey.bind(this));
     }
   }
 
-  // Manejar tecla ESC para cerrar modal
   private handleEscapeKey(event: KeyboardEvent): void {
     if (event.key === 'Escape' && this.selectedProject) {
       this.closeModal();
     }
   }
 
-  // Link handling - Compatible con SSR
+  // Link handling
   handleLinkClick(link: any): void {
-    // Solo abrir enlaces si estamos en el navegador
     if (!this.isBrowser) {
       return;
     }
 
     if (link?.url) {
       try {
-        // Validación de URL solo en el navegador
         new URL(link.url);
         window.open(link.url, '_blank', 'noopener,noreferrer');
       } catch {
@@ -274,24 +257,20 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
     return 'Error al cargar los proyectos.';
   }
 
-  // Image error handling - Compatible con SSR
+  // Image error handling
   handleImageError(event: any): void {
-    // Solo manejar errores de imagen en el navegador
     if (!this.isBrowser || !event?.target) {
       return;
     }
 
-    // Fallback image como data URI
     event.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2Y3ZjdmNyIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM5OTkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5Qcm95ZWN0bzwvdGV4dD48L3N2Zz4=';
   }
 
   handleTechIconError(event: any): void {
-    // Solo manejar errores de iconos en el navegador
     if (!this.isBrowser || !event?.target) {
       return;
     }
 
-    // Fallback para iconos de tecnología
     event.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjZTVlN2ViIiByeD0iNCIvPgo8cGF0aCBkPSJNMTAgNmMtMS4xIDAtMiAuOS0yIDJzLjkgMiAyIDIgMi0uOSAyLTItLjktMi0yLTJ6IiBmaWxsPSIjOWNhM2FmIi8+Cjwvc3ZnPgo=';
   }
 
@@ -300,7 +279,7 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
     return project.id;
   }
 
-  // Button styling con tema verde
+  // Button styling
   getLinkButtonClass(type: string): string {
     const baseClasses = 'font-medium transition-all duration-200';
 

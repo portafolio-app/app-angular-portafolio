@@ -6,8 +6,8 @@
 
       <!-- Logo responsivo -->
       <div class="flex items-center min-w-0 flex-shrink-0">
-        <a routerLink="/"
-          class="group flex items-center space-x-2 sm:space-x-3 hover:scale-105 transition-transform duration-300">
+        <a (click)="navigateToPage('/home')"
+          class="group flex items-center space-x-2 sm:space-x-3 hover:scale-105 transition-transform duration-300 cursor-pointer">
           <!-- Icono circular -->
           <div
             class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-green-500/25 transition-all duration-300">
@@ -25,32 +25,34 @@
       <!-- Navegación desktop (oculta en móvil) -->
       <div class="hidden md:flex md:items-center md:space-x-1 lg:space-x-2">
         <nav class="flex space-x-1">
-          <a (click)="scrollToSection('home')"
-            routerLinkActive="text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20"
-            [routerLinkActiveOptions]="{exact: true}"
+          <!-- Home (sección) -->
+          <button (click)="scrollToSection('home')"
             class="group relative px-3 lg:px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 font-medium text-sm lg:text-base cursor-pointer">
             <i class="fas fa-home mr-1 lg:mr-2 text-sm group-hover:scale-110 transition-transform duration-300"></i>
             Home
-          </a>
+          </button>
 
-          <a (click)="scrollToSection('proyectos')"
+          <!-- Proyectos (sección) -->
+          <button (click)="scrollToSection('proyectos')"
             class="group relative px-3 lg:px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 font-medium text-sm lg:text-base cursor-pointer">
             <i class="fas fa-folder mr-1 lg:mr-2 text-sm group-hover:scale-110 transition-transform duration-300"></i>
             Proyectos
-          </a>
+          </button>
 
-          <a (click)="scrollToSection('tecnologias')"
+          <!-- Tecnologías (sección) -->
+          <button (click)="scrollToSection('tecnologias')"
             class="group relative px-3 lg:px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 font-medium text-sm lg:text-base cursor-pointer">
             <i class="fas fa-cogs mr-1 lg:mr-2 text-sm group-hover:scale-110 transition-transform duration-300"></i>
             Tecnologías
-          </a>
+          </button>
 
-          <a routerLink="/about" routerLinkActive="text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20"
+          <!-- Sobre mí (página separada) -->
+          <button (click)="navigateToPage('/about')"
             class="group relative px-3 lg:px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 font-medium text-sm lg:text-base">
             <i class="fas fa-user mr-1 lg:mr-2 text-sm group-hover:scale-110 transition-transform duration-300"></i>
             <span class="hidden lg:inline">Sobre mí</span>
             <span class="lg:hidden">About</span>
-          </a>
+          </button>
         </nav>
 
         <!-- CTA Button desktop -->
@@ -112,44 +114,39 @@
       class="md:hidden overflow-hidden bg-gray-50/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-700/50 shadow-lg transition-all duration-300 ease-in-out"
       [attr.aria-hidden]="!isMenuOpen">
 
-      <!-- También actualiza el menú móvil -->
+      <!-- Menú móvil con funciones corregidas -->
       <div class="px-3 sm:px-4 py-4 sm:py-6 space-y-2 sm:space-y-3">
-        <a (click)="scrollToSection('home'); onMenuItemClick()"
-          class="group flex items-center px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base cursor-pointer">
+        <!-- Home -->
+        <button (click)="scrollToSection('home')"
+          class="group flex items-center w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base cursor-pointer">
           <i
             class="fas fa-home mr-3 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300"></i>
           <span class="font-medium">Home</span>
-        </a>
+        </button>
 
-        <a (click)="scrollToSection('proyectos'); onMenuItemClick()"
-          class="group flex items-center px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base cursor-pointer">
+        <!-- Proyectos -->
+        <button (click)="scrollToSection('proyectos')"
+          class="group flex items-center w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base cursor-pointer">
           <i
             class="fas fa-folder mr-3 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300"></i>
           <span class="font-medium">Proyectos</span>
-        </a>
+        </button>
 
-        <a (click)="scrollToSection('tecnologias'); onMenuItemClick()"
-          class="group flex items-center px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base cursor-pointer">
+        <!-- Tecnologías -->
+        <button (click)="scrollToSection('tecnologias')"
+          class="group flex items-center w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base cursor-pointer">
           <i
             class="fas fa-cogs mr-3 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300"></i>
           <span class="font-medium">Tecnologías</span>
-        </a>
+        </button>
 
-        <a routerLink="/about" (click)="onMenuItemClick()"
-          routerLinkActive="text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500"
-          class="group flex items-center px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base">
+        <!-- Sobre mí -->
+        <button (click)="navigateToPage('/about')"
+          class="group flex items-center w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base">
           <i
             class="fas fa-user mr-3 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300"></i>
           <span class="font-medium">Sobre mí</span>
-        </a>
-
-        <a routerLink="/services" (click)="onMenuItemClick()"
-          routerLinkActive="text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500"
-          class="group flex items-center px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base">
-          <i
-            class="fas fa-cogs mr-3 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300"></i>
-          <span class="font-medium">Servicios</span>
-        </a>
+        </button>
 
         <!-- CTA móvil -->
         <div class="pt-3 sm:pt-4 border-t border-gray-200 dark:border-gray-700">

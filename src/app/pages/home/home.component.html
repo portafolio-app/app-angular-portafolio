@@ -1,22 +1,22 @@
-<!-- home.component.html - Mantenemos los mismos fondos originales -->
+<!-- home.component.html - IDs corregidos para navegación -->
 <app-navbard [isDarkMode]="isDarkMode" (themeToggle)="toggleTheme()"></app-navbard>
 
-<!-- Hero Section - Sin fondo específico (como tenías antes) -->
+<!-- Hero Section -->
 <section id="home">
   <app-hero></app-hero>
 </section>
 
-<!-- Proyectos Section - Mismo fondo que tenías -->
+<!-- Proyectos Section -->
 <section id="proyectos" class="bg-white dark:bg-gray-900">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <app-card-proyectos></app-card-proyectos>
   </div>
 </section>
 
-<!-- Stack Tecnológico Section - Mismo fondo que tenías -->
-<section id="proyectos" class="bg-white dark:bg-gray-900">
+<!-- Stack Tecnológico Section - CORREGIDO: cambiado el ID -->
+<section id="tecnologias" class="bg-white dark:bg-gray-900">
   <app-stack-tecnologico></app-stack-tecnologico>
 </section>
 
-<!-- Footer - Mantenemos como estaba -->
+<!-- Footer -->
 <app-footer [isDarkMode]="isDarkMode" (themeToggle)="toggleTheme()"></app-footer>

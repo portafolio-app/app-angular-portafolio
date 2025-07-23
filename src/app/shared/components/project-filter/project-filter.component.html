@@ -8,149 +8,30 @@
       </svg>
       Filtrar proyectos
     </h3>
+  </div>
 
-    <!-- Clear filters button -->
-    <button *ngIf="hasActiveFilters"
-      (click)="clearAllFilters()"
-      class="text-sm text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300 font-medium flex items-center transition-colors">
-      <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+  <!-- Search Input -->
+  <div class="lg:col-span-2">
+    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+      Buscar proyecto
+    </label>
+    <div class="relative">
+      <input
+        type="text"
+        [(ngModel)]="searchQuery"
+        (input)="onSearchChange()"
+        placeholder="Buscar por nombre, tecnología o descripción..."
+        class="w-full px-4 py-2 pl-10 pr-4 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 dark:bg-gray-700 dark:text-white transition-colors">
+      <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
       </svg>
-      Limpiar filtros
-    </button>
-  </div>
-
-  <!-- Filter Grid -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-
-    <!-- Search Input -->
-    <div class="lg:col-span-2">
-      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-        Buscar proyecto
-      </label>
-      <div class="relative">
-        <input
-          type="text"
-          [(ngModel)]="searchQuery"
-          (input)="onSearchChange()"
-          placeholder="Buscar por nombre, tecnología o descripción..."
-          class="w-full px-4 py-2 pl-10 pr-4 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 dark:bg-gray-700 dark:text-white transition-colors">
-        <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      <button *ngIf="searchQuery"
+        (click)="clearSearch()"
+        class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
-        <button *ngIf="searchQuery"
-          (click)="clearSearch()"
-          class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </div>
-    </div>
-
-    <!-- Technology Filter -->
-    <div>
-      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-        Tecnología
-      </label>
-      <select
-        [(ngModel)]="selectedTechnology"
-        (change)="onTechnologyChange()"
-        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 dark:bg-gray-700 dark:text-white transition-colors">
-        <option value="">Todas las tecnologías</option>
-        <option *ngFor="let tech of availableTechnologies" [value]="tech">
-          {{ tech }}
-        </option>
-      </select>
-    </div>
-
-    <!-- Featured Filter -->
-    <div>
-      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-        Tipo de proyecto
-      </label>
-      <select
-        [(ngModel)]="featuredFilter"
-        (change)="onFeaturedChange()"
-        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 dark:bg-gray-700 dark:text-white transition-colors">
-        <option value="">Todos los proyectos</option>
-        <option value="featured">Solo destacados</option>
-        <option value="regular">Solo regulares</option>
-      </select>
-    </div>
-  </div>
-
-  <!-- Quick Filter Tags -->
-  <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-    <div class="flex items-center justify-between mb-3">
-      <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300">Filtros rápidos</h4>
-      <span class="text-xs text-gray-500">{{ filteredCount }} de {{ totalCount }} proyectos</span>
-    </div>
-
-    <div class="flex flex-wrap gap-2">
-      <!-- Quick tech filters -->
-      <button *ngFor="let tech of quickFilterTechs"
-        (click)="toggleQuickFilter(tech)"
-        [class.active]="isQuickFilterActive(tech)"
-        class="px-3 py-1.5 text-xs font-medium rounded-full border transition-all duration-200 hover:scale-105"
-        [ngClass]="{
-          'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-700': isQuickFilterActive(tech),
-          'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 border-gray-300 dark:border-gray-600 hover:bg-emerald-50 dark:hover:bg-emerald-900/20': !isQuickFilterActive(tech)
-        }">
-        {{ tech }}
       </button>
-
-      <!-- Featured quick filter -->
-      <button
-        (click)="toggleFeaturedQuick()"
-        [class.active]="featuredFilter === 'featured'"
-        class="px-3 py-1.5 text-xs font-medium rounded-full border transition-all duration-200 hover:scale-105"
-        [ngClass]="{
-          'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-700': featuredFilter === 'featured',
-          'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 border-gray-300 dark:border-gray-600 hover:bg-emerald-50 dark:hover:bg-emerald-900/20': featuredFilter !== 'featured'
-        }">
-        ⭐ Destacados
-      </button>
-    </div>
-  </div>
-
-  <!-- Sort Options -->
-  <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-    <div class="flex items-center justify-between">
-      <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300">Ordenar por</h4>
-
-      <div class="flex items-center space-x-3">
-        <select
-          [(ngModel)]="sortBy"
-          (change)="onSortChange()"
-          class="px-3 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 dark:bg-gray-700 dark:text-white transition-colors">
-          <option value="title">Nombre</option>
-          <option value="date" *ngIf="hasDateField">Fecha</option>
-          <option value="featured">Destacados</option>
-          <option value="tech-count">Tecnologías</option>
-        </select>
-
-        <button
-          (click)="toggleSortOrder()"
-          class="p-1.5 text-gray-500 hover:text-emerald-600 dark:text-gray-400 dark:hover:text-emerald-400 transition-colors"
-          [title]="sortOrder === 'asc' ? 'Cambiar a descendente' : 'Cambiar a ascendente'">
-          <svg class="w-4 h-4 transform transition-transform" [class.rotate-180]="sortOrder === 'desc'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"></path>
-          </svg>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Active Filters Summary -->
-  <div *ngIf="hasActiveFilters" class="mt-4 p-3 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg border border-emerald-200 dark:border-emerald-800">
-    <div class="flex items-center justify-between">
-      <div class="flex items-center text-sm text-emerald-700 dark:text-emerald-300">
-        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-        </svg>
-        Filtros activos: {{ getActiveFiltersText() }}
-      </div>
     </div>
   </div>
 </div>

@@ -1,4 +1,3 @@
-
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Component, EventEmitter, Input, Output, HostListener, ElementRef, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
@@ -22,20 +21,24 @@ export class NavbardComponent {
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
-  // NUEVA FUNCIÓN: Scroll suave a las secciones
+  // FUNCIÓN CORREGIDA: Scroll suave a las secciones
   scrollToSection(sectionId: string): void {
     // Solo ejecutar en el navegador
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }
 
-    // Si no estamos en la página home, navegar primero
-    if (this.router.url !== '/') {
-      this.router.navigate(['/']).then(() => {
-        // Esperar un poco a que cargue la página y luego hacer scroll
+    // Cerrar menú móvil si está abierto
+    this.closeMenu();
+
+    // Verificar si estamos en la página correcta (home)
+    if (this.router.url !== '/home') {
+      // Si no estamos en home, navegar primero
+      this.router.navigate(['/home']).then(() => {
+        // Esperar a que cargue la página y luego hacer scroll
         setTimeout(() => {
           this.performScroll(sectionId);
-        }, 300);
+        }, 500); // Aumenté el tiempo para asegurar que cargue
       });
     } else {
       // Si ya estamos en home, hacer scroll directamente
@@ -44,16 +47,35 @@ export class NavbardComponent {
   }
 
   private performScroll(sectionId: string): void {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const navbarHeight = 80; // Altura aproximada del navbar
-      const elementPosition = element.offsetTop - navbarHeight;
+    // Intentar varias veces para asegurar que el elemento existe
+    let attempts = 0;
+    const maxAttempts = 10;
 
-      window.scrollTo({
-        top: elementPosition,
-        behavior: 'smooth'
-      });
-    }
+    const attemptScroll = () => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const navbarHeight = 80; // Altura del navbar
+        const elementPosition = element.offsetTop - navbarHeight;
+
+        window.scrollTo({
+          top: Math.max(0, elementPosition),
+          behavior: 'smooth'
+        });
+      } else if (attempts < maxAttempts) {
+        attempts++;
+        setTimeout(attemptScroll, 100);
+      } else {
+        console.warn(`No se encontró el elemento con ID: ${sectionId}`);
+      }
+    };
+
+    attemptScroll();
+  }
+
+  // Función para navegación regular (para páginas que no son secciones)
+  navigateToPage(route: string): void {
+    this.closeMenu();
+    this.router.navigate([route]);
   }
 
   // Resto de tus métodos existentes...
