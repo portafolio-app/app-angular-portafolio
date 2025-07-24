@@ -15,25 +15,41 @@
   pointer-events: auto;
 }
 
-/* Forzar el z-index en el contenedor principal */
+/* Asegurarse de que el backdrop ocupe solo el espacio necesario */
 .alert-backdrop {
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
   width: 100vw !important;
   height: 100vh !important;
-  z-index: 99999 !important; /* Forzar con !important */
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  background-color: rgba(0, 0, 0, 0.5) !important;
+  background-color: rgba(0, 0, 0, 0.5);
   pointer-events: auto !important;
+  z-index: 99999 !important;
+  display: none; /* Ocultar el backdrop por defecto */
+  justify-content: center; /* Centrar el contenido horizontalmente */
+  align-items: center; /* Centrar el contenido verticalmente */
 }
 
+:host(.alert-visible) .alert-backdrop {
+  display: flex; /* Mostrar cuando está activo */
+  pointer-events: auto;
+}
+body.modal-open {
+  overflow: hidden; /* Evitar el desplazamiento en el fondo mientras el modal está activo */
+}
+body:not(.modal-open) {
+  overflow: auto; /* Restaurar el desplazamiento en el fondo cuando se cierra el modal */
+}
 /* Asegurar que el contenido del modal esté por encima */
 .alert-content {
   position: relative;
-  z-index: 99999 !important;
-  pointer-events: auto !important;
+  max-width: 100%; /* Evitar que el contenido del modal sea más grande que el contenedor */
+  max-height: 90vh; /* Evitar que el contenido se estire más allá de la pantalla */
+  overflow-y: auto; /* Añadir desplazamiento si el contenido es muy grande */
+  margin: auto; /* Centrado automático */
+  z-index: 100000;
 }
 
 /* Animaciones personalizadas */
@@ -108,3 +124,4 @@
   visibility: visible !important;
   opacity: 1 !important;
 }
+
