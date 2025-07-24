@@ -1,4 +1,5 @@
-<!-- home.component.html - IDs corregidos para navegación -->
+<!-- src/app/pages/home/home.component.html - SOLO BOTÓN INFO -->
+<!-- Navbar -->
 <app-navbard [isDarkMode]="isDarkMode" (themeToggle)="toggleTheme()"></app-navbard>
 
 <!-- Hero Section -->
@@ -13,10 +14,31 @@
   </div>
 </section>
 
-<!-- Stack Tecnológico Section - CORREGIDO: cambiado el ID -->
+<!-- Stack Tecnológico Section -->
 <section id="tecnologias" class="bg-white dark:bg-gray-900">
   <app-stack-tecnologico></app-stack-tecnologico>
 </section>
 
 <!-- Footer -->
 <app-footer></app-footer>
+
+<!-- Botón de Información del Portafolio -->
+<div class="fixed bottom-6 right-6 z-40">
+  <button
+    type="button"
+    (click)="showDevelopmentInfo()"
+    class="group bg-emerald-600 hover:bg-emerald-700 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+    title="Información sobre el desarrollo del portafolio"
+    [disabled]="isAlertVisible">
+    <i class="fas fa-info text-lg group-hover:rotate-12 transition-transform duration-300"></i>
+  </button>
+</div>
+
+<!-- Componente de Alert -->
+<app-alert
+  *ngIf="currentAlert && isAlertVisible"
+  [config]="currentAlert"
+  [isVisible]="isAlertVisible"
+  (actionClicked)="onAlertAction($event)"
+  (closed)="onAlertClosed($event)">
+</app-alert>

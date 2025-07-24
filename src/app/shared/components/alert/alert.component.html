@@ -1,0 +1,86 @@
+<!-- src/app/shared/components/alert/alert.component.html -->
+<div *ngIf="isVisible && config"
+     class="fixed inset-0 z-[9999] flex items-center justify-center p-4 transition-all duration-300"
+     [class.opacity-0]="!showAnimation"
+     [class.opacity-100]="showAnimation"
+     [ngClass]="getPositionClass()"
+     [style.background-color]="'rgba(0, 0, 0, 0.5)'"
+     [style.backdrop-filter]="'blur(4px)'"
+     (click)="onBackdropClick($event)">
+
+  <!-- Alert Container -->
+  <div class="relative w-full max-h-[90vh] overflow-y-auto transition-all duration-300 transform"
+       [ngClass]="getSizeClass()"
+       [class.scale-95]="!showAnimation"
+       [class.scale-100]="showAnimation"
+       [class.translate-y-4]="!showAnimation && config.position === 'top'"
+       [class.translate-y-0]="showAnimation || config.position !== 'top'"
+       (click)="$event.stopPropagation()">
+
+    <!-- Alert Card -->
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl border overflow-hidden"
+         [ngClass]="getAlertClasses()">
+
+      <!-- Progress Bar (si autoClose está habilitado) -->
+      <div *ngIf="config.showProgress && config.autoClose && config.autoClose > 0"
+           class="h-1 bg-gray-200 dark:bg-gray-700 overflow-hidden">
+        <div class="h-full transition-all ease-linear"
+             [ngClass]="getProgressBarClass()"
+             [style.width.%]="progressWidth"
+             [style.transition-duration.ms]="config.autoClose">
+        </div>
+      </div>
+
+      <!-- Header -->
+      <div class="flex items-start justify-between p-6"
+           [ngClass]="getHeaderClass()">
+
+        <!-- Icon & Title -->
+        <div class="flex items-start space-x-4">
+          <!-- Icon -->
+          <div *ngIf="config.showIcon !== false"
+               class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center"
+               [ngClass]="getIconBackgroundClass()">
+            <i [class]="getIconClass()" [ngClass]="getIconColorClass()"></i>
+          </div>
+
+          <!-- Title & Message -->
+          <div class="flex-1 min-w-0">
+            <h3 class="text-lg font-semibold mb-2"
+                [ngClass]="getTitleColorClass()">
+              {{ config.title }}
+            </h3>
+            <div class="text-sm leading-relaxed"
+                 [ngClass]="getMessageColorClass()"
+                 [innerHTML]="formatMessage(config.message || '')">
+            </div>
+          </div>
+        </div>
+
+        <!-- Close Button -->
+        <button *ngIf="config.dismissible !== false"
+                (click)="handleCloseButton($event)"
+                type="button"
+                class="flex-shrink-0 ml-4 p-2 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                aria-label="Cerrar alerta">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Actions (si existen) -->
+      <div *ngIf="config.actions && config.actions.length > 0"
+           class="flex items-center justify-end space-x-3 px-6 pb-6">
+        <button *ngFor="let action of config.actions"
+                (click)="handleActionButton(action.action, $event)"
+                type="button"
+                class="px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 flex items-center space-x-2 hover:scale-105"
+                [ngClass]="getActionButtonClass(action.style || 'secondary')">
+          <i *ngIf="action.icon" [class]="action.icon" class="text-sm"></i>
+          <span>{{ action.label }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

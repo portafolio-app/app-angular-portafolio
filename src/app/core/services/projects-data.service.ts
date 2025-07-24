@@ -56,7 +56,7 @@ export class ProjectsDataService {
           'Plataforma completa para gestionar ventas y productos electrónicos en línea, con carrito de compras inteligente, múltiples métodos de pago, gestión de inventario en tiempo real y panel de administración avanzado.',
         shortDescription:
           'Plataforma e-commerce completa para productos electrónicos con gestión de inventario y pagos.',
-        image: '../assets/jwt-autenticator.png',
+        image: '../assets/banner-ventas.png',
         technologies: [
           {
             name: 'Angular',
@@ -78,14 +78,10 @@ export class ProjectsDataService {
         links: [
           {
             type: 'github',
-            url: 'https://github.com/VCL-tt/sistema-ventas-electronicos',
+            url: 'https://github.com/App-GigaShop/app-Gigashop-Back.git',
             label: 'Código Fuente',
           },
-          {
-            type: 'demo',
-            url: 'https://ventas-demo.vercel.app',
-            label: 'Demo en Vivo',
-          },
+         
         ],
         category: 'web',
         status: 'completed',
