@@ -1,80 +1,98 @@
-<!-- src/app/shared/components/alert/alert.component.html -->
+<!-- src/app/shared/components/alert/alert.component.html - ACTUALIZADO -->
 <div *ngIf="isVisible && config"
-     class="alert-backdrop flex items-center justify-center p-4 transition-all duration-300"
+     class="fixed inset-0 z-[9999] flex items-center justify-center p-4
+            transition-all duration-300 ease-out"
      [class.opacity-0]="!showAnimation"
      [class.opacity-100]="showAnimation"
-     [class.alert-visible]="showAnimation"
+     [class.pointer-events-none]="!isVisible || isClosing"
+     [class.pointer-events-auto]="isVisible && !isClosing"
      [ngClass]="getPositionClass()"
      (click)="onBackdropClick($event)">
 
   <!-- Alert Container -->
-  <div class="alert-content relative w-full max-h-[90vh] overflow-y-auto transition-all duration-300 transform"
+  <div class="relative w-full max-h-[90vh] overflow-y-auto
+              transform transition-all duration-300 ease-out"
        [ngClass]="getSizeClass()"
        [class.scale-95]="!showAnimation"
        [class.scale-100]="showAnimation"
-       [class.translate-y-4]="!showAnimation && config.position === 'top'"
-       [class.translate-y-0]="showAnimation || config.position !== 'top'"
+       [class.translate-y-4]="!showAnimation"
+       [class.translate-y-0]="showAnimation"
        (click)="$event.stopPropagation()">
 
     <!-- Alert Card -->
-    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl border overflow-hidden"
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl border-2 overflow-hidden
+                transform transition-all duration-300
+                ring-4 ring-gray-200 dark:ring-gray-700"
          [ngClass]="getAlertClasses()">
 
-      <!-- Progress Bar (si autoClose está habilitado) -->
+      <!-- Progress Bar -->
       <div *ngIf="config.showProgress && config.autoClose && config.autoClose > 0"
            class="h-1 bg-gray-200 dark:bg-gray-700 overflow-hidden">
         <div class="h-full transition-all ease-linear"
              [ngClass]="getProgressBarClass()"
-             [style.width.%]="progressWidth"
-             [style.transition-duration.ms]="config.autoClose">
+             [style.width.%]="progressWidth">
         </div>
       </div>
 
       <!-- Header -->
-      <div class="flex items-start justify-between p-6"
+      <div class="flex items-start justify-between p-6 border-b border-gray-100 dark:border-gray-700"
            [ngClass]="getHeaderClass()">
 
-        <!-- Icon & Title -->
-        <div class="flex items-start space-x-4">
+        <!-- Icon & Content -->
+        <div class="flex items-start space-x-4 flex-1">
           <!-- Icon -->
           <div *ngIf="config.showIcon !== false"
-               class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center"
+               class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center
+                      shadow-lg transform transition-all duration-300 hover:scale-110"
                [ngClass]="getIconBackgroundClass()">
-            <i [class]="getIconClass()" [ngClass]="getIconColorClass()"></i>
+            <i [class]="getIconClass()"
+               [ngClass]="getIconColorClass()"
+               class="text-xl"></i>
           </div>
 
           <!-- Title & Message -->
           <div class="flex-1 min-w-0">
-            <h3 class="text-lg font-semibold mb-2"
+            <h3 class="text-xl font-bold mb-3 leading-tight"
                 [ngClass]="getTitleColorClass()">
               {{ config.title }}
             </h3>
-            <div class="text-sm leading-relaxed"
+            <div class="text-sm leading-relaxed prose prose-sm max-w-none"
                  [ngClass]="getMessageColorClass()"
                  [innerHTML]="formatMessage(config.message || '')">
             </div>
           </div>
         </div>
 
-        <!-- Close Button - CORREGIDO -->
+        <!-- Close Button -->
         <button *ngIf="config.dismissible !== false"
                 type="button"
-                class="flex-shrink-0 ml-4 p-2 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                class="flex-shrink-0 ml-4 p-2 rounded-lg
+                       text-gray-400 hover:text-gray-600 dark:hover:text-gray-300
+                       hover:bg-gray-100 dark:hover:bg-gray-700
+                       transition-all duration-200 transform hover:scale-110 active:scale-95
+                       focus:outline-none focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-600"
                 aria-label="Cerrar alerta"
+                [disabled]="isClosing"
                 (click)="handleCloseButton($event)">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"></path>
           </svg>
         </button>
       </div>
 
-      <!-- Actions (si existen) - CORREGIDO -->
+      <!-- Actions -->
       <div *ngIf="config.actions && config.actions.length > 0"
-           class="flex items-center justify-end space-x-3 px-6 pb-6">
-        <button *ngFor="let action of config.actions"
+           class="flex flex-col sm:flex-row items-stretch sm:items-center
+                  justify-end gap-3 px-6 py-4 bg-gray-50 dark:bg-gray-900/50">
+        <button *ngFor="let action of config.actions; let last = last"
                 type="button"
-                class="px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 flex items-center space-x-2 hover:scale-105"
+                class="px-4 py-2.5 text-sm font-medium rounded-lg
+                       transition-all duration-200 transform hover:scale-105 active:scale-95
+                       flex items-center justify-center space-x-2
+                       focus:outline-none focus:ring-2 focus:ring-offset-2"
                 [ngClass]="getActionButtonClass(action.style || 'secondary')"
+                [disabled]="isClosing"
                 (click)="handleActionButton(action.action, $event)">
           <i *ngIf="action.icon" [class]="action.icon" class="text-sm"></i>
           <span>{{ action.label }}</span>

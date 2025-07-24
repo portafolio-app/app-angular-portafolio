@@ -16,7 +16,10 @@ import Typewriter from 'typewriter-effect/dist/core';
 import { NavbardComponent } from '../../shared/components/navbard/navbard.component';
 import { ThemeService } from '../../core/services/ThemeService';
 import { AlertService } from '../../core/services/alert.service';
-import { AlertComponent, AlertConfig } from '../../shared/components/alert/alert.component';
+import {
+  AlertComponent,
+  AlertConfig,
+} from '../../shared/components/alert/alert.component';
 import { CardProyectosComponent } from '../../shared/components/card-proyectos/card-proyectos.component';
 import { FooterComponent } from '../../shared/components/footer/footer.component';
 import { StackTecnologicoComponent } from '../../shared/components/stack-tecnologico/stack-tecnologico.component';
@@ -34,7 +37,7 @@ import { Subscription } from 'rxjs';
     FooterComponent,
     StackTecnologicoComponent,
     HeroComponent,
-    AlertComponent
+    AlertComponent,
   ],
   templateUrl: './home.component.html',
 })
@@ -45,11 +48,14 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private typewriterInstance: any;
   private observer: IntersectionObserver | null = null;
 
-  // Propiedades para Alert - SIMPLIFICADAS
+  // Propiedades para Alert
   currentAlert: AlertConfig | null = null;
   isAlertVisible: boolean = false;
   private alertSubscription?: Subscription;
   private visibilitySubscription?: Subscription;
+
+  // PROPIEDADES AGREGADAS para el botón
+  isButtonLoading: boolean = false;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -64,7 +70,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.cdr.detectChanges();
     });
 
-    // Configurar suscripciones de alertas
     this.setupAlertSubscriptions();
   }
 
@@ -84,36 +89,75 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.observer.disconnect();
     }
 
-    // Limpiar suscripciones de alertas
     this.alertSubscription?.unsubscribe();
     this.visibilitySubscription?.unsubscribe();
 
-    // Restaurar scroll del body
+    // CLEANUP MEJORADO del scroll
     if (isPlatformBrowser(this.platformId)) {
-      document.body.style.overflow = 'auto';
+      const body = document.body;
+      const html = document.documentElement;
+
+      // Asegurar que el scroll se restaure completamente
+      body.style.position = '';
+      body.style.top = '';
+      body.style.width = '';
+      body.style.overflow = '';
+      html.style.overflow = '';
     }
   }
 
-  // MÉTODOS DE ALERT CORREGIDOS
+  // MÉTODOS DE ALERT
   private setupAlertSubscriptions(): void {
-    this.alertSubscription = this.alertService.currentAlert$.subscribe(alert => {
-      console.log('🔔 Alert config changed:', alert);
-      this.currentAlert = alert;
-      this.cdr.detectChanges();
-    });
-
-    this.visibilitySubscription = this.alertService.isVisible$.subscribe(isVisible => {
-      console.log('👁️ Alert visibility changed:', isVisible);
-      this.isAlertVisible = isVisible;
-      this.cdr.detectChanges();
-
-      // Manejar el scroll del body
-      if (isPlatformBrowser(this.platformId)) {
-        document.body.style.overflow = isVisible ? 'hidden' : 'auto';
+    this.alertSubscription = this.alertService.currentAlert$.subscribe(
+      (alert) => {
+        console.log('🔔 Alert config changed:', alert);
+        this.currentAlert = alert;
+        this.cdr.detectChanges();
       }
-    });
-  }
+    );
 
+    this.visibilitySubscription = this.alertService.isVisible$.subscribe(
+      (isVisible) => {
+        console.log('👁️ Alert visibility changed:', isVisible);
+        this.isAlertVisible = isVisible;
+        this.isButtonLoading = false;
+        this.cdr.detectChanges();
+
+        // MANEJO MEJORADO DEL SCROLL
+        this.handleBodyScrollLock(isVisible);
+      }
+    );
+  }
+  private handleBodyScrollLock(isVisible: boolean): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    const body = document.body;
+    const html = document.documentElement;
+
+    if (isVisible) {
+      // Bloquear scroll cuando se abre el modal
+      const scrollY = window.scrollY;
+      body.style.position = 'fixed';
+      body.style.top = `-${scrollY}px`;
+      body.style.width = '100%';
+      body.style.overflow = 'hidden';
+      html.style.overflow = 'hidden';
+    } else {
+      // Restaurar scroll cuando se cierra el modal
+      const scrollY = body.style.top;
+      body.style.position = '';
+      body.style.top = '';
+      body.style.width = '';
+      body.style.overflow = '';
+      html.style.overflow = '';
+
+      // Restaurar la posición del scroll
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
+    }
+  }
+  // MÉTODO MEJORADO para mostrar información
   showDevelopmentInfo(): void {
     console.log('🚀 Showing development info');
 
@@ -123,20 +167,25 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
-    // Mostrar la alerta
-    this.alertService.showDevelopmentAlert();
+    // Activar estado de loading
+    this.isButtonLoading = true;
+    this.cdr.detectChanges();
+
+    // Simular pequeña carga para feedback visual (opcional)
+    setTimeout(() => {
+      this.alertService.showDevelopmentAlert();
+      // El loading se desactiva automáticamente en setupAlertSubscriptions
+    }, 300);
   }
 
-  // MÉTODO CORREGIDO: Manejar acciones de alerta
+  // Manejar acciones de alerta
   onAlertAction(action: string): void {
     console.log('🎬 Processing alert action:', action);
 
-    // Procesar la acción inmediatamente SIN cerrar el modal aún
     switch (action) {
       case 'view_available':
       case 'explore':
         console.log('📂 Navigating to projects...');
-        // NO cerrar el modal aquí, se cierra automáticamente en handleActionButton
         setTimeout(() => this.scrollToSection('proyectos'), 100);
         break;
 
@@ -166,18 +215,20 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  // MÉTODO CORREGIDO: Manejar cierre de alerta
+  // Manejar cierre de alerta
   onAlertClosed(reason: string): void {
     console.log('🔒 Alert closed with reason:', reason);
 
-    // El AlertService ya maneja la limpieza del estado
-    // Solo necesitamos restaurar el scroll del body
+    // Asegurar que el loading state se resetee
+    this.isButtonLoading = false;
+    this.cdr.detectChanges();
+
     if (isPlatformBrowser(this.platformId)) {
       document.body.style.overflow = 'auto';
     }
   }
 
-  // MÉTODOS DE NAVEGACIÓN MEJORADOS
+  // MÉTODOS DE NAVEGACIÓN
   private scrollToSection(sectionId: string): void {
     if (!isPlatformBrowser(this.platformId)) return;
 
@@ -190,7 +241,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
       window.scrollTo({
         top: Math.max(0, elementPosition),
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
 
       console.log(`✅ Scrolled to ${sectionId}`);
@@ -201,7 +252,14 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private openEmail(): void {
     if (isPlatformBrowser(this.platformId)) {
-      window.open('mailto:casvejorge1@gmail.com', '_blank');
+      const subject = encodeURIComponent('Contacto desde portafolio');
+      const body = encodeURIComponent(
+        'Hola Jorge,\n\nMe pongo en contacto contigo desde tu portafolio web...'
+      );
+      window.open(
+        `mailto:casvejorge1@gmail.com?subject=${subject}&body=${body}`,
+        '_blank'
+      );
     }
   }
 
