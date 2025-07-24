@@ -282,12 +282,12 @@ export class ProjectsDataService {
         links: [
           {
             type: 'github',
-            url: 'https://github.com/App-Authenticator',
+            url: 'https://github.com/orgs/App-Authenticator/repositories',
             label: 'Ver Código',
           },
           {
             type: 'demo',
-            url: 'https://jcv-code.netlify.app/auth',
+            url: 'https://auth-jcvcode.netlify.app/auth',
             label: 'Demo en Vivo',
           },
         ],
