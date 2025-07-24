@@ -78,10 +78,10 @@ export class ProjectsDataService {
         links: [
           {
             type: 'github',
-            url: 'https://github.com/App-GigaShop/app-Gigashop-Back.git',
+            url: 'https://github.com/App-GigaShop/aapp-Gigashop-Back.git',
             label: 'Código Fuente',
           },
-         
+
         ],
         category: 'web',
         status: 'completed',
