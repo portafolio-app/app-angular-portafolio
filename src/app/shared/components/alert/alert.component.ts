@@ -1,8 +1,22 @@
-// src/app/shared/components/alert/alert.component.ts - SEPARADO
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, HostListener,
-         ChangeDetectionStrategy, ChangeDetectorRef, OnChanges, SimpleChanges,
-         ElementRef, Renderer2 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+// src/app/shared/components/alert/alert.component.ts - CORREGIDO
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnDestroy,
+  HostListener,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  OnChanges,
+  SimpleChanges,
+  ElementRef,
+  Renderer2,
+  Inject,
+  PLATFORM_ID,
+} from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 export interface AlertConfig {
   type: 'info' | 'success' | 'warning' | 'error' | 'development';
@@ -30,8 +44,8 @@ export interface AlertAction {
   standalone: true,
   imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './alert.component.html',  // ✅ AHORA USA TU ARCHIVO HTML
-  styleUrls: ['./alert.component.css']     // ✅ Y TU ARCHIVO CSS SI EXISTE
+  templateUrl: './alert.component.html',
+  styleUrls: ['./alert.component.css'],
 })
 export class AlertComponent implements OnInit, OnDestroy, OnChanges {
   @Input() config: AlertConfig | null = null;
@@ -43,12 +57,14 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
   showAnimation: boolean = false;
   private autoCloseTimer?: any;
   private progressTimer?: any;
-  isClosing: boolean = false;  // ✅ Hacer pública para usar en template
+  isClosing: boolean = false;
+  private savedScrollPosition: number = 0; // NUEVO: Guardar posición del scroll
 
   constructor(
     private cdr: ChangeDetectorRef,
     private elementRef: ElementRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit(): void {
@@ -79,8 +95,15 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
       this.progressWidth = 100;
 
       // Configurar estilos del host
-      this.renderer.setStyle(this.elementRef.nativeElement, 'pointer-events', 'auto');
+      this.renderer.setStyle(
+        this.elementRef.nativeElement,
+        'pointer-events',
+        'auto'
+      );
       this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'block');
+
+      // Manejar scroll lock
+      this.handleBodyScrollLock(true);
 
       // Activar animación después de un micro delay
       setTimeout(() => {
@@ -103,16 +126,66 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     this.showAnimation = false;
     this.clearTimers();
 
+    // Restaurar scroll
+    this.handleBodyScrollLock(false);
+
     // Limpiar estilos del host
-    this.renderer.setStyle(this.elementRef.nativeElement, 'pointer-events', 'none');
+    this.renderer.setStyle(
+      this.elementRef.nativeElement,
+      'pointer-events',
+      'none'
+    );
     this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'none');
 
     this.cdr.detectChanges();
   }
 
+  // MÉTODO CORREGIDO para manejar el scroll lock
+  private handleBodyScrollLock(isVisible: boolean): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    const body = document.body;
+    const html = document.documentElement;
+
+    if (isVisible) {
+      // Guardar posición actual antes de bloquear
+      this.savedScrollPosition =
+        window.pageYOffset || document.documentElement.scrollTop;
+
+      // Bloquear scroll
+      body.style.position = 'fixed';
+      body.style.top = `-${this.savedScrollPosition}px`;
+      body.style.left = '0';
+      body.style.right = '0';
+      body.style.width = '100%';
+      body.style.overflow = 'hidden';
+      html.style.overflow = 'hidden';
+    } else {
+      // Restaurar scroll
+      body.style.position = '';
+      body.style.top = '';
+      body.style.left = '';
+      body.style.right = '';
+      body.style.width = '';
+      body.style.overflow = '';
+      html.style.overflow = '';
+
+      // Restaurar posición del scroll
+      if (this.savedScrollPosition >= 0) {
+        window.scrollTo(0, this.savedScrollPosition);
+        this.savedScrollPosition = 0;
+      }
+    }
+  }
+
   @HostListener('document:keydown.escape', ['$event'])
   onEscapePress(event: KeyboardEvent): void {
-    if (this.isVisible && this.config && this.config.dismissible !== false && !this.isClosing) {
+    if (
+      this.isVisible &&
+      this.config &&
+      this.config.dismissible !== false &&
+      !this.isClosing
+    ) {
       event.preventDefault();
       event.stopPropagation();
       this.closeAlert('escape');
@@ -125,7 +198,11 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     const target = event.target as HTMLElement;
     const currentTarget = event.currentTarget as HTMLElement;
 
-    if (target === currentTarget && this.config && this.config.dismissible !== false) {
+    if (
+      target === currentTarget &&
+      this.config &&
+      this.config.dismissible !== false
+    ) {
       console.log('🎯 Backdrop clicked - closing modal');
       this.closeAlert('backdrop');
     }
@@ -243,9 +320,9 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     if (!this.config) return 'items-center justify-center';
     const position = this.config.position || 'center';
     const positionClasses: Record<string, string> = {
-      'top': 'items-start justify-center pt-20',
-      'center': 'items-center justify-center',
-      'bottom': 'items-end justify-center pb-20'
+      top: 'items-start justify-center pt-20',
+      center: 'items-center justify-center',
+      bottom: 'items-end justify-center pb-20',
     };
     return positionClasses[position];
   }
@@ -254,10 +331,10 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     if (!this.config) return 'max-w-md';
     const size = this.config.size || 'md';
     const sizeClasses: Record<string, string> = {
-      'sm': 'max-w-sm',
-      'md': 'max-w-md',
-      'lg': 'max-w-lg',
-      'xl': 'max-w-xl'
+      sm: 'max-w-sm sm:max-w-md',
+      md: 'max-w-md sm:max-w-lg',
+      lg: 'max-w-lg sm:max-w-xl lg:max-w-2xl',
+      xl: 'max-w-xl sm:max-w-2xl lg:max-w-3xl',
     };
     return sizeClasses[size];
   }
@@ -266,11 +343,11 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     if (!this.config) return 'border-blue-200 dark:border-blue-700';
     const type = this.config.type;
     const borderClasses: Record<string, string> = {
-      'info': 'border-blue-200 dark:border-blue-700',
-      'success': 'border-green-200 dark:border-green-700',
-      'warning': 'border-yellow-200 dark:border-yellow-700',
-      'error': 'border-red-200 dark:border-red-700',
-      'development': 'border-emerald-200 dark:border-emerald-700'
+      info: 'border-blue-200 dark:border-blue-700',
+      success: 'border-green-200 dark:border-green-700',
+      warning: 'border-yellow-200 dark:border-yellow-700',
+      error: 'border-red-200 dark:border-red-700',
+      development: 'border-emerald-200 dark:border-emerald-700',
     };
     return borderClasses[type] || borderClasses['info'];
   }
@@ -279,11 +356,12 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     if (!this.config) return 'bg-blue-50 dark:bg-blue-900/20';
     const type = this.config.type;
     const headerClasses: Record<string, string> = {
-      'info': 'bg-blue-50 dark:bg-blue-900/20',
-      'success': 'bg-green-50 dark:bg-green-900/20',
-      'warning': 'bg-yellow-50 dark:bg-yellow-900/20',
-      'error': 'bg-red-50 dark:bg-red-900/20',
-      'development': 'bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20'
+      info: 'bg-blue-50 dark:bg-blue-900/20',
+      success: 'bg-green-50 dark:bg-green-900/20',
+      warning: 'bg-yellow-50 dark:bg-yellow-900/20',
+      error: 'bg-red-50 dark:bg-red-900/20',
+      development:
+        'bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20',
     };
     return headerClasses[type] || headerClasses['info'];
   }
@@ -293,11 +371,11 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     if (this.config.icon) return this.config.icon;
     const type = this.config.type;
     const iconClasses: Record<string, string> = {
-      'info': 'fas fa-info-circle',
-      'success': 'fas fa-check-circle',
-      'warning': 'fas fa-exclamation-triangle',
-      'error': 'fas fa-times-circle',
-      'development': 'fas fa-rocket'
+      info: 'fas fa-info-circle',
+      success: 'fas fa-check-circle',
+      warning: 'fas fa-exclamation-triangle',
+      error: 'fas fa-times-circle',
+      development: 'fas fa-rocket',
     };
     return iconClasses[type] || iconClasses['info'];
   }
@@ -306,11 +384,12 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     if (!this.config) return 'bg-blue-100 dark:bg-blue-800';
     const type = this.config.type;
     const bgClasses: Record<string, string> = {
-      'info': 'bg-blue-100 dark:bg-blue-800',
-      'success': 'bg-green-100 dark:bg-green-800',
-      'warning': 'bg-yellow-100 dark:bg-yellow-800',
-      'error': 'bg-red-100 dark:bg-red-800',
-      'development': 'bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-800 dark:to-teal-800'
+      info: 'bg-blue-100 dark:bg-blue-800',
+      success: 'bg-green-100 dark:bg-green-800',
+      warning: 'bg-yellow-100 dark:bg-yellow-800',
+      error: 'bg-red-100 dark:bg-red-800',
+      development:
+        'bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-800 dark:to-teal-800',
     };
     return bgClasses[type] || bgClasses['info'];
   }
@@ -319,11 +398,11 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     if (!this.config) return 'text-blue-600 dark:text-blue-400';
     const type = this.config.type;
     const colorClasses: Record<string, string> = {
-      'info': 'text-blue-600 dark:text-blue-400',
-      'success': 'text-green-600 dark:text-green-400',
-      'warning': 'text-yellow-600 dark:text-yellow-400',
-      'error': 'text-red-600 dark:text-red-400',
-      'development': 'text-emerald-600 dark:text-emerald-400'
+      info: 'text-blue-600 dark:text-blue-400',
+      success: 'text-green-600 dark:text-green-400',
+      warning: 'text-yellow-600 dark:text-yellow-400',
+      error: 'text-red-600 dark:text-red-400',
+      development: 'text-emerald-600 dark:text-emerald-400',
     };
     return colorClasses[type] || colorClasses['info'];
   }
@@ -332,11 +411,11 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     if (!this.config) return 'text-blue-900 dark:text-blue-100';
     const type = this.config.type;
     const titleClasses: Record<string, string> = {
-      'info': 'text-blue-900 dark:text-blue-100',
-      'success': 'text-green-900 dark:text-green-100',
-      'warning': 'text-yellow-900 dark:text-yellow-100',
-      'error': 'text-red-900 dark:text-red-100',
-      'development': 'text-emerald-900 dark:text-emerald-100'
+      info: 'text-blue-900 dark:text-blue-100',
+      success: 'text-green-900 dark:text-green-100',
+      warning: 'text-yellow-900 dark:text-yellow-100',
+      error: 'text-red-900 dark:text-red-100',
+      development: 'text-emerald-900 dark:text-emerald-100',
     };
     return titleClasses[type] || titleClasses['info'];
   }
@@ -345,11 +424,11 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     if (!this.config) return 'text-blue-700 dark:text-blue-300';
     const type = this.config.type;
     const messageClasses: Record<string, string> = {
-      'info': 'text-blue-700 dark:text-blue-300',
-      'success': 'text-green-700 dark:text-green-300',
-      'warning': 'text-yellow-700 dark:text-yellow-300',
-      'error': 'text-red-700 dark:text-red-300',
-      'development': 'text-emerald-700 dark:text-emerald-300'
+      info: 'text-blue-700 dark:text-blue-300',
+      success: 'text-green-700 dark:text-green-300',
+      warning: 'text-yellow-700 dark:text-yellow-300',
+      error: 'text-red-700 dark:text-red-300',
+      development: 'text-emerald-700 dark:text-emerald-300',
     };
     return messageClasses[type] || messageClasses['info'];
   }
@@ -358,27 +437,51 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     if (!this.config) return 'bg-blue-500';
     const type = this.config.type;
     const progressClasses: Record<string, string> = {
-      'info': 'bg-blue-500',
-      'success': 'bg-green-500',
-      'warning': 'bg-yellow-500',
-      'error': 'bg-red-500',
-      'development': 'bg-gradient-to-r from-emerald-500 to-teal-500'
+      info: 'bg-blue-500',
+      success: 'bg-green-500',
+      warning: 'bg-yellow-500',
+      error: 'bg-red-500',
+      development: 'bg-gradient-to-r from-emerald-500 to-teal-500',
     };
     return progressClasses[type] || progressClasses['info'];
   }
 
   getActionButtonClass(style: string): string {
-    const baseClasses = 'transition-all duration-200 transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2';
+    const baseClasses =
+      'relative transition-all duration-300 transform focus:outline-none focus:ring-4 focus:ring-offset-2 animate-fadeIn';
     const buttonClasses: Record<string, string> = {
-      'primary': `${baseClasses} bg-emerald-600 hover:bg-emerald-700 text-white focus:ring-emerald-500 shadow-lg hover:shadow-xl`,
-      'secondary': `${baseClasses} bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 focus:ring-gray-500 border border-gray-300 dark:border-gray-600`,
-      'danger': `${baseClasses} bg-red-600 hover:bg-red-700 text-white focus:ring-red-500 shadow-lg hover:shadow-xl`,
-      'success': `${baseClasses} bg-green-600 hover:bg-green-700 text-white focus:ring-green-500 shadow-lg hover:shadow-xl`
+      primary: `${baseClasses} bg-gradient-to-r from-emerald-600 via-emerald-700 to-teal-600
+                hover:from-emerald-700 hover:via-emerald-800 hover:to-teal-700
+                text-white focus:ring-emerald-500 shadow-emerald-500/25`,
+      secondary: `${baseClasses} bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100
+                  dark:from-gray-700 dark:via-gray-600 dark:to-gray-700
+                  hover:from-gray-200 hover:via-gray-300 hover:to-gray-200
+                  dark:hover:from-gray-600 dark:hover:via-gray-500 dark:hover:to-gray-600
+                  text-gray-700 dark:text-gray-300 focus:ring-gray-500
+                  border border-gray-300/50 dark:border-gray-600/50 shadow-gray-500/25`,
+      danger: `${baseClasses} bg-gradient-to-r from-red-600 via-red-700 to-red-600
+               hover:from-red-700 hover:via-red-800 hover:to-red-700
+               text-white focus:ring-red-500 shadow-red-500/25`,
+      success: `${baseClasses} bg-gradient-to-r from-green-600 via-green-700 to-green-600
+                hover:from-green-700 hover:via-green-800 hover:to-green-700
+                text-white focus:ring-green-500 shadow-green-500/25`,
     };
     return buttonClasses[style] || buttonClasses['secondary'];
   }
-
   formatMessage(message: string): string {
     return message.replace(/\n/g, '<br>');
+  }
+  getActionButtonHoverClass(style: string): string {
+    const hoverClasses: Record<string, string> = {
+      primary: 'from-emerald-400 to-teal-400',
+      secondary: 'from-gray-300 to-gray-400',
+      danger: 'from-red-400 to-red-500',
+      success: 'from-green-400 to-green-500',
+    };
+    return hoverClasses[style] || hoverClasses['secondary'];
+  }
+
+  trackByAction(index: number, action: AlertAction): string {
+    return action.action;
   }
 }

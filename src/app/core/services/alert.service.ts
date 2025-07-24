@@ -49,11 +49,9 @@ export class AlertService {
 
     this.showAlert({
       type: 'development',
-      title: '🚀 Portafolio en Evolución',
+      title: 'Portafolio en Evolución',
       message: `
         ¡Hola! 👋 Este portafolio está en <strong>constante desarrollo</strong> y mejora continua.
-
-        <br><br>
 
         🔧 <strong>Tecnologías utilizadas:</strong>
         <br>• Angular 18 + TypeScript
@@ -61,15 +59,11 @@ export class AlertService {
         <br>• Componentes modulares y reutilizables
         <br>• Animaciones y transiciones fluidas
 
-        <br><br>
-
         ✨ <strong>Características destacadas:</strong>
         <br>• Modo oscuro/claro dinámico
         <br>• Optimizado para móviles y desktop
         <br>• Código limpio y escalable
         <br>• Experiencia de usuario moderna
-
-        <br><br>
 
         💡 ¿Te interesa colaborar o tienes alguna sugerencia?
         <br>¡Me encantaría conocer tu opinión!

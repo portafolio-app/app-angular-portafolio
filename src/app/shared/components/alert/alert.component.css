@@ -1,127 +1,55 @@
-/* src/app/shared/components/alert/alert.component.css */
-
-:host {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 99999; /* Aumentamos significativamente */
-  display: block;
+/* Scrollbar personalizada */
+.scrollbar-thin {
+  scrollbar-width: thin;
 }
 
-:host(.active) {
-  pointer-events: auto;
+.scrollbar-thumb-gray-300::-webkit-scrollbar-thumb {
+  background-color: rgb(209 213 219);
+  border-radius: 0.375rem;
 }
 
-/* Asegurarse de que el backdrop ocupe solo el espacio necesario */
-.alert-backdrop {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  background-color: rgba(0, 0, 0, 0.5);
-  pointer-events: auto !important;
-  z-index: 99999 !important;
-  display: none; /* Ocultar el backdrop por defecto */
-  justify-content: center; /* Centrar el contenido horizontalmente */
-  align-items: center; /* Centrar el contenido verticalmente */
+.scrollbar-thumb-gray-600::-webkit-scrollbar-thumb {
+  background-color: rgb(75 85 99);
+  border-radius: 0.375rem;
 }
 
-:host(.alert-visible) .alert-backdrop {
-  display: flex; /* Mostrar cuando está activo */
-  pointer-events: auto;
+.scrollbar-track-transparent::-webkit-scrollbar-track {
+  background-color: transparent;
 }
-body.modal-open {
-  overflow: hidden; /* Evitar el desplazamiento en el fondo mientras el modal está activo */
-}
-body:not(.modal-open) {
-  overflow: auto; /* Restaurar el desplazamiento en el fondo cuando se cierra el modal */
-}
-/* Asegurar que el contenido del modal esté por encima */
-.alert-content {
-  position: relative;
-  max-width: 100%; /* Evitar que el contenido del modal sea más grande que el contenedor */
-  max-height: 90vh; /* Evitar que el contenido se estire más allá de la pantalla */
-  overflow-y: auto; /* Añadir desplazamiento si el contenido es muy grande */
-  margin: auto; /* Centrado automático */
-  z-index: 100000;
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
 }
 
 /* Animaciones personalizadas */
-.alert-enter {
-  animation: alertEnter 0.3s ease-out;
-}
-
-.alert-leave {
-  animation: alertLeave 0.3s ease-in;
-}
-
-@keyframes alertEnter {
+@keyframes fadeIn {
   from {
     opacity: 0;
-    transform: scale(0.9) translateY(20px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: translateY(0);
   }
 }
 
-@keyframes alertLeave {
-  from {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: scale(0.9) translateY(20px);
-  }
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
 }
 
-/* Asegurar que todos los botones sean clickeables */
-.alert-content button {
-  pointer-events: auto !important;
-  cursor: pointer !important;
-  position: relative;
-  z-index: 100000 !important;
+/* Gradiente radial para efecto ripple */
+.bg-gradient-radial {
+  background: radial-gradient(circle, var(--tw-gradient-from), var(--tw-gradient-to));
 }
 
-.alert-content button:hover {
-  transform: scale(1.05);
-  transition: transform 0.2s ease;
+/* Sombras personalizadas */
+.shadow-3xl {
+  box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
 }
 
-/* Responsive adjustments */
+/* Responsive improvements */
 @media (max-width: 640px) {
-  .alert-backdrop {
-    padding: 1rem;
-  }
-
-  .alert-content {
-    margin: 0;
-    max-height: 95vh;
+  .animate-fadeIn {
+    animation-delay: 0.1s;
   }
 }
-
-/* Smooth transitions */
-.transition-alert {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Progress bar animation */
-.progress-bar {
-  transition: width linear;
-}
-
-/* Forzar visibilidad cuando está activo */
-:host(.alert-visible) {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-

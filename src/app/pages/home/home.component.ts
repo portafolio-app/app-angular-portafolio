@@ -97,9 +97,11 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       const body = document.body;
       const html = document.documentElement;
 
-      // Asegurar que el scroll se restaure completamente
+      // Restaurar completamente los estilos
       body.style.position = '';
       body.style.top = '';
+      body.style.left = '';
+      body.style.right = '';
       body.style.width = '';
       body.style.overflow = '';
       html.style.overflow = '';
@@ -122,41 +124,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         this.isAlertVisible = isVisible;
         this.isButtonLoading = false;
         this.cdr.detectChanges();
-
-        // MANEJO MEJORADO DEL SCROLL
-        this.handleBodyScrollLock(isVisible);
       }
     );
   }
-  private handleBodyScrollLock(isVisible: boolean): void {
-    if (!isPlatformBrowser(this.platformId)) return;
 
-    const body = document.body;
-    const html = document.documentElement;
-
-    if (isVisible) {
-      // Bloquear scroll cuando se abre el modal
-      const scrollY = window.scrollY;
-      body.style.position = 'fixed';
-      body.style.top = `-${scrollY}px`;
-      body.style.width = '100%';
-      body.style.overflow = 'hidden';
-      html.style.overflow = 'hidden';
-    } else {
-      // Restaurar scroll cuando se cierra el modal
-      const scrollY = body.style.top;
-      body.style.position = '';
-      body.style.top = '';
-      body.style.width = '';
-      body.style.overflow = '';
-      html.style.overflow = '';
-
-      // Restaurar la posición del scroll
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0') * -1);
-      }
-    }
-  }
   // MÉTODO MEJORADO para mostrar información
   showDevelopmentInfo(): void {
     console.log('🚀 Showing development info');
@@ -178,7 +149,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }, 300);
   }
 
-  // Manejar acciones de alerta
+  // CORREGIDO: Manejar acciones de alerta
   onAlertAction(action: string): void {
     console.log('🎬 Processing alert action:', action);
 
@@ -186,32 +157,39 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       case 'view_available':
       case 'explore':
         console.log('📂 Navigating to projects...');
-        setTimeout(() => this.scrollToSection('proyectos'), 100);
+        // Cerrar primero el modal, luego hacer scroll
+        this.alertService.hideAlert();
+        setTimeout(() => this.scrollToSection('proyectos'), 500); // Aumentar tiempo
         break;
 
       case 'about':
         console.log('ℹ️ Navigating to about...');
-        setTimeout(() => this.scrollToSection('tecnologias'), 100);
+        this.alertService.hideAlert();
+        setTimeout(() => this.scrollToSection('tecnologias'), 500);
         break;
 
       case 'contact':
       case 'email':
         console.log('📧 Opening email...');
         this.openEmail();
+        this.alertService.hideAlert();
         break;
 
       case 'linkedin':
         console.log('💼 Opening LinkedIn...');
         this.openLinkedIn();
+        this.alertService.hideAlert();
         break;
 
       case 'github':
         console.log('🐙 Opening GitHub...');
         this.openGitHub();
+        this.alertService.hideAlert();
         break;
 
       default:
         console.log('❓ Unknown action:', action);
+        this.alertService.hideAlert();
     }
   }
 
@@ -223,31 +201,42 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isButtonLoading = false;
     this.cdr.detectChanges();
 
-    if (isPlatformBrowser(this.platformId)) {
-      document.body.style.overflow = 'auto';
-    }
+    // REMOVIDO - ya no es necesario porque se maneja en el alert component
   }
 
-  // MÉTODOS DE NAVEGACIÓN
+  // CORREGIDO: Métodos de navegación
   private scrollToSection(sectionId: string): void {
     if (!isPlatformBrowser(this.platformId)) return;
 
     console.log(`📍 Scrolling to section: ${sectionId}`);
 
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const navbarHeight = 80;
-      const elementPosition = element.offsetTop - navbarHeight;
+    // Intentar scroll múltiples veces para asegurar que funcione
+    let attempts = 0;
+    const maxAttempts = 5;
 
-      window.scrollTo({
-        top: Math.max(0, elementPosition),
-        behavior: 'smooth',
-      });
+    const attemptScroll = () => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const navbarHeight = 80;
+        const elementPosition = element.offsetTop - navbarHeight;
 
-      console.log(`✅ Scrolled to ${sectionId}`);
-    } else {
-      console.error(`❌ Element ${sectionId} not found`);
-    }
+        window.scrollTo({
+          top: Math.max(0, elementPosition),
+          behavior: 'smooth',
+        });
+
+        console.log(`✅ Scrolled to ${sectionId}`);
+      } else if (attempts < maxAttempts) {
+        attempts++;
+        console.log(`⏳ Attempt ${attempts} - retrying scroll to ${sectionId}`);
+        setTimeout(attemptScroll, 200);
+      } else {
+        console.error(`❌ Element ${sectionId} not found after ${maxAttempts} attempts`);
+      }
+    };
+
+    // Esperar un poco antes del primer intento
+    setTimeout(attemptScroll, 100);
   }
 
   private openEmail(): void {
