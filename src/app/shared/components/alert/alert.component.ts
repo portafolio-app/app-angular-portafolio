@@ -1,5 +1,5 @@
 // src/app/shared/components/alert/alert.component.ts
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, HostListener, ChangeDetectionStrategy, ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, HostListener, ChangeDetectionStrategy, ChangeDetectorRef, OnChanges, SimpleChanges, ElementRef, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 export interface AlertConfig {
@@ -42,7 +42,11 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
   private autoCloseTimer?: any;
   private progressTimer?: any;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private elementRef: ElementRef,
+    private renderer: Renderer2
+  ) {}
 
   ngOnInit(): void {
     this.initializeAlert();
@@ -60,6 +64,10 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
 
   private initializeAlert(): void {
     if (this.isVisible && this.config) {
+      // Agregar clase al host para forzar visibilidad
+      this.renderer.addClass(this.elementRef.nativeElement, 'active');
+      this.renderer.addClass(this.elementRef.nativeElement, 'alert-visible');
+
       // Reset progress
       this.progressWidth = 100;
 
@@ -84,47 +92,69 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  // Método corregido para el backdrop
+  // MÉTODO CORREGIDO: Backdrop click
   onBackdropClick(event: Event): void {
+    // Verificar que el click fue en el elemento con clase alert-backdrop
     const target = event.target as HTMLElement;
-    const currentTarget = event.currentTarget as HTMLElement;
+    const hasBackdropClass = target.classList.contains('alert-backdrop');
 
-    // Solo cerrar si se hace clic directamente en el backdrop
-    if (target === currentTarget && this.config && this.config.dismissible !== false) {
-      console.log('Backdrop clicked - closing modal');
+    if (hasBackdropClass && this.config && this.config.dismissible !== false) {
+      console.log('🎯 Backdrop clicked - closing modal');
       this.closeAlert('backdrop');
     }
   }
 
-  // Método corregido para el botón de cerrar
+  // MÉTODO CORREGIDO: Botón de cerrar
   handleCloseButton(event: Event): void {
-    console.log('Close button clicked');
+    console.log('❌ Close button clicked');
     event.preventDefault();
     event.stopPropagation();
-    this.closeAlert('dismiss');
+
+    // Verificar que el componente está visible antes de cerrar
+    if (this.isVisible && this.config) {
+      this.closeAlert('dismiss');
+    }
   }
 
-  // Método corregido para botones de acción
+  // MÉTODO CORREGIDO: Botones de acción
   handleActionButton(action: string, event: Event): void {
-    console.log('Action button clicked:', action);
+    console.log('🔘 Action button clicked:', action);
     event.preventDefault();
     event.stopPropagation();
 
-    // Emitir el evento de acción
+    // Verificar que el componente está visible
+    if (!this.isVisible || !this.config) {
+      console.warn('⚠️ Alert not visible or config missing');
+      return;
+    }
+
+    // Emitir la acción ANTES de cerrar
     this.actionClicked.emit(action);
 
-    // Cerrar el modal después de la acción
-    this.closeAlert(action);
+    // Cerrar después de un pequeño delay para permitir que se procese la acción
+    setTimeout(() => {
+      this.closeAlert(action);
+    }, 150);
   }
 
+  // MÉTODO CORREGIDO: Cerrar alert
   closeAlert(reason: string): void {
-    console.log('Closing alert with reason:', reason);
+    console.log('🔒 Closing alert with reason:', reason);
 
+    // Verificar que aún está visible
+    if (!this.isVisible) {
+      console.log('⚠️ Alert already closed');
+      return;
+    }
+
+    // Detener animación y remover clases del host
     this.showAnimation = false;
+    this.renderer.removeClass(this.elementRef.nativeElement, 'active');
+    this.renderer.removeClass(this.elementRef.nativeElement, 'alert-visible');
     this.clearTimers();
     this.cdr.detectChanges();
 
-    // Esperar la animación antes de emitir el cierre
+    // Emitir cierre después de la animación
     setTimeout(() => {
       this.closed.emit(reason);
     }, 300);

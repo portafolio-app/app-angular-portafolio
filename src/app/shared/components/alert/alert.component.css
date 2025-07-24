@@ -7,19 +7,36 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 99999; /* Aumentamos significativamente */
+  display: block;
 }
 
 :host(.active) {
   pointer-events: auto;
 }
 
-/* Animaciones personalizadas */
+/* Forzar el z-index en el contenedor principal */
 .alert-backdrop {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 99999 !important; /* Forzar con !important */
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  pointer-events: auto !important;
 }
 
+/* Asegurar que el contenido del modal esté por encima */
+.alert-content {
+  position: relative;
+  z-index: 99999 !important;
+  pointer-events: auto !important;
+}
+
+/* Animaciones personalizadas */
 .alert-enter {
   animation: alertEnter 0.3s ease-out;
 }
@@ -50,21 +67,22 @@
   }
 }
 
-/* Estilos adicionales para mejor UX */
-.alert-container {
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+/* Asegurar que todos los botones sean clickeables */
+.alert-content button {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  position: relative;
+  z-index: 100000 !important;
 }
 
-/* Mejoras para accesibilidad */
-.alert-content:focus {
-  outline: 2px solid #10b981;
-  outline-offset: 2px;
+.alert-content button:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
 }
 
 /* Responsive adjustments */
 @media (max-width: 640px) {
-  .alert-container {
+  .alert-backdrop {
     padding: 1rem;
   }
 
@@ -82,4 +100,11 @@
 /* Progress bar animation */
 .progress-bar {
   transition: width linear;
+}
+
+/* Forzar visibilidad cuando está activo */
+:host(.alert-visible) {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }

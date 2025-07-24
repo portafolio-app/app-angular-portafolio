@@ -1,4 +1,4 @@
-// src/app/pages/home/home.component.ts - CON DEBUG
+// src/app/pages/home/home.component.ts - CORREGIDO
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import {
   AfterViewInit,
@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private typewriterInstance: any;
   private observer: IntersectionObserver | null = null;
 
-  // Propiedades para Alert
+  // Propiedades para Alert - SIMPLIFICADAS
   currentAlert: AlertConfig | null = null;
   isAlertVisible: boolean = false;
   private alertSubscription?: Subscription;
@@ -94,120 +94,130 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  // Métodos para manejar alertas
+  // MÉTODOS DE ALERT CORREGIDOS
   private setupAlertSubscriptions(): void {
     this.alertSubscription = this.alertService.currentAlert$.subscribe(alert => {
-      console.log('Alert changed:', alert);
+      console.log('🔔 Alert config changed:', alert);
       this.currentAlert = alert;
       this.cdr.detectChanges();
     });
 
     this.visibilitySubscription = this.alertService.isVisible$.subscribe(isVisible => {
-      console.log('Alert visibility changed:', isVisible);
+      console.log('👁️ Alert visibility changed:', isVisible);
       this.isAlertVisible = isVisible;
       this.cdr.detectChanges();
 
       // Manejar el scroll del body
       if (isPlatformBrowser(this.platformId)) {
-        if (isVisible) {
-          document.body.style.overflow = 'hidden';
-        } else {
-          document.body.style.overflow = 'auto';
-        }
+        document.body.style.overflow = isVisible ? 'hidden' : 'auto';
       }
     });
   }
 
   showDevelopmentInfo(): void {
-    console.log('Showing development info - current alert visible:', this.isAlertVisible);
+    console.log('🚀 Showing development info');
 
-    if (!this.alertService.hasActiveAlert()) {
-      this.alertService.showDevelopmentAlert();
-    } else {
-      console.log('Alert already active, not showing new one');
+    // Verificar si ya hay una alerta activa
+    if (this.alertService.hasActiveAlert()) {
+      console.log('⚠️ Alert already active, not showing new one');
+      return;
     }
+
+    // Mostrar la alerta
+    this.alertService.showDevelopmentAlert();
   }
 
-  // Método para manejar acciones de las alertas
+  // MÉTODO CORREGIDO: Manejar acciones de alerta
   onAlertAction(action: string): void {
-    console.log('🚀 Alert action received in home component:', action);
+    console.log('🎬 Processing alert action:', action);
 
-    // NO llamar alertService.handleAction aquí porque eso cierra el modal antes de tiempo
-    // Solo manejar acciones específicas
+    // Procesar la acción inmediatamente SIN cerrar el modal aún
     switch (action) {
       case 'view_available':
       case 'explore':
-        console.log('📍 Scrolling to projects section...');
-        setTimeout(() => {
-          this.scrollToSection('proyectos');
-        }, 300); // Reducir delay
+        console.log('📂 Navigating to projects...');
+        // NO cerrar el modal aquí, se cierra automáticamente en handleActionButton
+        setTimeout(() => this.scrollToSection('proyectos'), 100);
         break;
+
       case 'about':
-        console.log('📍 Scrolling to technologies section...');
-        setTimeout(() => {
-          this.scrollToSection('tecnologias');
-        }, 300);
+        console.log('ℹ️ Navigating to about...');
+        setTimeout(() => this.scrollToSection('tecnologias'), 100);
         break;
+
       case 'contact':
       case 'email':
         console.log('📧 Opening email...');
-        if (isPlatformBrowser(this.platformId)) {
-          window.open('mailto:casvejorge1@gmail.com', '_blank');
-        }
+        this.openEmail();
         break;
+
       case 'linkedin':
-        console.log('🔗 Opening LinkedIn...');
-        if (isPlatformBrowser(this.platformId)) {
-          window.open('https://www.linkedin.com/in/jcastillov15', '_blank');
-        }
+        console.log('💼 Opening LinkedIn...');
+        this.openLinkedIn();
         break;
+
       case 'github':
         console.log('🐙 Opening GitHub...');
-        if (isPlatformBrowser(this.platformId)) {
-          window.open('https://github.com/VCL-tt', '_blank');
-        }
+        this.openGitHub();
         break;
+
       default:
         console.log('❓ Unknown action:', action);
     }
   }
 
-  // Método para manejar el cierre de alertas
+  // MÉTODO CORREGIDO: Manejar cierre de alerta
   onAlertClosed(reason: string): void {
-    console.log('🔒 Alert closed in home component with reason:', reason);
+    console.log('🔒 Alert closed with reason:', reason);
 
-    // Llamar al servicio para limpiar el estado
-    this.alertService.hideAlert();
-
-    // Restaurar scroll del body
+    // El AlertService ya maneja la limpieza del estado
+    // Solo necesitamos restaurar el scroll del body
     if (isPlatformBrowser(this.platformId)) {
       document.body.style.overflow = 'auto';
     }
   }
 
+  // MÉTODOS DE NAVEGACIÓN MEJORADOS
   private scrollToSection(sectionId: string): void {
-    if (isPlatformBrowser(this.platformId)) {
-      console.log(`📍 Attempting to scroll to section: ${sectionId}`);
+    if (!isPlatformBrowser(this.platformId)) return;
 
-      const element = document.getElementById(sectionId);
-      if (element) {
-        console.log(`✅ Element found: ${sectionId}`);
-        const navbarHeight = 80;
-        const elementPosition = element.offsetTop - navbarHeight;
+    console.log(`📍 Scrolling to section: ${sectionId}`);
 
-        window.scrollTo({
-          top: Math.max(0, elementPosition),
-          behavior: 'smooth'
-        });
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const navbarHeight = 80;
+      const elementPosition = element.offsetTop - navbarHeight;
 
-        console.log(`📍 Scrolled to position: ${elementPosition}`);
-      } else {
-        console.error(`❌ Element not found: ${sectionId}`);
-      }
+      window.scrollTo({
+        top: Math.max(0, elementPosition),
+        behavior: 'smooth'
+      });
+
+      console.log(`✅ Scrolled to ${sectionId}`);
+    } else {
+      console.error(`❌ Element ${sectionId} not found`);
     }
   }
 
-  // Métodos existentes
+  private openEmail(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      window.open('mailto:casvejorge1@gmail.com', '_blank');
+    }
+  }
+
+  private openLinkedIn(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      window.open('https://www.linkedin.com/in/jcastillov15', '_blank');
+    }
+  }
+
+  private openGitHub(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      window.open('https://github.com/VCL-tt', '_blank');
+    }
+  }
+
+  // MÉTODOS EXISTENTES (sin cambios)
   private initTypewriterEffect(): void {
     if (this.typewriterElement?.nativeElement) {
       this.typewriterInstance = new Typewriter(
