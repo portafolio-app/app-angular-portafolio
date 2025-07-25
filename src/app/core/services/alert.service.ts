@@ -1,177 +1,277 @@
-// src/app/core/services/alert.service.ts - CORREGIDO
+// src/app/core/services/alert.service.ts - OPTIMIZADO PARA RESPONSIVE
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AlertConfig, AlertAction } from '../../shared/components/alert/alert.component';
+import { AlertConfig } from '../../shared/components/alert/alert.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlertService {
-  private alertSubject = new BehaviorSubject<AlertConfig | null>(null);
+  private currentAlertSubject = new BehaviorSubject<AlertConfig | null>(null);
   private isVisibleSubject = new BehaviorSubject<boolean>(false);
+
+  public currentAlert$ = this.currentAlertSubject.asObservable();
+  public isVisible$ = this.isVisibleSubject.asObservable();
 
   constructor() {}
 
-  // Observable para la alerta actual
-  get currentAlert$(): Observable<AlertConfig | null> {
-    return this.alertSubject.asObservable();
-  }
-
-  // Observable para la visibilidad
-  get isVisible$(): Observable<boolean> {
-    return this.isVisibleSubject.asObservable();
-  }
-
-  /**
-   * Muestra una alerta específica para proyectos en desarrollo
-   */
-  showDevelopmentAlert(): void {
-    const actions: AlertAction[] = [
-      {
-        label: 'Ver Proyectos',
-        action: 'view_available',
-        style: 'primary',
-        icon: 'fas fa-folder-open'
-      },
-      {
-        label: 'Sobre Mí',
-        action: 'about',
-        style: 'secondary',
-        icon: 'fas fa-user'
-      },
-      {
-        label: 'Contactar',
-        action: 'contact',
-        style: 'secondary',
-        icon: 'fas fa-envelope'
-      }
-    ];
-
-    this.showAlert({
-      type: 'development',
-      title: 'Portafolio en Evolución',
-      message: `
-        ¡Hola! 👋 Este portafolio está en <strong>constante desarrollo</strong> y mejora continua.
-
-        🔧 <strong>Tecnologías utilizadas:</strong>
-        <br>• Angular 18 + TypeScript
-        <br>• Tailwind CSS + Responsive Design
-        <br>• Componentes modulares y reutilizables
-        <br>• Animaciones y transiciones fluidas
-
-        ✨ <strong>Características destacadas:</strong>
-        <br>• Modo oscuro/claro dinámico
-        <br>• Optimizado para móviles y desktop
-        <br>• Código limpio y escalable
-        <br>• Experiencia de usuario moderna
-
-        💡 ¿Te interesa colaborar o tienes alguna sugerencia?
-        <br>¡Me encantaría conocer tu opinión!
-      `,
-      icon: 'fas fa-rocket',
-      size: 'lg',
-      actions,
-      showProgress: false,
-      dismissible: true
-    });
-  }
-
-  /**
-   * Muestra una alerta personalizada
-   */
+  // Método principal para mostrar alertas con detección automática de tamaño
   showAlert(config: AlertConfig): void {
-    console.log('🎯 AlertService: Showing alert', config);
+    // Detectar el mejor tamaño basado en el contenido y viewport
+    const optimizedConfig = this.optimizeConfigForViewport(config);
 
-    // Si ya hay una alerta visible, no mostrar otra
-    if (this.isVisibleSubject.value) {
-      console.log('⚠️ AlertService: Alert already visible, ignoring new request');
-      return;
-    }
+    this.currentAlertSubject.next(optimizedConfig);
+    this.isVisibleSubject.next(true);
+  }
 
-    // Configuración por defecto
-    const defaultConfig: Partial<AlertConfig> = {
+  // Método específico para el modal de desarrollo
+  showDevelopmentAlert(): void {
+    const developmentConfig: AlertConfig = {
+      type: 'development',
+      title: '👨‍💻 Disponible para Oportunidades',
+      message: `¡Hola! 👋 Soy Jorge, desarrollador de software en búsqueda activa de oportunidades laborales y prácticas profesionales.
+
+Este portafolio está en constante desarrollo. Algunas secciones pueden estar incompletas mientras añado nuevos proyectos y funcionalidades.
+
+¿Tienes una oportunidad que podría encajar conmigo? ¡Me encantaría conocer más!`,
       showIcon: true,
       dismissible: true,
-      size: 'md',
+      autoClose: 0, // No auto-cerrar
+      showProgress: false,
+      size: this.getOptimalSize(),
       position: 'center',
-      showProgress: false
+      actions: [
+        {
+          label: 'Ver Proyectos',
+          action: 'view_available',
+          style: 'primary',
+          icon: 'fas fa-code'
+        },
+        {
+          label: 'LinkedIn',
+          action: 'linkedin',
+          style: 'primary',
+          icon: 'fab fa-linkedin'
+        },
+        {
+          label: 'GitHub',
+          action: 'github',
+          style: 'secondary',
+          icon: 'fab fa-github'
+        }
+      ]
     };
 
-    const finalConfig = { ...defaultConfig, ...config };
-
-    // Configurar la alerta
-    this.alertSubject.next(finalConfig as AlertConfig);
-
-    // Mostrar después de un pequeño delay
-    setTimeout(() => {
-      this.isVisibleSubject.next(true);
-      console.log('✅ AlertService: Alert is now visible');
-    }, 50);
+    this.showAlert(developmentConfig);
   }
 
-  /**
-   * Oculta la alerta actual
-   */
+  // Ocultar alerta
   hideAlert(): void {
-    console.log('🔒 AlertService: Hiding alert');
-
-    // Ocultar primero
     this.isVisibleSubject.next(false);
-
-    // Limpiar la configuración después de la animación
+    // Limpiar después de la animación
     setTimeout(() => {
-      this.alertSubject.next(null);
-      console.log('✅ AlertService: Alert cleaned up');
-    }, 300);
+      this.currentAlertSubject.next(null);
+    }, 500);
   }
 
-  /**
-   * Verifica si hay una alerta activa
-   */
+  // Verificar si hay una alerta activa
   hasActiveAlert(): boolean {
-    return this.isVisibleSubject.value;
+    return this.isVisibleSubject.value && this.currentAlertSubject.value !== null;
   }
 
-  // Métodos de utilidad adicionales
-  showInfo(title: string, message: string, options?: Partial<AlertConfig>): void {
-    this.showAlert({
-      type: 'info',
-      title,
-      message,
-      icon: 'fas fa-info-circle',
-      ...options
-    });
+  // MÉTODO PRIVADO: Optimizar configuración según viewport
+  private optimizeConfigForViewport(config: AlertConfig): AlertConfig {
+    const optimizedConfig = { ...config };
+
+    // Si no se especifica tamaño, detectar automáticamente
+    if (!config.size) {
+      optimizedConfig.size = this.getOptimalSize();
+    }
+
+    // Si no se especifica posición, detectar automáticamente
+    if (!config.position) {
+      optimizedConfig.position = this.getOptimalPosition();
+    }
+
+    // Optimizar acciones según el espacio disponible
+    if (config.actions) {
+      optimizedConfig.actions = this.optimizeActionsForViewport(config.actions);
+    }
+
+    return optimizedConfig;
   }
 
-  showSuccess(title: string, message: string, options?: Partial<AlertConfig>): void {
+  // MÉTODO PRIVADO: Determinar tamaño óptimo según viewport
+  private getOptimalSize(): 'sm' | 'md' | 'lg' | 'xl' {
+    if (typeof window === 'undefined') return 'md';
+
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    // Móviles pequeños
+    if (width < 375) return 'sm';
+
+    // Móviles estándar
+    if (width < 640) return 'sm';
+
+    // Tablets portrait
+    if (width < 768) return 'md';
+
+    // Tablets landscape y pantallas medianas
+    if (width < 1024) return 'md';
+
+    // Laptops
+    if (width < 1280) return 'lg';
+
+    // Pantallas grandes
+    if (width < 1536) return 'lg';
+
+    // Pantallas extra grandes
+    return 'xl';
+  }
+
+  // MÉTODO PRIVADO: Determinar posición óptima según viewport
+  private getOptimalPosition(): 'top' | 'center' | 'bottom' {
+    if (typeof window === 'undefined') return 'center';
+
+    const height = window.innerHeight;
+    const width = window.innerWidth;
+
+    // En landscape mobile, usar center para mejor visibilidad
+    if (height < 600 && width > height) {
+      return 'center';
+    }
+
+    // En pantallas muy bajas, usar center
+    if (height < 500) {
+      return 'center';
+    }
+
+    // Para móviles portrait, center es mejor
+    if (width < 640) {
+      return 'center';
+    }
+
+    // Para pantallas más grandes, center sigue siendo óptimo
+    return 'center';
+  }
+
+  // MÉTODO PRIVADO: Optimizar acciones según viewport
+  private optimizeActionsForViewport(actions: any[]): any[] {
+    if (typeof window === 'undefined') return actions;
+
+    const width = window.innerWidth;
+
+    // En móviles muy pequeños, limitar número de acciones visibles
+    if (width < 375 && actions.length > 3) {
+      // Mantener las 3 acciones más importantes
+      return actions.slice(0, 3).concat([
+        {
+          label: 'Más...',
+          action: 'show_more',
+          style: 'secondary',
+          icon: 'fas fa-ellipsis-h'
+        }
+      ]);
+    }
+
+    // En móviles estándar, máximo 4 acciones
+    if (width < 640 && actions.length > 4) {
+      return actions.slice(0, 4);
+    }
+
+    return actions;
+  }
+
+  // Métodos de conveniencia para diferentes tipos de alertas
+  showSuccess(title: string, message: string, autoClose: number = 5000): void {
     this.showAlert({
       type: 'success',
       title,
       message,
-      icon: 'fas fa-check-circle',
-      autoClose: 5000,
+      autoClose,
       showProgress: true,
-      ...options
+      dismissible: true
     });
   }
 
-  showWarning(title: string, message: string, options?: Partial<AlertConfig>): void {
-    this.showAlert({
-      type: 'warning',
-      title,
-      message,
-      icon: 'fas fa-exclamation-triangle',
-      ...options
-    });
-  }
-
-  showError(title: string, message: string, options?: Partial<AlertConfig>): void {
+  showError(title: string, message: string): void {
     this.showAlert({
       type: 'error',
       title,
       message,
-      icon: 'fas fa-times-circle',
-      ...options
+      dismissible: true,
+      autoClose: 0
     });
+  }
+
+  showWarning(title: string, message: string, autoClose: number = 7000): void {
+    this.showAlert({
+      type: 'warning',
+      title,
+      message,
+      autoClose,
+      showProgress: true,
+      dismissible: true
+    });
+  }
+
+  showInfo(title: string, message: string, autoClose: number = 5000): void {
+    this.showAlert({
+      type: 'info',
+      title,
+      message,
+      autoClose,
+      showProgress: true,
+      dismissible: true
+    });
+  }
+
+  // Método para confirmar acciones críticas
+  showConfirmation(
+    title: string,
+    message: string,
+    confirmAction: string = 'confirm',
+    cancelAction: string = 'cancel'
+  ): void {
+    this.showAlert({
+      type: 'warning',
+      title,
+      message,
+      dismissible: true,
+      autoClose: 0,
+      actions: [
+        {
+          label: 'Confirmar',
+          action: confirmAction,
+          style: 'danger',
+          icon: 'fas fa-check'
+        },
+        {
+          label: 'Cancelar',
+          action: cancelAction,
+          style: 'secondary',
+          icon: 'fas fa-times'
+        }
+      ]
+    });
+  }
+
+  // Utilidad para detectar si es dispositivo móvil
+  private isMobile(): boolean {
+    if (typeof window === 'undefined') return false;
+    return window.innerWidth < 768;
+  }
+
+  // Utilidad para detectar si es tablet
+  private isTablet(): boolean {
+    if (typeof window === 'undefined') return false;
+    return window.innerWidth >= 768 && window.innerWidth < 1024;
+  }
+
+  // Utilidad para detectar orientación landscape en móvil
+  private isMobileLandscape(): boolean {
+    if (typeof window === 'undefined') return false;
+    return window.innerWidth < 1024 && window.innerWidth > window.innerHeight;
   }
 }

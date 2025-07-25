@@ -1,4 +1,4 @@
-// src/app/shared/components/alert/alert.component.ts - CORREGIDO
+// src/app/shared/components/alert/alert.component.ts - OPTIMIZADO PARA RESPONSIVE
 import {
   Component,
   Input,
@@ -55,10 +55,11 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
 
   progressWidth: number = 100;
   showAnimation: boolean = false;
+  isClosing: boolean = false;
+
   private autoCloseTimer?: any;
   private progressTimer?: any;
-  isClosing: boolean = false;
-  private savedScrollPosition: number = 0; // NUEVO: Guardar posición del scroll
+  private savedScrollPosition: number = 0;
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -88,24 +89,11 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
 
   private initializeAlert(): void {
     if (this.isVisible && this.config && !this.isClosing) {
-      console.log('🎬 Initializing alert');
-
-      // Reset estados
       this.isClosing = false;
       this.progressWidth = 100;
 
-      // Configurar estilos del host
-      this.renderer.setStyle(
-        this.elementRef.nativeElement,
-        'pointer-events',
-        'auto'
-      );
-      this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'block');
-
-      // Manejar scroll lock
       this.handleBodyScrollLock(true);
 
-      // Activar animación después de un micro delay
       setTimeout(() => {
         if (this.isVisible && !this.isClosing) {
           this.showAnimation = true;
@@ -120,27 +108,13 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   private cleanupAlert(): void {
-    console.log('🧹 Cleaning up alert');
-
     this.isClosing = true;
     this.showAnimation = false;
     this.clearTimers();
-
-    // Restaurar scroll
     this.handleBodyScrollLock(false);
-
-    // Limpiar estilos del host
-    this.renderer.setStyle(
-      this.elementRef.nativeElement,
-      'pointer-events',
-      'none'
-    );
-    this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'none');
-
     this.cdr.detectChanges();
   }
 
-  // MÉTODO CORREGIDO para manejar el scroll lock
   private handleBodyScrollLock(isVisible: boolean): void {
     if (!isPlatformBrowser(this.platformId)) return;
 
@@ -148,11 +122,7 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     const html = document.documentElement;
 
     if (isVisible) {
-      // Guardar posición actual antes de bloquear
-      this.savedScrollPosition =
-        window.pageYOffset || document.documentElement.scrollTop;
-
-      // Bloquear scroll
+      this.savedScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
       body.style.position = 'fixed';
       body.style.top = `-${this.savedScrollPosition}px`;
       body.style.left = '0';
@@ -161,7 +131,6 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
       body.style.overflow = 'hidden';
       html.style.overflow = 'hidden';
     } else {
-      // Restaurar scroll
       body.style.position = '';
       body.style.top = '';
       body.style.left = '';
@@ -170,7 +139,6 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
       body.style.overflow = '';
       html.style.overflow = '';
 
-      // Restaurar posición del scroll
       if (this.savedScrollPosition >= 0) {
         window.scrollTo(0, this.savedScrollPosition);
         this.savedScrollPosition = 0;
@@ -180,12 +148,7 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
 
   @HostListener('document:keydown.escape', ['$event'])
   onEscapePress(event: KeyboardEvent): void {
-    if (
-      this.isVisible &&
-      this.config &&
-      this.config.dismissible !== false &&
-      !this.isClosing
-    ) {
+    if (this.isVisible && this.config && this.config.dismissible !== false && !this.isClosing) {
       event.preventDefault();
       event.stopPropagation();
       this.closeAlert('escape');
@@ -198,12 +161,7 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     const target = event.target as HTMLElement;
     const currentTarget = event.currentTarget as HTMLElement;
 
-    if (
-      target === currentTarget &&
-      this.config &&
-      this.config.dismissible !== false
-    ) {
-      console.log('🎯 Backdrop clicked - closing modal');
+    if (target === currentTarget && this.config && this.config.dismissible !== false) {
       this.closeAlert('backdrop');
     }
   }
@@ -211,7 +169,6 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
   handleCloseButton(event: Event): void {
     if (this.isClosing) return;
 
-    console.log('❌ Close button clicked');
     event.preventDefault();
     event.stopPropagation();
 
@@ -223,51 +180,30 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
   handleActionButton(action: string, event: Event): void {
     if (this.isClosing) return;
 
-    console.log('🔘 Action button clicked:', action);
     event.preventDefault();
     event.stopPropagation();
 
-    if (!this.isVisible || !this.config) {
-      console.warn('⚠️ Alert not visible or config missing');
-      return;
-    }
+    if (!this.isVisible || !this.config) return;
 
-    // Emitir la acción INMEDIATAMENTE
     this.actionClicked.emit(action);
 
-    // Cerrar después de un pequeño delay
     setTimeout(() => {
       this.closeAlert(action);
     }, 100);
   }
 
   closeAlert(reason: string): void {
-    if (this.isClosing) {
-      console.log('⚠️ Alert is already closing');
-      return;
-    }
+    if (this.isClosing || !this.isVisible) return;
 
-    console.log('🔒 Closing alert with reason:', reason);
-
-    if (!this.isVisible) {
-      console.log('⚠️ Alert already closed');
-      return;
-    }
-
-    // Marcar como cerrando
     this.isClosing = true;
-
-    // Iniciar animación de salida
     this.showAnimation = false;
     this.clearTimers();
     this.cdr.detectChanges();
 
-    // Emitir cierre después de la animación
     setTimeout(() => {
       this.cleanupAlert();
       this.closed.emit(reason);
 
-      // Reset estado después de emitir
       setTimeout(() => {
         this.isClosing = false;
       }, 100);
@@ -315,170 +251,199 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  // MÉTODOS PARA CLASES TAILWIND DINÁMICAS
+  // MÉTODOS PARA CLASES CSS DINÁMICAS - OPTIMIZADOS PARA RESPONSIVE
+
   getPositionClass(): string {
     if (!this.config) return 'items-center justify-center';
     const position = this.config.position || 'center';
-    const positionClasses: Record<string, string> = {
-      top: 'items-start justify-center pt-20',
+    const classes = {
+      top: 'items-start justify-center pt-2 sm:pt-4 md:pt-6',
       center: 'items-center justify-center',
-      bottom: 'items-end justify-center pb-20',
+      bottom: 'items-end justify-center pb-2 sm:pb-4 md:pb-6',
     };
-    return positionClasses[position];
+    return classes[position];
   }
 
+  // MÉTODO COMPLETAMENTE REESCRITO PARA MEJOR RESPONSIVE
   getSizeClass(): string {
-    if (!this.config) return 'max-w-md';
+    if (!this.config) return 'w-full max-w-md mx-4';
+
     const size = this.config.size || 'md';
-    const sizeClasses: Record<string, string> = {
-      sm: 'max-w-sm sm:max-w-md',
-      md: 'max-w-md sm:max-w-lg',
-      lg: 'max-w-lg sm:max-w-xl lg:max-w-2xl',
-      xl: 'max-w-xl sm:max-w-2xl lg:max-w-3xl',
+
+    // Simplificamos las clases para mejor control
+    const baseClasses = 'w-full mx-2 sm:mx-4';
+
+    const sizeClasses = {
+      sm: `${baseClasses} max-w-sm sm:max-w-md`,
+      md: `${baseClasses} max-w-md sm:max-w-lg lg:max-w-xl`,
+      lg: `${baseClasses} max-w-lg sm:max-w-xl lg:max-w-2xl`,
+      xl: `${baseClasses} max-w-xl sm:max-w-2xl lg:max-w-3xl xl:max-w-4xl`
     };
+
     return sizeClasses[size];
   }
 
   getAlertClasses(): string {
     if (!this.config) return 'border-blue-200 dark:border-blue-700';
-    const type = this.config.type;
-    const borderClasses: Record<string, string> = {
+    const borders = {
       info: 'border-blue-200 dark:border-blue-700',
       success: 'border-green-200 dark:border-green-700',
       warning: 'border-yellow-200 dark:border-yellow-700',
       error: 'border-red-200 dark:border-red-700',
       development: 'border-emerald-200 dark:border-emerald-700',
     };
-    return borderClasses[type] || borderClasses['info'];
+    return borders[this.config.type] || borders.info;
   }
 
   getHeaderClass(): string {
     if (!this.config) return 'bg-blue-50 dark:bg-blue-900/20';
-    const type = this.config.type;
-    const headerClasses: Record<string, string> = {
+    const headers = {
       info: 'bg-blue-50 dark:bg-blue-900/20',
       success: 'bg-green-50 dark:bg-green-900/20',
       warning: 'bg-yellow-50 dark:bg-yellow-900/20',
       error: 'bg-red-50 dark:bg-red-900/20',
-      development:
-        'bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20',
+      development: 'bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20',
     };
-    return headerClasses[type] || headerClasses['info'];
+    return headers[this.config.type] || headers.info;
   }
 
   getIconClass(): string {
     if (!this.config) return 'fas fa-info-circle';
     if (this.config.icon) return this.config.icon;
-    const type = this.config.type;
-    const iconClasses: Record<string, string> = {
+    const icons = {
       info: 'fas fa-info-circle',
       success: 'fas fa-check-circle',
       warning: 'fas fa-exclamation-triangle',
       error: 'fas fa-times-circle',
       development: 'fas fa-rocket',
     };
-    return iconClasses[type] || iconClasses['info'];
+    return icons[this.config.type] || icons.info;
   }
 
   getIconBackgroundClass(): string {
     if (!this.config) return 'bg-blue-100 dark:bg-blue-800';
-    const type = this.config.type;
-    const bgClasses: Record<string, string> = {
+    const backgrounds = {
       info: 'bg-blue-100 dark:bg-blue-800',
       success: 'bg-green-100 dark:bg-green-800',
       warning: 'bg-yellow-100 dark:bg-yellow-800',
       error: 'bg-red-100 dark:bg-red-800',
-      development:
-        'bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-800 dark:to-teal-800',
+      development: 'bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-800 dark:to-teal-800',
     };
-    return bgClasses[type] || bgClasses['info'];
+    return backgrounds[this.config.type] || backgrounds.info;
   }
 
   getIconColorClass(): string {
     if (!this.config) return 'text-blue-600 dark:text-blue-400';
-    const type = this.config.type;
-    const colorClasses: Record<string, string> = {
+    const colors = {
       info: 'text-blue-600 dark:text-blue-400',
       success: 'text-green-600 dark:text-green-400',
       warning: 'text-yellow-600 dark:text-yellow-400',
       error: 'text-red-600 dark:text-red-400',
       development: 'text-emerald-600 dark:text-emerald-400',
     };
-    return colorClasses[type] || colorClasses['info'];
+    return colors[this.config.type] || colors.info;
   }
 
   getTitleColorClass(): string {
     if (!this.config) return 'text-blue-900 dark:text-blue-100';
-    const type = this.config.type;
-    const titleClasses: Record<string, string> = {
+    const colors = {
       info: 'text-blue-900 dark:text-blue-100',
       success: 'text-green-900 dark:text-green-100',
       warning: 'text-yellow-900 dark:text-yellow-100',
       error: 'text-red-900 dark:text-red-100',
       development: 'text-emerald-900 dark:text-emerald-100',
     };
-    return titleClasses[type] || titleClasses['info'];
+    return colors[this.config.type] || colors.info;
   }
 
   getMessageColorClass(): string {
     if (!this.config) return 'text-blue-700 dark:text-blue-300';
-    const type = this.config.type;
-    const messageClasses: Record<string, string> = {
+    const colors = {
       info: 'text-blue-700 dark:text-blue-300',
       success: 'text-green-700 dark:text-green-300',
       warning: 'text-yellow-700 dark:text-yellow-300',
       error: 'text-red-700 dark:text-red-300',
       development: 'text-emerald-700 dark:text-emerald-300',
     };
-    return messageClasses[type] || messageClasses['info'];
+    return colors[this.config.type] || colors.info;
   }
 
   getProgressBarClass(): string {
     if (!this.config) return 'bg-blue-500';
-    const type = this.config.type;
-    const progressClasses: Record<string, string> = {
+    const colors = {
       info: 'bg-blue-500',
       success: 'bg-green-500',
       warning: 'bg-yellow-500',
       error: 'bg-red-500',
       development: 'bg-gradient-to-r from-emerald-500 to-teal-500',
     };
-    return progressClasses[type] || progressClasses['info'];
+    return colors[this.config.type] || colors.info;
   }
 
   getActionButtonClass(style: string): string {
-    const baseClasses =
-      'relative transition-all duration-300 transform focus:outline-none focus:ring-4 focus:ring-offset-2 animate-fadeIn';
-    const buttonClasses: Record<string, string> = {
-      primary: `${baseClasses} bg-gradient-to-r from-emerald-600 via-emerald-700 to-teal-600
-                hover:from-emerald-700 hover:via-emerald-800 hover:to-teal-700
-                text-white focus:ring-emerald-500 shadow-emerald-500/25`,
-      secondary: `${baseClasses} bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100
-                  dark:from-gray-700 dark:via-gray-600 dark:to-gray-700
-                  hover:from-gray-200 hover:via-gray-300 hover:to-gray-200
-                  dark:hover:from-gray-600 dark:hover:via-gray-500 dark:hover:to-gray-600
-                  text-gray-700 dark:text-gray-300 focus:ring-gray-500
-                  border border-gray-300/50 dark:border-gray-600/50 shadow-gray-500/25`,
-      danger: `${baseClasses} bg-gradient-to-r from-red-600 via-red-700 to-red-600
-               hover:from-red-700 hover:via-red-800 hover:to-red-700
-               text-white focus:ring-red-500 shadow-red-500/25`,
-      success: `${baseClasses} bg-gradient-to-r from-green-600 via-green-700 to-green-600
-                hover:from-green-700 hover:via-green-800 hover:to-green-700
-                text-white focus:ring-green-500 shadow-green-500/25`,
+    const base = `group relative px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-medium
+                  rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-95
+                  flex items-center justify-center space-x-1.5 sm:space-x-2 focus:outline-none focus:ring-2
+                  shadow-sm hover:shadow-md min-h-[40px] sm:min-h-[44px]
+                  disabled:opacity-50 disabled:cursor-not-allowed`;
+
+    const styles: Record<string, string> = {
+      primary: `${base} bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white focus:ring-emerald-500 border border-emerald-600`,
+      secondary: `${base} bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 focus:ring-gray-500 border border-gray-300 dark:border-gray-600`,
+      danger: `${base} bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white focus:ring-red-500 border border-red-600`,
+      success: `${base} bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white focus:ring-green-500 border border-green-600`,
     };
-    return buttonClasses[style] || buttonClasses['secondary'];
+
+    return styles[style] || styles['secondary'];
   }
-  formatMessage(message: string): string {
-    return message.replace(/\n/g, '<br>');
-  }
+
   getActionButtonHoverClass(style: string): string {
-    const hoverClasses: Record<string, string> = {
+    const hovers: Record<string, string> = {
       primary: 'from-emerald-400 to-teal-400',
       secondary: 'from-gray-300 to-gray-400',
       danger: 'from-red-400 to-red-500',
       success: 'from-green-400 to-green-500',
     };
-    return hoverClasses[style] || hoverClasses['secondary'];
+    return hovers[style] || hovers['secondary'];
+  }
+
+  formatMessage(message: string): string {
+    return message.replace(/\n/g, '<br>');
+  }
+
+  // MÉTODO AGREGADO: Obtener mensaje truncado para header
+  getTruncatedMessage(): string {
+    if (!this.config?.message) return '';
+
+    // Remover etiquetas HTML para el truncado
+    const plainText = this.config.message.replace(/<[^>]*>/g, '');
+
+    if (plainText.length <= 60) {
+      return plainText;
+    }
+
+    // Truncar en la primera oración o en 60 caracteres
+    const firstSentence = plainText.split('.')[0];
+    if (firstSentence.length <= 60) {
+      return firstSentence + '...';
+    }
+
+    return plainText.substring(0, 57) + '...';
+  }
+
+  // MÉTODO AGREGADO: Determinar si mostrar mensaje completo
+  shouldShowFullMessage(): boolean {
+    if (!this.config?.message) return false;
+
+    // Siempre mostrar mensaje completo si tiene más de una línea de contenido significativo
+    const plainText = this.config.message.replace(/<[^>]*>/g, '').trim();
+
+    // Si es muy corto, no necesita sección separada
+    if (plainText.length <= 50) return false;
+
+    // Si tiene múltiples oraciones o párrafos, mostrar completo
+    const sentences = plainText.split(/[.!?]\s+/).filter(s => s.trim().length > 0);
+    return sentences.length > 1 || plainText.length > 80 || this.config.message.includes('\n');
   }
 
   trackByAction(index: number, action: AlertAction): string {
