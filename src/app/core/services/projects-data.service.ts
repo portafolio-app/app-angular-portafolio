@@ -225,14 +225,10 @@ export class ProjectsDataService {
         links: [
           {
             type: 'github',
-            url: 'https://github.com/VCL-tt/control-iot-arduino',
+            url: 'https://github.com/app-carroControl/app-control-IoT',
             label: 'Ver Código',
-          },
-          {
-            type: 'demo',
-            url: 'https://demo-control-iot.vercel.app',
-            label: 'Demo Interactiva',
-          },
+          }
+
         ],
         category: 'iot',
         status: 'in-progress',
