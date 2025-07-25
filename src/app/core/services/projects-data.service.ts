@@ -81,7 +81,6 @@ export class ProjectsDataService {
             url: 'https://github.com/App-GigaShop/aapp-Gigashop-Back.git',
             label: 'Código Fuente',
           },
-
         ],
         category: 'web',
         status: 'completed',
@@ -181,7 +180,7 @@ export class ProjectsDataService {
         ],
         category: 'mobile',
         status: 'completed',
-        featured: false,
+        featured: true,
         createdAt: new Date('2023-11-10'),
         highlights: [
           'Gestión completa de citas',
@@ -227,8 +226,7 @@ export class ProjectsDataService {
             type: 'github',
             url: 'https://github.com/app-carroControl/app-control-IoT',
             label: 'Ver Código',
-          }
-
+          },
         ],
         category: 'iot',
         status: 'in-progress',
@@ -268,8 +266,10 @@ export class ProjectsDataService {
             name: 'Java',
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
           },
-          { name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-plain-wordmark.svg' }
-
+          {
+            name: 'MySQL',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-plain-wordmark.svg',
+          },
         ],
         links: [
           {
@@ -297,6 +297,68 @@ export class ProjectsDataService {
         metrics: {
           stars: 32,
           forks: 12,
+        },
+      },
+      {
+        id: '6',
+        title: 'CarroBot - Robot Inteligente con Control Remoto',
+        description:
+          'Robot autónomo avanzado con capacidades de automatización inteligente, control remoto via WiFi/Bluetooth, sistema de evitar obstáculos con sensores ultrasónicos, seguimiento de línea, control de luces LED programables, y interfaz Android moderna construida con Jetpack Compose para una experiencia de usuario excepcional.',
+        shortDescription:
+          'Robot inteligente con automatización, sensores y control remoto via app Android.',
+        image: '../assets/banner-iot.png', // Cambia por tu imagen
+        technologies: [
+          {
+            name: 'Kotlin',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg',
+          },
+          {
+            name: 'Android',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg',
+          },
+          {
+            name: 'Arduino',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg',
+          },
+          {
+            name: 'C++',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg',
+          },
+          {
+            name: 'Jetpack Compose',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg',
+          },
+        ],
+        links: [
+          {
+            type: 'github',
+            url: 'https://github.com/app-carroControl/app-control-IoT.git',
+            label: 'Ver codigo',
+          },
+
+        ],
+        category: 'iot',
+        status: 'completed',
+        featured: true,
+        createdAt: new Date('2025-01-15'),
+        highlights: [
+          'Automatización inteligente (evitar obstáculos, seguir línea)',
+          'Interfaz moderna con Jetpack Compose y animaciones',
+          'Control remoto dual: WiFi y Bluetooth',
+          'Sistema de luces LED programables',
+          'Sensores ultrasónicos de precisión',
+          'Arquitectura MVVM con corrutinas',
+          'UI responsiva con estados animados',
+        ],
+        challenges: [
+          'Implementación de comunicación bidireccional estable',
+          'Optimización de batería en transmisión continua',
+          'Calibración precisa de sensores ultrasónicos',
+          'Sincronización de estados entre app y robot',
+        ],
+        metrics: {
+          stars: 15,
+          forks: 6,
         },
       },
     ];
