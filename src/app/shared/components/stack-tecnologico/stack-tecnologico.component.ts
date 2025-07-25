@@ -5,6 +5,7 @@ interface TechSkill {
   name: string;
   icon: string;
   level: number;
+  category: string;
 }
 
 @Component({
@@ -21,31 +22,37 @@ export class StackTecnologicoComponent {
       name: 'HTML5',
       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',
       level: 95,
+      category: 'frontend'
     },
     {
       name: 'CSS3',
       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg',
       level: 90,
+      category: 'frontend'
     },
     {
       name: 'JavaScript',
       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
       level: 88,
+      category: 'frontend'
     },
     {
       name: 'TypeScript',
       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
       level: 85,
+      category: 'frontend'
     },
     {
       name: 'Angular',
       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg',
       level: 82,
+      category: 'frontend'
     },
     {
       name: 'Tailwind CSS',
       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg',
       level: 90,
+      category: 'frontend'
     },
   ];
 
@@ -55,21 +62,25 @@ export class StackTecnologicoComponent {
       name: 'Java',
       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
       level: 88,
+      category: 'backend'
     },
     {
       name: 'Spring Boot',
       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg',
       level: 85,
+      category: 'backend'
     },
     {
       name: 'Python',
       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
       level: 80,
+      category: 'backend'
     },
     {
       name: 'Node.js',
       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
       level: 75,
+      category: 'backend'
     },
   ];
 
@@ -79,16 +90,19 @@ export class StackTecnologicoComponent {
       name: 'MySQL',
       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',
       level: 85,
+      category: 'database'
     },
     {
       name: 'PostgreSQL',
       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
       level: 80,
+      category: 'database'
     },
     {
       name: 'MongoDB',
       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
       level: 75,
+      category: 'database'
     },
   ];
 
@@ -98,58 +112,104 @@ export class StackTecnologicoComponent {
       name: 'Git',
       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
       level: 90,
+      category: 'tool'
     },
     {
       name: 'GitHub',
       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
       level: 88,
+      category: 'tool'
     },
     {
       name: 'Docker',
       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
       level: 78,
+      category: 'tool'
     },
     {
       name: 'VS Code',
       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg',
       level: 95,
+      category: 'tool'
     },
   ];
 
-  // MÉTODOS NECESARIOS PARA EL TEMPLATE RESPONSIVE
+  // MÉTODOS OPTIMIZADOS PARA RESPONSIVIDAD
 
   /**
-   * Método para trackBy en las tecnologías - mejora el rendimiento
+   * TrackBy function para optimizar performance
    */
   trackByTech(index: number, tech: TechSkill): string {
-    return tech.name;
+    return `${tech.name}-${tech.category}`;
   }
 
   /**
-   * Manejo de errores para iconos de tecnologías
+   * Manejo de errores para iconos con fallback SVG
    */
-  handleTechIconError(event: any): void {
-    if (!event?.target) {
-      return;
-    }
+  handleTechIconError(event: Event): void {
+    const target = event.target as HTMLImageElement;
+    if (!target) return;
 
-    console.warn(`Error cargando icono: ${event.target.src}`);
+    console.warn(`Error loading icon: ${target.src}`);
 
-    // Fallback para iconos de tecnología - SVG genérico
-    event.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjZjNmNGY2IiByeD0iOCIvPgo8cGF0aCBkPSJNMTYgMTBjLTEuNjU2IDAtMyAxLjM0NC0zIDNzMS4zNDQgMyAzIDMgMy0xLjM0NCAzLTMtMS4zNDQtMy0zLTN6bTAgMTZjLTQuNDExIDAtOC0zLjU4OS04LTggMC0xLjc4MS41ODEtMy40MjIgMS41NjMtNC43NSIgc3Ryb2tlPSIjOWNhM2FmIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4=';
+    // Fallback SVG más robusto
+    target.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(`
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="32" height="32" fill="#f3f4f6" rx="8"/>
+        <circle cx="16" cy="16" r="6" fill="#9ca3af"/>
+        <circle cx="16" cy="14" r="2" fill="#6b7280"/>
+        <path d="M12 20c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="#6b7280" stroke-width="1.5" fill="none"/>
+      </svg>
+    `)}`;
   }
 
   /**
-   * Método para obtener el número de columnas dinámicamente (opcional)
+   * Obtiene el número de columnas basado en el tamaño de pantalla
    */
-  getGridCols(itemsLength: number): string {
-    if (itemsLength <= 4) return 'grid-cols-2';
-    if (itemsLength <= 9) return 'grid-cols-3';
-    return 'grid-cols-4';
+  getResponsiveColumns(category: TechSkill[]): string {
+    const length = category.length;
+
+    // Lógica responsive mejorada
+    if (length <= 2) return 'grid-cols-2';
+    if (length <= 4) return 'grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2';
+    if (length <= 6) return 'grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3';
+    return 'grid-cols-3 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-4';
   }
 
   /**
-   * Método para obtener la categoría con más tecnologías
+   * Obtiene todas las tecnologías con nivel mínimo
+   */
+  getTechnologiesByLevel(minLevel: number): TechSkill[] {
+    const allTech = [
+      ...this.frontend,
+      ...this.backend,
+      ...this.databases,
+      ...this.tools
+    ];
+    return allTech.filter(tech => tech.level >= minLevel);
+  }
+
+  /**
+   * Calcula el promedio de nivel por categoría
+   */
+  getAverageLevel(category: TechSkill[]): number {
+    if (category.length === 0) return 0;
+    const sum = category.reduce((acc, tech) => acc + tech.level, 0);
+    return Math.round(sum / category.length);
+  }
+
+  /**
+   * Obtiene el total de tecnologías
+   */
+  getTotalTechnologies(): number {
+    return this.frontend.length +
+           this.backend.length +
+           this.databases.length +
+           this.tools.length;
+  }
+
+  /**
+   * Obtiene la categoría con más tecnologías
    */
   getMostPopularCategory(): string {
     const categories = [
@@ -165,26 +225,50 @@ export class StackTecnologicoComponent {
   }
 
   /**
-   * Método para obtener el total de tecnologías
+   * Obtiene la configuración de color por categoría
    */
-  getTotalTechnologies(): number {
-    return this.frontend.length + this.backend.length + this.databases.length + this.tools.length;
+  getCategoryConfig(category: string): { color: string, icon: string, title: string, subtitle: string } {
+    const configs = {
+      frontend: {
+        color: 'emerald',
+        icon: 'fas fa-palette',
+        title: 'Frontend',
+        subtitle: 'Interfaces & UX'
+      },
+      backend: {
+        color: 'blue',
+        icon: 'fas fa-server',
+        title: 'Backend',
+        subtitle: 'Lógica & APIs'
+      },
+      database: {
+        color: 'purple',
+        icon: 'fas fa-database',
+        title: 'Databases',
+        subtitle: 'Gestión de Datos'
+      },
+      tool: {
+        color: 'orange',
+        icon: 'fas fa-tools',
+        title: 'Herramientas',
+        subtitle: 'DevOps & Utilidades'
+      }
+    };
+
+    return configs[category as keyof typeof configs] || configs.frontend;
   }
 
   /**
-   * Método para obtener tecnologías por nivel (opcional)
+   * Verifica si el dispositivo soporta hover
    */
-  getTechnologiesByLevel(minLevel: number): TechSkill[] {
-    const allTech = [...this.frontend, ...this.backend, ...this.databases, ...this.tools];
-    return allTech.filter(tech => tech.level >= minLevel);
+  get supportsHover(): boolean {
+    return window.matchMedia('(hover: hover)').matches;
   }
 
   /**
-   * Método para obtener el promedio de nivel por categoría
+   * Detecta si es un dispositivo táctil
    */
-  getAverageLevel(category: TechSkill[]): number {
-    if (category.length === 0) return 0;
-    const sum = category.reduce((acc, tech) => acc + tech.level, 0);
-    return Math.round(sum / category.length);
+  get isTouchDevice(): boolean {
+    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
   }
 }
