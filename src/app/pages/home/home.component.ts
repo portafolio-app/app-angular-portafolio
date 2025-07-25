@@ -1,4 +1,3 @@
-// src/app/pages/home/home.component.ts - CORREGIDO
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import {
   AfterViewInit,
@@ -48,13 +47,11 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private typewriterInstance: any;
   private observer: IntersectionObserver | null = null;
 
-  // Propiedades para Alert
   currentAlert: AlertConfig | null = null;
   isAlertVisible: boolean = false;
   private alertSubscription?: Subscription;
   private visibilitySubscription?: Subscription;
 
-  // PROPIEDADES AGREGADAS para el botón
   isButtonLoading: boolean = false;
 
   constructor(
@@ -89,15 +86,28 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.observer.disconnect();
     }
 
-    this.alertSubscription?.unsubscribe();
-    this.visibilitySubscription?.unsubscribe();
+    if (this.alertSubscription) {
+      this.alertSubscription.unsubscribe();
+      this.alertSubscription = undefined;
+    }
 
-    // CLEANUP MEJORADO del scroll
+    if (this.visibilitySubscription) {
+      this.visibilitySubscription.unsubscribe();
+      this.visibilitySubscription = undefined;
+    }
+
+    this.isButtonLoading = false;
+    this.isAlertVisible = false;
+    this.currentAlert = null;
+
+    if (this.alertService.hasActiveAlert()) {
+      this.alertService.hideAlert();
+    }
+
     if (isPlatformBrowser(this.platformId)) {
       const body = document.body;
       const html = document.documentElement;
 
-      // Restaurar completamente los estilos
       body.style.position = '';
       body.style.top = '';
       body.style.left = '';
@@ -108,11 +118,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  // MÉTODOS DE ALERT
   private setupAlertSubscriptions(): void {
     this.alertSubscription = this.alertService.currentAlert$.subscribe(
       (alert) => {
-        console.log('🔔 Alert config changed:', alert);
         this.currentAlert = alert;
         this.cdr.detectChanges();
       }
@@ -120,97 +128,95 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.visibilitySubscription = this.alertService.isVisible$.subscribe(
       (isVisible) => {
-        console.log('👁️ Alert visibility changed:', isVisible);
         this.isAlertVisible = isVisible;
-        this.isButtonLoading = false;
+
+        if (!isVisible) {
+          this.isButtonLoading = false;
+          setTimeout(() => {
+            this.currentAlert = null;
+            this.cdr.detectChanges();
+          }, 100);
+        }
+
         this.cdr.detectChanges();
       }
     );
   }
 
-  // MÉTODO MEJORADO para mostrar información
   showDevelopmentInfo(): void {
-    console.log('🚀 Showing development info');
-
-    // Verificar si ya hay una alerta activa
-    if (this.alertService.hasActiveAlert()) {
-      console.log('⚠️ Alert already active, not showing new one');
+    if (this.isButtonLoading) {
       return;
     }
 
-    // Activar estado de loading
+    if (this.alertService.hasActiveAlert()) {
+      this.alertService.forceReset();
+      this.isButtonLoading = false;
+      this.isAlertVisible = false;
+      this.currentAlert = null;
+      this.cdr.detectChanges();
+
+      setTimeout(() => {
+        this.showDevelopmentInfo();
+      }, 200);
+      return;
+    }
+
     this.isButtonLoading = true;
     this.cdr.detectChanges();
 
-    // Simular pequeña carga para feedback visual (opcional)
     setTimeout(() => {
       this.alertService.showDevelopmentAlert();
-      // El loading se desactiva automáticamente en setupAlertSubscriptions
     }, 300);
   }
 
-  // CORREGIDO: Manejar acciones de alerta
   onAlertAction(action: string): void {
-    console.log('🎬 Processing alert action:', action);
-
     switch (action) {
       case 'view_available':
       case 'explore':
-        console.log('📂 Navigating to projects...');
-        // Cerrar primero el modal, luego hacer scroll
         this.alertService.hideAlert();
-        setTimeout(() => this.scrollToSection('proyectos'), 500); // Aumentar tiempo
+        setTimeout(() => this.scrollToSection('proyectos'), 500);
         break;
 
       case 'about':
-        console.log('ℹ️ Navigating to about...');
         this.alertService.hideAlert();
         setTimeout(() => this.scrollToSection('tecnologias'), 500);
         break;
 
       case 'contact':
       case 'email':
-        console.log('📧 Opening email...');
         this.openEmail();
         this.alertService.hideAlert();
         break;
 
       case 'linkedin':
-        console.log('💼 Opening LinkedIn...');
         this.openLinkedIn();
         this.alertService.hideAlert();
         break;
 
       case 'github':
-        console.log('🐙 Opening GitHub...');
         this.openGitHub();
         this.alertService.hideAlert();
         break;
 
       default:
-        console.log('❓ Unknown action:', action);
         this.alertService.hideAlert();
     }
   }
 
-  // Manejar cierre de alerta
   onAlertClosed(reason: string): void {
-    console.log('🔒 Alert closed with reason:', reason);
-
-    // Asegurar que el loading state se resetee
     this.isButtonLoading = false;
-    this.cdr.detectChanges();
+    this.isAlertVisible = false;
 
-    // REMOVIDO - ya no es necesario porque se maneja en el alert component
+    setTimeout(() => {
+      this.currentAlert = null;
+      this.alertService.forceReset();
+      this.cdr.detectChanges();
+    }, 50);
   }
 
-  // CORREGIDO: Métodos de navegación
   private scrollToSection(sectionId: string): void {
     if (!isPlatformBrowser(this.platformId)) return;
 
-    console.log(`📍 Scrolling to section: ${sectionId}`);
-
-    // Intentar scroll múltiples veces para asegurar que funcione
     let attempts = 0;
     const maxAttempts = 5;
 
@@ -224,18 +230,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
           top: Math.max(0, elementPosition),
           behavior: 'smooth',
         });
-
-        console.log(`✅ Scrolled to ${sectionId}`);
       } else if (attempts < maxAttempts) {
         attempts++;
-        console.log(`⏳ Attempt ${attempts} - retrying scroll to ${sectionId}`);
         setTimeout(attemptScroll, 200);
-      } else {
-        console.error(`❌ Element ${sectionId} not found after ${maxAttempts} attempts`);
       }
     };
 
-    // Esperar un poco antes del primer intento
     setTimeout(attemptScroll, 100);
   }
 
@@ -264,7 +264,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  // MÉTODOS EXISTENTES (sin cambios)
   private initTypewriterEffect(): void {
     if (this.typewriterElement?.nativeElement) {
       this.typewriterInstance = new Typewriter(

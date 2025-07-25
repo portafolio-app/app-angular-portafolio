@@ -1,4 +1,3 @@
-// src/app/shared/components/alert/alert.component.ts - OPTIMIZADO PARA RESPONSIVE
 import {
   Component,
   Input,
@@ -151,7 +150,7 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     if (this.isVisible && this.config && this.config.dismissible !== false && !this.isClosing) {
       event.preventDefault();
       event.stopPropagation();
-      this.closeAlert('escape');
+      this.handleClose('escape');
     }
   }
 
@@ -162,7 +161,7 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     const currentTarget = event.currentTarget as HTMLElement;
 
     if (target === currentTarget && this.config && this.config.dismissible !== false) {
-      this.closeAlert('backdrop');
+      this.handleClose('backdrop');
     }
   }
 
@@ -172,9 +171,9 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     event.preventDefault();
     event.stopPropagation();
 
-    if (this.isVisible && this.config) {
-      this.closeAlert('dismiss');
-    }
+    if (!this.isVisible || !this.config) return;
+
+    this.handleClose('dismiss');
   }
 
   handleActionButton(action: string, event: Event): void {
@@ -188,25 +187,24 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     this.actionClicked.emit(action);
 
     setTimeout(() => {
-      this.closeAlert(action);
+      this.handleClose(action);
     }, 100);
   }
 
-  closeAlert(reason: string): void {
-    if (this.isClosing || !this.isVisible) return;
+  private handleClose(reason: string): void {
+    if (this.isClosing) return;
 
     this.isClosing = true;
+    this.closed.emit(reason);
     this.showAnimation = false;
     this.clearTimers();
     this.cdr.detectChanges();
 
     setTimeout(() => {
       this.cleanupAlert();
-      this.closed.emit(reason);
-
       setTimeout(() => {
         this.isClosing = false;
-      }, 100);
+      }, 50);
     }, 300);
   }
 
@@ -215,7 +213,7 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
 
     this.autoCloseTimer = setTimeout(() => {
       if (!this.isClosing) {
-        this.closeAlert('timeout');
+        this.handleClose('timeout');
       }
     }, this.config.autoClose);
 
@@ -251,8 +249,6 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  // MÉTODOS PARA CLASES CSS DINÁMICAS - OPTIMIZADOS PARA RESPONSIVE
-
   getPositionClass(): string {
     if (!this.config) return 'items-center justify-center';
     const position = this.config.position || 'center';
@@ -264,20 +260,17 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     return classes[position];
   }
 
-  // MÉTODO COMPLETAMENTE REESCRITO PARA MEJOR RESPONSIVE
   getSizeClass(): string {
     if (!this.config) return 'w-full max-w-md mx-4';
 
     const size = this.config.size || 'md';
-
-    // Simplificamos las clases para mejor control
     const baseClasses = 'w-full mx-2 sm:mx-4';
 
     const sizeClasses = {
       sm: `${baseClasses} max-w-sm sm:max-w-md`,
       md: `${baseClasses} max-w-md sm:max-w-lg lg:max-w-xl`,
       lg: `${baseClasses} max-w-lg sm:max-w-xl lg:max-w-2xl`,
-      xl: `${baseClasses} max-w-xl sm:max-w-2xl lg:max-w-3xl xl:max-w-4xl`
+      xl: `${baseClasses} max-w-xl sm:max-w-2xl lg:max-w-3xl xl:max-w-4xl`,
     };
 
     return sizeClasses[size];
@@ -411,18 +404,15 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     return message.replace(/\n/g, '<br>');
   }
 
-  // MÉTODO AGREGADO: Obtener mensaje truncado para header
   getTruncatedMessage(): string {
     if (!this.config?.message) return '';
 
-    // Remover etiquetas HTML para el truncado
     const plainText = this.config.message.replace(/<[^>]*>/g, '');
 
     if (plainText.length <= 60) {
       return plainText;
     }
 
-    // Truncar en la primera oración o en 60 caracteres
     const firstSentence = plainText.split('.')[0];
     if (firstSentence.length <= 60) {
       return firstSentence + '...';
@@ -431,18 +421,14 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     return plainText.substring(0, 57) + '...';
   }
 
-  // MÉTODO AGREGADO: Determinar si mostrar mensaje completo
   shouldShowFullMessage(): boolean {
     if (!this.config?.message) return false;
 
-    // Siempre mostrar mensaje completo si tiene más de una línea de contenido significativo
     const plainText = this.config.message.replace(/<[^>]*>/g, '').trim();
 
-    // Si es muy corto, no necesita sección separada
     if (plainText.length <= 50) return false;
 
-    // Si tiene múltiples oraciones o párrafos, mostrar completo
-    const sentences = plainText.split(/[.!?]\s+/).filter(s => s.trim().length > 0);
+    const sentences = plainText.split(/[.!?]\s+/).filter((s) => s.trim().length > 0);
     return sentences.length > 1 || plainText.length > 80 || this.config.message.includes('\n');
   }
 
