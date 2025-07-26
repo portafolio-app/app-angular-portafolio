@@ -63,6 +63,10 @@ export class ProjectsDataService {
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg',
           },
           {
+            name: 'Spring Boot',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg',
+          },
+          {
             name: 'TypeScript',
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
           },
@@ -74,6 +78,15 @@ export class ProjectsDataService {
             name: 'Firebase',
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg',
           },
+          {
+            name: 'MySQL',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-plain-wordmark.svg',
+          },
+          {
+            name: 'Java',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
+          },
+
         ],
         links: [
           {
@@ -285,7 +298,6 @@ export class ProjectsDataService {
             url: 'https://github.com/app-carroControl/app-control-IoT.git',
             label: 'Ver codigo',
           },
-
         ],
         category: 'iot',
         status: 'completed',
