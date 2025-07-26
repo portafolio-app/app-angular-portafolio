@@ -56,7 +56,7 @@ export class ProjectsDataService {
           'Plataforma completa para gestionar ventas y productos electrónicos en línea, con carrito de compras inteligente, múltiples métodos de pago, gestión de inventario en tiempo real y panel de administración avanzado.',
         shortDescription:
           'Plataforma e-commerce completa para productos electrónicos con gestión de inventario y pagos.',
-        image: '../assets/banner-ventas.png',
+        image: '../assets/banner-ventaas.png',
         technologies: [
           {
             name: 'Angular',
