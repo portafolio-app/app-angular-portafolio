@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { AlertConfig } from '../../shared/components/alert/alert.component';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AlertService {
   private currentAlertSubject = new BehaviorSubject<AlertConfig | null>(null);
@@ -24,7 +24,7 @@ export class AlertService {
     const developmentConfig: AlertConfig = {
       type: 'development',
       title: '👨‍💻 Disponible para Oportunidades',
-      message: `¡Hola! 👋 Soy Jorge, desarrollador de software en búsqueda activa de oportunidades laborales y prácticas profesionales.
+      message: `¡Hola! 👋 Soy Jorge, desarrollador de software en búsqueda activa de oportunidades laborales.
 
 Este portafolio está en constante desarrollo. Algunas secciones pueden estar incompletas mientras añado nuevos proyectos y funcionalidades.
 
@@ -40,21 +40,21 @@ Este portafolio está en constante desarrollo. Algunas secciones pueden estar in
           label: 'Ver Proyectos',
           action: 'view_available',
           style: 'primary',
-          icon: 'fas fa-code'
+          icon: 'fas fa-code',
         },
         {
           label: 'LinkedIn',
           action: 'linkedin',
           style: 'primary',
-          icon: 'fab fa-linkedin'
+          icon: 'fab fa-linkedin',
         },
         {
           label: 'GitHub',
           action: 'github',
           style: 'secondary',
-          icon: 'fab fa-github'
-        }
-      ]
+          icon: 'fab fa-github',
+        },
+      ],
     };
 
     this.showAlert(developmentConfig);
@@ -143,8 +143,8 @@ Este portafolio está en constante desarrollo. Algunas secciones pueden estar in
           label: 'Más...',
           action: 'show_more',
           style: 'secondary',
-          icon: 'fas fa-ellipsis-h'
-        }
+          icon: 'fas fa-ellipsis-h',
+        },
       ]);
     }
 
@@ -162,7 +162,7 @@ Este portafolio está en constante desarrollo. Algunas secciones pueden estar in
       message,
       autoClose,
       showProgress: true,
-      dismissible: true
+      dismissible: true,
     });
   }
 
@@ -172,7 +172,7 @@ Este portafolio está en constante desarrollo. Algunas secciones pueden estar in
       title,
       message,
       dismissible: true,
-      autoClose: 0
+      autoClose: 0,
     });
   }
 
@@ -183,7 +183,7 @@ Este portafolio está en constante desarrollo. Algunas secciones pueden estar in
       message,
       autoClose,
       showProgress: true,
-      dismissible: true
+      dismissible: true,
     });
   }
 
@@ -194,7 +194,7 @@ Este portafolio está en constante desarrollo. Algunas secciones pueden estar in
       message,
       autoClose,
       showProgress: true,
-      dismissible: true
+      dismissible: true,
     });
   }
 
@@ -215,15 +215,15 @@ Este portafolio está en constante desarrollo. Algunas secciones pueden estar in
           label: 'Confirmar',
           action: confirmAction,
           style: 'danger',
-          icon: 'fas fa-check'
+          icon: 'fas fa-check',
         },
         {
           label: 'Cancelar',
           action: cancelAction,
           style: 'secondary',
-          icon: 'fas fa-times'
-        }
-      ]
+          icon: 'fas fa-times',
+        },
+      ],
     });
   }
 

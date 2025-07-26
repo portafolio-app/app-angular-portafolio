@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   selector: 'app-start',
   imports: [CommonModule],
   templateUrl: './start.component.html',
-  styleUrls: ['./start.component.css']
+  styleUrls: ['./start.component.css'],
 })
 export class StartComponent implements OnInit, OnDestroy {
   isVisible = false;
@@ -52,9 +52,11 @@ export class StartComponent implements OnInit, OnDestroy {
     const touchDuration = Date.now() - this.touchStartTime;
 
     // Solo procesar si es un tap corto (no un swipe o gesto largo)
-    if (event.changedTouches.length === 1 &&
-        touchDuration < 300 &&
-        !this.hasInteracted) {
+    if (
+      event.changedTouches.length === 1 &&
+      touchDuration < 300 &&
+      !this.hasInteracted
+    ) {
       event.preventDefault();
       this.navigateToHome();
     }
@@ -112,7 +114,7 @@ export class StartComponent implements OnInit, OnDestroy {
         left: Math.random() * 80 + 10,
         delay: Math.random() * 3,
         duration: 2 + Math.random() * 2,
-        size: 0.5 + Math.random() * 1
+        size: 0.5 + Math.random() * 1,
       });
     }
   }
@@ -140,7 +142,7 @@ export class StartComponent implements OnInit, OnDestroy {
         left: 50 + (Math.random() - 0.5) * 40,
         delay: i * 0.1,
         duration: 1,
-        size: 1.5
+        size: 1.5,
       };
       this.droplets.push(droplet);
     }
@@ -154,14 +156,14 @@ export class StartComponent implements OnInit, OnDestroy {
       left: ((rect.left + rect.width / 2) / window.innerWidth) * 100,
       delay: 0,
       duration: 1.5,
-      size: 1.2
+      size: 1.2,
     };
 
     this.droplets.push(droplet);
 
     // Remover después de la animación
     setTimeout(() => {
-      this.droplets = this.droplets.filter(d => d.id !== droplet.id);
+      this.droplets = this.droplets.filter((d) => d.id !== droplet.id);
     }, 2000);
   }
 }

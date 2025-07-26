@@ -1,94 +1,70 @@
-<!-- Modal responsivo COMPLETAMENTE OPTIMIZADO -->
-<div *ngIf="isVisible && config"
-     class="fixed inset-0 z-[9999] flex p-2 transition-all duration-500 ease-out"
-     [class.opacity-0]="!showAnimation"
-     [class.opacity-100]="showAnimation"
-     [class.pointer-events-none]="!isVisible || isClosing"
-     [class.pointer-events-auto]="isVisible && !isClosing"
-     [ngClass]="getPositionClass()"
-     (click)="onBackdropClick($event)">
+<div *ngIf="isVisible && config" class="fixed inset-0 z-[9999] flex p-2 transition-all duration-500 ease-out"
+  [class.opacity-0]="!showAnimation" [class.opacity-100]="showAnimation"
+  [class.pointer-events-none]="!isVisible || isClosing" [class.pointer-events-auto]="isVisible && !isClosing"
+  [ngClass]="getPositionClass()" (click)="onBackdropClick($event)">
 
   <!-- Backdrop -->
   <div class="absolute inset-0 bg-gradient-to-br from-black/50 via-gray-900/60 to-black/50
-              backdrop-blur-sm transition-all duration-500"
-       [class.opacity-0]="!showAnimation"
-       [class.opacity-100]="showAnimation">
+              backdrop-blur-sm transition-all duration-500" [class.opacity-0]="!showAnimation"
+    [class.opacity-100]="showAnimation">
   </div>
 
   <!-- Modal container - OPTIMIZADO PARA RESPONSIVE -->
   <div class="relative transform transition-all duration-500 ease-out flex flex-col
-              max-h-[95vh] sm:max-h-[90vh] md:max-h-[85vh] lg:max-h-[80vh]"
-       [ngClass]="getSizeClass()"
-       [class.scale-95]="!showAnimation"
-       [class.scale-100]="showAnimation"
-       [class.translate-y-4]="!showAnimation"
-       [class.translate-y-0]="showAnimation"
-       (click)="$event.stopPropagation()">
+              max-h-[95vh] sm:max-h-[90vh] md:max-h-[85vh] lg:max-h-[80vh]" [ngClass]="getSizeClass()"
+    [class.scale-95]="!showAnimation" [class.scale-100]="showAnimation" [class.translate-y-4]="!showAnimation"
+    [class.translate-y-0]="showAnimation" (click)="$event.stopPropagation()">
 
     <!-- Card principal -->
     <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl
                 rounded-lg sm:rounded-xl md:rounded-2xl
                 shadow-xl border border-white/20 dark:border-gray-700/30
                 overflow-hidden ring-1 ring-black/5 dark:ring-white/10
-                h-full flex flex-col min-h-0"
-         [ngClass]="getAlertClasses()">
+                h-full flex flex-col min-h-0" [ngClass]="getAlertClasses()">
 
       <!-- Progress bar -->
       <div *ngIf="config.showProgress && config.autoClose && config.autoClose > 0"
-           class="h-1 bg-gray-200 dark:bg-gray-700 overflow-hidden flex-shrink-0">
-        <div class="h-full transition-all ease-linear"
-             [ngClass]="getProgressBarClass()"
-             [style.width.%]="progressWidth">
+        class="h-1 bg-gray-200 dark:bg-gray-700 overflow-hidden flex-shrink-0">
+        <div class="h-full transition-all ease-linear" [ngClass]="getProgressBarClass()"
+          [style.width.%]="progressWidth">
         </div>
       </div>
 
       <!-- Header - MEJORADO PARA RESPONSIVE -->
       <div class="flex items-start justify-between p-3 sm:p-4 md:p-5
-                  border-b border-gray-100/50 dark:border-gray-700/50 flex-shrink-0"
-           [ngClass]="getHeaderClass()">
+                  border-b border-gray-100/50 dark:border-gray-700/50 flex-shrink-0" [ngClass]="getHeaderClass()">
 
         <!-- Icon & Content -->
         <div class="flex items-start space-x-2 sm:space-x-3 flex-1 min-w-0">
           <!-- Icon -->
-          <div *ngIf="config.showIcon !== false"
-               class="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10
+          <div *ngIf="config.showIcon !== false" class="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10
                       rounded-lg flex items-center justify-center
-                      shadow-md transition-all duration-300 hover:scale-105"
-               [ngClass]="getIconBackgroundClass()">
-            <i [class]="getIconClass()"
-               [ngClass]="getIconColorClass()"
-               class="text-xs sm:text-sm md:text-base"></i>
+                      shadow-md transition-all duration-300 hover:scale-105" [ngClass]="getIconBackgroundClass()">
+            <i [class]="getIconClass()" [ngClass]="getIconColorClass()" class="text-xs sm:text-sm md:text-base"></i>
           </div>
 
           <!-- Title & Message -->
           <div class="flex-1 min-w-0">
             <h3 class="text-sm sm:text-base md:text-lg font-bold mb-1 leading-tight
-                       break-words"
-                [ngClass]="getTitleColorClass()">
+                       break-words" [ngClass]="getTitleColorClass()">
               {{ config.title }}
             </h3>
             <!-- Solo mostrar mensaje truncado si NO vamos a mostrar el mensaje completo -->
-            <div *ngIf="config.message && !shouldShowFullMessage()"
-                 class="text-xs sm:text-sm leading-relaxed text-ellipsis overflow-hidden
-                        break-words"
-                 [ngClass]="getMessageColorClass()">
+            <div *ngIf="config.message && !shouldShowFullMessage()" class="text-xs sm:text-sm leading-relaxed text-ellipsis overflow-hidden
+                        break-words" [ngClass]="getMessageColorClass()">
               {{ getTruncatedMessage() }}
             </div>
           </div>
         </div>
 
         <!-- Close button -->
-        <button *ngIf="config.dismissible !== false"
-                type="button"
-                class="flex-shrink-0 ml-2 p-1.5 sm:p-2 rounded-lg
+        <button *ngIf="config.dismissible !== false" type="button" class="flex-shrink-0 ml-2 p-1.5 sm:p-2 rounded-lg
                        text-gray-400 hover:text-gray-600 dark:hover:text-gray-300
                        hover:bg-white/80 dark:hover:bg-gray-700/80
                        transition-all duration-300 transform hover:scale-105
                        focus:outline-none focus:ring-2 focus:ring-gray-300
                        min-h-[44px] min-w-[44px]
-                       flex items-center justify-center"
-                [disabled]="isClosing"
-                (click)="handleCloseButton($event)">
+                       flex items-center justify-center" [disabled]="isClosing" (click)="handleCloseButton($event)">
           <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
@@ -101,21 +77,18 @@
 
         <!-- Mensaje completo si es necesario -->
         <div *ngIf="shouldShowFullMessage()"
-             class="p-3 sm:p-4 md:p-5 border-b border-gray-100/30 dark:border-gray-700/30">
-          <div class="text-sm sm:text-base leading-relaxed break-words"
-               [ngClass]="getMessageColorClass()"
-               [innerHTML]="formatMessage(config.message)">
+          class="p-3 sm:p-4 md:p-5 border-b border-gray-100/30 dark:border-gray-700/30">
+          <div class="text-sm sm:text-base leading-relaxed break-words" [ngClass]="getMessageColorClass()"
+            [innerHTML]="formatMessage(config.message)">
           </div>
         </div>
 
         <!-- Actions - GRID RESPONSIVO MEJORADO -->
-        <div *ngIf="config.actions && config.actions.length > 0"
-             class="p-3 sm:p-4 md:p-5 bg-gradient-to-br from-gray-50/80 to-white/40
+        <div *ngIf="config.actions && config.actions.length > 0" class="p-3 sm:p-4 md:p-5 bg-gradient-to-br from-gray-50/80 to-white/40
                     dark:from-gray-900/50 dark:to-gray-800/30">
 
           <!-- Grid de botones optimizado -->
-          <div class="grid gap-2 sm:gap-3"
-               [ngClass]="{
+          <div class="grid gap-2 sm:gap-3" [ngClass]="{
                  'grid-cols-1': config.actions.length === 1,
                  'grid-cols-2': config.actions.length === 2,
                  'grid-cols-1 sm:grid-cols-2': config.actions.length === 3,
@@ -123,23 +96,19 @@
                  'grid-cols-2 sm:grid-cols-3': config.actions.length === 5
                }">
 
-            <button *ngFor="let action of config.actions; trackBy: trackByAction"
-                    type="button"
-                    [ngClass]="getActionButtonClass(action.style || 'secondary')"
-                    [disabled]="isClosing"
-                    (click)="handleActionButton(action.action, $event)">
+            <button *ngFor="let action of config.actions; trackBy: trackByAction" type="button"
+              [ngClass]="getActionButtonClass(action.style || 'secondary')" [disabled]="isClosing"
+              (click)="handleActionButton(action.action, $event)">
 
               <!-- Background hover -->
               <div class="absolute inset-0 bg-gradient-to-r opacity-0 group-hover:opacity-20
                           transition-opacity duration-300"
-                   [ngClass]="getActionButtonHoverClass(action.style || 'secondary')">
+                [ngClass]="getActionButtonHoverClass(action.style || 'secondary')">
               </div>
 
               <!-- Content -->
               <div class="relative z-10 flex items-center justify-center space-x-1 sm:space-x-1.5">
-                <i *ngIf="action.icon"
-                   [class]="action.icon"
-                   class="text-xs sm:text-sm flex-shrink-0 w-3 sm:w-4"></i>
+                <i *ngIf="action.icon" [class]="action.icon" class="text-xs sm:text-sm flex-shrink-0 w-3 sm:w-4"></i>
                 <span class="font-medium text-center break-words leading-tight">{{ action.label }}</span>
               </div>
             </button>

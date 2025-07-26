@@ -121,7 +121,8 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     const html = document.documentElement;
 
     if (isVisible) {
-      this.savedScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+      this.savedScrollPosition =
+        window.pageYOffset || document.documentElement.scrollTop;
       body.style.position = 'fixed';
       body.style.top = `-${this.savedScrollPosition}px`;
       body.style.left = '0';
@@ -147,7 +148,12 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
 
   @HostListener('document:keydown.escape', ['$event'])
   onEscapePress(event: KeyboardEvent): void {
-    if (this.isVisible && this.config && this.config.dismissible !== false && !this.isClosing) {
+    if (
+      this.isVisible &&
+      this.config &&
+      this.config.dismissible !== false &&
+      !this.isClosing
+    ) {
       event.preventDefault();
       event.stopPropagation();
       this.handleClose('escape');
@@ -160,7 +166,11 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
     const target = event.target as HTMLElement;
     const currentTarget = event.currentTarget as HTMLElement;
 
-    if (target === currentTarget && this.config && this.config.dismissible !== false) {
+    if (
+      target === currentTarget &&
+      this.config &&
+      this.config.dismissible !== false
+    ) {
       this.handleClose('backdrop');
     }
   }
@@ -295,7 +305,8 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
       success: 'bg-green-50 dark:bg-green-900/20',
       warning: 'bg-yellow-50 dark:bg-yellow-900/20',
       error: 'bg-red-50 dark:bg-red-900/20',
-      development: 'bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20',
+      development:
+        'bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20',
     };
     return headers[this.config.type] || headers.info;
   }
@@ -320,7 +331,8 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
       success: 'bg-green-100 dark:bg-green-800',
       warning: 'bg-yellow-100 dark:bg-yellow-800',
       error: 'bg-red-100 dark:bg-red-800',
-      development: 'bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-800 dark:to-teal-800',
+      development:
+        'bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-800 dark:to-teal-800',
     };
     return backgrounds[this.config.type] || backgrounds.info;
   }
@@ -428,8 +440,14 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
 
     if (plainText.length <= 50) return false;
 
-    const sentences = plainText.split(/[.!?]\s+/).filter((s) => s.trim().length > 0);
-    return sentences.length > 1 || plainText.length > 80 || this.config.message.includes('\n');
+    const sentences = plainText
+      .split(/[.!?]\s+/)
+      .filter((s) => s.trim().length > 0);
+    return (
+      sentences.length > 1 ||
+      plainText.length > 80 ||
+      this.config.message.includes('\n')
+    );
   }
 
   trackByAction(index: number, action: AlertAction): string {
