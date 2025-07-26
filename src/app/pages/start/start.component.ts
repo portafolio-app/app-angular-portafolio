@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 })
 export class StartComponent implements OnInit, OnDestroy {
   isVisible = false;
-  isHintVisible = false;
   droplets: any[] = [];
+  private hasInteracted = false;
 
   private fadeOutTimeout: any;
 
@@ -20,7 +20,23 @@ export class StartComponent implements OnInit, OnDestroy {
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.key === 'Enter' && this.isVisible) {
+    if (event.key === 'Enter' && this.isVisible && !this.hasInteracted) {
+      this.navigateToHome();
+    }
+  }
+
+  // Prevenir zoom en dispositivos móviles con doble tap
+  @HostListener('touchstart', ['$event'])
+  handleTouchStart(event: TouchEvent) {
+    if (event.touches.length > 1) {
+      event.preventDefault();
+    }
+  }
+
+  @HostListener('touchend', ['$event'])
+  handleTouchEnd(event: TouchEvent) {
+    if (event.changedTouches.length === 1 && !this.hasInteracted) {
+      event.preventDefault();
       this.navigateToHome();
     }
   }
@@ -36,15 +52,12 @@ export class StartComponent implements OnInit, OnDestroy {
       this.generateDroplets();
     }, 2000);
 
-    // Mostrar hint en lugar del botón
-    setTimeout(() => {
-      this.isHintVisible = true;
-    }, 4000);
-
-    // Auto-navegación (más tiempo para que vean el hint)
+    // Auto-navegación
     this.fadeOutTimeout = setTimeout(() => {
-      this.navigateToHome();
-    }, 12000);
+      if (!this.hasInteracted) {
+        this.navigateToHome();
+      }
+    }, 8000); // Reducido a 8 segundos ya que no hay hint
   }
 
   ngOnDestroy(): void {
@@ -65,12 +78,32 @@ export class StartComponent implements OnInit, OnDestroy {
   }
 
   navigateToHome(): void {
+    if (this.hasInteracted) return;
+
+    this.hasInteracted = true;
     clearTimeout(this.fadeOutTimeout);
     this.isVisible = false;
+
+    // Agregar efecto de ondas al hacer click
+    this.createClickEffect();
 
     setTimeout(() => {
       this.router.navigateByUrl('/home');
     }, 600);
+  }
+
+  createClickEffect(): void {
+    // Crear múltiples gotas desde el centro al hacer click
+    for (let i = 0; i < 8; i++) {
+      const droplet = {
+        id: Date.now() + i,
+        left: 50 + (Math.random() - 0.5) * 40, // Centrado con variación
+        delay: i * 0.1,
+        duration: 1,
+        size: 1.5
+      };
+      this.droplets.push(droplet);
+    }
   }
 
   onLetterHover(event: any): void {

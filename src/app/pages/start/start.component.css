@@ -370,3 +370,27 @@
     font-size: 0.7rem;
   }
 }
+.screen-container {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  /* Prevenir zoom en móviles */
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Efecto sutil al hacer click/tap - apenas perceptible */
+.screen-container:active {
+  transform: scale(0.998);
+  transition: transform 0.05s ease;
+}
+
+/* Para dispositivos móviles - mejorar experiencia táctil */
+@media (max-width: 768px) {
+  .screen-container {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0.05);
+  }
+}

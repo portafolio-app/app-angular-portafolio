@@ -1,4 +1,4 @@
-<section class="screen-container" [class.visible]="isVisible">
+<section class="screen-container" [class.visible]="isVisible" (click)="navigateToHome()" (touchstart)="navigateToHome()">
 
   <!-- Fondo con gradiente moderno -->
   <div class="background-gradient"></div>
@@ -39,8 +39,6 @@
 
     <!-- Subtítulo -->
     <p class="subtitle">Development Studio</p>
-
-   
   </div>
 
   <!-- Gotas animadas -->
