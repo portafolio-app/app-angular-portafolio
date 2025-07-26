@@ -196,56 +196,6 @@ export class ProjectsDataService {
         },
       },
       {
-        id: '4',
-        title: 'Control de Dispositivos IoT con Arduino y Bluetooth',
-        description:
-          'Sistema completo de domótica para controlar dispositivos IoT como carritos robóticos, sistemas de iluminación inteligente, sensores ambientales y más, utilizando comunicación Bluetooth, programación en Arduino y aplicación Android para control remoto.',
-        shortDescription:
-          'Sistema de domótica para control remoto de dispositivos IoT via Bluetooth.',
-        image: '../assets/jwt-autenticator.png',
-        technologies: [
-          {
-            name: 'Arduino',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg',
-          },
-          {
-            name: 'Kotlin',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg',
-          },
-          {
-            name: 'Android',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg',
-          },
-          {
-            name: 'C++',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg',
-          },
-        ],
-        links: [
-          {
-            type: 'github',
-            url: 'https://github.com/app-carroControl/app-control-IoT',
-            label: 'Ver Código',
-          },
-        ],
-        category: 'iot',
-        status: 'in-progress',
-        featured: true,
-        createdAt: new Date('2024-02-05'),
-        highlights: [
-          'Control remoto via Bluetooth',
-          'Múltiples dispositivos IoT',
-          'Interfaz Android intuitiva',
-          'Programación Arduino optimizada',
-          'Comunicación bidireccional',
-        ],
-        metrics: {
-          downloads: 500,
-          stars: 18,
-          forks: 5,
-        },
-      },
-      {
         id: '5',
         title: 'Sistema de Autenticación JWT con MFA',
         description:
