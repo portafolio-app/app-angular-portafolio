@@ -1,4 +1,9 @@
-<section class="screen-container" [class.visible]="isVisible" (click)="navigateToHome()" (touchstart)="navigateToHome()">
+<section class="screen-container"
+         [class.visible]="isVisible"
+         (click)="handleClick($event)"
+         (touchstart)="handleTouchStart($event)"
+         (touchend)="handleTouchEnd($event)"
+         (pointerdown)="handlePointerDown($event)">
 
   <!-- Fondo con gradiente moderno -->
   <div class="background-gradient"></div>
