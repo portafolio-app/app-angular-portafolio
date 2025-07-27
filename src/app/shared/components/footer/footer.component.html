@@ -1,5 +1,6 @@
 <!-- footer.component.html -->
-<footer [ngClass]="{'bg-gray-900 text-white': isDarkMode, 'bg-gray-50 text-gray-900': !isDarkMode}" class="border-t border-gray-200 dark:border-gray-700 py-12">
+<footer [ngClass]="{'bg-gray-900 text-white': isDarkMode, 'bg-gray-50 text-gray-900': !isDarkMode}"
+  class="border-t border-gray-200 dark:border-gray-700 py-12">
   <div class="max-w-screen-xl mx-auto px-6 lg:px-12">
     <div class="flex justify-between items-center mb-8">
       <!-- Logo o Texto del Autor -->
@@ -11,23 +12,26 @@
       <!-- Redes Sociales -->
       <div class="flex space-x-4">
         <a href="https://github.com/VCL-tt" target="_blank" rel="noopener noreferrer"
-           class="group p-3 rounded-xl bg-white/10 hover:bg-gray-800 dark:hover:bg-gray-700 transition-all duration-300 hover:scale-110">
-          <i class="fab fa-github text-xl text-gray-600 dark:text-gray-300 group-hover:text-white transition-colors"></i>
+          class="group p-3 rounded-xl bg-white/10 hover:bg-gray-800 dark:hover:bg-gray-700 transition-all duration-300 hover:scale-110">
+          <i
+            class="fab fa-github text-xl text-gray-600 dark:text-gray-300 group-hover:text-white transition-colors"></i>
         </a>
         <a href="https://www.linkedin.com/in/jcastillov15" target="_blank" rel="noopener noreferrer"
-           class="group p-3 rounded-xl bg-white/10 hover:bg-blue-600 transition-all duration-300 hover:scale-110">
-          <i class="fab fa-linkedin text-xl text-gray-600 dark:text-gray-300 group-hover:text-white transition-colors"></i>
+          class="group p-3 rounded-xl bg-white/10 hover:bg-blue-600 transition-all duration-300 hover:scale-110">
+          <i
+            class="fab fa-linkedin text-xl text-gray-600 dark:text-gray-300 group-hover:text-white transition-colors"></i>
         </a>
         <a href="mailto:casvejorge1@gmail.com"
-           class="group p-3 rounded-xl bg-white/10 hover:bg-green-600 transition-all duration-300 hover:scale-110">
-          <i class="fas fa-envelope text-xl text-gray-600 dark:text-gray-300 group-hover:text-white transition-colors"></i>
+          class="group p-3 rounded-xl bg-white/10 hover:bg-green-600 transition-all duration-300 hover:scale-110">
+          <i
+            class="fas fa-envelope text-xl text-gray-600 dark:text-gray-300 group-hover:text-white transition-colors"></i>
         </a>
       </div>
     </div>
 
     <!-- Información principal -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-sm"
-         [ngClass]="{'text-gray-300': isDarkMode, 'text-gray-600': !isDarkMode}">
+      [ngClass]="{'text-gray-300': isDarkMode, 'text-gray-600': !isDarkMode}">
 
       <!-- Tecnologías y Especialidades -->
       <div>
@@ -67,7 +71,8 @@
           <!-- Correo -->
           <div class="flex items-center space-x-3 group">
             <div class="p-2 rounded-lg bg-green-100 dark:bg-green-900/30 group-hover:bg-green-600 transition-colors">
-              <a href="mailto:casvejorge1@gmail.com" class="text-green-600 dark:text-green-400 group-hover:text-white transition-colors">
+              <a href="mailto:casvejorge1@gmail.com"
+                class="text-green-600 dark:text-green-400 group-hover:text-white transition-colors">
                 <i class="fas fa-envelope"></i>
               </a>
             </div>
@@ -80,7 +85,8 @@
           <!-- Teléfono -->
           <div class="flex items-center space-x-3 group">
             <div class="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30 group-hover:bg-blue-600 transition-colors">
-              <a href="tel:+51991185552" class="text-blue-600 dark:text-blue-400 group-hover:text-white transition-colors">
+              <a href="tel:+51991185552"
+                class="text-blue-600 dark:text-blue-400 group-hover:text-white transition-colors">
                 <i class="fas fa-phone"></i>
               </a>
             </div>
@@ -109,7 +115,8 @@
           Sobre Mí
         </h3>
         <p class="text-sm leading-relaxed mb-4">
-          Desarrollador de software apasionado por crear soluciones tecnológicas eficientes, escalables y centradas en la experiencia del usuario.
+          Desarrollador de software apasionado por crear soluciones tecnológicas eficientes, escalables y centradas en
+          la experiencia del usuario.
         </p>
 
         <!-- Disponibilidad -->
@@ -126,17 +133,24 @@
     <div class="my-8 h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
 
     <!-- Copyright y Footer adicional -->
-    <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0"
-         [ngClass]="{'text-gray-400': isDarkMode, 'text-gray-500': !isDarkMode}">
+    <div class="text-center space-y-3" [ngClass]="{'text-gray-400': isDarkMode, 'text-gray-500': !isDarkMode}">
       <p class="text-sm">
         &copy; {{ currentYear }} Jorge Luis Castillo Vega. Todos los derechos reservados.
       </p>
 
-      <div class="flex items-center space-x-4 text-xs">
+      <div class="inline-flex justify-center items-center space-x-2 text-sm text-gray-700">
         <span>Hecho con</span>
-        <i class="fas fa-mug-hot text-brown-500 animate-pulse"></i>
+        <div class="relative">
+          <i
+            class="fas fa-coffee text-amber-700 hover:text-amber-800 transform hover:rotate-12 transition-all duration-300"></i>
+          <div class="absolute -top-1 left-1/2 transform -translate-x-1/2">
+            <div class="w-1 h-2 bg-gray-300 opacity-60 rounded-full animate-pulse"></div>
+          </div>
+        </div>
         <span>en Trujillo, Perú</span>
       </div>
     </div>
+
+
   </div>
 </footer>
