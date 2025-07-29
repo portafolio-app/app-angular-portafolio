@@ -86,7 +86,6 @@ export class ProjectsDataService {
             name: 'Java',
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
           },
-
         ],
         links: [
           {
@@ -114,6 +113,72 @@ export class ProjectsDataService {
       },
       {
         id: '2',
+        title: 'Recordatorio de Pagos y Gestión de Deudas',
+        description:
+          'Aplicación web desarrollada con React + Vite que ayuda a personas a llevar el control de sus deudas, evitando olvidos de pago mediante recordatorios personalizados. Permite registrar múltiples deudas con opciones detalladas como monto, fecha límite, intereses y frecuencia. Incluye autenticación simple y con Google usando Firebase, almacenamiento seguro en Firestore y una interfaz moderna con Tailwind CSS.',
+        shortDescription:
+          'App web con recordatorios inteligentes para pagos y gestión de deudas, usando Firebase y Vite.',
+        image: '../assets/gestor-deudas.png', // Reemplázalo con la ruta real de tu imagen
+        technologies: [
+          {
+            name: 'React',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+          },
+          {
+            name: 'Vite',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vite/vite-original.svg',
+          },
+          {
+            name: 'Tailwind CSS',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg',
+          },
+          {
+            name: 'Firebase',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg',
+          },
+          {
+            name: 'JavaScript',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
+          },
+        ],
+        links: [
+          {
+            type: 'github',
+            url: 'https://github.com/VCL-tt/finance-organizer',
+            label: 'Ver Código',
+          },
+          {
+            type: 'demo',
+            url: 'https://jcv-code.netlify.app',
+            label: 'Probar App',
+          },
+        ],
+        category: 'web',
+        status: 'completed',
+        featured: true,
+        createdAt: new Date('2025-07-29'),
+        highlights: [
+          'Registro de múltiples deudas con opciones detalladas',
+          'Autenticación con correo y Google (Firebase Auth)',
+          'Base de datos en tiempo real con Firestore',
+          'Notificaciones y recordatorios personalizados',
+          'UI moderna y responsiva con Tailwind CSS',
+          'Fácil despliegue con Netlify',
+        ],
+        challenges: [
+          'Diseñar una interfaz intuitiva para diferentes tipos de usuarios',
+          'Sincronizar datos entre sesiones sin errores',
+          'Evitar duplicados y validar entradas del formulario',
+          'Integrar correctamente la autenticación con Google',
+        ],
+        metrics: {
+          stars: 12,
+          forks: 4,
+          downloads: 120,
+        },
+      },
+      {
+        id: '3',
         title: 'Aplicación de Seguimiento en Tiempo Real de Buses',
         description:
           'Aplicación móvil innovadora para el seguimiento en tiempo real de buses urbanos, utilizando Google Maps API para geolocalización precisa, notificaciones push para alertas de llegada, y sistema de rutas optimizadas con Firebase como backend.',
@@ -163,7 +228,7 @@ export class ProjectsDataService {
         },
       },
       {
-        id: '3',
+        id: '4',
         title: 'Aplicación Móvil Prodent - Citas Médicas',
         description:
           'Sistema integral de gestión de citas médicas para múltiples especialidades, que permite agendar citas, recibir recordatorios automatizados, mantener historial médico digital, y comunicación directa con profesionales de salud a través de chat integrado.',
