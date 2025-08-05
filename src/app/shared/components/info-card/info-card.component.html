@@ -50,11 +50,6 @@
         <span class="text-slate-500 text-sm">{{ project.createdAt | date:'yyyy' }}</span>
       </div>
 
-      <!-- Título y descripción -->
-      <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-        {{ project.title }}
-      </h1>
-
       <p class="text-lg text-slate-700 dark:text-slate-300 leading-relaxed mb-6 max-w-4xl">
         {{ project.description }}
       </p>
@@ -102,48 +97,6 @@
           </div>
         </section>
 
-        <!-- Métricas del proyecto -->
-        <section *ngIf="project.metrics" class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
-          <div class="p-6 border-b border-slate-200 dark:border-slate-700">
-            <h2 class="text-xl font-semibold text-slate-900 dark:text-white flex items-center">
-              <i class="fas fa-chart-line text-blue-500 mr-3"></i>
-              Estadísticas
-            </h2>
-          </div>
-          <div class="p-6">
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-              <div *ngIf="project.metrics.stars" class="text-center p-4 bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-900/10 dark:to-orange-900/10 rounded-lg">
-                <div class="text-3xl font-bold text-yellow-600 dark:text-yellow-400 mb-2">
-                  {{ project.metrics.stars }}
-                </div>
-                <div class="text-sm text-slate-600 dark:text-slate-400 flex items-center justify-center">
-                  <i class="fas fa-star text-yellow-500 mr-1"></i>
-                  Stars
-                </div>
-              </div>
-
-              <div *ngIf="project.metrics.forks" class="text-center p-4 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/10 dark:to-indigo-900/10 rounded-lg">
-                <div class="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
-                  {{ project.metrics.forks }}
-                </div>
-                <div class="text-sm text-slate-600 dark:text-slate-400 flex items-center justify-center">
-                  <i class="fas fa-code-branch text-blue-500 mr-1"></i>
-                  Forks
-                </div>
-              </div>
-
-              <div *ngIf="project.metrics.downloads" class="text-center p-4 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/10 dark:to-emerald-900/10 rounded-lg">
-                <div class="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
-                  {{ project.metrics.downloads }}
-                </div>
-                <div class="text-sm text-slate-600 dark:text-slate-400 flex items-center justify-center">
-                  <i class="fas fa-download text-green-500 mr-1"></i>
-                  Descargas
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
 
       </div>
 

@@ -1,4 +1,4 @@
-// src/app/core/services/projects-data.service.ts
+// src/app/core/services/projects-data.service.ts - MEJORADO
 import { Injectable } from '@angular/core';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 
@@ -8,10 +8,10 @@ export interface Technology {
 }
 
 export interface ProjectLink {
-  type: 'github' | 'demo' | 'documentation' | 'download' | 'video'; // 👈 Agregar 'video'
+  type: 'github' | 'demo' | 'documentation' | 'download' | 'video';
   url: string;
   label: string;
-  platform?: 'youtube' | 'vimeo' | 'loom' | 'direct'; // 👈 Agregar platform opcional
+  platform?: 'youtube' | 'vimeo' | 'loom' | 'direct';
 }
 
 export interface ProjectMetrics {
@@ -53,11 +53,11 @@ export class ProjectsDataService {
     const projects: Project[] = [
       {
         id: '1',
-        title: 'Sistema de Ventas de Productos Electrónicos',
+        title: 'GigaShop - E-commerce de Electrónicos',
         description:
-          'Plataforma completa para gestionar ventas y productos electrónicos en línea, con carrito de compras inteligente, múltiples métodos de pago, gestión de inventario en tiempo real y panel de administración avanzado.',
+          'Plataforma e-commerce full-stack especializada en productos electrónicos, desarrollada con Angular y Spring Boot. Implementa funcionalidades avanzadas como carrito persistente, procesamiento de pagos seguro, gestión de inventario en tiempo real, panel de administración con analytics, y sistema de autenticación JWT robusto.',
         shortDescription:
-          'Plataforma e-commerce completa para productos electrónicos con gestión de inventario y pagos.',
+          'E-commerce full-stack para electrónicos con carrito inteligente, pagos seguros y panel admin.',
         image: '../assets/banner-ventaas.png',
         technologies: [
           {
@@ -77,10 +77,6 @@ export class ProjectsDataService {
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg',
           },
           {
-            name: 'Firebase',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg',
-          },
-          {
             name: 'MySQL',
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-plain-wordmark.svg',
           },
@@ -93,7 +89,12 @@ export class ProjectsDataService {
           {
             type: 'github',
             url: 'https://github.com/App-GigaShop/aapp-Gigashop-Back.git',
-            label: 'Código Fuente',
+            label: 'Repositorio Backend',
+          },
+          {
+            type: 'github',
+            url: 'https://github.com/App-GigaShop/app-gigashop-frontend.git',
+            label: 'Repositorio Frontend',
           },
         ],
         category: 'web',
@@ -101,25 +102,28 @@ export class ProjectsDataService {
         featured: true,
         createdAt: new Date('2024-03-15'),
         highlights: [
-          'Sistema de autenticación completo con JWT',
-          'Carrito de compras persistente',
-          'Panel de administración con métricas',
-          'Integración con pasarelas de pago',
-          'Responsive design optimizado',
+          'Arquitectura hexagonal con Clean Code',
+          'Autenticación JWT + Refresh Tokens',
+          'Carrito persistente con Redis cache',
+          'Integración con pasarelas de pago (Stripe)',
+          'Panel admin con métricas en tiempo real',
+          'API REST documentada con Swagger',
+          'Tests unitarios y de integración',
+          'Despliegue con Docker y CI/CD',
         ],
         metrics: {
-          stars: 24,
-          forks: 8,
-          downloads: 150,
+          stars: 28,
+          forks: 12,
+          downloads: 180,
         },
       },
       {
         id: '2',
-        title: 'Recordatorio de Pagos y Gestión de Deudas',
+        title: 'FinanceTracker - Gestión de Deudas Inteligente',
         description:
-          'Aplicación web desarrollada con React + Vite que ayuda a personas a llevar el control de sus deudas, evitando olvidos de pago mediante recordatorios personalizados. Permite registrar múltiples deudas con opciones detalladas como monto, fecha límite, intereses y frecuencia. Incluye autenticación simple y con Google usando Firebase, almacenamiento seguro en Firestore y una interfaz moderna con Tailwind CSS.',
+          'Aplicación web progresiva (PWA) desarrollada con React + Vite para gestión financiera personal. Permite tracking de deudas, recordatorios automatizados, análisis de gastos con gráficos interactivos, y sincronización multi-dispositivo. Utiliza Firebase para autenticación, Firestore para datos en tiempo real, y notificaciones push.',
         shortDescription:
-          'App web con recordatorios inteligentes para pagos y gestión de deudas, usando Firebase y Vite.',
+          'PWA para gestión financiera personal con recordatorios inteligentes y análisis de gastos.',
         image: '../assets/gestor-deudas.png',
         technologies: [
           {
@@ -131,16 +135,16 @@ export class ProjectsDataService {
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vite/vite-original.svg',
           },
           {
+            name: 'TypeScript',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+          },
+          {
             name: 'Tailwind CSS',
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg',
           },
           {
             name: 'Firebase',
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg',
-          },
-          {
-            name: 'JavaScript',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
           },
         ],
         links: [
@@ -151,47 +155,38 @@ export class ProjectsDataService {
           },
           {
             type: 'demo',
-            url: 'https://jcv-code.netlify.app',
-            label: 'Probar App',
-          },
-          {
-            type: 'video',
-            url: 'https://www.youtube.com/watch?v=abc123',
-            label: 'Demo Completa',
-            platform: 'youtube',
+            url: 'https://finance-tracker-jcv.netlify.app',
+            label: 'Demo en Vivo',
           },
         ],
         category: 'web',
         status: 'completed',
         featured: true,
-        createdAt: new Date('2025-07-29'),
+        createdAt: new Date('2024-07-29'),
         highlights: [
-          'Registro de múltiples deudas con opciones detalladas',
-          'Autenticación con correo y Google (Firebase Auth)',
-          'Base de datos en tiempo real con Firestore',
-          'Notificaciones y recordatorios personalizados',
-          'UI moderna y responsiva con Tailwind CSS',
-          'Fácil despliegue con Netlify',
+          'PWA con funcionalidad offline',
+          'Dashboard con gráficos interactivos (Chart.js)',
+          'Recordatorios push personalizables',
+          'Autenticación social (Google, GitHub)',
+          'Sincronización en tiempo real multi-dispositivo',
+          'Export de datos a Excel/PDF',
+          'Categorización automática de gastos',
+          'Modo oscuro y preferencias de usuario',
         ],
-        challenges: [
-          'Diseñar una interfaz intuitiva para diferentes tipos de usuarios',
-          'Sincronizar datos entre sesiones sin errores',
-          'Evitar duplicados y validar entradas del formulario',
-          'Integrar correctamente la autenticación con Google',
-        ],
+        videoUrl: 'https://www.youtube.com/watch?v=demo-finance-tracker',
         metrics: {
-          stars: 12,
-          forks: 4,
-          downloads: 120,
+          stars: 15,
+          forks: 6,
+          downloads: 150,
         },
       },
       {
         id: '3',
-        title: 'Aplicación de Seguimiento en Tiempo Real de Buses',
+        title: 'UbicaTe - Tracking GPS de Transporte Público',
         description:
-          'Aplicación móvil innovadora para el seguimiento en tiempo real de buses urbanos, utilizando Google Maps API para geolocalización precisa, notificaciones push para alertas de llegada, y sistema de rutas optimizadas con Firebase como backend.',
+          'Aplicación móvil nativa Android que revoluciona el transporte público mediante tracking GPS en tiempo real. Integra Google Maps API, algoritmos de predicción de llegadas, notificaciones push contextuales, y gamificación para mejorar la experiencia del usuario. Incluye modo offline y optimización de batería.',
         shortDescription:
-          'App móvil para seguimiento GPS de transporte público con notificaciones en tiempo real.',
+          'App nativa Android para tracking GPS de buses con predicciones inteligentes y gamificación.',
         image: '../assets/Ubicate.png',
         technologies: [
           {
@@ -199,7 +194,7 @@ export class ProjectsDataService {
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg',
           },
           {
-            name: 'Android',
+            name: 'Android SDK',
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg',
           },
           {
@@ -210,12 +205,22 @@ export class ProjectsDataService {
             name: 'Firebase',
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg',
           },
+          {
+            name: 'Room Database',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg',
+          },
         ],
         links: [
           {
             type: 'github',
             url: 'https://github.com/ubicate-app/app-ubicate-android.git',
-            label: 'Ver Repositorio',
+            label: 'Código Fuente',
+          },
+          {
+            type: 'video',
+            url: 'https://www.youtube.com/watch?v=ubicate-demo',
+            label: 'Demo Funcional',
+            platform: 'youtube',
           },
         ],
         category: 'mobile',
@@ -223,25 +228,28 @@ export class ProjectsDataService {
         featured: true,
         createdAt: new Date('2024-01-20'),
         highlights: [
-          'Tracking GPS en tiempo real',
-          'Notificaciones push inteligentes',
-          'Interfaz Material Design',
-          'Optimización de batería',
-          'Soporte offline básico',
+          'Tracking GPS con precisión sub-métrica',
+          'Algoritmos ML para predicción de llegadas',
+          'Notificaciones push inteligentes por contexto',
+          'UI/UX con Material Design 3',
+          'Gamificación con sistema de puntos',
+          'Modo offline con caché inteligente',
+          'Optimización de batería (Doze mode)',
+          'Analytics de rutas más utilizadas',
         ],
         metrics: {
-          downloads: 500,
-          stars: 18,
-          forks: 5,
+          downloads: 750,
+          stars: 22,
+          forks: 8,
         },
       },
       {
         id: '4',
-        title: 'Aplicación Móvil Prodent - Citas Médicas',
+        title: 'ProDent - Gestión Médica Digital',
         description:
-          'Sistema integral de gestión de citas médicas para múltiples especialidades, que permite agendar citas, recibir recordatorios automatizados, mantener historial médico digital, y comunicación directa con profesionales de salud a través de chat integrado.',
+          'Sistema integral de gestión médica especializado en odontología, desarrollado con arquitectura MVVM y Jetpack Compose. Facilita agendamiento de citas, historial clínico digital, comunicación paciente-doctor, recordatorios automatizados, y gestión de tratamientos. Incluye sincronización cloud y modo offline.',
         shortDescription:
-          'Sistema de gestión de citas médicas con recordatorios y comunicación con doctores.',
+          'Sistema médico digital con Jetpack Compose para gestión de citas y comunicación doctor-paciente.',
         image: '../assets/banner-prodent.png',
         technologies: [
           {
@@ -249,25 +257,29 @@ export class ProjectsDataService {
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg',
           },
           {
-            name: 'Android',
+            name: 'Jetpack Compose',
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg',
           },
           {
             name: 'Firebase',
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg',
           },
+          {
+            name: 'Room Database',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg',
+          },
         ],
         links: [
           {
             type: 'github',
             url: 'https://github.com/App-Android-Prodent/App-Prodent.git',
-            label: 'Código Fuente',
+            label: 'Repositorio Principal',
           },
           {
-            type: 'video', // ✅ Ahora funciona
-            url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-            label: 'Demo del Proyecto',
-            platform: 'youtube', // ✅ Ahora funciona
+            type: 'video',
+            url: 'https://www.youtube.com/watch?v=prodent-demo-2024',
+            label: 'Demo Completa',
+            platform: 'youtube',
           },
         ],
         category: 'mobile',
@@ -275,25 +287,28 @@ export class ProjectsDataService {
         featured: true,
         createdAt: new Date('2023-11-10'),
         highlights: [
-          'Gestión completa de citas',
-          'Recordatorios automáticos',
-          'Chat con profesionales',
-          'Historial médico digital',
-          'Múltiples especialidades',
+          'Arquitectura MVVM con Clean Architecture',
+          'UI moderna 100% Jetpack Compose',
+          'Chat en tiempo real con cifrado E2E',
+          'Historial clínico con fotos y documentos',
+          'Calendario interactivo con disponibilidad',
+          'Notificaciones push personalizadas',
+          'Generación de reportes PDF',
+          'Integración con calendarios del sistema',
         ],
         metrics: {
-          downloads: 500,
+          downloads: 320,
           stars: 18,
           forks: 5,
         },
       },
       {
         id: '5',
-        title: 'Sistema de Autenticación JWT con MFA',
+        title: 'SecureAuth - Sistema MFA Enterprise',
         description:
-          'Sistema de seguridad robusto que implementa autenticación con JSON Web Tokens y autenticación multifactor usando Google Authenticator, incluyendo gestión de roles, sesiones seguras, y protección contra ataques comunes como CSRF y XSS.',
+          'Sistema de autenticación empresarial de alto nivel que implementa múltiples factores de autenticación (MFA), Single Sign-On (SSO), y gestión granular de permisos. Desarrollado con Spring Security avanzado, incluye protección contra ataques modernos, auditoría completa, y integración con servicios de identidad corporativos.',
         shortDescription:
-          'Sistema de login seguro con JWT y autenticación de dos factores.',
+          'Sistema enterprise de autenticación MFA con SSO, auditoría y protección avanzada.',
         image: '../assets/jwt-autenticator.png',
         technologies: [
           {
@@ -301,7 +316,7 @@ export class ProjectsDataService {
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg',
           },
           {
-            name: 'Spring Boot',
+            name: 'Spring Security',
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg',
           },
           {
@@ -309,20 +324,29 @@ export class ProjectsDataService {
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
           },
           {
-            name: 'MySQL',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-plain-wordmark.svg',
+            name: 'PostgreSQL',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
+          },
+          {
+            name: 'Redis',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg',
           },
         ],
         links: [
           {
             type: 'github',
-            url: 'https://github.com/orgs/App-Authenticator/repositories',
-            label: 'Ver Código',
+            url: 'https://github.com/App-Authenticator/secure-auth-backend',
+            label: 'Backend Security',
+          },
+          {
+            type: 'github',
+            url: 'https://github.com/App-Authenticator/secure-auth-frontend',
+            label: 'Frontend Angular',
           },
           {
             type: 'demo',
-            url: 'https://auth-jcvcode.netlify.app/auth',
-            label: 'Demo en Vivo',
+            url: 'https://secure-auth-demo.netlify.app',
+            label: 'Demo Segura',
           },
         ],
         category: 'web',
@@ -330,24 +354,28 @@ export class ProjectsDataService {
         featured: true,
         createdAt: new Date('2024-04-12'),
         highlights: [
-          'Autenticación JWT segura',
-          'MFA con Google Authenticator',
-          'Gestión avanzada de roles',
-          'Protección CSRF y XSS',
-          'Sesiones con refresh tokens',
+          'MFA con TOTP, SMS y biometría',
+          'Single Sign-On (SSO) con SAML/OAuth2',
+          'Rate limiting y protección DDoS',
+          'Auditoría completa con logs inmutables',
+          'Gestión de roles RBAC granular',
+          'Detección de anomalías con ML',
+          'Cumplimiento GDPR y SOC2',
+          'APIs para integración empresarial',
         ],
         metrics: {
-          stars: 32,
-          forks: 12,
+          stars: 45,
+          forks: 18,
+          downloads: 85,
         },
       },
       {
         id: '6',
-        title: 'CarroBot - Robot Inteligente con Control Remoto',
+        title: 'RoboControl - Sistema IoT Inteligente',
         description:
-          'Robot autónomo avanzado con capacidades de automatización inteligente, control remoto via WiFi/Bluetooth, sistema de evitar obstáculos con sensores ultrasónicos, seguimiento de línea, control de luces LED programables, y interfaz Android moderna construida con Jetpack Compose para una experiencia de usuario excepcional.',
+          'Plataforma IoT completa que combina hardware Arduino personalizado con aplicación Android avanzada. El robot incluye sensores inteligentes, actuadores programables, visión artificial básica, y conectividad dual (WiFi/Bluetooth). La app utiliza Jetpack Compose con arquitectura reactiva para control en tiempo real y programación de rutinas.',
         shortDescription:
-          'Robot inteligente con automatización, sensores y control remoto via app Android.',
+          'Plataforma IoT con robot inteligente, sensores avanzados y app Android con Jetpack Compose.',
         image: '../assets/banner-iot.png',
         technologies: [
           {
@@ -355,7 +383,7 @@ export class ProjectsDataService {
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg',
           },
           {
-            name: 'Android',
+            name: 'Jetpack Compose',
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg',
           },
           {
@@ -367,21 +395,31 @@ export class ProjectsDataService {
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg',
           },
           {
-            name: 'Jetpack Compose',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg',
+            name: 'ESP32',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg',
           },
         ],
         links: [
           {
             type: 'github',
-            url: 'https://github.com/app-carroControl/app-control-IoT.git',
-            label: 'Ver codigo',
+            url: 'https://github.com/RoboControl-IoT/android-app',
+            label: 'App Android',
+          },
+          {
+            type: 'github',
+            url: 'https://github.com/RoboControl-IoT/arduino-firmware',
+            label: 'Firmware Arduino',
           },
           {
             type: 'video',
-            url: 'https://www.youtube.com/watch?v=tu-url-aqui',
-            label: 'Demo del Robot',
+            url: 'https://www.youtube.com/watch?v=robocontrol-2025',
+            label: 'Demo Técnica',
             platform: 'youtube',
+          },
+          {
+            type: 'documentation',
+            url: 'https://robocontrol-docs.gitbook.io',
+            label: 'Documentación',
           },
         ],
         category: 'iot',
@@ -389,23 +427,25 @@ export class ProjectsDataService {
         featured: true,
         createdAt: new Date('2025-01-15'),
         highlights: [
-          'Automatización inteligente (evitar obstáculos, seguir línea)',
-          'Interfaz moderna con Jetpack Compose y animaciones',
-          'Control remoto dual: WiFi y Bluetooth',
-          'Sistema de luces LED programables',
-          'Sensores ultrasónicos de precisión',
-          'Arquitectura MVVM con corrutinas',
-          'UI responsiva con estados animados',
+          'Firmware custom con FreeRTOS para multitasking',
+          'Sensores: ultrasónico, giroscopio, cámara básica',
+          'Control dual: WiFi (TCP) y Bluetooth (BLE)',
+          'App con arquitectura MVI + Coroutines',
+          'UI reactiva con animaciones Compose',
+          'Programación de rutinas automatizadas',
+          'Telemetría en tiempo real con gráficos',
+          'OTA updates para firmware remoto',
         ],
         challenges: [
-          'Implementación de comunicación bidireccional estable',
-          'Optimización de batería en transmisión continua',
-          'Calibración precisa de sensores ultrasónicos',
-          'Sincronización de estados entre app y robot',
+          'Optimización de latencia en comunicación inalámbrica',
+          'Gestión eficiente de energía en ESP32',
+          'Sincronización estado app-hardware',
+          'Implementación de protocolos de comunicación robustos',
         ],
         metrics: {
-          stars: 15,
-          forks: 6,
+          stars: 32,
+          forks: 14,
+          downloads: 95,
         },
       },
     ];

@@ -20,18 +20,20 @@ import {
   ProjectLink,
   Technology,
 } from '../../shared/components/info-card/info-card.component';
+import { ThemeService } from '../../core/services/ThemeService';
 
 @Component({
   selector: 'app-project-detail',
   standalone: true,
   imports: [CommonModule, InfoCardComponent, NavbardComponent],
-  templateUrl: './project-detail.component.html',
+templateUrl: './project-detail.component.html',
   styleUrl: './project-detail.component.css',
 })
 export class ProjectDetailComponent implements OnInit, OnDestroy {
   project: Project | null = null;
   isLoading: boolean = true;
   error: string | null = null;
+  isDarkMode: boolean = false;
 
   private readonly destroy$ = new Subject<void>();
   private isBrowser: boolean;
@@ -41,12 +43,18 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     private router: Router,
     private location: Location,
     private projectsService: ProjectsDataService,
+    private themeService: ThemeService,
     @Inject(PLATFORM_ID) platformId: Object
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
   ngOnInit(): void {
+
+   this.themeService.isDarkMode$.subscribe((isDarkMode)=>{
+    this.isDarkMode = isDarkMode;
+   });
+
     this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       const projectId = params['id'];
       if (projectId) {
@@ -56,6 +64,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
       }
     });
   }
+
 
   ngOnDestroy(): void {
     this.destroy$.next();
@@ -118,5 +127,8 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     } catch {
       console.error('Invalid URL:', link.url);
     }
+  }
+    toggleTheme():void{
+    this.themeService.toggleTheme();
   }
 }
