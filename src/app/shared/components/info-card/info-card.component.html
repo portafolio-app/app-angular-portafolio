@@ -1,0 +1,355 @@
+<!-- info-card.component.html - DISEÑO 100% RESPONSIVO CON SOPORTE PARA VIDEOS -->
+<div class="min-h-screen bg-slate-50 dark:bg-slate-900">
+
+  <!-- HEADER PRINCIPAL CON MEDIA ADAPTATIVO -->
+  <header class="relative">
+    <!-- Contenedor de media (imagen o video) -->
+    <div class="bg-white dark:bg-slate-800 relative overflow-hidden">
+
+      <!-- Video si existe -->
+      <div *ngIf="project.video && project.video.url" class="w-full">
+        <div class="relative w-full" [style.padding-bottom]="project.video.aspectRatio || '56.25%'">
+          <iframe
+            [src]="getVideoEmbedUrl(project.video.url)"
+            [title]="project.video.title || project.title + ' - Video explicativo'"
+            class="absolute top-0 left-0 w-full h-full rounded-none"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <!-- Descripción del video -->
+        <div *ngIf="project.video.description"
+             class="bg-slate-100 dark:bg-slate-700 px-4 py-3 text-sm text-slate-600 dark:text-slate-300">
+          <i class="fas fa-play-circle mr-2 text-blue-500"></i>
+          {{ project.video.description }}
+        </div>
+      </div>
+
+      <!-- Imagen si no hay video -->
+      <div *ngIf="!project.video && project.images && project.images.length > 0" class="w-full">
+        <img [src]="project.images[activeImageIndex].url"
+             [alt]="project.images[activeImageIndex].alt"
+             (error)="handleImageError($event)"
+             class="w-full h-auto max-h-80 sm:max-h-96 object-contain bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-800">
+      </div>
+
+      <!-- Fallback si no hay media -->
+      <div *ngIf="!project.video && (!project.images || project.images.length === 0)"
+           class="h-48 sm:h-64 bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-700 dark:to-slate-800 flex items-center justify-center">
+        <div class="text-center">
+          <i [class]="getCategoryIcon()" class="text-4xl sm:text-5xl text-slate-400 dark:text-slate-500 mb-2"></i>
+          <p class="text-slate-500 dark:text-slate-400 text-sm sm:text-base">{{ project.category | titlecase }} Project</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navegación de imágenes (solo si hay múltiples imágenes y no hay video) -->
+    <div *ngIf="!project.video && project.images && project.images.length > 1"
+         class="absolute bottom-4 right-4 z-10">
+      <div class="flex space-x-2 bg-black/50 backdrop-blur-sm rounded-lg p-2">
+        <button *ngFor="let image of project.images; let i = index; trackBy: trackByImage"
+                (click)="selectImage(i)"
+                [class]="i === activeImageIndex ? 'bg-white' : 'bg-white/50'"
+                class="w-2.5 h-2.5 rounded-full transition-all duration-200 hover:bg-white/80">
+        </button>
+      </div>
+    </div>
+
+    <!-- Badge de video si existe -->
+    <div *ngIf="project.video" class="absolute top-4 left-4 z-10">
+      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300">
+        <i class="fas fa-video mr-1"></i>
+        Video Explicativo
+      </span>
+    </div>
+  </header>
+
+  <!-- INFORMACIÓN DEL PROYECTO -->
+  <div class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      <div class="max-w-4xl">
+        <!-- Estado y categoría -->
+        <div class="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-4">
+          <span [class]="getStatusColor()"
+                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold w-fit">
+            <span class="w-2 h-2 bg-current rounded-full mr-2"></span>
+            {{ project.status | titlecase }}
+          </span>
+          <span class="hidden sm:block text-slate-500 dark:text-slate-400">•</span>
+          <span class="text-slate-600 dark:text-slate-300 font-medium text-sm sm:text-base">
+            <i [class]="getCategoryIcon()" class="mr-2"></i>
+            {{ project.category | titlecase }}
+          </span>
+        </div>
+
+        <!-- Título responsivo -->
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-4 leading-tight">
+          {{ project.title }}
+        </h1>
+
+        <!-- Información profesional responsiva -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 text-sm">
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-user-tie text-blue-500 flex-shrink-0"></i>
+            <span class="text-slate-600 dark:text-slate-400">Rol:</span>
+            <span class="font-semibold text-slate-900 dark:text-white truncate">{{ project.role }}</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-calendar-alt text-green-500 flex-shrink-0"></i>
+            <span class="text-slate-600 dark:text-slate-400">Duración:</span>
+            <span class="font-semibold text-slate-900 dark:text-white">{{ project.duration }}</span>
+          </div>
+          <div *ngIf="project.teamSize" class="flex items-center space-x-2">
+            <i class="fas fa-users text-purple-500 flex-shrink-0"></i>
+            <span class="text-slate-600 dark:text-slate-400">Equipo:</span>
+            <span class="font-semibold text-slate-900 dark:text-white">{{ project.teamSize }} personas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENIDO PRINCIPAL RESPONSIVO -->
+  <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+
+    <!-- DESCRIPCIÓN DESTACADA -->
+    <section class="mb-8 sm:mb-12">
+      <div class="max-w-4xl">
+        <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+          {{ project.description }}
+        </p>
+      </div>
+    </section>
+
+    <!-- LAYOUT PRINCIPAL RESPONSIVO -->
+    <div class="grid grid-cols-1 xl:grid-cols-4 gap-6 lg:gap-8">
+
+      <!-- CONTENIDO PRINCIPAL -->
+      <div class="xl:col-span-3 space-y-6 sm:space-y-8">
+
+        <!-- PROBLEMA Y SOLUCIÓN RESPONSIVO -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+          <!-- Problema -->
+          <div class="bg-white dark:bg-slate-800 rounded-xl p-4 sm:p-6 shadow-sm border border-slate-200 dark:border-slate-700">
+            <div class="flex items-center mb-4">
+              <div class="w-8 h-8 sm:w-10 sm:h-10 bg-red-50 dark:bg-red-900/20 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                <i class="fas fa-exclamation-circle text-red-600 dark:text-red-400 text-sm sm:text-base"></i>
+              </div>
+              <h2 class="text-base sm:text-lg font-semibold text-slate-900 dark:text-white">Desafío</h2>
+            </div>
+            <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
+              {{ project.problemStatement }}
+            </p>
+          </div>
+
+          <!-- Solución -->
+          <div class="bg-white dark:bg-slate-800 rounded-xl p-4 sm:p-6 shadow-sm border border-slate-200 dark:border-slate-700">
+            <div class="flex items-center mb-4">
+              <div class="w-8 h-8 sm:w-10 sm:h-10 bg-green-50 dark:bg-green-900/20 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                <i class="fas fa-lightbulb text-green-600 dark:text-green-400 text-sm sm:text-base"></i>
+              </div>
+              <h2 class="text-base sm:text-lg font-semibold text-slate-900 dark:text-white">Solución</h2>
+            </div>
+            <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
+              {{ project.solution }}
+            </p>
+          </div>
+        </section>
+
+        <!-- CARACTERÍSTICAS PRINCIPALES RESPONSIVAS -->
+        <section *ngIf="project.features && project.features.length > 0">
+          <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
+            <div class="p-4 sm:p-6 border-b border-slate-200 dark:border-slate-700">
+              <h2 class="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white flex items-center">
+                <i class="fas fa-star text-amber-500 mr-2 sm:mr-3 flex-shrink-0"></i>
+                <span class="truncate">Características Clave</span>
+              </h2>
+            </div>
+            <div class="p-4 sm:p-6">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div *ngFor="let feature of project.features"
+                     class="flex items-start space-x-3 p-3 bg-slate-50 dark:bg-slate-700/30 rounded-lg">
+                  <div class="w-4 h-4 sm:w-5 sm:h-5 bg-green-500 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0">
+                    <i class="fas fa-check text-white text-xs"></i>
+                  </div>
+                  <span class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">{{ feature }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- DESAFÍOS TÉCNICOS RESPONSIVOS -->
+        <section *ngIf="project.challenges && project.challenges.length > 0">
+          <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
+            <div class="p-4 sm:p-6 border-b border-slate-200 dark:border-slate-700">
+              <h2 class="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white flex items-center">
+                <i class="fas fa-wrench text-orange-500 mr-2 sm:mr-3 flex-shrink-0"></i>
+                <span class="truncate">Desafíos Técnicos</span>
+              </h2>
+            </div>
+            <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
+              <div *ngFor="let challenge of project.challenges; trackBy: trackByChallenge">
+                <div class="border-l-4 border-orange-400 pl-4 sm:pl-6">
+                  <h3 class="font-semibold text-slate-900 dark:text-white mb-2 text-sm sm:text-base">
+                    {{ challenge.title }}
+                  </h3>
+                  <p class="text-slate-600 dark:text-slate-400 mb-3 text-sm leading-relaxed">
+                    {{ challenge.description }}
+                  </p>
+                  <div class="bg-emerald-50 dark:bg-emerald-900/10 border-l-4 border-emerald-400 p-3 rounded-r-lg">
+                    <p class="text-emerald-700 dark:text-emerald-300 text-sm mb-2">
+                      <span class="font-semibold">Solución:</span> {{ challenge.solution }}
+                    </p>
+                    <p *ngIf="challenge.impact" class="text-emerald-600 dark:text-emerald-400 text-sm">
+                      <span class="font-semibold">Resultado:</span> {{ challenge.impact }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PROCESO DE DESARROLLO RESPONSIVO -->
+        <section *ngIf="project.timeline && project.timeline.length > 0">
+          <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
+            <div class="p-4 sm:p-6 border-b border-slate-200 dark:border-slate-700">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
+                <h2 class="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white flex items-center">
+                  <i class="fas fa-tasks text-blue-500 mr-2 sm:mr-3 flex-shrink-0"></i>
+                  <span class="truncate">Proceso de Desarrollo</span>
+                </h2>
+                <div class="text-left sm:text-right">
+                  <div class="text-lg sm:text-xl font-bold text-blue-600 dark:text-blue-400">
+                    {{ getTimelineProgress() | number:'1.0-0' }}%
+                  </div>
+                  <div class="text-xs text-slate-500">Completado</div>
+                </div>
+              </div>
+            </div>
+            <div class="p-4 sm:p-6">
+              <!-- Barra de progreso -->
+              <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 mb-4 sm:mb-6">
+                <div class="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full transition-all duration-1000"
+                     [style.width.%]="getTimelineProgress()"></div>
+              </div>
+
+              <!-- Fases del proyecto -->
+              <div class="space-y-3">
+                <div *ngFor="let item of project.timeline; trackBy: trackByTimeline"
+                     class="flex items-start sm:items-center space-x-3 sm:space-x-4 p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+                  <div [class]="item.status === 'completed' ? 'bg-green-500' :
+                               item.status === 'in-progress' ? 'bg-blue-500' : 'bg-slate-400'"
+                       class="w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 sm:mt-0">
+                    <i [class]="item.status === 'completed' ? 'fas fa-check text-white text-xs' :
+                               item.status === 'in-progress' ? 'fas fa-spinner fa-spin text-white text-xs' :
+                               'fas fa-clock text-white text-xs'"></i>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-1 sm:space-y-0 mb-1">
+                      <h3 class="font-medium text-slate-900 dark:text-white text-sm sm:text-base truncate">{{ item.phase }}</h3>
+                      <span class="text-xs text-slate-500 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded w-fit">
+                        {{ item.duration }}
+                      </span>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm">{{ item.description }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- SIDEBAR RESPONSIVO -->
+      <aside class="xl:col-span-1 space-y-4 sm:space-y-6 order-last xl:order-none">
+
+        <!-- STACK TECNOLÓGICO RESPONSIVO -->
+        <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 xl:sticky xl:top-6">
+          <div class="p-4 sm:p-6 border-b border-slate-200 dark:border-slate-700">
+            <h3 class="font-semibold text-slate-900 dark:text-white flex items-center justify-between">
+              <span class="flex items-center truncate">
+                <i class="fas fa-code text-purple-500 mr-2 flex-shrink-0"></i>
+                <span class="truncate">Tecnologías</span>
+              </span>
+              <span class="text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-2 py-1 rounded-full flex-shrink-0 ml-2">
+                {{ project.technologies.length }}
+              </span>
+            </h3>
+          </div>
+          <div class="p-4 sm:p-6 space-y-2 sm:space-y-3">
+            <div *ngFor="let tech of project.technologies; trackBy: trackByTech"
+                 (click)="onTechClick(tech)"
+                 class="group flex items-center space-x-3 p-2 sm:p-3 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-lg cursor-pointer transition-all duration-200">
+              <div class="relative flex-shrink-0">
+                <img [src]="tech.icon"
+                     [alt]="tech.name"
+                     (error)="handleTechIconError($event)"
+                     class="w-6 h-6 sm:w-8 sm:h-8 rounded-md group-hover:scale-105 transition-transform duration-200">
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-medium text-slate-900 dark:text-white truncate">
+                  {{ tech.name }}
+                </div>
+                <div *ngIf="tech.proficiency" class="mt-1 sm:mt-1.5">
+                  <div class="flex items-center justify-between text-xs mb-1">
+                    <span class="text-slate-500">Nivel</span>
+                    <span class="text-purple-600 dark:text-purple-400 font-medium">{{ tech.proficiency }}%</span>
+                  </div>
+                  <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1 sm:h-1.5">
+                    <div class="bg-gradient-to-r from-purple-500 to-purple-600 h-1 sm:h-1.5 rounded-full transition-all duration-1000"
+                         [style.width.%]="tech.proficiency"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ENLACES DEL PROYECTO RESPONSIVOS -->
+        <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
+          <div class="p-4 sm:p-6 border-b border-slate-200 dark:border-slate-700">
+            <h3 class="font-semibold text-slate-900 dark:text-white flex items-center">
+              <i class="fas fa-external-link-alt text-indigo-500 mr-2 flex-shrink-0"></i>
+              <span class="truncate">Enlaces</span>
+            </h3>
+          </div>
+          <div class="p-4 sm:p-6 space-y-2 sm:space-y-3">
+            <button *ngFor="let link of project.links; trackBy: trackByLink"
+                    (click)="onLinkClick(link)"
+                    [class]="getLinkButtonClass(link)"
+                    class="w-full flex items-center justify-center space-x-2 p-2 sm:p-3 rounded-lg text-sm font-medium transition-all duration-200 hover:shadow-md focus:ring-2 focus:ring-offset-2">
+              <i [class]="getLinkIcon(link.type)" class="flex-shrink-0"></i>
+              <span class="truncate">{{ link.label }}</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- INFORMACIÓN ADICIONAL RESPONSIVA -->
+        <div class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-xl p-4 sm:p-6 border border-slate-200 dark:border-slate-600">
+          <h4 class="font-semibold text-slate-900 dark:text-white mb-4 flex items-center">
+            <i class="fas fa-info-circle text-blue-500 mr-2 flex-shrink-0"></i>
+            <span class="truncate">Detalles del Proyecto</span>
+          </h4>
+          <div class="space-y-2 sm:space-y-3 text-sm">
+            <div class="flex justify-between items-center">
+              <span class="text-slate-600 dark:text-slate-400 flex-shrink-0">Categoría:</span>
+              <span class="font-medium text-slate-900 dark:text-white text-right truncate ml-2">{{ project.category | titlecase }}</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-slate-600 dark:text-slate-400 flex-shrink-0">Estado:</span>
+              <span class="font-medium text-slate-900 dark:text-white text-right truncate ml-2">{{ project.status | titlecase }}</span>
+            </div>
+            <div *ngIf="project.clientType" class="flex justify-between items-center">
+              <span class="text-slate-600 dark:text-slate-400 flex-shrink-0">Sector:</span>
+              <span class="font-medium text-slate-900 dark:text-white text-right truncate ml-2">{{ project.clientType }}</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</div>

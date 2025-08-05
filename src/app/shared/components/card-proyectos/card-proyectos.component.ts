@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectionStrategy, Inject, PLATFORM_ID, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { CommonModule, isPlatformBrowser, DOCUMENT } from '@angular/common';
+import { Router } from '@angular/router'; // AGREGADO
 import { Subject } from 'rxjs';
 import { takeUntil, catchError, of } from 'rxjs';
 
@@ -12,13 +13,12 @@ import { ProjectFilterComponent } from '../project-filter/project-filter.compone
 @Component({
   selector: 'app-card-proyectos',
   standalone: true,
-  imports: [CommonModule, ProjectFilterComponent],
+  imports: [CommonModule, ProjectFilterComponent], // REMOVIDO InfoCardComponent
   templateUrl: './card-proyectos.component.html',
   styleUrls: ['./card-proyectos.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardProyectosComponent implements OnInit, OnDestroy {
-  // ViewChild para acceder al componente de filtro
   @ViewChild(ProjectFilterComponent) filterComponent!: ProjectFilterComponent;
 
   // Inputs
@@ -26,7 +26,7 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
   @Input() sectionTitle: string = 'Mis Proyectos';
   @Input() sectionDescription: string = 'Una colección de proyectos que demuestran mis habilidades y experiencia en desarrollo de software';
   @Input() showFilters: boolean = true;
-  @Input() projectsPerPage: number = 10; // NUEVO: Proyectos por página
+  @Input() projectsPerPage: number = 10;
 
   // Outputs
   @Output() projectClicked = new EventEmitter<Project>();
@@ -35,15 +35,14 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
   // State
   allProjects: Project[] = [];
   filteredProjects: Project[] = [];
-  displayProjects: Project[] = []; // Proyectos que se muestran actualmente
-  selectedProject: Project | null = null;
+  displayProjects: Project[] = [];
   isLoading: boolean = false;
   error: string | null = null;
 
   // Filter and pagination state
   hasActiveSearch: boolean = false;
-  currentPage: number = 1; // NUEVO: Página actual
-  showingAll: boolean = false; // NUEVO: Si está mostrando todos los proyectos
+  currentPage: number = 1;
+  showingAll: boolean = false;
 
   // Private
   private readonly destroy$ = new Subject<void>();
@@ -51,7 +50,8 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
 
   constructor(
     private projectsService: ProjectsDataService,
-    private cdr: ChangeDetectorRef, // NUEVO: Para detectar cambios
+    private cdr: ChangeDetectorRef,
+    private router: Router, // AGREGADO
     @Inject(PLATFORM_ID) platformId: Object,
     @Inject(DOCUMENT) private document: Document
   ) {
@@ -65,13 +65,9 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
-
-    if (this.isBrowser) {
-      this.document.body.style.overflow = 'auto';
-    }
   }
 
-  // Computed properties actualizadas
+  // Computed properties
   get totalProjects(): number {
     return this.allProjects.length;
   }
@@ -90,25 +86,14 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
     return techSet.size;
   }
 
-  get visibleProjectsCount(): number {
-    return this.displayProjects.length;
-  }
-
-  // NUEVO: Computed properties para paginación
   get availableProjects(): Project[] {
-    // Obtener proyectos base según filtros
     const baseProjects = this.hasActiveSearch ? this.filteredProjects : this.allProjects;
 
-    // Si está en modo destacados y no hay búsqueda activa, filtrar solo destacados
     if (this.showFeaturedOnly && !this.hasActiveSearch) {
       return baseProjects.filter(p => p.featured);
     }
 
     return baseProjects;
-  }
-
-  get totalPages(): number {
-    return Math.ceil(this.availableProjects.length / this.projectsPerPage);
   }
 
   get hasMoreProjects(): boolean {
@@ -117,37 +102,6 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
 
   get remainingProjectsCount(): number {
     return Math.max(0, this.availableProjects.length - this.displayProjects.length);
-  }
-
-  // Métodos para manejar filtros
-  onFilteredProjectsChanged(filtered: Project[]): void {
-    this.filteredProjects = filtered;
-    this.hasActiveSearch = filtered.length !== this.allProjects.length;
-    this.currentPage = 1; // Reset página al filtrar
-    this.showingAll = false; // Reset vista al filtrar
-    this.updateDisplayProjects();
-    this.cdr.markForCheck(); // NUEVO: Marcar para detección de cambios
-  }
-
-  onFiltersChanged(criteria: any): void {
-    // Método opcional para compatibilidad
-    const hasSearch = !!(criteria?.searchQuery?.trim());
-    if (hasSearch !== this.hasActiveSearch) {
-      this.currentPage = 1;
-      this.showingAll = false;
-    }
-  }
-
-  private updateDisplayProjects(): void {
-    const available = this.availableProjects;
-
-    if (this.showingAll) {
-      // Mostrar todos los proyectos disponibles
-      this.displayProjects = available;
-    } else {
-      // Mostrar solo los primeros N proyectos
-      this.displayProjects = available.slice(0, this.projectsPerPage);
-    }
   }
 
   // Data loading
@@ -181,7 +135,39 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
     this.loadProjects();
   }
 
-  // NUEVO: Métodos de paginación
+  // Filter methods
+  onFilteredProjectsChanged(filtered: Project[]): void {
+    this.filteredProjects = filtered;
+    this.hasActiveSearch = filtered.length !== this.allProjects.length;
+    this.currentPage = 1;
+    this.showingAll = false;
+    this.updateDisplayProjects();
+    this.cdr.markForCheck();
+  }
+
+  onFiltersChanged(criteria: any): void {
+    const hasSearch = !!(criteria?.searchQuery?.trim());
+    if (hasSearch !== this.hasActiveSearch) {
+      this.currentPage = 1;
+      this.showingAll = false;
+    }
+  }
+
+  clearAllFilters(): void {
+    this.hasActiveSearch = false;
+    this.filteredProjects = this.allProjects;
+    this.currentPage = 1;
+    this.showingAll = false;
+    this.updateDisplayProjects();
+
+    if (this.filterComponent) {
+      this.filterComponent.resetFilters();
+    }
+
+    this.cdr.markForCheck();
+  }
+
+  // Pagination methods
   loadMoreProjects(): void {
     this.showingAll = true;
     this.updateDisplayProjects();
@@ -195,11 +181,11 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
     this.cdr.markForCheck();
   }
 
-  // View controls actualizados
+  // View controls
   showAllProjects(): void {
     this.showFeaturedOnly = false;
     this.currentPage = 1;
-    this.showingAll = false; // Reset al cambiar modo
+    this.showingAll = false;
     this.updateDisplayProjects();
     this.cdr.markForCheck();
   }
@@ -207,33 +193,37 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
   showOnlyFeatured(): void {
     this.showFeaturedOnly = true;
     this.currentPage = 1;
-    this.showingAll = false; // Reset al cambiar modo
-    this.updateDisplayProjects();
-    this.cdr.markForCheck();
-  }
-
-  // Métodos para gestión de filtros
-  clearAllFilters(): void {
-    this.hasActiveSearch = false;
-    this.filteredProjects = this.allProjects;
-    this.currentPage = 1;
     this.showingAll = false;
     this.updateDisplayProjects();
+    this.cdr.markForCheck();
+  }
 
-    // NUEVO: Limpiar filtros en el componente hijo
-    if (this.filterComponent) {
-      this.filterComponent.resetFilters();
+  private updateDisplayProjects(): void {
+    const available = this.availableProjects;
+
+    if (this.showingAll) {
+      this.displayProjects = available;
+    } else {
+      this.displayProjects = available.slice(0, this.projectsPerPage);
     }
-
-    this.cdr.markForCheck();
   }
 
-  toggleFilterVisibility(): void {
-    this.showFilters = !this.showFilters;
-    this.cdr.markForCheck();
+  // Helper methods
+  getSectionTitle(): string {
+    if (this.hasActiveSearch) {
+      return `Resultados de búsqueda`;
+    }
+    return this.showFeaturedOnly ? 'Proyectos Destacados' : 'Todos los Proyectos';
   }
 
-  // Método helper para mostrar información de filtrado
+  getPaginationInfo(): string {
+    if (this.showingAll) {
+      return `Mostrando todos los ${this.availableProjects.length} proyectos`;
+    }
+    const showing = Math.min(this.projectsPerPage, this.availableProjects.length);
+    return `Mostrando ${showing} de ${this.availableProjects.length} proyectos`;
+  }
+
   getFilterSummary(): string {
     if (!this.hasActiveSearch) {
       return '';
@@ -246,27 +236,10 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
     return `Mostrando ${filtered} de ${total} proyectos (${percentage}%)`;
   }
 
-  // NUEVO: Método para obtener el título de la sección
-  getSectionTitle(): string {
-    if (this.hasActiveSearch) {
-      return `Resultados de búsqueda`;
-    }
-    return this.showFeaturedOnly ? 'Proyectos Destacados' : 'Todos los Proyectos';
-  }
-
-  // NUEVO: Método para obtener información de paginación
-  getPaginationInfo(): string {
-    if (this.showingAll) {
-      return `Mostrando todos los ${this.availableProjects.length} proyectos`;
-    }
-    const showing = Math.min(this.projectsPerPage, this.availableProjects.length);
-    return `Mostrando ${showing} de ${this.availableProjects.length} proyectos`;
-  }
-
-  // Project interactions
+  // Project interactions - MODIFICADO PARA NAVEGACIÓN
   onProjectClick(project: Project): void {
     this.projectClicked.emit(project);
-    this.openModal(project);
+    this.router.navigate(['/project', project.id]);
   }
 
   onLinkClick(project: Project, link: any, event: Event): void {
@@ -279,32 +252,7 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
 
   onViewDetails(project: Project, event: Event): void {
     event.stopPropagation();
-    this.openModal(project);
-  }
-
-  // Modal management
-  openModal(project: Project): void {
-    this.selectedProject = project;
-
-    if (this.isBrowser) {
-      this.document.body.style.overflow = 'hidden';
-      this.document.addEventListener('keydown', this.handleEscapeKey.bind(this));
-    }
-  }
-
-  closeModal(): void {
-    this.selectedProject = null;
-
-    if (this.isBrowser) {
-      this.document.body.style.overflow = 'auto';
-      this.document.removeEventListener('keydown', this.handleEscapeKey.bind(this));
-    }
-  }
-
-  private handleEscapeKey(event: KeyboardEvent): void {
-    if (event.key === 'Escape' && this.selectedProject) {
-      this.closeModal();
-    }
+    this.router.navigate(['/project', project.id]);
   }
 
   // Link handling
@@ -359,7 +307,6 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
     return project.id;
   }
 
-  // NUEVO: Método para obtener texto corto de botones
   getShortButtonText(type: string, originalLabel: string): string {
     switch (type) {
       case 'github':
@@ -375,7 +322,6 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
       case 'repository':
         return 'Repo';
       default:
-        // Para etiquetas largas como "Ver Repositorio", acortarlas
         if (originalLabel.toLowerCase().includes('repositorio')) {
           return 'Repositorio';
         }
@@ -386,7 +332,6 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
     }
   }
 
-  // NUEVO: Método para obtener texto micro de botones (solo íconos o 1-2 caracteres)
   getMicroButtonText(type: string): string {
     switch (type) {
       case 'github':
@@ -404,13 +349,6 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
       default:
         return '';
     }
-  }
-
-  // NUEVO: Método para determinar si mostrar texto en botones según el espacio
-  shouldShowButtonText(): boolean {
-    // Podemos usar una lógica más sofisticada aquí basada en el contenedor
-    // Por ahora, siempre mostramos texto excepto en pantallas muy pequeñas
-    return true;
   }
 
   // Button styling

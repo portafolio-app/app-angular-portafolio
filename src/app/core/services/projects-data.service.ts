@@ -8,9 +8,10 @@ export interface Technology {
 }
 
 export interface ProjectLink {
-  type: 'github' | 'demo' | 'documentation' | 'download';
+  type: 'github' | 'demo' | 'documentation' | 'download' | 'video'; // 👈 Agregar 'video'
   url: string;
   label: string;
+  platform?: 'youtube' | 'vimeo' | 'loom' | 'direct'; // 👈 Agregar platform opcional
 }
 
 export interface ProjectMetrics {
@@ -34,6 +35,7 @@ export interface Project {
   highlights?: string[];
   challenges?: string[];
   metrics?: ProjectMetrics;
+  videoUrl?: string;
 }
 
 @Injectable({
@@ -118,7 +120,7 @@ export class ProjectsDataService {
           'Aplicación web desarrollada con React + Vite que ayuda a personas a llevar el control de sus deudas, evitando olvidos de pago mediante recordatorios personalizados. Permite registrar múltiples deudas con opciones detalladas como monto, fecha límite, intereses y frecuencia. Incluye autenticación simple y con Google usando Firebase, almacenamiento seguro en Firestore y una interfaz moderna con Tailwind CSS.',
         shortDescription:
           'App web con recordatorios inteligentes para pagos y gestión de deudas, usando Firebase y Vite.',
-        image: '../assets/gestor-deudas.png', // Reemplázalo con la ruta real de tu imagen
+        image: '../assets/gestor-deudas.png',
         technologies: [
           {
             name: 'React',
@@ -151,6 +153,12 @@ export class ProjectsDataService {
             type: 'demo',
             url: 'https://jcv-code.netlify.app',
             label: 'Probar App',
+          },
+          {
+            type: 'video',
+            url: 'https://www.youtube.com/watch?v=abc123',
+            label: 'Demo Completa',
+            platform: 'youtube',
           },
         ],
         category: 'web',
@@ -255,6 +263,12 @@ export class ProjectsDataService {
             url: 'https://github.com/App-Android-Prodent/App-Prodent.git',
             label: 'Código Fuente',
           },
+          {
+            type: 'video', // ✅ Ahora funciona
+            url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+            label: 'Demo del Proyecto',
+            platform: 'youtube', // ✅ Ahora funciona
+          },
         ],
         category: 'mobile',
         status: 'completed',
@@ -334,7 +348,7 @@ export class ProjectsDataService {
           'Robot autónomo avanzado con capacidades de automatización inteligente, control remoto via WiFi/Bluetooth, sistema de evitar obstáculos con sensores ultrasónicos, seguimiento de línea, control de luces LED programables, y interfaz Android moderna construida con Jetpack Compose para una experiencia de usuario excepcional.',
         shortDescription:
           'Robot inteligente con automatización, sensores y control remoto via app Android.',
-        image: '../assets/banner-iot.png', // Cambia por tu imagen
+        image: '../assets/banner-iot.png',
         technologies: [
           {
             name: 'Kotlin',
@@ -362,6 +376,12 @@ export class ProjectsDataService {
             type: 'github',
             url: 'https://github.com/app-carroControl/app-control-IoT.git',
             label: 'Ver codigo',
+          },
+          {
+            type: 'video',
+            url: 'https://www.youtube.com/watch?v=tu-url-aqui',
+            label: 'Demo del Robot',
+            platform: 'youtube',
           },
         ],
         category: 'iot',
