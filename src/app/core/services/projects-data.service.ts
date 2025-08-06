@@ -90,12 +90,7 @@ export class ProjectsDataService {
             type: 'github',
             url: 'https://github.com/App-GigaShop/aapp-Gigashop-Back.git',
             label: 'Repositorio Backend',
-          },
-          {
-            type: 'github',
-            url: 'https://github.com/App-GigaShop/app-gigashop-frontend.git',
-            label: 'Repositorio Frontend',
-          },
+          }
         ],
         category: 'web',
         status: 'completed',
@@ -155,7 +150,7 @@ export class ProjectsDataService {
           },
           {
             type: 'demo',
-            url: 'https://finance-tracker-jcv.netlify.app',
+            url: 'https://jcv-code.netlify.app',
             label: 'Demo en Vivo',
           },
         ],
@@ -275,12 +270,7 @@ export class ProjectsDataService {
             url: 'https://github.com/App-Android-Prodent/App-Prodent.git',
             label: 'Repositorio Principal',
           },
-          {
-            type: 'video',
-            url: 'https://www.youtube.com/watch?v=prodent-demo-2024',
-            label: 'Demo Completa',
-            platform: 'youtube',
-          },
+
         ],
         category: 'mobile',
         status: 'completed',
@@ -335,12 +325,12 @@ export class ProjectsDataService {
         links: [
           {
             type: 'github',
-            url: 'https://github.com/App-Authenticator/secure-auth-backend',
+            url: 'https://github.com/App-Authenticator/App-JWT-Auth-Backend.git',
             label: 'Backend Security',
           },
           {
             type: 'github',
-            url: 'https://github.com/App-Authenticator/secure-auth-frontend',
+            url: 'https://github.com/App-Authenticator/App-JWT-Auth-FrontEnd.git',
             label: 'Frontend Angular',
           },
           {
@@ -402,25 +392,10 @@ export class ProjectsDataService {
         links: [
           {
             type: 'github',
-            url: 'https://github.com/RoboControl-IoT/android-app',
+            url: 'https://github.com/app-carroControl/app-control-IoT.git',
             label: 'App Android',
           },
-          {
-            type: 'github',
-            url: 'https://github.com/RoboControl-IoT/arduino-firmware',
-            label: 'Firmware Arduino',
-          },
-          {
-            type: 'video',
-            url: 'https://www.youtube.com/watch?v=robocontrol-2025',
-            label: 'Demo Técnica',
-            platform: 'youtube',
-          },
-          {
-            type: 'documentation',
-            url: 'https://robocontrol-docs.gitbook.io',
-            label: 'Documentación',
-          },
+         
         ],
         category: 'iot',
         status: 'completed',
