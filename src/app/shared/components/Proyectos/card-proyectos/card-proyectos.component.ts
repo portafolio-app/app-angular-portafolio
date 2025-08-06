@@ -7,8 +7,8 @@ import { takeUntil, catchError, of } from 'rxjs';
 import {
   Project,
   ProjectsDataService,
-} from '../../../core/services/projects-data.service';
-import { ProjectFilterComponent } from '../project-filter/project-filter.component';
+} from '../../../../core/services/projects-data.service';
+import { ProjectFilterComponent } from '../../project-filter/project-filter.component';
 
 @Component({
   selector: 'app-card-proyectos',

@@ -19,7 +19,7 @@ import {
   AlertComponent,
   AlertConfig,
 } from '../../shared/components/alert/alert.component';
-import { CardProyectosComponent } from '../../shared/components/card-proyectos/card-proyectos.component';
+import { CardProyectosComponent } from '../../shared/components/Proyectos/card-proyectos/card-proyectos.component';
 import { FooterComponent } from '../../shared/components/footer/footer.component';
 import { StackTecnologicoComponent } from '../../shared/components/stack-tecnologico/stack-tecnologico.component';
 import { HeroComponent } from '../../shared/components/hero/hero.component';

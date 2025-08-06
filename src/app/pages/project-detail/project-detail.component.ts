@@ -19,7 +19,7 @@ import {
   InfoCardComponent,
   ProjectLink,
   Technology,
-} from '../../shared/components/info-card/info-card.component';
+} from '../../shared/components/Proyectos/info-card/info-card.component';
 import { ThemeService } from '../../core/services/ThemeService';
 
 @Component({

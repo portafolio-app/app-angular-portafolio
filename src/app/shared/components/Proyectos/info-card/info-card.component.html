@@ -1,15 +1,10 @@
 <div class="min-h-screen bg-slate-50 dark:bg-slate-900">
 
-  <!-- HEADER CON MEDIA -->
   <header class="relative bg-white dark:bg-slate-800 rounded-t-xl overflow-hidden">
-    <!-- Video del proyecto (si existe) -->
     <div *ngIf="hasProjectVideo()" class="w-full bg-black">
       <div class="relative w-full" style="padding-bottom: 56.25%;">
-        <iframe
-          [src]="getVideoEmbedUrl(project.videoUrl!)"
-          [title]="project.title + ' - Demo'"
-          class="absolute inset-0 w-full h-full rounded-lg"
-          frameborder="0"
+        <iframe [src]="getVideoEmbedUrl(project.videoUrl!)" [title]="project.title + ' - Demo'"
+          class="absolute inset-0 w-full h-full rounded-lg" frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen>
         </iframe>
@@ -22,19 +17,10 @@
 
     <!-- Imagen principal (si no hay video) -->
     <div *ngIf="!hasProjectVideo()" class="w-full bg-gray-100 dark:bg-gray-800">
-      <img [src]="project.image"
-           [alt]="project.title"
-           (error)="handleImageError($event)"
-           class="w-full h-auto max-h-80 sm:max-h-96 object-contain">
+      <img [src]="project.image" [alt]="project.title" (error)="handleImageError($event)"
+        class="w-full h-auto max-h-80 sm:max-h-96 object-contain">
     </div>
 
-    <!-- Badge de estado -->
-    <div class="absolute top-4 right-4">
-      <span [class]="getStatusColor()" class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm">
-        <span class="w-2 h-2 bg-current rounded-full mr-2"></span>
-        {{ project.status | titlecase }}
-      </span>
-    </div>
   </header>
 
   <!-- INFORMACIÓN DEL PROYECTO -->
@@ -57,12 +43,12 @@
       <!-- Highlights principales - CON VERIFICACIÓN NULL -->
       <div *ngIf="project.highlights && project.highlights.length > 0" class="flex flex-wrap gap-2">
         <span *ngFor="let highlight of project.highlights.slice(0, 4)"
-              class="inline-flex items-center px-3 py-1 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 text-sm rounded-full border border-emerald-200 dark:border-emerald-800">
+          class="inline-flex items-center px-3 py-1 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 text-sm rounded-full border border-emerald-200 dark:border-emerald-800">
           <i class="fas fa-check text-emerald-600 mr-2 text-xs"></i>
           {{ highlight }}
         </span>
         <span *ngIf="project.highlights.length > 4"
-              class="inline-flex items-center px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 text-sm rounded-full">
+          class="inline-flex items-center px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 text-sm rounded-full">
           +{{ project.highlights.length - 4 }} más
         </span>
       </div>
@@ -77,7 +63,8 @@
       <div class="xl:col-span-3 space-y-8">
 
         <!-- Características principales - CON VERIFICACIÓN NULL -->
-        <section *ngIf="project.highlights && project.highlights.length > 0" class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
+        <section *ngIf="project.highlights && project.highlights.length > 0"
+          class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
           <div class="p-6 border-b border-slate-200 dark:border-slate-700">
             <h2 class="text-xl font-semibold text-slate-900 dark:text-white flex items-center">
               <i class="fas fa-star text-amber-500 mr-3"></i>
@@ -87,7 +74,7 @@
           <div class="p-6">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div *ngFor="let highlight of project.highlights"
-                   class="flex items-start space-x-3 p-4 bg-slate-50 dark:bg-slate-700/30 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-colors">
+                class="flex items-start space-x-3 p-4 bg-slate-50 dark:bg-slate-700/30 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-colors">
                 <div class="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0">
                   <i class="fas fa-check text-white text-xs"></i>
                 </div>
@@ -96,10 +83,7 @@
             </div>
           </div>
         </section>
-
-
       </div>
-
       <!-- SIDEBAR -->
       <aside class="xl:col-span-1 space-y-6">
 
@@ -111,7 +95,8 @@
                 <i class="fas fa-code text-purple-500 mr-2"></i>
                 Tecnologías
               </span>
-              <span class="text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-2 py-1 rounded-full">
+              <span
+                class="text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-2 py-1 rounded-full">
                 {{ project.technologies.length || 0 }}
               </span>
             </h3>
@@ -119,13 +104,10 @@
           <div class="p-6">
             <!-- Grid organizado de tecnologías -->
             <div class="grid grid-cols-2 gap-3">
-              <div *ngFor="let tech of project.technologies"
-                   (click)="onTechClick(tech)"
-                   class="flex flex-col items-center p-3 bg-slate-50 dark:bg-slate-700/30 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700/50 cursor-pointer transition-colors group">
-                <img [src]="tech.icon"
-                     [alt]="tech.name"
-                     (error)="handleTechIconError($event)"
-                     class="w-10 h-10 rounded-lg mb-2 group-hover:scale-105 transition-transform">
+              <div *ngFor="let tech of project.technologies" (click)="onTechClick(tech)"
+                class="flex flex-col items-center p-3 bg-slate-50 dark:bg-slate-700/30 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700/50 cursor-pointer transition-colors group">
+                <img [src]="tech.icon" [alt]="tech.name" (error)="handleTechIconError($event)"
+                  class="w-10 h-10 rounded-lg mb-2 group-hover:scale-105 transition-transform">
                 <span class="text-xs font-medium text-slate-900 dark:text-white text-center leading-tight">
                   {{ tech.name }}
                 </span>
@@ -144,18 +126,15 @@
           </div>
           <div class="p-6 space-y-3">
             <!-- Enlaces regulares -->
-            <button *ngFor="let link of project.links"
-                    (click)="onLinkClick(link)"
-                    [class]="getLinkButtonClass(link)"
-                    class="w-full flex items-center justify-center space-x-2 p-3 rounded-lg text-sm font-medium transition-all hover:shadow-md">
+            <button *ngFor="let link of project.links" (click)="onLinkClick(link)" [class]="getLinkButtonClass(link)"
+              class="w-full flex items-center justify-center space-x-2 p-3 rounded-lg text-sm font-medium transition-all hover:shadow-md">
               <i [class]="getLinkIcon(link.type)"></i>
               <span>{{ link.label }}</span>
             </button>
 
             <!-- Video link especial (si existe videoUrl y no está en links) -->
-            <button *ngIf="project.videoUrl && !hasVideoInLinks()"
-                    (click)="openVideo(project.videoUrl)"
-                    class="w-full flex items-center justify-center space-x-2 p-3 rounded-lg text-sm font-medium bg-red-600 hover:bg-red-700 text-white transition-all hover:shadow-md">
+            <button *ngIf="project.videoUrl && !hasVideoInLinks()" (click)="openVideo(project.videoUrl)"
+              class="w-full flex items-center justify-center space-x-2 p-3 rounded-lg text-sm font-medium bg-red-600 hover:bg-red-700 text-white transition-all hover:shadow-md">
               <i class="fab fa-youtube"></i>
               <span>Ver Demo</span>
             </button>
@@ -163,7 +142,8 @@
         </div>
 
         <!-- Información adicional -->
-        <div class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-xl p-6 border border-slate-200 dark:border-slate-600">
+        <div
+          class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-xl p-6 border border-slate-200 dark:border-slate-600">
           <h4 class="font-semibold text-slate-900 dark:text-white mb-4 flex items-center">
             <i class="fas fa-info-circle text-blue-500 mr-2"></i>
             Información
@@ -171,7 +151,8 @@
           <div class="space-y-3 text-sm">
             <div class="flex justify-between items-center">
               <span class="text-slate-600 dark:text-slate-400">Categoría:</span>
-              <span class="font-medium text-slate-900 dark:text-white bg-slate-200 dark:bg-slate-600 px-2 py-1 rounded text-xs">
+              <span
+                class="font-medium text-slate-900 dark:text-white bg-slate-200 dark:bg-slate-600 px-2 py-1 rounded text-xs">
                 {{ project.category | titlecase }}
               </span>
             </div>
