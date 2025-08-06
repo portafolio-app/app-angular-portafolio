@@ -102,57 +102,7 @@
         </div>
       </div>
 
-      <!-- Quick stats mejorados -->
-      <div *ngIf="project" class="grid grid-cols-2 sm:grid-cols-4 gap-4 lg:gap-6 mt-8">
-        <div class="stat-card hover-lift p-6 rounded-xl">
-          <div class="flex items-center justify-between mb-2">
-            <div class="text-3xl font-bold text-emerald-600 dark:text-emerald-400">
-              {{ project.technologies.length }}
-            </div>
-            <div class="w-10 h-10 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg flex items-center justify-center">
-              <i class="fas fa-code text-emerald-600 dark:text-emerald-400"></i>
-            </div>
-          </div>
-          <div class="text-sm font-medium text-gray-600 dark:text-gray-400">Tecnologías</div>
-        </div>
-
-        <div class="stat-card hover-lift p-6 rounded-xl">
-          <div class="flex items-center justify-between mb-2">
-            <div class="text-3xl font-bold text-blue-600 dark:text-blue-400">
-              {{ project.links.length }}
-            </div>
-            <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
-              <i class="fas fa-link text-blue-600 dark:text-blue-400"></i>
-            </div>
-          </div>
-          <div class="text-sm font-medium text-gray-600 dark:text-gray-400">Enlaces</div>
-        </div>
-
-        <div class="stat-card hover-lift p-6 rounded-xl">
-          <div class="flex items-center justify-between mb-2">
-            <div class="text-xl font-bold text-purple-600 dark:text-purple-400 truncate">
-              {{ project.category | titlecase }}
-            </div>
-            <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center">
-              <i class="fas fa-folder text-purple-600 dark:text-purple-400"></i>
-            </div>
-          </div>
-          <div class="text-sm font-medium text-gray-600 dark:text-gray-400">Categoría</div>
-        </div>
-
-        <!-- Stat adicional - fecha o duración -->
-        <div class="stat-card hover-lift p-6 rounded-xl">
-          <div class="flex items-center justify-between mb-2">
-            <div class="text-2xl font-bold text-teal-600 dark:text-teal-400">
-              {{ project.createdAt | date:'yyyy' }}
-            </div>
-            <div class="w-10 h-10 bg-teal-100 dark:bg-teal-900/30 rounded-lg flex items-center justify-center">
-              <i class="fas fa-calendar text-teal-600 dark:text-teal-400"></i>
-            </div>
-          </div>
-          <div class="text-sm font-medium text-gray-600 dark:text-gray-400">Año</div>
-        </div>
-      </div>
+      
     </div>
 
     <!-- InfoCard Component - REMOVIDOS LOS INPUTS Y EVENTOS PROBLEMÁTICOS -->
