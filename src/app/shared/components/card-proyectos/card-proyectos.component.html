@@ -1,24 +1,9 @@
 <!-- card-proyectos.component.html ACTUALIZADO SIN MODAL -->
-<div class="max-w-7xl mx-auto px-2 sm:px-4 py-8 sm:py-12">
+<div class="max-w-7xl mx-auto px-2 sm:px-4 py-8 sm:py-4">
 
-  <header class="text-center mb-8 sm:mb-12">
+  <header class="text-center mb-8 sm:mb-4">
     <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-3">{{ sectionTitle }}</h2>
     <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-sm sm:text-base px-4">{{ sectionDescription }}</p>
-
-    <div *ngIf="!isLoading && !error" class="flex flex-wrap justify-center gap-4 sm:gap-8 mt-6 sm:mt-8">
-      <div class="text-center min-w-0">
-        <div class="text-xl sm:text-2xl font-bold text-emerald-600 dark:text-emerald-400">{{ totalProjects }}</div>
-        <div class="text-xs sm:text-sm text-gray-500">Proyectos</div>
-      </div>
-      <div class="text-center min-w-0">
-        <div class="text-xl sm:text-2xl font-bold text-teal-600 dark:text-teal-400">{{ featuredCount }}</div>
-        <div class="text-xs sm:text-sm text-gray-500">Destacados</div>
-      </div>
-      <div class="text-center min-w-0">
-        <div class="text-xl sm:text-2xl font-bold text-green-600 dark:text-green-400">{{ totalTechnologies }}</div>
-        <div class="text-xs sm:text-sm text-gray-500">Tecnologías</div>
-      </div>
-    </div>
   </header>
 
   <div *ngIf="isLoading" class="text-center py-12 sm:py-16">
