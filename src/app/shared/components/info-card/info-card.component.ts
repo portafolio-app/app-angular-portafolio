@@ -1,8 +1,7 @@
 // info-card.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-// Interfaces simplificadas
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export interface Technology {
   name: string;
   icon: string;
@@ -41,7 +40,7 @@ export interface Project {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './info-card.component.html',
-  styleUrls: ['./info-card.component.css']
+  styleUrls: ['./info-card.component.css'],
 })
 export class InfoCardComponent {
   @Input() project!: Project;
@@ -49,44 +48,44 @@ export class InfoCardComponent {
   @Output() linkClicked = new EventEmitter<ProjectLink>();
   @Output() techClicked = new EventEmitter<Technology>();
 
-  constructor() {}
-
-  // ======== MÉTODOS PRINCIPALES ========
+  constructor(private sanitizer: DomSanitizer) {}
 
   hasProjectVideo(): boolean {
     return !!this.project.videoUrl;
   }
 
   hasVideoInLinks(): boolean {
-    return this.project.links?.some(link => link.type === 'video') || false;
+    return this.project.links?.some((link) => link.type === 'video') || false;
   }
 
-  getVideoEmbedUrl(url: string): string {
-    if (!url) return '';
+  getVideoEmbedUrl(url: string): SafeResourceUrl {
+    if (!url) return this.sanitizer.bypassSecurityTrustResourceUrl('');
 
     try {
+      let embedUrl = '';
+
       // YouTube URLs
       if (url.includes('youtube.com/watch?v=')) {
         const videoId = url.split('v=')[1].split('&')[0];
-        return `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`;
-      }
-
-      if (url.includes('youtu.be/')) {
+        embedUrl = `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`;
+      } else if (url.includes('youtu.be/')) {
         const videoId = url.split('youtu.be/')[1].split('?')[0];
-        return `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`;
+        embedUrl = `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`;
       }
-
       // Vimeo URLs
-      if (url.includes('vimeo.com/')) {
+      else if (url.includes('vimeo.com/')) {
         const videoId = url.split('vimeo.com/')[1].split('?')[0];
-        return `https://player.vimeo.com/video/${videoId}`;
+        embedUrl = `https://player.vimeo.com/video/${videoId}`;
+      }
+      // URL directa
+      else {
+        embedUrl = url;
       }
 
-      // URL directa
-      return url;
+      return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
     } catch (error) {
       console.error('Error processing video URL:', error);
-      return '';
+      return this.sanitizer.bypassSecurityTrustResourceUrl('');
     }
   }
 
@@ -183,12 +182,14 @@ export class InfoCardComponent {
 
   handleImageError(event: any): void {
     // Imagen placeholder SVG
-    event.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2Y3ZjdmNyIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM5OTkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5JbWFnZW4gbm8gZGlzcG9uaWJsZTwvdGV4dD48L3N2Zz4=';
+    event.target.src =
+      'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2Y3ZjdmNyIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM5OTkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5JbWFnZW4gbm8gZGlzcG9uaWJsZTwvdGV4dD48L3N2Zz4=';
   }
 
   handleTechIconError(event: any): void {
     // Icono placeholder para tecnologías
-    event.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjZTVlN2ViIiByeD0iNiIvPgo8cGF0aCBkPSJNMTYgMTBjLTEuNjU3IDAtMyAxLjM0My0zIDNzMS4zNDMgMyAzIDMgMy0xLjM0MyAzLTMtMS4zNDMtMy0zLTN6IiBmaWxsPSIjOWNhM2FmIi8+CjxwYXRoIGQ9Ik0xNiA4Yy0yLjIxIDAtNCAxLjc5LTQgNHMxLjc5IDQgNCA0IDQtMS43OSA0LTQtMS43OS00LTQtNHptMCA2Yy0xLjEgMC0yLS45LTItMnMuOS0yIDItMiAyIC45IDIgMi0uOSAyLTIgMnoiIGZpbGw9IiM2Yjcy4GmIi8+Cjwvc3ZnPgo=';
+    event.target.src =
+      'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjZTVlN2ViIiByeD0iNiIvPgo8cGF0aCBkPSJNMTYgMTBjLTEuNjU3IDAtMyAxLjM0My0zIDNzMS4zNDMgMyAzIDMgMy0xLjM0MyAzLTMtMS4zNDMtMy0zLTN6IiBmaWxsPSIjOWNhM2FmIi8+CjxwYXRoIGQ9Ik0xNiA4Yy0yLjIxIDAtNCAxLjc5LTQgNHMxLjc5IDQgNCA0IDQtMS43OSA0LTQtMS43OS00LTQtNHptMCA2Yy0xLjEgMC0yLS45LTItMnMuOS0yIDItMiAyIC45IDIgMi0uOSAyLTIgMnoiIGZpbGw9IiM2Yjcy4GmIi8+Cjwvc3ZnPgo=';
   }
 
   // ======== MÉTODOS AUXILIARES ========
@@ -218,10 +219,12 @@ export class InfoCardComponent {
    * Verifica si el proyecto tiene métricas disponibles
    */
   hasMetrics(): boolean {
-    return !!(this.project.metrics &&
+    return !!(
+      this.project.metrics &&
       (this.project.metrics.stars ||
-       this.project.metrics.forks ||
-       this.project.metrics.downloads));
+        this.project.metrics.forks ||
+        this.project.metrics.downloads)
+    );
   }
 
   /**

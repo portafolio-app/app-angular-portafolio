@@ -168,7 +168,7 @@ export class ProjectsDataService {
           'Categorización automática de gastos',
           'Modo oscuro y preferencias de usuario',
         ],
-        videoUrl: 'https://www.youtube.com/watch?v=demo-finance-tracker',
+        videoUrl: 'https://www.youtube.com/watch?v=4L9Bc3UFG3M',
         metrics: {
           stars: 15,
           forks: 6,
@@ -395,7 +395,7 @@ export class ProjectsDataService {
             url: 'https://github.com/app-carroControl/app-control-IoT.git',
             label: 'App Android',
           },
-         
+
         ],
         category: 'iot',
         status: 'completed',
