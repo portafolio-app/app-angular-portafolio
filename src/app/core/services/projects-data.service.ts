@@ -335,7 +335,7 @@ export class ProjectsDataService {
           },
           {
             type: 'demo',
-            url: 'https://secure-auth-demo.netlify.app',
+            url: 'https://auth-jcvcode.netlify.app',
             label: 'Demo Segura',
           },
         ],

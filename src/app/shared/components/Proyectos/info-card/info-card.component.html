@@ -17,7 +17,7 @@
 
     <!-- Imagen principal (si no hay video) -->
     <div *ngIf="!hasProjectVideo()" class="w-full bg-gray-100 dark:bg-gray-800">
-      <img [src]="project.image" [alt]="project.title" (error)="handleImageError($event)"
+      <img [src]="project.image" [alt]="project.title"
         class="w-full h-auto max-h-80 sm:max-h-96 object-contain">
     </div>
 
@@ -106,7 +106,7 @@
             <div class="grid grid-cols-2 gap-3">
               <div *ngFor="let tech of project.technologies" (click)="onTechClick(tech)"
                 class="flex flex-col items-center p-3 bg-slate-50 dark:bg-slate-700/30 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700/50 cursor-pointer transition-colors group">
-                <img [src]="tech.icon" [alt]="tech.name" (error)="handleTechIconError($event)"
+                <img [src]="tech.icon" [alt]="tech.name"
                   class="w-10 h-10 rounded-lg mb-2 group-hover:scale-105 transition-transform">
                 <span class="text-xs font-medium text-slate-900 dark:text-white text-center leading-tight">
                   {{ tech.name }}
