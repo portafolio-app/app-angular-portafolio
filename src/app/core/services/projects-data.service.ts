@@ -104,7 +104,7 @@ export class ProjectsDataService {
           'Panel admin con métricas en tiempo real',
           'API REST documentada con Swagger',
           'Tests unitarios y de integración',
-          'Despliegue con Docker y CI/CD',
+          'Despliegue con Docker',
         ],
         metrics: {
           stars: 28,
@@ -314,13 +314,10 @@ export class ProjectsDataService {
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
           },
           {
-            name: 'PostgreSQL',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
+            name: 'MySQL',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-plain-wordmark.svg',
           },
-          {
-            name: 'Redis',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg',
-          },
+
         ],
         links: [
           {
