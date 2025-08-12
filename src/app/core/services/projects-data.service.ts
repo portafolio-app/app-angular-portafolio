@@ -53,11 +53,11 @@ export class ProjectsDataService {
     const projects: Project[] = [
       {
         id: '1',
-        title: 'GigaShop - E-commerce de Electrónicos',
+        title: 'GigaShop - Plataforma E-commerce de productos electrónicos',
         description:
-          'Plataforma e-commerce full-stack especializada en productos electrónicos, desarrollada con Angular y Spring Boot. Implementa funcionalidades avanzadas como carrito persistente, procesamiento de pagos seguro, gestión de inventario en tiempo real, panel de administración con analytics, y sistema de autenticación JWT robusto.',
+          'En el comercio de productos electrónicos, muchos negocios carecen de una plataforma unificada que les permita vender online con seguridad, mantener inventarios actualizados y procesar pagos de forma confiable. Esto limita sus ventas y reduce la confianza del cliente. GigaShop resuelve este problema con una solución e-commerce full-stack desarrollada en Angular (con Tailwind CSS) y Spring Boot (con Spring Security y JWT). El sistema incluye un área de usuario con autenticación segura, carrito persistente y pagos online mediante Stripe; y un panel administrativo para la gestión de productos, inventario y métricas en tiempo real, respaldado por MySQL. Su arquitectura sigue principios de Clean Code y está desplegado con Docker, asegurando escalabilidad y mantenibilidad.',
         shortDescription:
-          'E-commerce full-stack para electrónicos con carrito inteligente, pagos seguros y panel admin.',
+          'E-commerce seguro con pagos online, gestión en tiempo real y panel administrativo para productos electrónicos.',
         image: '../assets/banner-ventaas.png',
         technologies: [
           {
@@ -90,20 +90,21 @@ export class ProjectsDataService {
             type: 'github',
             url: 'https://github.com/App-GigaShop/aapp-Gigashop-Back.git',
             label: 'Repositorio Backend',
-          }
+          },
         ],
         category: 'web',
         status: 'completed',
         featured: true,
         createdAt: new Date('2024-03-15'),
         highlights: [
-          'Arquitectura hexagonal con Clean Code',
-          'Autenticación JWT + Refresh Tokens',
-          'Carrito persistente con Redis cache',
-          'Integración con pasarelas de pago (Stripe)',
-          'Panel admin con métricas en tiempo real',
-          'API REST documentada con Swagger',
-          'Tests unitarios y de integración',
+          'Identificación y solución de un problema real en e-commerce',
+          'Autenticación segura con JWT y Spring Security',
+          'Carrito persistente con Redis',
+          'Pagos online con Stripe',
+          'Panel administrativo con métricas en tiempo real',
+          'Gestión de productos e inventario',
+          'Arquitectura hexagonal y principios Clean Code',
+          'Documentación API con Swagger',
           'Despliegue con Docker',
         ],
         metrics: {
@@ -114,11 +115,11 @@ export class ProjectsDataService {
       },
       {
         id: '2',
-        title: 'FinanceTracker - Gestión de Deudas Inteligente',
+        title: 'FinanceTracker - Gestión Inteligente de Deudas y Préstamos',
         description:
-          'Aplicación web progresiva (PWA) desarrollada con React + Vite para gestión financiera personal. Permite tracking de deudas, recordatorios automatizados, análisis de gastos con gráficos interactivos, y sincronización multi-dispositivo. Utiliza Firebase para autenticación, Firestore para datos en tiempo real, y notificaciones push.',
+          'Muchas personas no llevan un control preciso de sus deudas y préstamos, lo que dificulta planificar pagos y calcular el impacto de intereses e impuestos a lo largo del tiempo. FinanceTracker resuelve este problema con una aplicación web desarrollada en React + Vite, Tailwind CSS y Firebase, que permite registrar deudas, calcular cuotas considerando tasas de interés e IGV, y recibir recordatorios automáticos de vencimientos. Ofrece autenticación segura con Google, almacenamiento y sincronización en tiempo real mediante Firestore, así como categorización automática de gastos para un mejor análisis financiero.',
         shortDescription:
-          'PWA para gestión financiera personal con recordatorios inteligentes y análisis de gastos.',
+          'Controla deudas y préstamos con cálculos automáticos, recordatorios y sincronización en tiempo real.',
         image: '../assets/gestor-deudas.png',
         technologies: [
           {
@@ -159,29 +160,27 @@ export class ProjectsDataService {
         featured: true,
         createdAt: new Date('2024-07-29'),
         highlights: [
-          'PWA con funcionalidad offline',
-          'Dashboard con gráficos interactivos (Chart.js)',
+          'Cálculo automático de cuotas con interés e impuestos',
+          'Registro y visualización de deudas en tiempo real',
           'Recordatorios push personalizables',
-          'Autenticación social (Google, GitHub)',
-          'Sincronización en tiempo real multi-dispositivo',
-          'Export de datos a Excel/PDF',
+          'Autenticación segura con Google',
+          'Sincronización multi-dispositivo con Firestore',
           'Categorización automática de gastos',
-          'Modo oscuro y preferencias de usuario',
         ],
-        videoUrl: 'https://www.youtube.com/watch?v=4L9Bc3UFG3M',
         metrics: {
           stars: 15,
           forks: 6,
           downloads: 150,
         },
       },
+
       {
         id: '3',
-        title: 'UbicaTe - Tracking GPS de Transporte Público',
+        title: 'Ubícate - Tracking GPS de Transporte Público',
         description:
-          'Aplicación móvil nativa Android que revoluciona el transporte público mediante tracking GPS en tiempo real. Integra Google Maps API, algoritmos de predicción de llegadas, notificaciones push contextuales, y gamificación para mejorar la experiencia del usuario. Incluye modo offline y optimización de batería.',
+          'Aplicación móvil nativa Android desarrollada para mejorar la experiencia de los usuarios del transporte público mediante geolocalización en tiempo real. Ubícate permite visualizar la ubicación de los buses en un mapa interactivo, estimar el tiempo y la distancia hacia una parada seleccionada, y trazar rutas a pie para llegar al punto más cercano. La solución integra Google Maps API para el cálculo de rutas, Firebase para la sincronización en tiempo real y gestión de datos, y notificaciones push para avisos importantes.',
         shortDescription:
-          'App nativa Android para tracking GPS de buses con predicciones inteligentes y gamificación.',
+          'App Android para ver buses en tiempo real, calcular tiempos de llegada y rutas hacia paraderos cercanos.',
         image: '../assets/Ubicate.png',
         technologies: [
           {
@@ -199,10 +198,6 @@ export class ProjectsDataService {
           {
             name: 'Firebase',
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg',
-          },
-          {
-            name: 'Room Database',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg',
           },
         ],
         links: [
@@ -223,14 +218,12 @@ export class ProjectsDataService {
         featured: true,
         createdAt: new Date('2024-01-20'),
         highlights: [
-          'Tracking GPS con precisión sub-métrica',
-          'Algoritmos ML para predicción de llegadas',
-          'Notificaciones push inteligentes por contexto',
-          'UI/UX con Material Design 3',
-          'Gamificación con sistema de puntos',
-          'Modo offline con caché inteligente',
-          'Optimización de batería (Doze mode)',
-          'Analytics de rutas más utilizadas',
+          'Ubicación de buses en tiempo real con alta precisión',
+          'Cálculo de tiempo y distancia hacia paradas seleccionadas',
+          'Rutas a pie hacia paraderos cercanos',
+          'Notificaciones push para avisos relevantes',
+          'Interfaz basada en Material Design 3',
+          'Visualización de recorridos en Google Maps',
         ],
         metrics: {
           downloads: 750,
@@ -240,11 +233,11 @@ export class ProjectsDataService {
       },
       {
         id: '4',
-        title: 'ProDent - Gestión Médica Digital',
+        title: 'ProDent - Agenda Médica y Gestión de Citas',
         description:
-          'Sistema integral de gestión médica especializado en odontología, desarrollado con arquitectura MVVM y Jetpack Compose. Facilita agendamiento de citas, historial clínico digital, comunicación paciente-doctor, recordatorios automatizados, y gestión de tratamientos. Incluye sincronización cloud y modo offline.',
+          'Aplicación móvil nativa Android para facilitar la gestión de citas médicas tanto para pacientes como doctores. Resuelve el problema de coordinación y seguimiento de citas, permitiendo a los pacientes registrar, visualizar y administrar sus reservas, consultar su historial médico, calificar doctores y dejar comentarios. Los doctores pueden registrar sus horarios disponibles, confirmar o rechazar citas y visualizar su agenda en un calendario interactivo. Incluye notificaciones push para recordar citas próximas y está totalmente sincronizada con Firebase para autenticación y almacenamiento de datos en la nube.',
         shortDescription:
-          'Sistema médico digital con Jetpack Compose para gestión de citas y comunicación doctor-paciente.',
+          'App Android para gestión de citas médicas con historial, calificaciones y recordatorios automáticos.',
         image: '../assets/banner-prodent.png',
         technologies: [
           {
@@ -252,16 +245,12 @@ export class ProjectsDataService {
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg',
           },
           {
-            name: 'Jetpack Compose',
+            name: 'Android SDK',
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg',
           },
           {
             name: 'Firebase',
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg',
-          },
-          {
-            name: 'Room Database',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg',
           },
         ],
         links: [
@@ -270,7 +259,6 @@ export class ProjectsDataService {
             url: 'https://github.com/App-Android-Prodent/App-Prodent.git',
             label: 'Repositorio Principal',
           },
-
         ],
         category: 'mobile',
         status: 'completed',
@@ -278,13 +266,11 @@ export class ProjectsDataService {
         createdAt: new Date('2023-11-10'),
         highlights: [
           'Arquitectura MVVM con Clean Architecture',
-          'UI moderna 100% Jetpack Compose',
-          'Chat en tiempo real con cifrado E2E',
-          'Historial clínico con fotos y documentos',
-          'Calendario interactivo con disponibilidad',
-          'Notificaciones push personalizadas',
-          'Generación de reportes PDF',
-          'Integración con calendarios del sistema',
+          'Registro y gestión de citas médicas',
+          'Calendario interactivo con disponibilidad de doctores',
+          'Notificaciones push para recordatorios',
+          'Historial médico con detalles y documentos adjuntos',
+          'Calificación y comentarios para doctores',
         ],
         metrics: {
           downloads: 320,
@@ -296,9 +282,9 @@ export class ProjectsDataService {
         id: '5',
         title: 'SecureAuth - Sistema MFA Enterprise',
         description:
-          'Sistema de autenticación empresarial de alto nivel que implementa múltiples factores de autenticación (MFA), Single Sign-On (SSO), y gestión granular de permisos. Desarrollado con Spring Security avanzado, incluye protección contra ataques modernos, auditoría completa, y integración con servicios de identidad corporativos.',
+          'Sistema de autenticación que implementa múltiples factores de autenticación (MFA), Single Sign-On (SSO), y gestión granular de permisos. Desarrollado con Spring Security, incluye protección contra ataques modernos, auditoría completa, y integración con servicios de identidad corporativos.',
         shortDescription:
-          'Sistema enterprise de autenticación MFA con SSO, auditoría y protección avanzada.',
+          'Sistema de autenticación MFA con SSO, auditoría y protección avanzada.',
         image: '../assets/jwt-autenticator.png',
         technologies: [
           {
@@ -317,7 +303,6 @@ export class ProjectsDataService {
             name: 'MySQL',
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-plain-wordmark.svg',
           },
-
         ],
         links: [
           {
@@ -392,7 +377,6 @@ export class ProjectsDataService {
             url: 'https://github.com/app-carroControl/app-control-IoT.git',
             label: 'App Android',
           },
-
         ],
         category: 'iot',
         status: 'completed',
