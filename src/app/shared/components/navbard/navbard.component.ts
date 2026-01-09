@@ -1,16 +1,54 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component, EventEmitter, Input, Output, HostListener, ElementRef, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, EventEmitter, Input, Output, HostListener, ElementRef, Inject, PLATFORM_ID, OnInit } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
+import { trigger, transition, style, animate, state } from '@angular/animations';
 
 @Component({
   selector: 'app-navbard',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './navbard.component.html'
+  templateUrl: './navbard.component.html',
+  animations: [
+    trigger('slideDown', [
+      state('hidden', style({
+        opacity: 0,
+        transform: 'translateY(-100%)'
+      })),
+      state('visible', style({
+        opacity: 1,
+        transform: 'translateY(0)'
+      })),
+      transition('hidden => visible', [
+        animate('500ms cubic-bezier(0.35, 0, 0.25, 1)')
+      ])
+    ]),
+    trigger('fadeIn', [
+      state('hidden', style({
+        opacity: 0
+      })),
+      state('visible', style({
+        opacity: 1
+      })),
+      transition('hidden => visible', [
+        animate('400ms 200ms ease-out')
+      ])
+    ]),
+    trigger('mobileMenu', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(-20px)' }),
+        animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ]),
+      transition(':leave', [
+        animate('200ms ease-in', style({ opacity: 0, transform: 'translateY(-20px)' }))
+      ])
+    ])
+  ]
 })
-export class NavbardComponent {
+export class NavbardComponent implements OnInit {
 
   isMenuOpen: boolean = false;
+  navbarState = 'hidden';
+  menuItemsState = 'hidden';
 
   @Input() isDarkMode!: boolean;
   @Output() themeToggle = new EventEmitter<void>();
@@ -20,6 +58,16 @@ export class NavbardComponent {
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
+
+  ngOnInit(): void {
+    // Animar navbar al cargar
+    setTimeout(() => {
+      this.navbarState = 'visible';
+      setTimeout(() => {
+        this.menuItemsState = 'visible';
+      }, 100);
+    }, 100);
+  }
 
   // FUNCIÓN CORREGIDA: Scroll suave a las secciones
   scrollToSection(sectionId: string): void {

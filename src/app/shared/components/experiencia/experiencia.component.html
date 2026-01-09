@@ -1,0 +1,121 @@
+<section id="experiencia" class="bg-white dark:bg-gray-900 py-12 sm:py-16 lg:py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="header-section text-center mb-12 sm:mb-16" [@scrollAnimation]="headerState">
+      <div
+        class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-6 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700">
+        <i class="fas fa-briefcase mr-2"></i>
+        Trayectoria Profesional
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+        Mi
+        <span class="text-emerald-600 dark:text-emerald-400">Experiencia</span>
+      </h2>
+      <p class="text-lg lg:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+        Desarrollo profesional, proyectos y formación académica
+      </p>
+    </div>
+
+    <!-- Timeline -->
+    <div class="relative">
+      <!-- Línea vertical central -->
+      <div
+        class="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-emerald-200 via-emerald-300 to-emerald-200 dark:from-emerald-800 dark:via-emerald-700 dark:to-emerald-800">
+      </div>
+
+      <!-- Experiencias -->
+      <div class="space-y-8 lg:space-y-12">
+        <div *ngFor="let exp of experiences; let i = index"
+          #experienceCard
+          [attr.data-id]="exp.id"
+          [@slideInLeft]="i % 2 === 0 ? getAnimationState(exp.id) : 'hidden'"
+          [@slideInRight]="i % 2 !== 0 ? getAnimationState(exp.id) : 'hidden'"
+          [ngClass]="{'lg:flex-row-reverse': i % 2 === 0, 'lg:flex-row': i % 2 !== 0}"
+          class="relative flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-12">
+
+          <!-- Punto central en timeline (desktop) -->
+          <div
+            class="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full border-4 border-white dark:border-gray-900 z-10"
+            [ngClass]="exp.current ? 'bg-emerald-500 shadow-lg shadow-emerald-500/50' : 'bg-gray-400 dark:bg-gray-600'">
+          </div>
+
+          <!-- Spacer (mantiene el layout 50-50) -->
+          <div class="hidden lg:block lg:w-1/2"></div>
+
+          <!-- Card de experiencia -->
+          <div class="lg:w-1/2 group">
+            <div
+              class="relative p-6 bg-gray-50 dark:bg-gray-800 rounded-2xl border-2 border-gray-200 dark:border-gray-700 hover:border-emerald-300 dark:hover:border-emerald-600 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+
+              <!-- Badge de tipo -->
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center space-x-2">
+                  <div [ngClass]="getTypeBgColor(exp.type)"
+                    class="w-10 h-10 rounded-lg flex items-center justify-center">
+                    <i [ngClass]="[getTypeIcon(exp.type), getTypeColor(exp.type)]"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">{{ exp.title }}</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ exp.company }}</p>
+                  </div>
+                </div>
+
+                <!-- Badge "Actual" -->
+                <span *ngIf="exp.current"
+                  class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-semibold rounded-full border border-emerald-200 dark:border-emerald-700">
+                  Actual
+                </span>
+              </div>
+
+              <!-- Período y ubicación -->
+              <div class="flex flex-wrap items-center gap-4 mb-4 text-sm text-gray-600 dark:text-gray-400">
+                <div class="flex items-center space-x-2">
+                  <i class="fas fa-calendar text-emerald-600 dark:text-emerald-400"></i>
+                  <span>{{ exp.period }}</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <i class="fas fa-map-marker-alt text-emerald-600 dark:text-emerald-400"></i>
+                  <span>{{ exp.location }}</span>
+                </div>
+              </div>
+
+              <!-- Descripción -->
+              <p class="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">{{ exp.description }}</p>
+
+              <!-- Logros -->
+              <div class="mb-4">
+                <h4 class="text-sm font-semibold text-gray-900 dark:text-white mb-2 flex items-center">
+                  <i class="fas fa-star text-amber-500 mr-2"></i>
+                  Logros destacados
+                </h4>
+                <ul class="space-y-2">
+                  <li *ngFor="let achievement of exp.achievements"
+                    class="flex items-start text-sm text-gray-600 dark:text-gray-400">
+                    <i class="fas fa-check text-emerald-600 dark:text-emerald-400 mt-1 mr-2 flex-shrink-0"></i>
+                    <span>{{ achievement }}</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Tecnologías -->
+              <div>
+                <h4 class="text-sm font-semibold text-gray-900 dark:text-white mb-2">Tecnologías</h4>
+                <div class="flex flex-wrap gap-2">
+                  <span *ngFor="let tech of exp.technologies"
+                    class="px-3 py-1 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs rounded-lg border border-emerald-200 dark:border-emerald-800">
+                    {{ tech }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Decoración de esquina -->
+              <div
+                class="absolute top-4 right-4 w-16 h-16 bg-gradient-to-br from-emerald-100/50 to-transparent dark:from-emerald-900/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

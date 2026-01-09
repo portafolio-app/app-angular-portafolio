@@ -24,11 +24,13 @@ export class AlertService {
     const developmentConfig: AlertConfig = {
       type: 'development',
       title: '👨‍💻 Disponible para Oportunidades',
-      message: `¡Hola! 👋 Soy Jorge, desarrollador de software en búsqueda activa de oportunidades laborales.
+      message: `¡Hola! 👋 Soy Jorge, desarrollador Full Stack especializado en Angular, Spring Boot y arquitecturas modernas.
 
-Este portafolio está en constante desarrollo. Algunas secciones pueden estar incompletas mientras añado nuevos proyectos y funcionalidades.
+Actualmente en búsqueda activa de oportunidades donde pueda aportar valor con mi experiencia en desarrollo frontend, backend y despliegue de aplicaciones empresariales.
 
-¿Tienes una oportunidad que podría encajar conmigo? ¡Me encantaría conocer más!`,
+Este portafolio está en constante evolución. Algunas secciones pueden estar incompletas mientras añado nuevos proyectos y funcionalidades.
+
+¿Tienes un proyecto desafiante o una oportunidad que podría encajar conmigo? ¡Me encantaría conectar!`,
       showIcon: true,
       dismissible: true,
       autoClose: 0,

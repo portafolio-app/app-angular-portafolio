@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { trigger, transition, style, animate, state } from '@angular/animations';
 
 interface TechSkill {
   name: string;
@@ -12,9 +13,42 @@ interface TechSkill {
   selector: 'app-stack-tecnologico',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './stack-tecnologico.component.html'
+  templateUrl: './stack-tecnologico.component.html',
+  animations: [
+    trigger('fadeInUp', [
+      state('hidden', style({
+        opacity: 0,
+        transform: 'translateY(50px)'
+      })),
+      state('visible', style({
+        opacity: 1,
+        transform: 'translateY(0)'
+      })),
+      transition('hidden => visible', [
+        animate('600ms ease-out')
+      ])
+    ]),
+    trigger('slideInLeft', [
+      state('hidden', style({
+        opacity: 0,
+        transform: 'translateX(-80px)'
+      })),
+      state('visible', style({
+        opacity: 1,
+        transform: 'translateX(0)'
+      })),
+      transition('hidden => visible', [
+        animate('700ms cubic-bezier(0.34, 1.56, 0.64, 1)')
+      ])
+    ])
+  ]
 })
-export class StackTecnologicoComponent {
+export class StackTecnologicoComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChildren('techCard') techCards!: QueryList<ElementRef>;
+  
+  private observer!: IntersectionObserver;
+  animationStates: { [key: string]: string } = {};
+  headerState = 'hidden';
 
   // Datos de habilidades Frontend
   frontend: TechSkill[] = [
@@ -270,5 +304,57 @@ export class StackTecnologicoComponent {
    */
   get isTouchDevice(): boolean {
     return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  }
+
+  ngOnInit(): void {
+    // Inicializar estados de animación para cada categoría
+    ['frontend', 'backend', 'databases', 'tools'].forEach(category => {
+      this.animationStates[category] = 'hidden';
+    });
+
+    // Crear IntersectionObserver
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const category = entry.target.getAttribute('data-category');
+            if (category) {
+              setTimeout(() => {
+                this.animationStates[category] = 'visible';
+              }, 100);
+            } else if (entry.target.classList.contains('stack-header')) {
+              this.headerState = 'visible';
+            }
+          }
+        });
+      },
+      {
+        threshold: 0.2,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+  }
+
+  ngAfterViewInit(): void {
+    // Observar el header
+    const headerElement = document.querySelector('.stack-header');
+    if (headerElement) {
+      this.observer.observe(headerElement);
+    }
+
+    // Observar cada categoría de tecnologías
+    this.techCards?.forEach(card => {
+      this.observer.observe(card.nativeElement);
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+  }
+
+  getAnimationState(category: string): string {
+    return this.animationStates[category] || 'hidden';
   }
 }

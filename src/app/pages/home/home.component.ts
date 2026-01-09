@@ -23,6 +23,7 @@ import { CardProyectosComponent } from '../../shared/components/Proyectos/card-p
 import { FooterComponent } from '../../shared/components/footer/footer.component';
 import { StackTecnologicoComponent } from '../../shared/components/stack-tecnologico/stack-tecnologico.component';
 import { HeroComponent } from '../../shared/components/hero/hero.component';
+import { ExperienciaComponent } from '../../shared/components/experiencia/experiencia.component';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -36,6 +37,7 @@ import { Subscription } from 'rxjs';
     FooterComponent,
     StackTecnologicoComponent,
     HeroComponent,
+    ExperienciaComponent,
     AlertComponent,
   ],
   templateUrl: './home.component.html',

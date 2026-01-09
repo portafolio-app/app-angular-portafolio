@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectionStrategy, Inject, PLATFORM_ID, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, Input, Output, EventEmitter, ChangeDetectionStrategy, Inject, PLATFORM_ID, ChangeDetectorRef, ViewChild, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { CommonModule, isPlatformBrowser, DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router'; // AGREGADO
 import { Subject } from 'rxjs';
 import { takeUntil, catchError, of } from 'rxjs';
+import { trigger, transition, style, animate, state } from '@angular/animations';
 
 import {
   Project,
@@ -17,8 +18,37 @@ import { ProjectFilterComponent } from '../../project-filter/project-filter.comp
   templateUrl: './card-proyectos.component.html',
   styleUrls: ['./card-proyectos.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('fadeInUp', [
+      state('hidden', style({
+        opacity: 0,
+        transform: 'translateY(50px)'
+      })),
+      state('visible', style({
+        opacity: 1,
+        transform: 'translateY(0)'
+      })),
+      transition('hidden => visible', [
+        animate('600ms ease-out')
+      ])
+    ]),
+    trigger('scaleIn', [
+      state('hidden', style({
+        opacity: 0,
+        transform: 'scale(0.9)'
+      })),
+      state('visible', style({
+        opacity: 1,
+        transform: 'scale(1)'
+      })),
+      transition('hidden => visible', [
+        animate('500ms cubic-bezier(0.34, 1.56, 0.64, 1)')
+      ])
+    ])
+  ]
 })
-export class CardProyectosComponent implements OnInit, OnDestroy {
+export class CardProyectosComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChildren('projectCard') projectCards!: QueryList<ElementRef>;
   @ViewChild(ProjectFilterComponent) filterComponent!: ProjectFilterComponent;
 
   // Inputs
@@ -46,6 +76,11 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
   currentPage: number = 1;
   showingAll: boolean = false;
 
+  // Animation states
+  headerState = 'hidden';
+  animationStates: { [key: number]: string } = {};
+  private observer!: IntersectionObserver;
+
   // Private
   private readonly destroy$ = new Subject<void>();
   private isBrowser: boolean;
@@ -62,11 +97,65 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadProjects();
+    this.initializeObserver();
+  }
+
+  ngAfterViewInit(): void {
+    this.observeElements();
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+  }
+
+  private initializeObserver(): void {
+    if (!this.isBrowser) return;
+
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('data-project-index');
+            if (id) {
+              setTimeout(() => {
+                this.animationStates[parseInt(id)] = 'visible';
+                this.cdr.markForCheck();
+              }, 100);
+            } else if (entry.target.classList.contains('projects-header')) {
+              this.headerState = 'visible';
+              this.cdr.markForCheck();
+            }
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+  }
+
+  private observeElements(): void {
+    if (!this.isBrowser || !this.observer) return;
+
+    setTimeout(() => {
+      const headerElement = this.document.querySelector('.projects-header');
+      if (headerElement) {
+        this.observer.observe(headerElement);
+      }
+
+      this.projectCards?.forEach(card => {
+        this.observer.observe(card.nativeElement);
+      });
+    }, 100);
+  }
+
+  getAnimationState(index: number): string {
+    return this.animationStates[index] || 'hidden';
   }
 
   // Computed properties
