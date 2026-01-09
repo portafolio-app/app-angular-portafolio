@@ -24,8 +24,8 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
   // Inputs
   @Input() showFeaturedOnly: boolean = true;
   @Input() sectionTitle: string = 'Mis Proyectos';
-  @Input() sectionDescription: string = 'Una colección de proyectos que demuestran mis habilidades y experiencia en desarrollo de software';
-  @Input() showFilters: boolean = true;
+  @Input() sectionDescription: string = 'Proyectos Full Stack que demuestran mis habilidades en frontend, backend y despliegue.';
+  @Input() showFilters: boolean = false; // deshabilitar filtros por defecto
   @Input() projectsPerPage: number = 10;
 
   // Outputs
@@ -41,6 +41,8 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
 
   // Filter and pagination state
   hasActiveSearch: boolean = false;
+  searchQuery: string = '';
+  selectedCategory: 'all' | 'web' | 'mobile' | 'iot' = 'all';
   currentPage: number = 1;
   showingAll: boolean = false;
 
@@ -89,11 +91,19 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
   get availableProjects(): Project[] {
     const baseProjects = this.hasActiveSearch ? this.filteredProjects : this.allProjects;
 
-    if (this.showFeaturedOnly && !this.hasActiveSearch) {
-      return baseProjects.filter(p => p.featured);
+    let list = baseProjects;
+
+    // Category filter via tabs
+    if (this.selectedCategory !== 'all') {
+      list = list.filter(p => (p.category || '').toLowerCase() === this.selectedCategory);
     }
 
-    return baseProjects;
+    // Featured-only toggle
+    if (this.showFeaturedOnly && !this.hasActiveSearch) {
+      list = list.filter(p => p.featured);
+    }
+
+    return list;
   }
 
   get hasMoreProjects(): boolean {
@@ -155,6 +165,8 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
 
   clearAllFilters(): void {
     this.hasActiveSearch = false;
+    this.searchQuery = '';
+    this.selectedCategory = 'all';
     this.filteredProjects = this.allProjects;
     this.currentPage = 1;
     this.showingAll = false;
@@ -164,6 +176,44 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
       this.filterComponent.resetFilters();
     }
 
+    this.cdr.markForCheck();
+  }
+
+  // Simple search
+  onSearchQueryChange(query: string): void {
+    this.searchQuery = (query || '').trim();
+    this.applySearch();
+  }
+
+  private applySearch(): void {
+    if (!this.searchQuery) {
+      this.hasActiveSearch = false;
+      this.filteredProjects = this.allProjects;
+    } else {
+      const q = this.searchQuery.toLowerCase();
+      this.filteredProjects = this.allProjects.filter((p) => {
+        const inTitle = p.title.toLowerCase().includes(q);
+        const inShort = p.shortDescription?.toLowerCase().includes(q);
+        const inDesc = p.description?.toLowerCase().includes(q);
+        const inTech = (p.technologies || []).some(t => t.name.toLowerCase().includes(q));
+        const inCategory = p.category?.toLowerCase().includes(q);
+        return inTitle || inShort || inDesc || inTech || inCategory;
+      });
+      this.hasActiveSearch = true;
+    }
+
+    this.currentPage = 1;
+    this.showingAll = false;
+    this.updateDisplayProjects();
+    this.cdr.markForCheck();
+  }
+
+  // Category tabs
+  setCategory(category: 'all' | 'web' | 'mobile' | 'iot'): void {
+    this.selectedCategory = category;
+    this.currentPage = 1;
+    this.showingAll = false;
+    this.updateDisplayProjects();
     this.cdr.markForCheck();
   }
 
@@ -211,9 +261,16 @@ export class CardProyectosComponent implements OnInit, OnDestroy {
   // Helper methods
   getSectionTitle(): string {
     if (this.hasActiveSearch) {
-      return `Resultados de búsqueda`;
+      return 'Resultados de búsqueda';
     }
-    return this.showFeaturedOnly ? 'Proyectos Destacados' : 'Todos los Proyectos';
+    const categoryLabels: Record<'all' | 'web' | 'mobile' | 'iot', string> = {
+      all: 'Todos los Proyectos',
+      web: 'Proyectos Web',
+      mobile: 'Proyectos Mobile',
+      iot: 'Proyectos IoT',
+    };
+    const base = categoryLabels[this.selectedCategory] || 'Todos los Proyectos';
+    return this.showFeaturedOnly ? `${base} (Destacados)` : base;
   }
 
   getPaginationInfo(): string {

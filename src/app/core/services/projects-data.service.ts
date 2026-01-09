@@ -114,6 +114,56 @@ export class ProjectsDataService {
         },
       },
       {
+        id: '7',
+        title: 'UBICATE - Gestión de Transporte y Geolocalización en Tiempo Real',
+        description:
+          'UBICATE es una plataforma full-stack con Angular en el frontend y Spring Boot en el backend, que permite a usuarios y conductores visualizar en tiempo real la ubicación de los buses, consultar ETA y rutas sobre mapas interactivos. El backend implementa Spring Security con JWT para autenticación/roles y persiste datos operativos en MySQL (conductores, buses, rutas, empresas). Las ubicaciones se publican y consumen en tiempo real desde Firebase/Firestore para baja latencia en el tracking. La solución integra Google Maps para trazado de rutas y geocercas, y notificaciones push para avisos críticos.',
+        shortDescription:
+          'Plataforma Angular + Firebase para tracking de buses y gestión de transporte.',
+        image: '../assets/ubicate-v2.png',
+        technologies: [
+          { name: 'Angular', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg' },
+          { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
+          { name: 'Tailwind CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg' },
+          { name: 'Spring Boot', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg' },
+          { name: 'Spring Security', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg' },
+          { name: 'Java', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
+          { name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-plain-wordmark.svg' },
+          { name: 'Firebase', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg' },
+          { name: 'Google Maps API', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg' },
+        ],
+        links: [
+          {
+            type: 'demo',
+            url: 'https://ubicate-front-d55c8d1668ba.herokuapp.com/landing',
+            label: 'Ver Demo',
+          },
+        ],
+        category: 'web',
+        status: 'completed',
+        featured: true,
+        createdAt: new Date('2024-09-10'),
+        highlights: [
+          'Backend Spring Boot con Spring Security (JWT, roles y permisos)',
+          'Persistencia operativa en MySQL (conductores, buses, rutas, empresas)',
+          'Seguimiento en tiempo real de buses con Firebase/Firestore',
+          'Panel empresarial para gestión de conductores, rutas y flota',
+          'Mapas interactivos con Google Maps y geocercas',
+          'Notificaciones push para eventos y avisos a usuarios',
+          'Frontend Angular responsivo y accesible',
+        ],
+        challenges: [
+          'Optimización de rendimiento con gran volumen de ubicaciones',
+          'Consistencia de datos en tiempo real entre perfiles',
+          'Definición de reglas de seguridad en Firebase',
+        ],
+        metrics: {
+          stars: 30,
+          forks: 10,
+          downloads: 500,
+        },
+      },
+      {
         id: '2',
         title: 'FinanceTracker - Gestión Inteligente de Deudas y Préstamos',
         description:

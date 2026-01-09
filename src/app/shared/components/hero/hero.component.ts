@@ -55,7 +55,7 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
         .deleteChars(13)
         .pauseFor(500)
         .typeString(
-          '<span class="text-green-600 dark:text-green-400">Desarrollador de Software</span>'
+          '<span class="text-green-600 dark:text-green-400">Desarrollador Full Stack</span>'
         )
         .start();
     }

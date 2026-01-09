@@ -22,6 +22,22 @@ export const routes: Routes = [
     title: 'Detalles del Proyecto',
   },
   {
+    path: 'blog',
+    loadComponent: () =>
+      import('./pages/blog/blog-list/blog-list.component').then(
+        (m) => m.BlogListComponent
+      ),
+    title: 'Blog - Artículos y Tutoriales',
+  },
+  {
+    path: 'blog/:slug',
+    loadComponent: () =>
+      import('./pages/blog/blog-detail/blog-detail.component').then(
+        (m) => m.BlogDetailComponent
+      ),
+    title: 'Artículo - Blog',
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },

@@ -1,0 +1,256 @@
+<!-- blog-list.component.html -->
+<app-navbard></app-navbard>
+
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-green-600 to-emerald-600 dark:from-green-800 dark:to-emerald-800 py-20">
+    <div class="container mx-auto px-4">
+      <div class="text-center text-white">
+        <h1 class="text-5xl font-bold mb-4 animate__animated animate__fadeInDown">
+          📝 Blog de Desarrollo
+        </h1>
+        <p class="text-xl opacity-90 max-w-2xl mx-auto animate__animated animate__fadeInUp">
+          Artículos, tutoriales y mejores prácticas sobre Angular, Spring Boot y desarrollo full-stack
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Articles -->
+  @if (featuredArticles.length > 0) {
+    <section class="container mx-auto px-4 py-12">
+      <h2 class="text-3xl font-bold mb-8 text-gray-900 dark:text-white flex items-center gap-3">
+        <span class="text-4xl">⭐</span>
+        Artículos Destacados
+      </h2>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        @for (article of featuredArticles; track article.id) {
+          <article
+            (click)="viewArticle(article)"
+            class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 cursor-pointer">
+
+            <div class="relative overflow-hidden h-48">
+              <img
+                [src]="article.coverImage"
+                [alt]="article.title"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                onerror="this.src='https://via.placeholder.com/1200x630/10b981/ffffff?text=Blog+Image'">
+              <div class="absolute top-4 right-4">
+                <span [class]="getCategoryColor(article.category)"
+                      class="px-3 py-1 rounded-full text-white text-xs font-semibold">
+                  {{ getCategoryLabel(article.category) }}
+                </span>
+              </div>
+            </div>
+
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors line-clamp-2">
+                {{ article.title }}
+              </h3>
+
+              <p class="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
+                {{ article.excerpt }}
+              </p>
+
+              <div class="flex flex-wrap gap-2 mb-4">
+                @for (tag of article.tags; track tag.id) {
+                  <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-xs">
+                    #{{ tag.name }}
+                  </span>
+                }
+              </div>
+
+              <div class="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
+                <div class="flex items-center gap-4">
+                  <span class="flex items-center gap-1">
+                    📅 {{ formatDate(article.publishedAt) }}
+                  </span>
+                  <span class="flex items-center gap-1">
+                    ⏱️ {{ article.readingTime }} min
+                  </span>
+                </div>
+                @if (article.views) {
+                  <span class="flex items-center gap-1">
+                    👁️ {{ article.views }}
+                  </span>
+                }
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+    </section>
+  }
+
+  <!-- Filters Section -->
+  <section class="container mx-auto px-4 py-8">
+    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 mb-8">
+      <div class="grid md:grid-cols-4 gap-4">
+
+        <!-- Search -->
+        <div class="md:col-span-2">
+          <label class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+            🔍 Buscar
+          </label>
+          <input
+            type="text"
+            [(ngModel)]="searchQuery"
+            (ngModelChange)="applyFilters()"
+            placeholder="Buscar artículos..."
+            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent">
+        </div>
+
+        <!-- Category Filter -->
+        <div>
+          <label class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+            📂 Categoría
+          </label>
+          <select
+            [(ngModel)]="selectedCategory"
+            (ngModelChange)="applyFilters()"
+            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500">
+            <option value="">Todas</option>
+            @for (category of categories; track category) {
+              <option [value]="category">{{ getCategoryLabel(category) }}</option>
+            }
+          </select>
+        </div>
+
+        <!-- Clear Filters -->
+        <div class="flex items-end">
+          <button
+            (click)="clearFilters()"
+            class="w-full px-4 py-2 bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500 transition-colors">
+            Limpiar Filtros
+          </button>
+        </div>
+      </div>
+
+      <!-- Results Info -->
+      <div class="mt-4 text-sm text-gray-600 dark:text-gray-400">
+        Mostrando <span class="font-semibold">{{ filteredArticles.length }}</span> artículo(s)
+      </div>
+    </div>
+  </section>
+
+  <!-- Articles Grid -->
+  <section class="container mx-auto px-4 pb-12">
+    @if (isLoading) {
+      <div class="flex justify-center items-center py-20">
+        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-green-500"></div>
+      </div>
+    } @else if (paginatedArticles.length === 0) {
+      <div class="text-center py-20">
+        <div class="text-6xl mb-4">🔍</div>
+        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+          No se encontraron artículos
+        </h3>
+        <p class="text-gray-600 dark:text-gray-400">
+          Intenta ajustar los filtros de búsqueda
+        </p>
+      </div>
+    } @else {
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        @for (article of paginatedArticles; track article.id) {
+          <article
+            (click)="viewArticle(article)"
+            class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 cursor-pointer">
+
+            <div class="relative overflow-hidden h-48">
+              <img
+                [src]="article.coverImage"
+                [alt]="article.title"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                onerror="this.src='https://via.placeholder.com/600x400/10b981/ffffff?text=Blog+Image'">
+              <div class="absolute top-4 right-4">
+                <span [class]="getCategoryColor(article.category)"
+                      class="px-3 py-1 rounded-full text-white text-xs font-semibold">
+                  {{ getCategoryLabel(article.category) }}
+                </span>
+              </div>
+              @if (article.featured) {
+                <div class="absolute top-4 left-4">
+                  <span class="px-3 py-1 rounded-full bg-yellow-500 text-white text-xs font-semibold">
+                    ⭐ Destacado
+                  </span>
+                </div>
+              }
+            </div>
+
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors line-clamp-2">
+                {{ article.title }}
+              </h3>
+
+              <p class="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
+                {{ article.excerpt }}
+              </p>
+
+              <div class="flex flex-wrap gap-2 mb-4">
+                @for (tag of article.tags.slice(0, 3); track tag.id) {
+                  <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-xs">
+                    #{{ tag.name }}
+                  </span>
+                }
+              </div>
+
+              <div class="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
+                <span class="flex items-center gap-1">
+                  ⏱️ {{ article.readingTime }} min
+                </span>
+                <div class="flex items-center gap-3">
+                  @if (article.views) {
+                    <span class="flex items-center gap-1">
+                      👁️ {{ article.views }}
+                    </span>
+                  }
+                  @if (article.likes) {
+                    <span class="flex items-center gap-1">
+                      ❤️ {{ article.likes }}
+                    </span>
+                  }
+                </div>
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+
+      <!-- Pagination -->
+      @if (totalPages > 1) {
+        <div class="flex justify-center items-center gap-2 mt-12">
+          <button
+            (click)="goToPage(currentPage - 1)"
+            [disabled]="currentPage === 1"
+            class="px-4 py-2 rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+            « Anterior
+          </button>
+
+          @for (page of pages; track page) {
+            <button
+              (click)="goToPage(page)"
+              [class.bg-green-600]="page === currentPage"
+              [class.text-white]="page === currentPage"
+              [class.bg-white]="page !== currentPage"
+              [class.dark:bg-gray-800]="page !== currentPage"
+              [class.text-gray-700]="page !== currentPage"
+              [class.dark:text-gray-300]="page !== currentPage"
+              class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+              {{ page }}
+            </button>
+          }
+
+          <button
+            (click)="goToPage(currentPage + 1)"
+            [disabled]="currentPage === totalPages"
+            class="px-4 py-2 rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+            Siguiente »
+          </button>
+        </div>
+      }
+    }
+  </section>
+</div>
+
+<app-footer></app-footer>

@@ -46,6 +46,12 @@
             Tecnologías
           </button>
 
+          <!-- Blog (página) - OCULTO TEMPORALMENTE -->
+          <!-- <button (click)="navigateToPage('/blog')"
+            class="group relative px-3 lg:px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 font-medium text-sm lg:text-base cursor-pointer">
+            <i class="fas fa-blog mr-1 lg:mr-2 text-sm group-hover:scale-110 transition-transform duration-300"></i>
+            Blog
+          </button> -->
 
         </nav>
       </div>
@@ -74,7 +80,7 @@
         </button>
 
         <!-- Botón menú móvil mejorado -->
-        <button (click)="toggleMenu($event)" id="menu-toggle" type="button"
+        <button (click)="toggleMenu()" id="menu-toggle" type="button"
           [attr.aria-label]="isMenuOpen ? 'Cerrar menú' : 'Abrir menú'" [attr.aria-expanded]="isMenuOpen"
           class="md:hidden group p-2 sm:p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-green-100 dark:hover:bg-green-900/30 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900">
 
@@ -127,6 +133,13 @@
           <span class="font-medium">Tecnologías</span>
         </button>
 
+        <!-- Blog - OCULTO TEMPORALMENTE -->
+        <!-- <button (click)="navigateToPage('/blog')"
+          class="group flex items-center w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base cursor-pointer">
+          <i
+            class="fas fa-blog mr-3 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300"></i>
+          <span class="font-medium">Blog</span>
+        </button> -->
 
       </div>
     </div>

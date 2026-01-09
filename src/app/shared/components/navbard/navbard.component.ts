@@ -92,22 +92,21 @@ export class NavbardComponent {
     }
   }
 
-  @HostListener('document:keydown.escape', ['$event'])
-  onEscapePress(event: KeyboardEvent) {
-    if (this.isMenuOpen) {
-      event.preventDefault();
+  @HostListener('document:keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Escape' && this.isMenuOpen) {
       this.closeMenu();
     }
   }
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize')
   onResize() {
     if (window.innerWidth >= 768 && this.isMenuOpen) {
       this.closeMenu();
     }
   }
 
-  @HostListener('window:orientationchange', ['$event'])
+  @HostListener('window:orientationchange')
   onOrientationChange() {
     setTimeout(() => {
       if (window.innerWidth >= 768 && this.isMenuOpen) {
@@ -120,10 +119,7 @@ export class NavbardComponent {
     this.themeToggle.emit();
   }
 
-  toggleMenu(event?: Event) {
-    if (event) {
-      event.stopPropagation();
-    }
+  toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
