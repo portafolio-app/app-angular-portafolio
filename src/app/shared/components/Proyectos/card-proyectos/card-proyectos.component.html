@@ -149,7 +149,7 @@
               }">
                 <button *ngFor="let link of project.links.slice(0, 2); let i = index"
                   (click)="onLinkClick(project, link, $event)" [ngClass]="getLinkButtonClass(link.type)"
-                  class="px-1.5 sm:px-2 lg:px-3 py-2 sm:py-2.5 font-medium rounded-md sm:rounded-lg transition-all duration-200 flex items-center justify-center hover:scale-105 text-xs sm:text-sm min-h-[36px] sm:min-h-[40px]">
+                  class="px-1.5 sm:px-2 lg:px-3 py-2 sm:py-2.5 font-medium rounded-md sm:rounded-lg transition-all duration-200 flex items-center justify-center hover:scale-105 text-xs sm:text-sm min-h-[36px] sm:min-h-[40px] cursor-pointer">
                   <i [class]="getLinkIcon(link.type)" class="text-xs sm:text-sm flex-shrink-0"></i>
                   <span class="truncate ml-1 sm:ml-1.5" [ngClass]="{
                     'max-w-none': project.links.slice(0, 2).length === 1,
