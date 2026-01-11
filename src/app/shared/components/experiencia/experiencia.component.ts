@@ -148,7 +148,7 @@ export class ExperienciaComponent implements OnInit, AfterViewInit, OnDestroy {
       title: 'Ingeniero de Software',
       company: 'Gato Marketing y Software S.A.C',
       period: 'Agosto 2025 - Noviembre 2025',
-      location: 'Trujillo, Perú',
+      location: 'Lima, Perú',
       type: 'work',
       current: false,
       description: 'Participación en equipo de desarrollo para módulo contable de ERP, trabajando en arquitectura full stack con metodologías ágiles.',
