@@ -92,7 +92,7 @@ export class ProjectsDataService {
             label: 'Repositorio Backend',
           },
         ],
-        category: 'web',
+        category: 'freelance',
         status: 'completed',
         featured: true,
         createdAt: new Date('2024-03-15'),
@@ -117,7 +117,7 @@ export class ProjectsDataService {
         id: '7',
         title: 'UBICATE - Gestión de Transporte y Geolocalización en Tiempo Real',
         description:
-          'UBICATE es una plataforma full-stack con Angular en el frontend y Spring Boot en el backend, que permite a usuarios y conductores visualizar en tiempo real la ubicación de los buses, consultar ETA y rutas sobre mapas interactivos. El backend implementa Spring Security con JWT para autenticación/roles y persiste datos operativos en MySQL (conductores, buses, rutas, empresas). Las ubicaciones se publican y consumen en tiempo real desde Firebase/Firestore para baja latencia en el tracking. La solución integra Google Maps para trazado de rutas y geocercas, y notificaciones push para avisos críticos.',
+          'UBICATE es una plataforma que permite a usuarios y conductores visualizar en tiempo real la ubicación de los buses, consultar ETA y rutas sobre mapas interactivos. El backend implementa Spring Security con JWT para autenticación/roles y persiste datos operativos en MySQL (conductores, buses, rutas, empresas). Las ubicaciones se publican y consumen en tiempo real desde Firebase/Firestore para baja latencia en el tracking. La solución integra Google Maps para trazado de rutas y geocercas, y notificaciones push para avisos críticos.',
         shortDescription:
           'Plataforma Angular + Firebase para tracking de buses y gestión de transporte.',
         image: '../assets/ubicate-v2.png',
@@ -135,11 +135,11 @@ export class ProjectsDataService {
         links: [
           {
             type: 'demo',
-            url: 'https://ubicate-front-d55c8d1668ba.herokuapp.com/landing',
+            url: 'https://ubicatee.netlify.app/landing',
             label: 'Ver Demo',
           },
         ],
-        category: 'web',
+        category: 'freelance',
         status: 'completed',
         featured: true,
         createdAt: new Date('2024-09-10'),

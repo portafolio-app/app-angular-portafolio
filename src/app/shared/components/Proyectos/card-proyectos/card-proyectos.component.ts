@@ -72,7 +72,7 @@ export class CardProyectosComponent implements OnInit, AfterViewInit, OnDestroy 
   // Filter and pagination state
   hasActiveSearch: boolean = false;
   searchQuery: string = '';
-  selectedCategory: 'all' | 'web' | 'mobile' | 'iot' = 'all';
+  selectedCategory: 'all' | 'web' | 'mobile' | 'iot' | 'freelance' = 'all';
   currentPage: number = 1;
   showingAll: boolean = false;
 
@@ -298,7 +298,7 @@ export class CardProyectosComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   // Category tabs
-  setCategory(category: 'all' | 'web' | 'mobile' | 'iot'): void {
+  setCategory(category: 'all' | 'web' | 'mobile' | 'iot' | 'freelance'): void {
     this.selectedCategory = category;
     this.currentPage = 1;
     this.showingAll = false;
@@ -352,11 +352,12 @@ export class CardProyectosComponent implements OnInit, AfterViewInit, OnDestroy 
     if (this.hasActiveSearch) {
       return 'Resultados de búsqueda';
     }
-    const categoryLabels: Record<'all' | 'web' | 'mobile' | 'iot', string> = {
+    const categoryLabels: Record<'all' | 'web' | 'mobile' | 'iot' | 'freelance', string> = {
       all: 'Todos los Proyectos',
       web: 'Proyectos Web',
       mobile: 'Proyectos Mobile',
       iot: 'Proyectos IoT',
+      freelance: 'Proyectos Freelance',
     };
     const base = categoryLabels[this.selectedCategory] || 'Todos los Proyectos';
     return this.showFeaturedOnly ? `${base} (Destacados)` : base;
