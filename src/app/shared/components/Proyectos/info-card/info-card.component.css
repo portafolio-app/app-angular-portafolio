@@ -14,6 +14,94 @@
   transform: translateY(-2px) scale(1.05);
 }
 
+/* CARRUSEL DE TECNOLOGÍAS ANIMADO */
+.tech-carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.tech-carousel-track {
+  display: flex;
+  gap: 1rem;
+  padding: 0 1.5rem;
+  animation: scroll-carousel 30s linear infinite;
+  width: fit-content;
+}
+
+/* Pausar animación al hacer hover */
+.tech-carousel-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-carousel {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Card de tecnología */
+.tech-card {
+  min-width: 80px;
+  position: relative;
+}
+
+/* Efecto sutil al pasar (sin brillo exagerado) */
+.tech-card:hover {
+  background-color: rgba(248, 250, 252, 1);
+}
+
+.dark .tech-card:hover {
+  background-color: rgba(51, 65, 85, 0.8);
+}
+
+/* Ocultar scrollbar en el carrusel de tecnologías */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Mostrar scrollbar suave al hacer hover */
+.hover-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.hover-scroll::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+  margin: 0 24px;
+}
+
+.hover-scroll::-webkit-scrollbar-thumb {
+  background: rgba(147, 51, 234, 0.3);
+  border-radius: 10px;
+}
+
+.hover-scroll:hover::-webkit-scrollbar-thumb {
+  background: rgba(147, 51, 234, 0.6);
+}
+
+.dark .hover-scroll::-webkit-scrollbar-thumb {
+  background: rgba(147, 51, 234, 0.4);
+}
+
+.dark .hover-scroll:hover::-webkit-scrollbar-thumb {
+  background: rgba(147, 51, 234, 0.7);
+}
+
+/* Scroll suave */
+.overflow-x-auto {
+  scroll-behavior: smooth;
+  scroll-padding: 0 24px;
+}
+
 /* Scrollbar personalizada para contenido largo */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;

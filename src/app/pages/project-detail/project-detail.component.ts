@@ -50,14 +50,26 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // Scroll al inicio de la página
+    if (this.isBrowser) {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
 
-   this.themeService.isDarkMode$.subscribe((isDarkMode)=>{
-    this.isDarkMode = isDarkMode;
-   });
+    // Suscripción al tema
+    this.themeService.isDarkMode$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((isDarkMode) => {
+        this.isDarkMode = isDarkMode;
+      });
 
+    // Suscripción a los parámetros de la ruta
     this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       const projectId = params['id'];
       if (projectId) {
+        // Scroll al inicio cuando cambia el proyecto
+        if (this.isBrowser) {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
         this.loadProject(projectId);
       } else {
         this.router.navigate(['/projects']);

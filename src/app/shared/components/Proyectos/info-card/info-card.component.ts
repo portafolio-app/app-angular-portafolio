@@ -32,6 +32,7 @@ export interface Project {
   featured: boolean;
   createdAt: Date;
   highlights?: string[];
+  challenges?: string[];
   metrics?: ProjectMetrics;
   videoUrl?: string; // Campo simple para video
 }
@@ -226,6 +227,19 @@ export class InfoCardComponent {
         this.project.metrics.forks ||
         this.project.metrics.downloads)
     );
+  }
+
+  /**
+   * Formatea números grandes (ej: 1000 -> 1K)
+   */
+  formatNumber(num: number): string {
+    if (num >= 1000000) {
+      return (num / 1000000).toFixed(1) + 'M';
+    }
+    if (num >= 1000) {
+      return (num / 1000).toFixed(1) + 'K';
+    }
+    return num.toString();
   }
 
   /**

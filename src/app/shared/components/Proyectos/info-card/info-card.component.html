@@ -1,6 +1,6 @@
-<div class="min-h-screen bg-slate-50 dark:bg-slate-900">
+<div class="bg-transparent">
 
-  <header class="relative bg-white dark:bg-slate-800 rounded-t-xl overflow-hidden">
+  <header class="relative bg-white dark:bg-slate-800 rounded-t-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-700">
     <div *ngIf="hasProjectVideo()" class="w-full bg-black">
       <div class="relative w-full" style="padding-bottom: 56.25%;">
         <iframe [src]="getVideoEmbedUrl(project.videoUrl!)" [title]="project.title + ' - Demo'"
@@ -24,8 +24,8 @@
   </header>
 
   <!-- INFORMACIÓN DEL PROYECTO -->
-  <div class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
-    <div class="container mx-auto px-6 py-6 max-w-6xl">
+  <div class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 shadow-sm">
+    <div class="px-6 py-6">
       <!-- Categoría y año -->
       <div class="flex items-center gap-4 mb-4">
         <span class="text-slate-600 dark:text-slate-300 font-medium text-sm">
@@ -36,11 +36,11 @@
         <span class="text-slate-500 text-sm">{{ project.createdAt | date:'yyyy' }}</span>
       </div>
 
-      <p class="text-lg text-slate-700 dark:text-slate-300 leading-relaxed mb-6 max-w-4xl">
+      <p class="text-lg text-slate-700 dark:text-slate-300 leading-relaxed mb-6">
         {{ project.description }}
       </p>
 
-      <!-- Highlights principales - CON VERIFICACIÓN NULL -->
+      <!-- Highlights principales -->
       <div *ngIf="project.highlights && project.highlights.length > 0" class="flex flex-wrap gap-2">
         <span *ngFor="let highlight of project.highlights.slice(0, 4)"
           class="inline-flex items-center px-3 py-1 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 text-sm rounded-full border border-emerald-200 dark:border-emerald-800">
@@ -55,86 +55,142 @@
     </div>
   </div>
 
+  <!-- TECNOLOGÍAS - FRANJA HORIZONTAL -->
+  <div class="bg-slate-50 dark:bg-slate-800/50 border-y border-slate-200 dark:border-slate-700 py-6 overflow-hidden">
+    <div class="px-6 mb-4 flex items-center justify-between">
+      <div class="flex items-center">
+        <i class="fas fa-code text-slate-600 dark:text-slate-400 mr-3"></i>
+        <h3 class="text-base font-semibold text-slate-900 dark:text-white">
+          Stack Tecnológico
+        </h3>
+        <span class="ml-3 text-xs bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 px-2.5 py-1 rounded-full">
+          {{ project.technologies.length }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Si hay muchas tecnologías (más de 7): Carrusel animado -->
+    <div *ngIf="project.technologies.length > 7" class="relative tech-carousel-container">
+      <div class="tech-carousel-track">
+        <!-- Primera copia -->
+        <div *ngFor="let tech of project.technologies" (click)="onTechClick(tech)"
+          class="tech-card flex-shrink-0 flex flex-col items-center justify-center p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-500 cursor-pointer transition-all group hover:scale-105 hover:shadow-md hover:z-10 w-20">
+          <div class="w-12 h-12 mb-2 flex items-center justify-center bg-slate-50 dark:bg-slate-700/50 rounded-md group-hover:scale-110 transition-transform">
+            <img [src]="tech.icon" [alt]="tech.name" class="w-10 h-10 object-contain">
+          </div>
+          <span class="text-xs font-medium text-slate-700 dark:text-slate-300 text-center leading-tight">
+            {{ tech.name }}
+          </span>
+        </div>
+
+        <!-- Segunda copia para loop infinito -->
+        <div *ngFor="let tech of project.technologies" (click)="onTechClick(tech)"
+          class="tech-card flex-shrink-0 flex flex-col items-center justify-center p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-500 cursor-pointer transition-all group hover:scale-105 hover:shadow-md hover:z-10 w-20">
+          <div class="w-12 h-12 mb-2 flex items-center justify-center bg-slate-50 dark:bg-slate-700/50 rounded-md group-hover:scale-110 transition-transform">
+            <img [src]="tech.icon" [alt]="tech.name" class="w-10 h-10 object-contain">
+          </div>
+          <span class="text-xs font-medium text-slate-700 dark:text-slate-300 text-center leading-tight">
+            {{ tech.name }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Gradientes laterales -->
+      <div class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-slate-50 dark:from-slate-800/50 to-transparent pointer-events-none z-10"></div>
+      <div class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-slate-50 dark:from-slate-800/50 to-transparent pointer-events-none z-10"></div>
+    </div>
+
+    <!-- Si hay pocas tecnologías (7 o menos): Grid centrado sin animación -->
+    <div *ngIf="project.technologies.length <= 7" class="px-6">
+      <div class="flex flex-wrap justify-center gap-4">
+        <div *ngFor="let tech of project.technologies" (click)="onTechClick(tech)"
+          class="flex flex-col items-center justify-center p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-500 cursor-pointer transition-all group hover:scale-105 hover:shadow-md w-20">
+          <div class="w-12 h-12 mb-2 flex items-center justify-center bg-slate-50 dark:bg-slate-700/50 rounded-md group-hover:scale-110 transition-transform">
+            <img [src]="tech.icon" [alt]="tech.name" class="w-10 h-10 object-contain">
+          </div>
+          <span class="text-xs font-medium text-slate-700 dark:text-slate-300 text-center leading-tight">
+            {{ tech.name }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- CONTENIDO PRINCIPAL -->
-  <main class="container mx-auto px-6 py-8 max-w-6xl">
-    <div class="grid grid-cols-1 xl:grid-cols-4 gap-8">
+  <main class="px-6 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-      <!-- CONTENIDO PRINCIPAL -->
-      <div class="xl:col-span-3 space-y-8">
+      <!-- CONTENIDO PRINCIPAL - Características -->
+      <div class="lg:col-span-2 space-y-6">
 
-        <!-- Características principales - CON VERIFICACIÓN NULL -->
+        <!-- Características principales -->
         <section *ngIf="project.highlights && project.highlights.length > 0"
           class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
-          <div class="p-6 border-b border-slate-200 dark:border-slate-700">
-            <h2 class="text-xl font-semibold text-slate-900 dark:text-white flex items-center">
+          <div class="p-5 border-b border-slate-200 dark:border-slate-700">
+            <h2 class="text-lg font-semibold text-slate-900 dark:text-white flex items-center">
               <i class="fas fa-star text-amber-500 mr-3"></i>
               Características Principales
             </h2>
           </div>
-          <div class="p-6">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="p-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div *ngFor="let highlight of project.highlights"
-                class="flex items-start space-x-3 p-4 bg-slate-50 dark:bg-slate-700/30 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-colors">
-                <div class="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0">
+                class="flex items-start space-x-3 p-3 bg-slate-50 dark:bg-slate-700/30 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-colors">
+                <div class="w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0">
                   <i class="fas fa-check text-white text-xs"></i>
                 </div>
-                <span class="text-slate-700 dark:text-slate-300 leading-relaxed">{{ highlight }}</span>
+                <span class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">{{ highlight }}</span>
               </div>
             </div>
           </div>
         </section>
-      </div>
-      <!-- SIDEBAR -->
-      <aside class="xl:col-span-1 space-y-6">
 
-        <!-- Tecnologías - MEJORADAS Y ORGANIZADAS -->
-        <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
-          <div class="p-6 border-b border-slate-200 dark:border-slate-700">
-            <h3 class="font-semibold text-slate-900 dark:text-white flex items-center justify-between">
-              <span class="flex items-center">
-                <i class="fas fa-code text-purple-500 mr-2"></i>
-                Tecnologías
-              </span>
-              <span
-                class="text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-2 py-1 rounded-full">
-                {{ project.technologies.length || 0 }}
-              </span>
-            </h3>
+        <!-- Desafíos y Soluciones -->
+        <section *ngIf="project.challenges && project.challenges.length > 0"
+          class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
+          <div class="p-5 border-b border-slate-200 dark:border-slate-700">
+            <h2 class="text-lg font-semibold text-slate-900 dark:text-white flex items-center">
+              <i class="fas fa-lightbulb text-yellow-500 mr-3"></i>
+              Desafíos y Soluciones
+            </h2>
           </div>
-          <div class="p-6">
-            <!-- Grid organizado de tecnologías -->
-            <div class="grid grid-cols-2 gap-3">
-              <div *ngFor="let tech of project.technologies" (click)="onTechClick(tech)"
-                class="flex flex-col items-center p-3 bg-slate-50 dark:bg-slate-700/30 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700/50 cursor-pointer transition-colors group">
-                <img [src]="tech.icon" [alt]="tech.name"
-                  class="w-10 h-10 rounded-lg mb-2 group-hover:scale-105 transition-transform">
-                <span class="text-xs font-medium text-slate-900 dark:text-white text-center leading-tight">
-                  {{ tech.name }}
-                </span>
+          <div class="p-5">
+            <div class="space-y-4">
+              <div *ngFor="let challenge of project.challenges; let i = index"
+                class="flex items-start space-x-4 p-4 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/10 dark:to-orange-900/10 rounded-lg border border-amber-200 dark:border-amber-800 hover:shadow-md transition-all">
+                <div class="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                  {{ i + 1 }}
+                </div>
+                <div class="flex-1">
+                  <p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">{{ challenge }}</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
+
+      </div>
+
+      <!-- SIDEBAR - Enlaces e Información -->
+      <aside class="lg:col-span-1 space-y-6">
 
         <!-- Enlaces -->
         <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
-          <div class="p-6 border-b border-slate-200 dark:border-slate-700">
-            <h3 class="font-semibold text-slate-900 dark:text-white flex items-center">
+          <div class="p-4 border-b border-slate-200 dark:border-slate-700">
+            <h3 class="text-base font-semibold text-slate-900 dark:text-white flex items-center">
               <i class="fas fa-external-link-alt text-indigo-500 mr-2"></i>
               Enlaces
             </h3>
           </div>
-          <div class="p-6 space-y-3">
-            <!-- Enlaces regulares -->
+          <div class="p-4 space-y-2">
             <button *ngFor="let link of project.links" (click)="onLinkClick(link)" [class]="getLinkButtonClass(link)"
-              class="w-full flex items-center justify-center space-x-2 p-3 rounded-lg text-sm font-medium transition-all hover:shadow-md">
+              class="w-full flex items-center justify-center space-x-2 p-3 rounded-lg text-sm font-medium transition-all hover:shadow-md hover:scale-105">
               <i [class]="getLinkIcon(link.type)"></i>
               <span>{{ link.label }}</span>
             </button>
 
-            <!-- Video link especial (si existe videoUrl y no está en links) -->
             <button *ngIf="project.videoUrl && !hasVideoInLinks()" (click)="openVideo(project.videoUrl)"
-              class="w-full flex items-center justify-center space-x-2 p-3 rounded-lg text-sm font-medium bg-red-600 hover:bg-red-700 text-white transition-all hover:shadow-md">
+              class="w-full flex items-center justify-center space-x-2 p-3 rounded-lg text-sm font-medium bg-red-600 hover:bg-red-700 text-white transition-all hover:shadow-md hover:scale-105">
               <i class="fab fa-youtube"></i>
               <span>Ver Demo</span>
             </button>
@@ -143,8 +199,8 @@
 
         <!-- Información adicional -->
         <div
-          class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-xl p-6 border border-slate-200 dark:border-slate-600">
-          <h4 class="font-semibold text-slate-900 dark:text-white mb-4 flex items-center">
+          class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-xl p-5 border border-slate-200 dark:border-slate-600 shadow-sm">
+          <h4 class="text-base font-semibold text-slate-900 dark:text-white mb-4 flex items-center">
             <i class="fas fa-info-circle text-blue-500 mr-2"></i>
             Información
           </h4>
@@ -167,10 +223,6 @@
               <span class="font-medium text-slate-900 dark:text-white">
                 {{ project.createdAt | date:'yyyy' }}
               </span>
-            </div>
-            <div *ngIf="project.featured" class="flex justify-between items-center">
-              <span class="text-slate-600 dark:text-slate-400">Destacado:</span>
-              <i class="fas fa-star text-amber-500"></i>
             </div>
           </div>
         </div>
