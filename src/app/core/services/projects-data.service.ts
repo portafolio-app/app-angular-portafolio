@@ -164,6 +164,73 @@ export class ProjectsDataService {
         },
       },
       {
+        id: '8',
+        title: 'Polule Ice - Sistema de Ventas e Inventario',
+        description:
+          'Sistema integral de gestión de ventas e inventario desarrollado como proyecto freelance. La aplicación implementa autenticación segura con JWT y Spring Security, permitiendo la administración de dos roles distintos: Administrador y Vendedor. El sistema ofrece un panel administrativo completo para la gestión de inventario en tiempo real, control de ventas, y generación de reportes diarios, semanales y mensuales. Desarrollado con Angular en el frontend y Spring Boot en el backend, utiliza MySQL como base de datos para garantizar la persistencia y confiabilidad de la información. La arquitectura permite escalar el negocio con funcionalidades como control de stock, alertas de inventario bajo, historial de transacciones y análisis de ventas.',
+        shortDescription:
+          'Sistema completo de ventas e inventario con autenticación JWT, reportes automáticos y gestión de roles.',
+        image: '../assets/polule-ice.png',
+        technologies: [
+          {
+            name: 'Angular',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg',
+          },
+          {
+            name: 'Spring Boot',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg',
+          },
+          {
+            name: 'Spring Security',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg',
+          },
+          {
+            name: 'TypeScript',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+          },
+          {
+            name: 'MySQL',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-plain-wordmark.svg',
+          },
+          {
+            name: 'Java',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
+          },
+        ],
+        links: [
+          {
+            type: 'demo',
+            url: 'https://polule-ice.netlify.app',
+            label: 'Ver Demo',
+          },
+        ],
+        category: 'freelance',
+        status: 'completed',
+        featured: true,
+        createdAt: new Date('2025-01-17'),
+        highlights: [
+          'Autenticación segura con JWT y Spring Security',
+          'Gestión de roles: Administrador y Vendedor',
+          'Sistema de inventario en tiempo real',
+          'Reportes diarios, semanales y mensuales',
+          'Control de ventas y transacciones',
+          'Alertas de stock bajo automáticas',
+          'Panel administrativo intuitivo',
+          'Historial completo de operaciones',
+          'Análisis de ventas con gráficos',
+        ],
+        challenges: [
+          'Implementación de sistema de permisos granular',
+          'Optimización de consultas para reportes en tiempo real',
+          'Sincronización de inventario entre múltiples usuarios',
+        ],
+        metrics: {
+          stars: 20,
+          forks: 8,
+          downloads: 120,
+        },
+      },
+      {
         id: '2',
         title: 'FinanceTracker - Gestión Inteligente de Deudas y Préstamos',
         description:
