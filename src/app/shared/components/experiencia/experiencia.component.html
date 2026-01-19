@@ -35,8 +35,7 @@
 
           <!-- Punto central en timeline (desktop) -->
           <div
-            class="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full border-4 border-white dark:border-gray-900 z-10"
-            [ngClass]="exp.current ? 'bg-emerald-500 shadow-lg shadow-emerald-500/50' : 'bg-gray-400 dark:bg-gray-600'">
+            class="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full border-4 border-white dark:border-gray-900 z-10 bg-gray-400 dark:bg-gray-600">
           </div>
 
           <!-- Spacer (mantiene el layout 50-50) -->
@@ -59,12 +58,6 @@
                     <p class="text-sm text-gray-600 dark:text-gray-400">{{ exp.company }}</p>
                   </div>
                 </div>
-
-                <!-- Badge "Actual" -->
-                <span *ngIf="exp.current"
-                  class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-semibold rounded-full border border-emerald-200 dark:border-emerald-700">
-                  Actual
-                </span>
               </div>
 
               <!-- Período y ubicación -->

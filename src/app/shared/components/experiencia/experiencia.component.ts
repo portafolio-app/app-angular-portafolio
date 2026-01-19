@@ -127,10 +127,10 @@ export class ExperienciaComponent implements OnInit, AfterViewInit, OnDestroy {
       id: '1',
       title: 'Desarrollador de Software Front End',
       company: 'Gato Marketing y Software S.A.C',
-      period: 'Octubre 2025 - Presente',
+      period: 'Octubre 2025 - Enero 2026',
       location: 'Lima, Perú (Remoto)',
       type: 'work',
-      current: true,
+      current: false,
       description: 'Encargado del mantenimiento y desarrollo frontend de múltiples proyectos empresariales para distintos clientes: ERP contable, ERP de recursos humanos y plataforma de gestión para estudios fotográficos.',
       achievements: [
         'Desarrollo de arquitectura frontend con Angular para ERP contable de empresa cliente',
