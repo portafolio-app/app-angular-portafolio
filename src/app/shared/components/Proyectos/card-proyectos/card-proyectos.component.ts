@@ -52,11 +52,11 @@ export class CardProyectosComponent implements OnInit, AfterViewInit, OnDestroy 
   @ViewChild(ProjectFilterComponent) filterComponent!: ProjectFilterComponent;
 
   // Inputs
-  @Input() showFeaturedOnly: boolean = true;
+  @Input() showFeaturedOnly: boolean = false;
   @Input() sectionTitle: string = 'Mis Proyectos';
   @Input() sectionDescription: string = 'Proyectos Full Stack que demuestran mis habilidades en frontend, backend y despliegue.';
   @Input() showFilters: boolean = false; // deshabilitar filtros por defecto
-  @Input() projectsPerPage: number = 10;
+  @Input() projectsPerPage: number = 6;
 
   // Outputs
   @Output() projectClicked = new EventEmitter<Project>();
@@ -310,7 +310,13 @@ export class CardProyectosComponent implements OnInit, AfterViewInit, OnDestroy 
   loadMoreProjects(): void {
     this.showingAll = true;
     this.updateDisplayProjects();
-    this.cdr.markForCheck();
+
+    // Inicializar estados de animación para todos los proyectos
+    this.displayProjects.forEach((_, index) => {
+      this.animationStates[index] = 'visible';
+    });
+
+    this.cdr.detectChanges();
   }
 
   showLessProjects(): void {
@@ -324,7 +330,7 @@ export class CardProyectosComponent implements OnInit, AfterViewInit, OnDestroy 
   showAllProjects(): void {
     this.showFeaturedOnly = false;
     this.currentPage = 1;
-    this.showingAll = false;
+    this.showingAll = true; // Mostrar todos los proyectos
     this.updateDisplayProjects();
     this.cdr.markForCheck();
   }

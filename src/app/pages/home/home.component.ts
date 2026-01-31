@@ -24,6 +24,7 @@ import { FooterComponent } from '../../shared/components/footer/footer.component
 import { StackTecnologicoComponent } from '../../shared/components/stack-tecnologico/stack-tecnologico.component';
 import { HeroComponent } from '../../shared/components/hero/hero.component';
 import { ExperienciaComponent } from '../../shared/components/experiencia/experiencia.component';
+import { CertificacionesComponent } from '../../shared/components/certificaciones/certificaciones.component';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -38,6 +39,7 @@ import { Subscription } from 'rxjs';
     StackTecnologicoComponent,
     HeroComponent,
     ExperienciaComponent,
+    CertificacionesComponent,
     AlertComponent,
   ],
   templateUrl: './home.component.html',

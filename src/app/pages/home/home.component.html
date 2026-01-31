@@ -5,6 +5,11 @@
   <app-hero></app-hero>
 </section>
 
+<!-- Certificaciones Section -->
+<section id="certificaciones">
+  <app-certificaciones></app-certificaciones>
+</section>
+
 <!-- Experiencia Section -->
 <section id="experiencia">
   <app-experiencia></app-experiencia>
@@ -49,6 +54,7 @@
                focus:outline-none focus:ring-4 focus:ring-emerald-300 focus:ring-opacity-50
                dark:focus:ring-emerald-800
                disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none
+               cursor-pointer
                group" title="Información sobre el desarrollo del portafolio"
         aria-label="Mostrar información del portafolio" [disabled]="isAlertVisible"
         [class.animate-pulse]="isButtonLoading">

@@ -9,3 +9,6 @@
 /* input.css */
 @custom-variant dark (&:where(.dark, .dark *));
 
+body {
+  background-color: white !important;
+}

@@ -44,16 +44,7 @@
             {{ getFilterSummary() }}
           </p>
         </div>
-        <!-- Barra de búsqueda simple -->
         <div class="flex items-center gap-2 sm:gap-3">
-          <div class="relative w-full sm:w-64">
-            <input type="text" (input)="onSearchQueryChange($any($event.target).value)" placeholder="Buscar proyectos..."
-              class="w-full px-3 py-2 text-xs sm:text-sm bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-gray-800 dark:text-gray-100" />
-            <span class="absolute right-2 top-2.5 text-gray-400">
-              <i class="fas fa-search"></i>
-            </span>
-          </div>
-
           <div class="flex flex-wrap gap-2 sm:gap-2">
           <button *ngIf="!showFeaturedOnly && !hasActiveSearch" (click)="showOnlyFeatured()"
             class="text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300 text-xs sm:text-sm font-medium bg-emerald-50 dark:bg-emerald-900/30 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-all whitespace-nowrap">

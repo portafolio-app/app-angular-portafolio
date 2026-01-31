@@ -1,0 +1,115 @@
+<section class="py-16 bg-white dark:bg-gray-800 transition-colors duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        Certificaciones & Formación
+      </h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+        Mi compromiso continuo con el aprendizaje y la excelencia profesional
+      </p>
+    </div>
+
+    <!-- Certifications Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Certification Card -->
+      <div *ngFor="let cert of certifications"
+           class="bg-white dark:bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 dark:border-gray-700">
+
+        <!-- Status Badge -->
+        <div class="px-6 pt-6 pb-4">
+          <div class="flex items-center justify-between mb-4">
+            <span *ngIf="cert.status === 'completed'"
+                  class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+              <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              Completado
+            </span>
+            <span *ngIf="cert.status === 'in-progress'"
+                  class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+              <svg class="w-4 h-4 mr-1 animate-spin" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              En curso
+            </span>
+            <span class="text-sm text-gray-500 dark:text-gray-400">
+              {{ cert.date | date: 'yyyy' }}
+              <span *ngIf="cert.endDate"> - {{ cert.endDate | date: 'yyyy' }}</span>
+            </span>
+          </div>
+
+          <!-- Title & Issuer -->
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+            {{ cert.title }}
+          </h3>
+          <p class="text-emerald-600 dark:text-emerald-400 font-medium mb-3">
+            {{ cert.issuer }}
+          </p>
+
+          <!-- Description -->
+          <p class="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
+            {{ cert.description }}
+          </p>
+
+          <!-- Progress Bar for In-Progress -->
+          <div *ngIf="cert.status === 'in-progress'" class="mb-4">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Progreso</span>
+              <span class="text-sm font-medium text-blue-600 dark:text-blue-400">
+                {{ getProgressPercentage(cert) | number: '1.0-0' }}%
+              </span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
+              <div class="bg-gradient-to-r from-blue-500 to-emerald-500 h-2 rounded-full transition-all duration-300"
+                   [style.width.%]="getProgressPercentage(cert)">
+              </div>
+            </div>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">
+              <span *ngIf="getMonthsRemaining(cert) > 0">
+                Faltan {{ getMonthsRemaining(cert) }} mes<span *ngIf="getMonthsRemaining(cert) !== 1">es</span> para completar
+              </span>
+              <span *ngIf="getMonthsRemaining(cert) === 0">
+                Próximo a completar
+              </span>
+            </p>
+          </div>
+
+          <!-- Skills -->
+          <div class="mb-4">
+            <p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Skills:</p>
+            <div class="flex flex-wrap gap-2">
+              <span *ngFor="let skill of cert.skills"
+                    class="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs rounded-full border border-gray-300 dark:border-gray-600">
+                {{ skill }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Credential Link -->
+          <div *ngIf="cert.credentialUrl && cert.status === 'completed'" class="mt-4">
+            <a [href]="cert.credentialUrl"
+               target="_blank"
+               class="inline-flex items-center px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition-colors duration-200">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+              Ver Credencial
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="certifications.length === 0"
+         class="text-center py-12">
+      <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+      </svg>
+      <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">No hay certificaciones</h3>
+      <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Pronto agregaré más certificaciones.</p>
+    </div>
+  </div>
+</section>
