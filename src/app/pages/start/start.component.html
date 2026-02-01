@@ -29,10 +29,18 @@
 
   <!-- Scroll Down Hint -->
   <div class="scroll-hint" #scrollHint>
-    <div class="mouse-icon">
-      <div class="wheel"></div>
+    <!-- Desktop Version -->
+    <div class="hint-desktop">
+      <div class="mouse-icon">
+        <div class="wheel"></div>
+      </div>
+      <span class="scroll-text">Baja con el mouse</span>
     </div>
-    <span class="scroll-text">Baja con el mouse</span>
+    <!-- Mobile Version -->
+    <div class="hint-mobile">
+      <span class="scroll-text">Desliza hacia abajo</span>
+      <div class="swipe-arrow">↓</div>
+    </div>
   </div>
 
 </section>

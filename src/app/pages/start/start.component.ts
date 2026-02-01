@@ -57,6 +57,7 @@ export class StartComponent implements OnInit, AfterViewInit, OnDestroy {
   private targetMouseX = 0;
   private targetMouseY = 0;
   private scrollProgress = 0;
+  private touchStartY = 0;
 
   // Sistema de ripples (ondas circulares) como Offground
   private ripples: Array<{
@@ -122,6 +123,30 @@ export class StartComponent implements OnInit, AfterViewInit, OnDestroy {
     this.scrollProgress = Math.max(0, Math.min(1, this.scrollProgress + delta));
 
     // Ocultar hint cuando comience scroll
+    if (this.scrollProgress > 0.05 && this.scrollHint) {
+      this.scrollHint.nativeElement.classList.add('hidden');
+    }
+
+    // Activar cortinas cuando scroll llegue a 100%
+    if (this.scrollProgress >= 0.99 && !this.curtainsActivated) {
+      this.activateCurtains();
+    }
+  }
+
+  @HostListener('touchstart', ['$event'])
+  onTouchStart(event: TouchEvent): void {
+    this.touchStartY = event.touches[0].clientY;
+  }
+
+  @HostListener('touchmove', ['$event'])
+  onTouchMove(event: TouchEvent): void {
+    event.preventDefault();
+    const touchEndY = event.touches[0].clientY;
+    const delta = (this.touchStartY - touchEndY) * 0.0018;
+    this.scrollProgress = Math.max(0, Math.min(1, this.scrollProgress + delta));
+    this.touchStartY = touchEndY;
+
+    // Ocultar hint cuando comience swipe
     if (this.scrollProgress > 0.05 && this.scrollHint) {
       this.scrollHint.nativeElement.classList.add('hidden');
     }
