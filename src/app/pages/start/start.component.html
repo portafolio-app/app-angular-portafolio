@@ -1,23 +1,23 @@
-<section class="screen-container" [class.visible]="isVisible" (click)="handleClick($event)"
-  (touchstart)="handleTouchStart($event)" (touchend)="handleTouchEnd($event)" (pointerdown)="handlePointerDown($event)">
+<section class="screen-container" [class.visible]="isVisible">
+
 
   <!-- Fondo con gradiente moderno -->
   <div class="background-gradient"></div>
 
-  <!-- Grid de puntos -->
-  <div class="dot-grid"></div>
+  <!-- Canvas Three.js para partículas -->
+  <canvas #threeCanvas class="three-canvas"></canvas>
 
   <!-- Texto principal con letras individuales -->
-  <div class="main-content">
+  <div class="main-content" #mainContent>
     <h1 class="logo-title">
-      <span class="letter" (mouseenter)="onLetterHover($event)" style="--delay: 0.1s">J</span>
-      <span class="letter" (mouseenter)="onLetterHover($event)" style="--delay: 0.2s">C</span>
-      <span class="letter" (mouseenter)="onLetterHover($event)" style="--delay: 0.3s">V</span>
+      <span class="letter" style="--delay: 0.1s">J</span>
+      <span class="letter" style="--delay: 0.2s">C</span>
+      <span class="letter" style="--delay: 0.3s">V</span>
       <span class="letter space" style="--delay: 0.4s"> </span>
-      <span class="letter" (mouseenter)="onLetterHover($event)" style="--delay: 0.5s">C</span>
-      <span class="letter" (mouseenter)="onLetterHover($event)" style="--delay: 0.6s">O</span>
-      <span class="letter" (mouseenter)="onLetterHover($event)" style="--delay: 0.7s">D</span>
-      <span class="letter" (mouseenter)="onLetterHover($event)" style="--delay: 0.8s">E</span>
+      <span class="letter" style="--delay: 0.5s">C</span>
+      <span class="letter" style="--delay: 0.6s">O</span>
+      <span class="letter" style="--delay: 0.7s">D</span>
+      <span class="letter" style="--delay: 0.8s">E</span>
     </h1>
 
     <!-- Línea decorativa -->
@@ -27,28 +27,12 @@
     <p class="subtitle">Development Studio</p>
   </div>
 
-  <!-- Gotas animadas -->
-  <div class="droplets-container">
-    <div class="droplet" *ngFor="let droplet of droplets" [style.left.%]="droplet.left"
-      [style.animation-delay.s]="droplet.delay" [style.animation-duration.s]="droplet.duration"
-      [style.transform]="'scale(' + droplet.size + ')'">
-      <div class="droplet-inner"></div>
-      <div class="droplet-tail"></div>
+  <!-- Scroll Down Hint -->
+  <div class="scroll-hint" #scrollHint>
+    <div class="mouse-icon">
+      <div class="wheel"></div>
     </div>
-  </div>
-
-  <!-- Ondas de impacto -->
-  <div class="impact-waves">
-    <div class="wave" *ngFor="let droplet of droplets" [style.left.%]="droplet.left"
-      [style.animation-delay.s]="droplet.delay + droplet.duration - 0.3">
-    </div>
-  </div>
-
-  <!-- Elementos decorativos -->
-  <div class="floating-elements">
-    <div class="float-element" *ngFor="let i of [1,2,3,4,5,6]" [style.left.%]="i * 15"
-      [style.animation-delay.s]="i * 0.8">
-    </div>
+    <span class="scroll-text">Baja con el mouse</span>
   </div>
 
 </section>

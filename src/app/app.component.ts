@@ -1,7 +1,8 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component, OnInit, Inject, PLATFORM_ID, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, ChangeDetectorRef, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { FlowbiteService } from './flowbite.service';
+import { CurtainService } from './core/services/curtain.service';
 
 
 @Component({
@@ -15,11 +16,18 @@ export class AppComponent implements OnInit, AfterViewInit {
   title = 'portafolio_1.0_jcv';
   isDarkMode = false; // Estado del modo oscuro
 
+  @ViewChild('curtainLeft', { static: false })
+  curtainLeft!: ElementRef<HTMLDivElement>;
+
+  @ViewChild('curtainRight', { static: false })
+  curtainRight!: ElementRef<HTMLDivElement>;
+
   constructor(
     private flowbiteService: FlowbiteService,
     @Inject(PLATFORM_ID) private platformId: object,
     public router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private curtainService: CurtainService
   ) {}
 
   // Usamos async/await para asegurar que el flujo sea correcto
@@ -39,6 +47,13 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+     // Inicializar el servicio de cortinas con las referencias
+     if (this.curtainLeft && this.curtainRight) {
+       this.curtainService.setCurtainElements(
+         this.curtainLeft.nativeElement,
+         this.curtainRight.nativeElement
+       );
+     }
     // Forzamos la detección de cambios después de la renderización de la vista
     this.cdr.detectChanges();
   }

@@ -1,7 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  HostListener,
+  AfterViewInit,
+  ElementRef,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
+import * as THREE from 'three';
+import { gsap } from 'gsap';
 
+import { CurtainService } from '../../core/services/curtain.service';
 @Component({
   standalone: true,
   selector: 'app-start',
@@ -9,161 +20,378 @@ import { Router } from '@angular/router';
   templateUrl: './start.component.html',
   styleUrls: ['./start.component.css'],
 })
-export class StartComponent implements OnInit, OnDestroy {
+export class StartComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('threeCanvas', { static: false })
+  canvasRef!: ElementRef<HTMLCanvasElement>;
+
+
+  @ViewChild('mainContent', { static: false })
+  mainContent!: ElementRef<HTMLDivElement>;
+
+  @ViewChild('scrollHint', { static: false })
+  scrollHint!: ElementRef<HTMLDivElement>;
+
   isVisible = false;
-  droplets: any[] = [];
-  private hasInteracted = false;
-  private fadeOutTimeout: any;
-  private touchStartTime = 0;
 
-  constructor(private router: Router) {}
+    constructor(
+      private router: Router,
+      private curtainService: CurtainService
+    ) {}
 
-  @HostListener('document:keydown', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.key === 'Enter' && this.isVisible && !this.hasInteracted) {
-      this.navigateToHome();
-    }
-  }
+  private scene!: THREE.Scene;
+  private camera!: THREE.PerspectiveCamera;
+  private renderer!: THREE.WebGLRenderer;
+  private geometry!: THREE.BufferGeometry;
+  private material!: THREE.PointsMaterial;
+  private points!: THREE.Points;
+  private animationId = 0;
+  private basePositions = new Float32Array(0);
+  private textPositions = new Float32Array(0);
+  private time = 0;
 
-  // Manejo más robusto de eventos táctiles para tablets
-  @HostListener('touchstart', ['$event'])
-  handleTouchStart(event: TouchEvent) {
-    this.touchStartTime = Date.now();
+  private particleCount = 15100; // 150x100 + 100 extras
+  private spacing = 0.24; // Mantener por compatibilidad
 
-    // Prevenir zoom con múltiples dedos
-    if (event.touches.length > 1) {
-      event.preventDefault();
-      return;
-    }
+  private mouseX = 0;
+  private mouseY = 0;
+  private targetMouseX = 0;
+  private targetMouseY = 0;
+  private scrollProgress = 0;
 
-    // Para tablets que manejan touchstart diferente
-    if (!this.hasInteracted) {
-      // Pequeño delay para evitar conflictos con gestos del sistema
-      setTimeout(() => {
-        if (!this.hasInteracted && Date.now() - this.touchStartTime < 200) {
-          this.navigateToHome();
-        }
-      }, 50);
-    }
-  }
-
-  @HostListener('touchend', ['$event'])
-  handleTouchEnd(event: TouchEvent) {
-    const touchDuration = Date.now() - this.touchStartTime;
-
-    // Solo procesar si es un tap corto (no un swipe o gesto largo)
-    if (
-      event.changedTouches.length === 1 &&
-      touchDuration < 300 &&
-      !this.hasInteracted
-    ) {
-      event.preventDefault();
-      this.navigateToHome();
-    }
-  }
-
-  // Backup con evento click para casos donde touch no funciona
-  @HostListener('click', ['$event'])
-  handleClick(event: MouseEvent) {
-    if (!this.hasInteracted) {
-      this.navigateToHome();
-    }
-  }
-
-  // Manejo de pointer events (más moderno y compatible)
-  @HostListener('pointerdown', ['$event'])
-  handlePointerDown(event: PointerEvent) {
-    if (!this.hasInteracted && event.isPrimary) {
-      // Delay pequeño para tablets que procesan eventos más lento
-      setTimeout(() => {
-        if (!this.hasInteracted) {
-          this.navigateToHome();
-        }
-      }, 100);
-    }
-  }
+  // Sistema de ripples (ondas circulares) como Offground
+  private ripples: Array<{
+    x: number;
+    y: number;
+    startTime: number;
+    maxAge: number;
+  }> = [];
 
   ngOnInit(): void {
-    // Aparición gradual
     setTimeout(() => {
       this.isVisible = true;
-    }, 500);
+    }, 300);
+  }
 
-    // Generar droplets aleatorios
-    setTimeout(() => {
-      this.generateDroplets();
-    }, 2000);
-
-    // Auto-navegación
-    this.fadeOutTimeout = setTimeout(() => {
-      if (!this.hasInteracted) {
-        this.navigateToHome();
-      }
-    }, 8000);
+  ngAfterViewInit(): void {
+    this.initThree();
+    // Pasar elementos al servicio de cortinas
+    this.curtainService.setCanvasAndContent(
+      this.canvasRef.nativeElement,
+      this.mainContent.nativeElement
+    );
+    this.animate();
   }
 
   ngOnDestroy(): void {
-    clearTimeout(this.fadeOutTimeout);
-  }
+    if (this.animationId) {
+      cancelAnimationFrame(this.animationId);
+    }
 
-  generateDroplets(): void {
-    // Crear 12 gotas distribuidas
-    for (let i = 0; i < 12; i++) {
-      this.droplets.push({
-        id: i,
-        left: Math.random() * 80 + 10,
-        delay: Math.random() * 3,
-        duration: 2 + Math.random() * 2,
-        size: 0.5 + Math.random() * 1,
-      });
+    if (this.geometry) {
+      this.geometry.dispose();
+    }
+
+    if (this.material) {
+      this.material.dispose();
+    }
+
+    if (this.renderer) {
+      this.renderer.dispose();
     }
   }
 
-  navigateToHome(): void {
-    if (this.hasInteracted) return;
+  @HostListener('window:resize')
+  onResize(): void {
+    if (!this.camera || !this.renderer) return;
 
-    this.hasInteracted = true;
-    clearTimeout(this.fadeOutTimeout);
-    this.isVisible = false;
-
-    // Agregar efecto de ondas al hacer click
-    this.createClickEffect();
-
-    setTimeout(() => {
-      this.router.navigateByUrl('/home');
-    }, 600);
+    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
   }
 
-  createClickEffect(): void {
-    // Crear múltiples gotas desde el centro al hacer click
-    for (let i = 0; i < 8; i++) {
-      const droplet = {
-        id: Date.now() + i,
-        left: 50 + (Math.random() - 0.5) * 40,
-        delay: i * 0.1,
-        duration: 1,
-        size: 1.5,
-      };
-      this.droplets.push(droplet);
+  @HostListener('window:mousemove', ['$event'])
+  onMouseMove(event: MouseEvent): void {
+    this.targetMouseX = (event.clientX / window.innerWidth) * 2 - 1;
+    this.targetMouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+  }
+
+  @HostListener('wheel', ['$event'])
+  onWheel(event: WheelEvent): void {
+    event.preventDefault();
+    const delta = event.deltaY * 0.0015;
+    this.scrollProgress = Math.max(0, Math.min(1, this.scrollProgress + delta));
+
+    // Ocultar hint cuando comience scroll
+    if (this.scrollProgress > 0.05 && this.scrollHint) {
+      this.scrollHint.nativeElement.classList.add('hidden');
+    }
+
+    // Activar cortinas cuando scroll llegue a 100%
+    if (this.scrollProgress >= 0.99 && !this.curtainsActivated) {
+      this.activateCurtains();
     }
   }
 
-  onLetterHover(event: any): void {
-    // Crear efecto de gota al hacer hover
-    const rect = event.target.getBoundingClientRect();
-    const droplet = {
-      id: Date.now(),
-      left: ((rect.left + rect.width / 2) / window.innerWidth) * 100,
-      delay: 0,
-      duration: 1.5,
-      size: 1.2,
-    };
+  private curtainsActivated = false;
 
-    this.droplets.push(droplet);
+  private activateCurtains(): void {
+    this.curtainsActivated = true;
+    console.log('🎬 Activando cortinas!');
 
-    // Remover después de la animación
-    setTimeout(() => {
-      this.droplets = this.droplets.filter((d) => d.id !== droplet.id);
-    }, 2000);
+    // Usar el servicio de cortinas para manejar la transición
+    // Las cortinas persisten en app.component, así que se abren automáticamente después
+    this.curtainService.closeCurtains(() => {
+      console.log('🏠 Navegando al home...');
+      this.router.navigate(['/home']);
+    });
+  }
+  @HostListener('click', ['$event'])
+  onClick(event: MouseEvent): void {
+    const rect = this.canvasRef.nativeElement.getBoundingClientRect();
+    const mouse = new THREE.Vector2();
+    mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+    // Raycast para obtener la posición en el plano horizontal (Y=0)
+    const raycaster = new THREE.Raycaster();
+    raycaster.setFromCamera(mouse, this.camera);
+
+    // Plano horizontal en Y=0 (el plano está rotado -90 grados en X)
+    const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+    const intersectPoint = new THREE.Vector3();
+    raycaster.ray.intersectPlane(plane, intersectPoint);
+
+    // Crear ripple con tiempo de inicio
+    this.ripples.push({
+      x: intersectPoint.x,
+      y: intersectPoint.z, // En el plano horizontal, Z es la profundidad (Y en 2D)
+      startTime: performance.now(),
+      maxAge: 4000 // 4 segundos como Offground
+    });
+
+    console.log('Ripple creado en:', intersectPoint.x.toFixed(2), intersectPoint.z.toFixed(2));
+  }
+
+  private initThree(): void {
+    const canvas = this.canvasRef.nativeElement;
+
+    this.scene = new THREE.Scene();
+    this.scene.fog = new THREE.Fog(0xffffff, 25, 50); // Fog blanco como el fondo
+
+    const aspect = window.innerWidth / window.innerHeight;
+    this.camera = new THREE.PerspectiveCamera(75, aspect, 0.1, 1000);
+    // Cámara más alta para ver el plano completo
+    this.camera.position.set(0, 10, 0);
+    this.camera.lookAt(0, 0, 0);
+
+    this.renderer = new THREE.WebGLRenderer({
+      canvas,
+      alpha: true,
+      antialias: true,
+    });
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    this.createParticles();
+  }
+
+  private createParticles(): void {
+    // PlaneGeometry más grande para llenar pantalla: 40x30 unidades, 250x200 subdivisiones
+    this.geometry = new THREE.PlaneGeometry(40, 30, 250, 200);
+
+    const positionAttr = this.geometry.getAttribute('position') as THREE.BufferAttribute;
+    this.particleCount = positionAttr.count;
+
+    // Guardar posiciones base
+    this.basePositions = new Float32Array(this.particleCount * 3);
+    for (let i = 0; i < this.particleCount; i++) {
+      this.basePositions[i * 3] = positionAttr.getX(i);
+      this.basePositions[i * 3 + 1] = positionAttr.getY(i);
+      this.basePositions[i * 3 + 2] = positionAttr.getZ(i);
+    }
+
+    // Crear textura circular para los puntos
+    const canvas = document.createElement('canvas');
+    canvas.width = 32;
+    canvas.height = 32;
+    const ctx = canvas.getContext('2d')!;
+    const gradient = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+    gradient.addColorStop(0, 'rgba(255,255,255,1)');
+    gradient.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 32, 32);
+    const texture = new THREE.CanvasTexture(canvas);
+
+    this.material = new THREE.PointsMaterial({
+      color: 0x00ff00, // Verde puro
+      size: 0.015,
+      sizeAttenuation: true,
+      transparent: true,
+      opacity: 0.95,
+      blending: THREE.NormalBlending,
+      map: texture
+    });
+
+    this.points = new THREE.Points(this.geometry, this.material);
+
+    // Generar posiciones basadas en el texto "JCV CODE"
+    this.generateTextPositions();
+
+    // Crear grupo para rotación
+    const surface = new THREE.Group();
+    surface.add(this.points);
+    surface.rotation.x = -Math.PI / 2; // Rotar para que sea plano
+    this.scene.add(surface);
+  }
+
+  private generateTextPositions(): void {
+    // Crear canvas para renderizar texto
+    const canvas = document.createElement('canvas');
+    const size = 512;
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d')!;
+
+    // Configurar texto - SOLO CONTORNO
+    ctx.strokeStyle = 'white';
+    ctx.lineWidth = 3;
+    ctx.font = 'bold 80px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.strokeText('JCV CODE', size / 2, size / 2);
+
+    // Obtener píxeles del texto
+    const imageData = ctx.getImageData(0, 0, size, size);
+    const pixels = imageData.data;
+
+    // Extraer posiciones de píxeles blancos (contorno del texto)
+    const textPoints: number[] = [];
+    const step = 3; // Saltar píxeles para tener menos puntos
+
+    for (let y = 0; y < size; y += step) {
+      for (let x = 0; x < size; x += step) {
+        const i = (y * size + x) * 4;
+        const alpha = pixels[i + 3];
+
+        if (alpha > 128) {
+          // Normalizar a coordenadas -5 a 5 en X, -4 a 4 en Y
+          const px = ((x / size) * 10 - 5);
+          const py = ((y / size) * 8 - 4);
+          textPoints.push(px, py, 0);
+        }
+      }
+    }
+
+    // Asignar posiciones a partículas
+    this.textPositions = new Float32Array(this.particleCount * 3);
+
+    for (let i = 0; i < this.particleCount; i++) {
+      if (i < textPoints.length / 3) {
+        // Usar posición del contorno del texto
+        this.textPositions[i * 3] = textPoints[i * 3];
+        this.textPositions[i * 3 + 1] = textPoints[i * 3 + 1];
+        this.textPositions[i * 3 + 2] = textPoints[i * 3 + 2];
+      } else {
+        // Puntos extras: distribuir aleatoriamente alrededor
+        const angle = Math.random() * Math.PI * 2;
+        const radius = 6 + Math.random() * 2;
+        this.textPositions[i * 3] = Math.cos(angle) * radius;
+        this.textPositions[i * 3 + 1] = Math.sin(angle) * radius * 0.6;
+        this.textPositions[i * 3 + 2] = (Math.random() - 0.5) * 2;
+      }
+    }
+  }
+
+  private animate(): void {
+    this.animationId = requestAnimationFrame(() => this.animate());
+    this.time += 0.03;
+
+    this.mouseX += (this.targetMouseX - this.mouseX) * 0.04;
+    this.mouseY += (this.targetMouseY - this.mouseY) * 0.04;
+
+    this.updateParticles();
+
+    this.renderer.render(this.scene, this.camera);
+  }
+
+  private updateParticles(): void {
+    const positionAttr = this.geometry.getAttribute('position') as THREE.BufferAttribute;
+    const currentTime = performance.now();
+
+    // Parámetros de ondas como Offground
+    const clickFrequency = 4.0;
+    const clickAmplitude = 0.7;
+    const clickSpeed = 2.0;
+    const clickDamping = 0.6;
+    const fadeInDuration = 1000;
+    const fadeOutDuration = 2200;
+
+    // Limpiar ripples expirados
+    this.ripples = this.ripples.filter(ripple => {
+      const age = currentTime - ripple.startTime;
+      return age <= ripple.maxAge;
+    });
+
+    for (let i = 0; i < this.particleCount; i++) {
+      const i3 = i * 3;
+      const baseX = this.basePositions[i3];
+      const baseY = this.basePositions[i3 + 1];
+
+      // Ondas suaves de base (muy reducidas)
+      const waveY = Math.sin(baseX * 0.8 + this.time) * 0.15 +
+                    Math.sin(baseX * 1.5 + this.time * 0.7) * 0.08;
+
+      const waveX = Math.sin(baseY * 0.6 + this.time * 0.8) * 0.1 +
+                    Math.cos(baseY * 1.2 + this.time * 0.5) * 0.05;
+
+      const waveZ = Math.sin((baseX + baseY) * 0.4 + this.time * 0.6) * 0.1;
+
+      // Calcular ondas circulares de ripples (COMO OFFGROUND)
+      let ripplesY = 0;
+      for (const ripple of this.ripples) {
+        const rippleAge = currentTime - ripple.startTime;
+
+        // Envelope con fade in/out suave
+        let envelope;
+        if (rippleAge < fadeInDuration) {
+          envelope = rippleAge / fadeInDuration;
+        } else if (rippleAge > ripple.maxAge - fadeOutDuration) {
+          envelope = 1.0 - (rippleAge - (ripple.maxAge - fadeOutDuration)) / fadeOutDuration;
+        } else {
+          envelope = 1.0;
+        }
+        envelope = Math.max(0, envelope);
+
+        // Distancia desde el centro del ripple
+        const dx = baseX - ripple.x;
+        const dy = baseY - ripple.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        // Onda circular con decaimiento exponencial
+        ripplesY += envelope * clickAmplitude *
+                    Math.exp(-distance * clickDamping) *
+                    Math.sin(distance * clickFrequency - (rippleAge / 1000) * clickSpeed);
+      }
+
+      // Posición final con ondas base + ripples
+      const planeX = baseX + waveX;
+      const planeY = waveY + ripplesY; // Ripples en Y (altura del plano)
+      const planeZ = baseY + waveZ;
+
+      // Posición del texto (para scroll)
+      const textX = this.textPositions[i * 3];
+      const textY = this.textPositions[i * 3 + 1];
+      const textZ = this.textPositions[i * 3 + 2];
+
+      // Interpolar entre plano ondulado y texto
+      positionAttr.setXYZ(
+        i,
+        planeX + (textX - planeX) * this.scrollProgress,
+        planeY + (textY - planeY) * this.scrollProgress,
+        planeZ + (textZ - planeZ) * this.scrollProgress
+      );
+    }
+
+    positionAttr.needsUpdate = true;
   }
 }
