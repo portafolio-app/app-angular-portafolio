@@ -69,7 +69,6 @@ export class NavbardComponent implements OnInit {
     }, 100);
   }
 
-  // FUNCIÓN CORREGIDA: Scroll suave a las secciones
   scrollToSection(sectionId: string): void {
     // Solo ejecutar en el navegador
     if (!isPlatformBrowser(this.platformId)) {
