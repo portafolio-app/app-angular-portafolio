@@ -1,84 +1,77 @@
-<!-- Sección con scroll horizontal -->
-<section #horizontalSection id="experiencia" class="horizontal-scroll-section bg-white dark:bg-gray-900">
-  <!-- Wrapper sticky para título y cards -->
-  <div class="sticky-wrapper">
-    <div class="container-custom">
-      <!-- Título arriba de las cards -->
-      <div class="header-section text-center mb-8">
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-          Mi
-          <span class="text-emerald-600 dark:text-emerald-400">Experiencia</span>
-        </h2>
-      </div>
+<!-- Sección de experiencia con timeline vertical -->
+<section id="experiencia" class="py-20 bg-white dark:bg-gray-900">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Título -->
+    <div class="text-center mb-16">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+        Mi <span class="text-emerald-600 dark:text-emerald-400">Experiencia</span>
+      </h2>
+    </div>
 
-      <!-- Contenedor horizontal -->
-      <div #horizontalScroller class="horizontal-scroller">
-        <div class="horizontal-content">
-          <!-- Tarjetas de experiencia -->
-          <div *ngFor="let exp of experiences; let i = index"
-            #experienceCard
-            [attr.data-id]="exp.id"
-            class="experience-card">
+    <!-- Timeline vertical -->
+    <div class="relative">
+      <!-- Línea vertical -->
+      <div class="absolute left-0 sm:left-6 h-full w-0.5 bg-emerald-500 dark:bg-emerald-600"></div>
 
-            <div class="card-wrapper group">
-              <!-- Badge de tipo -->
-              <div class="flex items-center gap-3 mb-4">
-                <div [ngClass]="getTypeBgColor(exp.type)"
-                  class="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md">
-                  <i [ngClass]="[getTypeIcon(exp.type), getTypeColor(exp.type)]" class="text-2xl"></i>
-                </div>
-                <div class="flex-1 min-w-0">
-                  <h3 class="text-xl lg:text-2xl font-bold text-gray-900 dark:text-white truncate">{{ exp.title }}</h3>
-                  <p class="text-base text-emerald-600 dark:text-emerald-400 font-semibold truncate">{{ exp.company }}</p>
-                </div>
-              </div>
+      <!-- Experiencias -->
+      <div class="space-y-12">
+        <div *ngFor="let exp of experiences; let i = index" class="relative pl-8 sm:pl-16">
 
-              <!-- Período y ubicación -->
-              <div class="flex flex-wrap items-center gap-3 mb-4 text-sm text-gray-600 dark:text-gray-400">
-                <div class="flex items-center gap-2">
-                  <i class="fas fa-calendar text-emerald-600 dark:text-emerald-400"></i>
-                  <span>{{ exp.period }}</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <i class="fas fa-map-marker-alt text-emerald-600 dark:text-emerald-400"></i>
-                  <span>{{ exp.location }}</span>
+          <!-- Punto en la línea de tiempo -->
+          <div class="absolute left-0 sm:left-6 transform -translate-x-1/2 w-4 h-4 bg-emerald-600 dark:bg-emerald-400 rounded-full border-4 border-white dark:border-gray-900 z-10"></div>
+
+          <!-- Contenido sin card -->
+          <div class="pb-8 border-b border-gray-200 dark:border-gray-700 last:border-0">
+
+            <!-- Header -->
+            <div class="flex items-start gap-3 mb-3">
+              <i [ngClass]="[getTypeIcon(exp.type)]" class="text-2xl text-emerald-600 dark:text-emerald-400 mt-1"></i>
+              <div class="flex-1">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-1">{{ exp.title }}</h3>
+                <p class="text-lg text-emerald-600 dark:text-emerald-400 font-semibold mb-2">{{ exp.company }}</p>
+
+                <!-- Período y ubicación -->
+                <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  <div class="flex items-center gap-1.5">
+                    <i class="fas fa-calendar"></i>
+                    <span>{{ exp.period }}</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>{{ exp.location }}</span>
+                  </div>
                 </div>
               </div>
+            </div>
 
-              <!-- Descripción -->
-              <p class="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed text-sm">{{ exp.description }}</p>
+            <!-- Descripción -->
+            <p class="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">{{ exp.description }}</p>
 
-              <!-- Logros -->
-              <div class="mb-4">
-                <h4 class="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-                  <i class="fas fa-star text-amber-500"></i>
-                  LOGROS DESTACADOS
-                </h4>
-                <ul class="space-y-2 max-h-40 overflow-y-auto custom-scrollbar pr-2">
-                  <li *ngFor="let achievement of exp.achievements"
-                    class="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
-                    <i class="fas fa-check-circle text-emerald-600 dark:text-emerald-400 mt-0.5 flex-shrink-0"></i>
-                    <span>{{ achievement }}</span>
-                  </li>
-                </ul>
+            <!-- Logros -->
+            <div class="mb-4">
+              <h4 class="text-sm font-semibold text-gray-900 dark:text-white mb-3 uppercase tracking-wide">
+                Logros Destacados
+              </h4>
+              <ul class="space-y-2.5">
+                <li *ngFor="let achievement of exp.achievements"
+                    class="flex items-start gap-3 text-gray-600 dark:text-gray-400">
+                  <i class="fas fa-chevron-right text-emerald-600 dark:text-emerald-400 mt-1.5 text-xs flex-shrink-0"></i>
+                  <span>{{ achievement }}</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Tecnologías -->
+            <div>
+              <h4 class="text-sm font-semibold text-gray-900 dark:text-white mb-3 uppercase tracking-wide">
+                Tecnologías
+              </h4>
+              <div class="flex flex-wrap gap-2">
+                <span *ngFor="let tech of exp.technologies"
+                      class="text-emerald-600 dark:text-emerald-400 text-sm font-medium">
+                  {{ tech }}
+                </span>
               </div>
-
-              <!-- Tecnologías -->
-              <div>
-                <h4 class="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-                  <i class="fas fa-code text-emerald-600 dark:text-emerald-400"></i>
-                  TECNOLOGÍAS
-                </h4>
-                <div class="flex flex-wrap gap-2">
-                  <span *ngFor="let tech of exp.technologies"
-                    class="px-3 py-1.5 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-medium rounded-lg border border-emerald-200 dark:border-emerald-800 uppercase tracking-wide">
-                    {{ tech }}
-                  </span>
-                </div>
-              </div>
-
-              <!-- Decoración sutil -->
-              <div class="card-decoration"></div>
             </div>
           </div>
         </div>
