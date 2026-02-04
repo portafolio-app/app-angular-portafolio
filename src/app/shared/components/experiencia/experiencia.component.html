@@ -1,9 +1,9 @@
 <!-- Sección de experiencia con timeline vertical -->
-<section id="experiencia" class="py-20 bg-white dark:bg-gray-900">
+<section id="experiencia" class="py-12 sm:py-16 md:py-20 bg-white dark:bg-gray-900">
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Título -->
-    <div class="text-center mb-16">
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+    <div class="text-center mb-10 sm:mb-12 md:mb-16">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-4">
         Mi <span class="text-emerald-600 dark:text-emerald-400">Experiencia</span>
       </h2>
     </div>
@@ -14,61 +14,76 @@
       <div class="absolute left-0 sm:left-6 h-full w-0.5 bg-emerald-500 dark:bg-emerald-600"></div>
 
       <!-- Experiencias -->
-      <div class="space-y-12">
-        <div *ngFor="let exp of experiences; let i = index" class="relative pl-8 sm:pl-16">
+      <div class="space-y-8 sm:space-y-10 md:space-y-12">
+        <div *ngFor="let exp of experiences; let i = index" class="relative pl-6 sm:pl-16">
 
           <!-- Punto en la línea de tiempo -->
-          <div class="absolute left-0 sm:left-6 transform -translate-x-1/2 w-4 h-4 bg-emerald-600 dark:bg-emerald-400 rounded-full border-4 border-white dark:border-gray-900 z-10"></div>
+          <div class="absolute left-0 sm:left-6 transform -translate-x-1/2 w-3 h-3 sm:w-4 sm:h-4 bg-emerald-600 dark:bg-emerald-400 rounded-full border-2 sm:border-4 border-white dark:border-gray-900 z-10"></div>
 
           <!-- Contenido sin card -->
-          <div class="pb-8 border-b border-gray-200 dark:border-gray-700 last:border-0">
+          <div class="pb-6 sm:pb-8 border-b border-gray-200 dark:border-gray-700 last:border-0">
 
-            <!-- Header -->
-            <div class="flex items-start gap-3 mb-3">
-              <i [ngClass]="[getTypeIcon(exp.type)]" class="text-2xl text-emerald-600 dark:text-emerald-400 mt-1"></i>
-              <div class="flex-1">
-                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-1">{{ exp.title }}</h3>
-                <p class="text-lg text-emerald-600 dark:text-emerald-400 font-semibold mb-2">{{ exp.company }}</p>
-
-                <!-- Período y ubicación -->
-                <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
-                  <div class="flex items-center gap-1.5">
-                    <i class="fas fa-calendar"></i>
-                    <span>{{ exp.period }}</span>
-                  </div>
-                  <div class="flex items-center gap-1.5">
+            <!-- Header con fecha a la derecha -->
+            <div class="flex items-start justify-between gap-3 mb-3">
+              <div class="flex items-start gap-2 sm:gap-3 flex-1 min-w-0">
+                <i [ngClass]="[getTypeIcon(exp.type)]" class="text-lg sm:text-xl md:text-2xl text-emerald-600 dark:text-emerald-400 mt-1 flex-shrink-0"></i>
+                <div class="flex-1 min-w-0">
+                  <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-1 break-words">{{ exp.title }}</h3>
+                  <p class="text-base sm:text-lg text-emerald-600 dark:text-emerald-400 font-semibold mb-2 break-words">{{ exp.company }}</p>
+                  
+                  <!-- Ubicación (solo móvil) -->
+                  <div class="flex sm:hidden items-center gap-1.5 text-xs text-gray-600 dark:text-gray-400 mb-2">
                     <i class="fas fa-map-marker-alt"></i>
-                    <span>{{ exp.location }}</span>
+                    <span class="break-words">{{ exp.location }}</span>
                   </div>
+                </div>
+              </div>
+              
+              <!-- Período y ubicación a la derecha (desktop/tablet) -->
+              <div class="hidden sm:flex flex-col items-end text-right flex-shrink-0">
+                <div class="flex items-center gap-1.5 text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-1">
+                  <i class="fas fa-calendar"></i>
+                  <span class="whitespace-nowrap">{{ exp.period }}</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span class="whitespace-nowrap">{{ exp.location }}</span>
+                </div>
+              </div>
+              
+              <!-- Período (solo móvil) -->
+              <div class="flex sm:hidden flex-col items-end text-right flex-shrink-0">
+                <div class="text-xs text-gray-600 dark:text-gray-400">
+                  <span class="whitespace-nowrap">{{ exp.period }}</span>
                 </div>
               </div>
             </div>
 
             <!-- Descripción -->
-            <p class="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">{{ exp.description }}</p>
+            <p class="text-sm sm:text-base text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">{{ exp.description }}</p>
 
             <!-- Logros -->
             <div class="mb-4">
-              <h4 class="text-sm font-semibold text-gray-900 dark:text-white mb-3 uppercase tracking-wide">
+              <h4 class="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white mb-2 sm:mb-3 uppercase tracking-wide">
                 Logros Destacados
               </h4>
-              <ul class="space-y-2.5">
+              <ul class="space-y-2">
                 <li *ngFor="let achievement of exp.achievements"
-                    class="flex items-start gap-3 text-gray-600 dark:text-gray-400">
-                  <i class="fas fa-chevron-right text-emerald-600 dark:text-emerald-400 mt-1.5 text-xs flex-shrink-0"></i>
-                  <span>{{ achievement }}</span>
+                    class="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+                  <i class="fas fa-chevron-right text-emerald-600 dark:text-emerald-400 mt-1 sm:mt-1.5 text-[8px] sm:text-xs flex-shrink-0"></i>
+                  <span class="leading-relaxed">{{ achievement }}</span>
                 </li>
               </ul>
             </div>
 
             <!-- Tecnologías -->
             <div>
-              <h4 class="text-sm font-semibold text-gray-900 dark:text-white mb-3 uppercase tracking-wide">
+              <h4 class="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white mb-2 sm:mb-3 uppercase tracking-wide">
                 Tecnologías
               </h4>
-              <div class="flex flex-wrap gap-2">
+              <div class="flex flex-wrap gap-1.5 sm:gap-2">
                 <span *ngFor="let tech of exp.technologies"
-                      class="text-emerald-600 dark:text-emerald-400 text-sm font-medium">
+                      class="text-emerald-600 dark:text-emerald-400 text-xs sm:text-sm font-medium whitespace-nowrap">
                   {{ tech }}
                 </span>
               </div>
