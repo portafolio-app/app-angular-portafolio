@@ -33,6 +33,9 @@ export interface BlogArticle {
   likes?: number;
   featured: boolean;
   published: boolean;
+  videoUrl?: string; // URL del video de YouTube/Vimeo
+  videoType?: 'youtube' | 'vimeo' | 'direct';
+  videoDuration?: number; // duración en minutos
   seoMetadata?: {
     metaTitle?: string;
     metaDescription?: string;

@@ -1,0 +1,74 @@
+/* Blog Navbar Styles */
+
+/* Smooth transitions for all interactive elements */
+.blog-navbar {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Mobile menu animations */
+.mobile-menu-enter {
+  transform: translateY(-10px);
+  opacity: 0;
+}
+
+.mobile-menu-enter-active {
+  transform: translateY(0);
+  opacity: 1;
+  transition: all 0.2s ease-out;
+}
+
+.mobile-menu-exit {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.mobile-menu-exit-active {
+  transform: translateY(-10px);
+  opacity: 0;
+  transition: all 0.2s ease-in;
+}
+
+/* Custom focus styles */
+button:focus,
+a:focus {
+  outline: 2px solid theme('colors.emerald.500');
+  outline-offset: 2px;
+}
+
+/* Logo hover effect */
+.logo-gradient {
+  background: linear-gradient(135deg, theme('colors.emerald.500'), theme('colors.emerald.600'));
+}
+
+.logo-gradient:hover {
+  background: linear-gradient(135deg, theme('colors.emerald.600'), theme('colors.emerald.700'));
+  box-shadow: 0 8px 25px -5px theme('colors.emerald.500' / 25%);
+}
+
+/* Active link indicator */
+.nav-link-active {
+  position: relative;
+}
+
+.nav-link-active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 2px;
+  background: theme('colors.emerald.500');
+  border-radius: 1px;
+}
+
+/* Backdrop blur fallback */
+@supports not (backdrop-filter: blur(12px)) {
+  nav {
+    background: theme('colors.white');
+  }
+
+  .dark nav {
+    background: theme('colors.gray.900');
+  }
+}

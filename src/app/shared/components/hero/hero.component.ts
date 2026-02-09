@@ -8,7 +8,7 @@ import {
   PLATFORM_ID,
   ViewChild,
 } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import Typewriter from 'typewriter-effect/dist/core';
 
 @Component({
@@ -23,7 +23,10 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
   private typewriterInstance: any;
   private observer: IntersectionObserver | null = null;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private router: Router
+  ) {}
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -99,5 +102,9 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
     if (this.observer) {
       this.observer.disconnect();
     }
+  }
+
+  navigateToBlog(): void {
+    this.router.navigate(['/blog']);
   }
 }

@@ -50,14 +50,23 @@ export class InfoCardComponent {
   @Output() linkClicked = new EventEmitter<ProjectLink>();
   @Output() techClicked = new EventEmitter<Technology>();
 
+  // Variables para el carrusel
+  currentSlide = 0;
+  totalSlides = 4; // 3 pantallas + 1 video
+
   constructor(private sanitizer: DomSanitizer) {}
 
   hasProjectVideo(): boolean {
-    return !!this.project.videoUrl;
+    return this.project.links?.some((link) => link.type === 'video') || false;
   }
 
   hasVideoInLinks(): boolean {
     return this.project.links?.some((link) => link.type === 'video') || false;
+  }
+
+  getProjectVideoUrl(): string {
+    const videoLink = this.project.links?.find((link) => link.type === 'video');
+    return videoLink?.url || '';
   }
 
   getVideoEmbedUrl(url: string): SafeResourceUrl {
@@ -240,6 +249,29 @@ export class InfoCardComponent {
       return (num / 1000).toFixed(1) + 'K';
     }
     return num.toString();
+  }
+
+  // ======== MÉTODOS DEL CARRUSEL ========
+
+  /**
+   * Ir al slide anterior
+   */
+  previousSlide(): void {
+    this.currentSlide = this.currentSlide > 0 ? this.currentSlide - 1 : this.totalSlides - 1;
+  }
+
+  /**
+   * Ir al siguiente slide
+   */
+  nextSlide(): void {
+    this.currentSlide = this.currentSlide < this.totalSlides - 1 ? this.currentSlide + 1 : 0;
+  }
+
+  /**
+   * Ir a un slide específico
+   */
+  goToSlide(index: number): void {
+    this.currentSlide = index;
   }
 
   /**

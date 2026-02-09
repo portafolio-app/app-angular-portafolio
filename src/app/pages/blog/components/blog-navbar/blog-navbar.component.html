@@ -1,0 +1,96 @@
+<!-- Blog Navbar personalizado -->
+<nav class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border-b border-gray-200/50 dark:border-gray-700/50 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- Logo y Back Button -->
+      <div class="flex items-center gap-6">
+        <!-- Logo -->
+        <a [routerLink]="'/'"
+           class="group flex items-center gap-3 hover:scale-105 transition-transform duration-300 cursor-pointer">
+          <div class="w-9 h-9 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-emerald-500/25 transition-all duration-300">
+            <span class="text-white font-bold text-sm">JC</span>
+          </div>
+          <span class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors duration-300 hidden sm:block">
+            Jcv Code
+          </span>
+        </a>
+
+        <!-- Separador -->
+        <div class="w-px h-6 bg-gray-300 dark:bg-gray-600"></div>
+
+        <!-- Back to Blog Button -->
+        <button (click)="goBack()"
+                class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 font-medium transition-colors">
+          <lucide-angular [img]="ArrowLeft" class="w-4 h-4"></lucide-angular>
+          <span class="hidden sm:inline">Blog</span>
+        </button>
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="hidden md:flex items-center space-x-1">
+        <!-- Home -->
+        <a [routerLink]="'/'"
+           class="px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all duration-300 font-medium">
+          <i class="fas fa-home mr-2 text-sm"></i>
+          Home
+        </a>
+
+        <!-- Blog -->
+        <a [routerLink]="'/blog'"
+           class="px-4 py-2 rounded-lg text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 font-medium">
+          <i class="fas fa-blog mr-2 text-sm"></i>
+          Blog
+        </a>
+
+        <!-- Proyectos -->
+        <a [routerLink]="'/#proyectos'"
+           class="px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all duration-300 font-medium">
+          <i class="fas fa-folder mr-2 text-sm"></i>
+          Proyectos
+        </a>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="flex items-center gap-3">
+        <!-- Theme Toggle -->
+        <button (click)="toggleTheme()"
+                class="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+          <lucide-angular [img]="isDarkMode ? Sun : Moon" class="w-5 h-5"></lucide-angular>
+        </button>
+
+        <!-- Mobile Menu Button -->
+        <button (click)="toggleMobileMenu()"
+                class="md:hidden p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+          <lucide-angular [img]="isMobileMenuOpen ? X : Menu" class="w-5 h-5"></lucide-angular>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div [class.hidden]="!isMobileMenuOpen" class="md:hidden border-t border-gray-200 dark:border-gray-700 py-4">
+      <div class="space-y-2">
+        <a [routerLink]="'/'"
+           (click)="closeMobileMenu()"
+           class="block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all duration-300 font-medium">
+          <i class="fas fa-home mr-3 text-sm"></i>
+          Home
+        </a>
+
+        <a [routerLink]="'/blog'"
+           (click)="closeMobileMenu()"
+           class="block px-4 py-3 rounded-lg text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 font-medium">
+          <i class="fas fa-blog mr-3 text-sm"></i>
+          Blog
+        </a>
+
+        <a [routerLink]="'/#proyectos'"
+           (click)="closeMobileMenu()"
+           class="block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all duration-300 font-medium">
+          <i class="fas fa-folder mr-3 text-sm"></i>
+          Proyectos
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>

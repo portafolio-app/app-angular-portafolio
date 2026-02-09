@@ -295,18 +295,18 @@ export class ProjectsDataService {
         id: '3',
         title: 'Ubícate - Tracking GPS de Transporte Público',
         description:
-          'Aplicación móvil nativa Android desarrollada para mejorar la experiencia de los usuarios del transporte público mediante geolocalización en tiempo real. Ubícate permite visualizar la ubicación de los buses en un mapa interactivo, estimar el tiempo y la distancia hacia una parada seleccionada, y trazar rutas a pie para llegar al punto más cercano. La solución integra Google Maps API para el cálculo de rutas, Firebase para la sincronización en tiempo real y gestión de datos, y notificaciones push para avisos importantes.',
+          'Aplicación móvil nativa Android desarrollada para mejorar la experiencia de los usuarios del transporte público mediante geolocalización en tiempo real. Ubicate permite visualizar la ubicación de los buses en un mapa interactivo, estimar el tiempo y la distancia hacia una parada seleccionada, y trazar rutas a pie para llegar al punto más cercano. La solución integra Google Maps API para el cálculo de rutas, Firebase para la sincronización en tiempo real y gestión de datos, y notificaciones push para avisos importantes. VIAJA CON TRANQUILIDAD - esta aplicación móvil está optimizada para brindar la mejor experiencia de usuario en dispositivos Android, con tres pantallas principales: ubicación de buses en tiempo real, cálculo de tiempo y distancia hacia paradas seleccionadas, y rutas a pie hacia paraderos cercanos.',
         shortDescription:
           'App Android para ver buses en tiempo real, calcular tiempos de llegada y rutas hacia paraderos cercanos.',
         image: '../assets/Ubicate.png',
         technologies: [
           {
-            name: 'Kotlin',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg',
+            name: 'Android',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg',
           },
           {
-            name: 'Android SDK',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg',
+            name: 'Java',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
           },
           {
             name: 'Google Maps API',
@@ -315,6 +315,10 @@ export class ProjectsDataService {
           {
             name: 'Firebase',
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg',
+          },
+          {
+            name: 'GPS',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg',
           },
         ],
         links: [
@@ -325,7 +329,7 @@ export class ProjectsDataService {
           },
           {
             type: 'video',
-            url: 'https://www.youtube.com/watch?v=ubicate-demo',
+            url: 'https://www.youtube.com/watch?v=32kQkyNtmbU',
             label: 'Demo Funcional',
             platform: 'youtube',
           },
@@ -339,8 +343,17 @@ export class ProjectsDataService {
           'Cálculo de tiempo y distancia hacia paradas seleccionadas',
           'Rutas a pie hacia paraderos cercanos',
           'Notificaciones push para avisos relevantes',
-          'Interfaz basada en Material Design 3',
-          'Visualización de recorridos en Google Maps',
+          'Material Design con interfaz intuitiva para Android',
+          'VIAJA CON TRANQUILIDAD - App móvil optimizada',
+          'Tres pantallas principales: mapa en tiempo real, cálculos de ETA y rutas peatonales',
+          'Integración completa con Google Maps para navegación',
+          'Sistema de notificaciones para actualizaciones de rutas',
+        ],
+        challenges: [
+          'Optimización de rendimiento para tracking GPS en tiempo real',
+          'Gestión eficiente de batería en dispositivos Android',
+          'Sincronización de datos entre múltiples usuarios',
+          'Implementación de algoritmos de cálculo de rutas eficientes',
         ],
         metrics: {
           downloads: 750,

@@ -1,22 +1,133 @@
 <div class="bg-transparent">
 
   <header class="relative bg-white dark:bg-slate-800 rounded-t-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-700">
-    <div *ngIf="hasProjectVideo()" class="w-full bg-black">
-      <div class="relative w-full" style="padding-bottom: 56.25%;">
-        <iframe [src]="getVideoEmbedUrl(project.videoUrl!)" [title]="project.title + ' - Demo'"
-          class="absolute inset-0 w-full h-full rounded-lg" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen>
-        </iframe>
-      </div>
-      <div class="bg-slate-900 px-6 py-3 text-sm text-slate-300 border-b border-slate-700">
-        <i class="fas fa-play-circle mr-2 text-red-500"></i>
-        Demostración del proyecto
+
+    <!-- CARRUSEL DE PANTALLAS PARA PROYECTO UBÍCATE -->
+    <div *ngIf="project.title.includes('Ubícate')" class="w-full bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20">
+      <div class="relative w-full max-w-lg mx-auto py-8">
+
+        <!-- Slides del carrusel -->
+        <div class="relative h-96 overflow-hidden">
+
+          <!-- Slide 1: Pantalla de Login -->
+          <div class="absolute inset-0 transition-transform duration-700 ease-in-out"
+               [ngClass]="{'translate-x-0': currentSlide === 0, 'translate-x-full': currentSlide !== 0}">
+            <div class="flex flex-col items-center justify-center h-full">
+              <div class="w-48 h-80 bg-gray-900 rounded-2xl p-1 shadow-2xl">
+                <div class="w-full h-full bg-teal-500 rounded-xl flex items-center justify-center relative overflow-hidden">
+                  <div class="text-center text-white p-4">
+                    <i class="fas fa-map-marker-alt text-6xl mb-4 text-green-300"></i>
+                    <h3 class="text-lg font-bold mb-2">Pantalla de Inicio</h3>
+                    <p class="text-sm opacity-90">Login y configuración inicial</p>
+                  </div>
+                </div>
+              </div>
+              <p class="text-sm text-gray-600 dark:text-gray-400 mt-3 font-medium">Autenticación de usuario</p>
+            </div>
+          </div>
+
+          <!-- Slide 2: Mapa en tiempo real -->
+          <div class="absolute inset-0 transition-transform duration-700 ease-in-out"
+               [ngClass]="{'translate-x-0': currentSlide === 1, '-translate-x-full': currentSlide < 1, 'translate-x-full': currentSlide > 1}">
+            <div class="flex flex-col items-center justify-center h-full">
+              <div class="w-48 h-80 bg-gray-900 rounded-2xl p-1 shadow-2xl">
+                <div class="w-full h-full bg-gray-800 rounded-xl relative overflow-hidden">
+                  <div class="absolute inset-0 bg-gradient-to-br from-blue-200 to-green-200"></div>
+                  <div class="absolute top-4 left-4 right-4">
+                    <div class="bg-white rounded-lg p-2 mb-2 text-xs">
+                      <i class="fas fa-bus text-green-600 mr-1"></i>
+                      Bus AVO-502 • Llegada: 8 min
+                    </div>
+                  </div>
+                  <div class="absolute bottom-4 left-4">
+                    <div class="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                  </div>
+                  <div class="absolute bottom-12 right-8">
+                    <div class="w-3 h-3 bg-green-500 rounded-full animate-bounce"></div>
+                  </div>
+                </div>
+              </div>
+              <p class="text-sm text-gray-600 dark:text-gray-400 mt-3 font-medium">Mapa en tiempo real</p>
+            </div>
+          </div>
+
+          <!-- Slide 3: Rutas y navegación -->
+          <div class="absolute inset-0 transition-transform duration-700 ease-in-out"
+               [ngClass]="{'translate-x-0': currentSlide === 2, '-translate-x-full': currentSlide < 2, 'translate-x-full': currentSlide > 2}">
+            <div class="flex flex-col items-center justify-center h-full">
+              <div class="w-48 h-80 bg-gray-900 rounded-2xl p-1 shadow-2xl">
+                <div class="w-full h-full bg-white rounded-xl flex flex-col justify-between p-4">
+                  <div>
+                    <div class="flex items-center justify-between mb-3">
+                      <h4 class="text-sm font-bold text-gray-800">Rutas disponibles</h4>
+                      <i class="fas fa-route text-green-600"></i>
+                    </div>
+                    <div class="space-y-2">
+                      <div class="bg-green-50 p-2 rounded border-l-4 border-green-400">
+                        <div class="text-xs font-semibold text-green-800">Ruta A • 12 min</div>
+                        <div class="text-xs text-green-600">Via Av. Principal</div>
+                      </div>
+                      <div class="bg-blue-50 p-2 rounded border-l-4 border-blue-400">
+                        <div class="text-xs font-semibold text-blue-800">Ruta B • 18 min</div>
+                        <div class="text-xs text-blue-600">Via Centro</div>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="bg-green-600 text-white text-xs py-2 rounded-lg font-medium cursor-pointer hover:bg-green-700 transition-colors">
+                    Iniciar navegación
+                  </button>
+                </div>
+              </div>
+              <p class="text-sm text-gray-600 dark:text-gray-400 mt-3 font-medium">Cálculo de rutas</p>
+            </div>
+          </div>
+
+          <!-- Slide 4: Video Demo -->
+          <div class="absolute inset-0 transition-transform duration-700 ease-in-out"
+               [ngClass]="{'translate-x-0': currentSlide === 3, '-translate-x-full': currentSlide < 3}">
+            <div class="flex flex-col items-center justify-center h-full px-8">
+              <div class="text-center">
+                <div class="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <i class="fab fa-youtube text-white text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2">Demo en YouTube</h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                  Mira la aplicación funcionando en tiempo real
+                </p>
+                <button (click)="openVideo(getProjectVideoUrl())"
+                  class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-lg text-sm font-medium hover:bg-red-700 transition-colors cursor-pointer hover:scale-105">
+                  <i class="fab fa-youtube mr-2"></i>
+                  Ver Demo
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controles de navegación -->
+        <button (click)="previousSlide()"
+          class="absolute top-1/2 left-2 -translate-y-1/2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-600 dark:text-gray-300 p-2 rounded-full shadow-lg hover:bg-white dark:hover:bg-gray-800 transition-all cursor-pointer hover:scale-110">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <button (click)="nextSlide()"
+          class="absolute top-1/2 right-2 -translate-y-1/2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-600 dark:text-gray-300 p-2 rounded-full shadow-lg hover:bg-white dark:hover:bg-gray-800 transition-all cursor-pointer hover:scale-110">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <!-- Indicadores -->
+        <div class="flex justify-center mt-4 space-x-2">
+          <button *ngFor="let slide of [0,1,2,3]; let i = index"
+            (click)="goToSlide(i)"
+            [ngClass]="i === currentSlide ? 'bg-emerald-600' : 'bg-gray-300 dark:bg-gray-600'"
+            class="w-3 h-3 rounded-full transition-colors hover:scale-110 cursor-pointer">
+          </button>
+        </div>
       </div>
     </div>
 
-    <!-- Imagen principal (si no hay video) -->
-    <div *ngIf="!hasProjectVideo()" class="w-full bg-gray-100 dark:bg-gray-800">
+    <!-- IMAGEN NORMAL PARA OTROS PROYECTOS -->
+    <div *ngIf="!project.title.includes('Ubícate')" class="w-full bg-gray-100 dark:bg-gray-800">
       <img [src]="project.image" [alt]="project.title"
         class="w-full h-auto max-h-80 sm:max-h-96 object-contain">
     </div>

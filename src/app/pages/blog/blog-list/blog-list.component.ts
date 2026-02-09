@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil, map } from 'rxjs';
 
 import { BlogService } from '../../../core/services/blog.service';
 import { BlogArticle, BlogCategory, BlogFilters } from '../../../core/models/blog.interface';
@@ -68,15 +68,15 @@ export class BlogListComponent implements OnInit, OnDestroy {
     this.blogService.getPublishedArticles().pipe(
       takeUntil(this.destroy$)
     ).subscribe({
-      next: (articles) => {
-        this.articles = articles.sort((a, b) =>
+      next: (articles: BlogArticle[]) => {
+        this.articles = articles.sort((a: BlogArticle, b: BlogArticle) =>
           b.publishedAt.getTime() - a.publishedAt.getTime()
         );
         this.applyFilters();
         this.isLoading = false;
         this.cdr.detectChanges();
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error('Error loading articles:', error);
         this.isLoading = false;
       }
@@ -84,8 +84,9 @@ export class BlogListComponent implements OnInit, OnDestroy {
   }
 
   private loadFeaturedArticles(): void {
-    this.blogService.getFeaturedArticles(3).pipe(
-      takeUntil(this.destroy$)
+    this.blogService.getFeaturedArticles().pipe(
+      takeUntil(this.destroy$),
+      map((articles: BlogArticle[]) => articles.slice(0, 3))
     ).subscribe(articles => {
       this.featuredArticles = articles;
       this.cdr.detectChanges();
