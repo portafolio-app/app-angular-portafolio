@@ -1,13 +1,15 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component, OnInit, Inject, PLATFORM_ID, ChangeDetectorRef, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { RouterModule, Router } from '@angular/router';
+import { Component, OnInit, Inject, PLATFORM_ID, ChangeDetectorRef, AfterViewInit, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+import { RouterModule, Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { ViewportScroller } from '@angular/common';
 import { FlowbiteService } from './flowbite.service';
 import { CurtainService } from './core/services/curtain.service';
-
 
 @Component({
   selector: 'app-root',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, RouterModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
@@ -27,8 +29,18 @@ export class AppComponent implements OnInit, AfterViewInit {
     @Inject(PLATFORM_ID) private platformId: object,
     public router: Router,
     private cdr: ChangeDetectorRef,
-    private curtainService: CurtainService
-  ) {}
+    private curtainService: CurtainService,
+    private viewportScroller: ViewportScroller
+  ) {
+    // Scroll to top on navigation
+    if (isPlatformBrowser(this.platformId)) {
+      this.router.events.pipe(
+        filter(event => event instanceof NavigationEnd)
+      ).subscribe(() => {
+        this.viewportScroller.scrollToPosition([0, 0]);
+      });
+    }
+  }
 
   // Usamos async/await para asegurar que el flujo sea correcto
   async ngOnInit(): Promise<void> {

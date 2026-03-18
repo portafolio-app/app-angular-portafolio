@@ -25,20 +25,20 @@ interface TechSkill {
         transform: 'translateY(0)'
       })),
       transition('hidden => visible', [
-        animate('600ms ease-out')
+        animate('400ms ease-out')
       ])
     ]),
     trigger('slideInLeft', [
       state('hidden', style({
         opacity: 0,
-        transform: 'translateX(-80px)'
+        transform: 'translateX(-40px)'
       })),
       state('visible', style({
         opacity: 1,
         transform: 'translateX(0)'
       })),
       transition('hidden => visible', [
-        animate('700ms cubic-bezier(0.34, 1.56, 0.64, 1)')
+        animate('400ms ease-out')
       ])
     ])
   ]
@@ -319,9 +319,7 @@ export class StackTecnologicoComponent implements OnInit, AfterViewInit, OnDestr
           if (entry.isIntersecting) {
             const category = entry.target.getAttribute('data-category');
             if (category) {
-              setTimeout(() => {
-                this.animationStates[category] = 'visible';
-              }, 100);
+              this.animationStates[category] = 'visible';
             } else if (entry.target.classList.contains('stack-header')) {
               this.headerState = 'visible';
             }
@@ -329,7 +327,7 @@ export class StackTecnologicoComponent implements OnInit, AfterViewInit, OnDestr
         });
       },
       {
-        threshold: 0.2,
+        threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
       }
     );

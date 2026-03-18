@@ -47,6 +47,7 @@ import { trigger, transition, style, animate, state } from '@angular/animations'
 export class NavbardComponent implements OnInit {
 
   isMenuOpen: boolean = false;
+  isDropdownOpen: boolean = false;
   navbarState = 'hidden';
   menuItemsState = 'hidden';
 
@@ -60,13 +61,9 @@ export class NavbardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Animar navbar al cargar
-    setTimeout(() => {
-      this.navbarState = 'visible';
-      setTimeout(() => {
-        this.menuItemsState = 'visible';
-      }, 100);
-    }, 100);
+    // Mostrar navbar inmediatamente para mejorar la percepción de velocidad
+    this.navbarState = 'visible';
+    this.menuItemsState = 'visible';
   }
 
   scrollToSection(sectionId: string): void {
@@ -75,17 +72,19 @@ export class NavbardComponent implements OnInit {
       return;
     }
 
-    // Cerrar menú móvil si está abierto
+    // Cerrar menú móvil y dropdown si están abiertos
     this.closeMenu();
+    this.closeDropdown();
 
     // Verificar si estamos en la página correcta (home)
-    if (this.router.url !== '/home') {
+    const currentUrl = this.router.url.split('#')[0];
+    if (currentUrl !== '/home' && currentUrl !== '/') {
       // Si no estamos en home, navegar primero
       this.router.navigate(['/home']).then(() => {
         // Esperar a que cargue la página y luego hacer scroll
         setTimeout(() => {
           this.performScroll(sectionId);
-        }, 500); // Aumenté el tiempo para asegurar que cargue
+        }, 500); 
       });
     } else {
       // Si ya estamos en home, hacer scroll directamente
@@ -137,6 +136,10 @@ export class NavbardComponent implements OnInit {
         !menuButton?.contains(target)) {
       this.closeMenu();
     }
+
+    if (this.isDropdownOpen && !navbar.contains(target)) {
+      this.closeDropdown();
+    }
   }
 
   @HostListener('document:keydown', ['$event'])
@@ -168,13 +171,24 @@ export class NavbardComponent implements OnInit {
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+    if (this.isMenuOpen) this.isDropdownOpen = false;
   }
 
   closeMenu() {
     this.isMenuOpen = false;
   }
 
+  toggleDropdown(event: Event) {
+    event.stopPropagation();
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  closeDropdown() {
+    this.isDropdownOpen = false;
+  }
+
   onMenuItemClick() {
     this.closeMenu();
+    this.closeDropdown();
   }
 }

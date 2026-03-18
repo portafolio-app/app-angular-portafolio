@@ -38,6 +38,14 @@ export const routes: Routes = [
     title: 'Artículo - Blog',
   },
   {
+    path: 'proyectos',
+    loadComponent: () =>
+      import('./pages/projects-page/projects-page.component').then(
+        (m) => m.ProjectsPageComponent
+      ),
+    title: 'Todos los Proyectos',
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },

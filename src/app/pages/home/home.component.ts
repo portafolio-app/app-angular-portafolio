@@ -15,6 +15,7 @@ import Typewriter from 'typewriter-effect/dist/core';
 import { NavbardComponent } from '../../shared/components/navbard/navbard.component';
 import { ThemeService } from '../../core/services/ThemeService';
 import { AlertService } from '../../core/services/alert.service';
+import { AboutMeComponent } from '../../shared/components/about-me/about-me.component';
 import {
   AlertComponent,
   AlertConfig,
@@ -26,20 +27,22 @@ import { HeroComponent } from '../../shared/components/hero/hero.component';
 import { ExperienciaComponent } from '../../shared/components/experiencia/experiencia.component';
 import { CertificacionesComponent } from '../../shared/components/certificaciones/certificaciones.component';
 import { Subscription } from 'rxjs';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-home',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
     RouterModule,
     NavbardComponent,
-    CardProyectosComponent,
+    HeroComponent,
+    AboutMeComponent,
+    CertificacionesComponent,
     FooterComponent,
     StackTecnologicoComponent,
-    HeroComponent,
     ExperienciaComponent,
-    CertificacionesComponent,
     AlertComponent,
   ],
   templateUrl: './home.component.html',

@@ -58,7 +58,7 @@ export class ProjectsDataService {
           'En el comercio de productos electrónicos, muchos negocios carecen de una plataforma unificada que les permita vender online con seguridad, mantener inventarios actualizados y procesar pagos de forma confiable. Esto limita sus ventas y reduce la confianza del cliente. GigaShop resuelve este problema con una solución e-commerce full-stack desarrollada en Angular (con Tailwind CSS) y Spring Boot (con Spring Security y JWT). El sistema incluye un área de usuario con autenticación segura, carrito persistente y pagos online mediante Stripe; y un panel administrativo para la gestión de productos, inventario y métricas en tiempo real, respaldado por MySQL. Su arquitectura sigue principios de Clean Code y está desplegado con Docker, asegurando escalabilidad y mantenibilidad.',
         shortDescription:
           'E-commerce seguro con pagos online, gestión en tiempo real y panel administrativo para productos electrónicos.',
-        image: '../assets/banner-ventaas.png',
+        image: '../assets/banner-ventaas.webp',
         technologies: [
           {
             name: 'Angular',
@@ -120,7 +120,7 @@ export class ProjectsDataService {
           'UBICATE es una plataforma que permite a usuarios y conductores visualizar en tiempo real la ubicación de los buses, consultar ETA y rutas sobre mapas interactivos. El backend implementa Spring Security con JWT para autenticación/roles y persiste datos operativos en MySQL (conductores, buses, rutas, empresas). Las ubicaciones se publican y consumen en tiempo real desde Firebase/Firestore para baja latencia en el tracking. La solución integra Google Maps para trazado de rutas y geocercas, y notificaciones push para avisos críticos.',
         shortDescription:
           'Plataforma Angular + Firebase para tracking de buses y gestión de transporte.',
-        image: '../assets/ubicate-v4.png',
+        image: '../assets/ubicate-v4.webp',
         technologies: [
           { name: 'Angular', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg' },
           { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
@@ -170,7 +170,7 @@ export class ProjectsDataService {
           'Sistema integral de gestión de ventas e inventario desarrollado como proyecto freelance. La aplicación implementa autenticación segura con JWT y Spring Security, permitiendo la administración de dos roles distintos: Administrador y Vendedor. El sistema ofrece un panel administrativo completo para la gestión de inventario en tiempo real, control de ventas, y generación de reportes diarios, semanales y mensuales. Desarrollado con Angular en el frontend y Spring Boot en el backend, utiliza MySQL como base de datos para garantizar la persistencia y confiabilidad de la información. La arquitectura permite escalar el negocio con funcionalidades como control de stock, alertas de inventario bajo, historial de transacciones y análisis de ventas.',
         shortDescription:
           'Sistema completo de ventas e inventario con autenticación JWT, reportes automáticos y gestión de roles.',
-        image: '../assets/polule-ice.png',
+        image: '../assets/polule-ice.webp',
         technologies: [
           {
             name: 'Angular',
@@ -237,7 +237,7 @@ export class ProjectsDataService {
           'Muchas personas no llevan un control preciso de sus deudas y préstamos, lo que dificulta planificar pagos y calcular el impacto de intereses e impuestos a lo largo del tiempo. FinanceTracker resuelve este problema con una aplicación web desarrollada en React + Vite, Tailwind CSS y Firebase, que permite registrar deudas, calcular cuotas considerando tasas de interés e IGV, y recibir recordatorios automáticos de vencimientos. Ofrece autenticación segura con Google, almacenamiento y sincronización en tiempo real mediante Firestore, así como categorización automática de gastos para un mejor análisis financiero.',
         shortDescription:
           'Controla deudas y préstamos con cálculos automáticos, recordatorios y sincronización en tiempo real.',
-        image: '../assets/gestor-deudas.png',
+        image: '../assets/gestor-deudas.webp',
         technologies: [
           {
             name: 'React',
@@ -298,7 +298,7 @@ export class ProjectsDataService {
           'Aplicación móvil nativa Android desarrollada para mejorar la experiencia de los usuarios del transporte público mediante geolocalización en tiempo real. Ubicate permite visualizar la ubicación de los buses en un mapa interactivo, estimar el tiempo y la distancia hacia una parada seleccionada, y trazar rutas a pie para llegar al punto más cercano. La solución integra Google Maps API para el cálculo de rutas, Firebase para la sincronización en tiempo real y gestión de datos, y notificaciones push para avisos importantes. VIAJA CON TRANQUILIDAD - esta aplicación móvil está optimizada para brindar la mejor experiencia de usuario en dispositivos Android, con tres pantallas principales: ubicación de buses en tiempo real, cálculo de tiempo y distancia hacia paradas seleccionadas, y rutas a pie hacia paraderos cercanos.',
         shortDescription:
           'App Android para ver buses en tiempo real, calcular tiempos de llegada y rutas hacia paraderos cercanos.',
-        image: '../assets/Ubicate.png',
+        image: '../assets/Ubicate.webp',
         technologies: [
           {
             name: 'Android',
@@ -368,7 +368,7 @@ export class ProjectsDataService {
           'Aplicación móvil nativa Android para facilitar la gestión de citas médicas tanto para pacientes como doctores. Resuelve el problema de coordinación y seguimiento de citas, permitiendo a los pacientes registrar, visualizar y administrar sus reservas, consultar su historial médico, calificar doctores y dejar comentarios. Los doctores pueden registrar sus horarios disponibles, confirmar o rechazar citas y visualizar su agenda en un calendario interactivo. Incluye notificaciones push para recordar citas próximas y está totalmente sincronizada con Firebase para autenticación y almacenamiento de datos en la nube.',
         shortDescription:
           'App Android para gestión de citas médicas con historial, calificaciones y recordatorios automáticos.',
-        image: '../assets/banner-prodent.png',
+        image: '../assets/banner-prodent.webp',
         technologies: [
           {
             name: 'Kotlin',
@@ -415,7 +415,7 @@ export class ProjectsDataService {
           'Sistema de autenticación que implementa múltiples factores de autenticación (MFA), Single Sign-On (SSO), y gestión granular de permisos. Desarrollado con Spring Security, incluye protección contra ataques modernos, auditoría completa, y integración con servicios de identidad corporativos.',
         shortDescription:
           'Sistema de autenticación MFA con SSO, auditoría y protección avanzada.',
-        image: '../assets/jwt-autenticator.png',
+        image: '../assets/jwt-autenticator.webp',
         technologies: [
           {
             name: 'Angular',
@@ -478,7 +478,7 @@ export class ProjectsDataService {
           'Plataforma IoT completa que combina hardware Arduino personalizado con aplicación Android avanzada. El robot incluye sensores inteligentes, actuadores programables, visión artificial básica, y conectividad dual (WiFi/Bluetooth). La app utiliza Jetpack Compose con arquitectura reactiva para control en tiempo real y programación de rutinas.',
         shortDescription:
           'Plataforma IoT con robot inteligente, sensores avanzados y app Android con Jetpack Compose.',
-        image: '../assets/banner-iot.png',
+        image: '../assets/banner-iot.webp',
         technologies: [
           {
             name: 'Kotlin',

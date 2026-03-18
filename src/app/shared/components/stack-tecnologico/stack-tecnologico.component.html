@@ -1,7 +1,7 @@
-<section class="bg-white dark:bg-gray-900 relative py-5">
+<section class="bg-white dark:bg-slate-950 relative py-5">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Header -->
-    <div class="stack-header text-center sm:mb-12 lg:mb-16" [@fadeInUp]="headerState">
+    <div class="stack-header text-center sm:mb-12 lg:mb-16">
       <div
         class="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700">
         <i class="fas fa-code mr-1.5 sm:mr-2 text-xs sm:text-sm"></i>
@@ -28,9 +28,9 @@
                 auto-rows-fr">
 
       <!-- Frontend -->
-      <div #techCard data-category="frontend" [@slideInLeft]="getAnimationState('frontend')" class="group relative">
+      <div #techCard data-category="frontend" class="group relative">
         <div
-          class="h-full p-3 sm:p-4 md:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl lg:rounded-2xl border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-emerald-300 dark:hover:border-emerald-600 transition-all duration-300 hover:-translate-y-2 flex flex-col">
+          class="h-full p-3 sm:p-4 md:p-5 lg:p-6 bg-white dark:bg-slate-900 rounded-lg sm:rounded-xl lg:rounded-2xl border border-gray-200 dark:border-slate-800 hover:shadow-xl hover:border-emerald-300 dark:hover:border-emerald-600 transition-all duration-300 hover:-translate-y-2 flex flex-col">
 
           <!-- Header de categoría -->
           <div class="text-center mb-3 sm:mb-4 md:mb-5">
@@ -230,20 +230,14 @@
             </div>
           </div>
 
-          <!-- Badge -->
-          <div class="text-center">
-            <span
-              class="inline-flex items-center px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs font-medium text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-900/30">
-              11 tecnologías
-            </span>
-          </div>
+          <!-- Badge removed -->
         </div>
       </div>
 
       <!-- Backend -->
-      <div #techCard data-category="backend" [@slideInLeft]="getAnimationState('backend')" class="group relative">
+      <div #techCard data-category="backend" class="group relative">
         <div
-          class="h-full p-3 sm:p-4 md:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl lg:rounded-2xl border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-300 hover:-translate-y-2 flex flex-col">
+          class="h-full p-3 sm:p-4 md:p-5 lg:p-6 bg-white dark:bg-slate-900 rounded-lg sm:rounded-xl lg:rounded-2xl border border-gray-200 dark:border-slate-800 hover:shadow-xl hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-300 hover:-translate-y-2 flex flex-col">
 
           <!-- Header de categoría -->
           <div class="text-center mb-3 sm:mb-4 md:mb-5">
@@ -397,20 +391,14 @@
             </div>
           </div>
 
-          <!-- Badge -->
-          <div class="text-center">
-            <span
-              class="inline-flex items-center px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs font-medium text-blue-700 dark:text-blue-300 bg-blue-100 dark:bg-blue-900/30">
-              9 tecnologías
-            </span>
-          </div>
+          <!-- Badge removed -->
         </div>
       </div>
 
       <!-- Databases -->
-      <div #techCard data-category="databases" [@slideInLeft]="getAnimationState('databases')" class="group relative">
+      <div #techCard data-category="databases" class="group relative">
         <div
-          class="h-full p-3 sm:p-4 md:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl lg:rounded-2xl border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-purple-300 dark:hover:border-purple-600 transition-all duration-300 hover:-translate-y-2 flex flex-col">
+          class="h-full p-3 sm:p-4 md:p-5 lg:p-6 bg-white dark:bg-slate-900 rounded-lg sm:rounded-xl lg:rounded-2xl border border-gray-200 dark:border-slate-800 hover:shadow-xl hover:border-purple-300 dark:hover:border-purple-600 transition-all duration-300 hover:-translate-y-2 flex flex-col">
 
           <!-- Header de categoría -->
           <div class="text-center mb-3 sm:mb-4 md:mb-5">
@@ -514,20 +502,14 @@
             </div>
           </div>
 
-          <!-- Badge -->
-          <div class="text-center">
-            <span
-              class="inline-flex items-center px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs font-medium text-purple-700 dark:text-purple-300 bg-purple-100 dark:bg-purple-900/30">
-              6 tecnologías
-            </span>
-          </div>
+          <!-- Badge removed -->
         </div>
       </div>
 
       <!-- DevOps & Cloud -->
-      <div #techCard data-category="tools" [@slideInLeft]="getAnimationState('tools')" class="group relative">
+      <div #techCard data-category="tools" class="group relative">
         <div
-          class="h-full p-3 sm:p-4 md:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl lg:rounded-2xl border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-orange-300 dark:hover:border-orange-600 transition-all duration-300 hover:-translate-y-2 flex flex-col">
+          class="h-full p-3 sm:p-4 md:p-5 lg:p-6 bg-white dark:bg-slate-900 rounded-lg sm:rounded-xl lg:rounded-2xl border border-gray-200 dark:border-slate-800 hover:shadow-xl hover:border-orange-300 dark:hover:border-orange-600 transition-all duration-300 hover:-translate-y-2 flex flex-col">
 
           <!-- Header de categoría -->
           <div class="text-center mb-3 sm:mb-4 md:mb-5">
@@ -695,13 +677,7 @@
             </div>
           </div>
 
-          <!-- Badge -->
-          <div class="text-center">
-            <span
-              class="inline-flex items-center px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs font-medium text-orange-700 dark:text-orange-300 bg-orange-100 dark:bg-orange-900/30">
-              10 herramientas
-            </span>
-          </div>
+          <!-- Badge removed -->
         </div>
       </div>
 

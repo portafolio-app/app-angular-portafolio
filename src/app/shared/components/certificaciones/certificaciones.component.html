@@ -1,4 +1,4 @@
-<section class="py-16 bg-white dark:bg-gray-800 transition-colors duration-300">
+<section class="py-16 bg-white dark:bg-slate-950 transition-colors duration-300">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Header -->
     <div class="text-center mb-12">
@@ -14,7 +14,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <!-- Certification Card -->
       <div *ngFor="let cert of certifications"
-           class="bg-white dark:bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 dark:border-gray-700">
+           class="bg-white dark:bg-slate-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 dark:border-slate-800">
 
         <!-- Status Badge -->
         <div class="px-6 pt-6 pb-4">
@@ -81,7 +81,7 @@
             <p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Skills:</p>
             <div class="flex flex-wrap gap-2">
               <span *ngFor="let skill of cert.skills"
-                    class="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs rounded-full border border-gray-300 dark:border-gray-600">
+                    class="px-3 py-1 bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-gray-300 text-xs rounded-full border border-gray-300 dark:border-slate-700">
                 {{ skill }}
               </span>
             </div>

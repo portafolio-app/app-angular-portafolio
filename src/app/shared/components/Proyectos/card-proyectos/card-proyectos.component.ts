@@ -9,12 +9,11 @@ import {
   Project,
   ProjectsDataService,
 } from '../../../../core/services/projects-data.service';
-import { ProjectFilterComponent } from '../../project-filter/project-filter.component';
 
 @Component({
   selector: 'app-card-proyectos',
   standalone: true,
-  imports: [CommonModule, ProjectFilterComponent], // REMOVIDO InfoCardComponent
+  imports: [CommonModule], // REMOVIDO ProjectFilterComponent, InfoCardComponent
   templateUrl: './card-proyectos.component.html',
   styleUrls: ['./card-proyectos.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -49,7 +48,6 @@ import { ProjectFilterComponent } from '../../project-filter/project-filter.comp
 })
 export class CardProyectosComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChildren('projectCard') projectCards!: QueryList<ElementRef>;
-  @ViewChild(ProjectFilterComponent) filterComponent!: ProjectFilterComponent;
 
   // Inputs
   @Input() showFeaturedOnly: boolean = false;
@@ -260,10 +258,6 @@ export class CardProyectosComponent implements OnInit, AfterViewInit, OnDestroy 
     this.currentPage = 1;
     this.showingAll = false;
     this.updateDisplayProjects();
-
-    if (this.filterComponent) {
-      this.filterComponent.resetFilters();
-    }
 
     this.cdr.markForCheck();
   }

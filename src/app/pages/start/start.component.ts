@@ -13,9 +13,12 @@ import * as THREE from 'three';
 import { gsap } from 'gsap';
 
 import { CurtainService } from '../../core/services/curtain.service';
+import { ChangeDetectionStrategy } from '@angular/core';
+
 @Component({
   standalone: true,
   selector: 'app-start',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule],
   templateUrl: './start.component.html',
   styleUrls: ['./start.component.css'],

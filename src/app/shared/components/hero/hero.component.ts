@@ -83,12 +83,7 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
       // Observar elementos con animación de scroll
       const elementsToAnimate = document.querySelectorAll('.scroll-animate');
       elementsToAnimate.forEach((element) => {
-        element.classList.add(
-          'opacity-0',
-          'translate-y-8',
-          'transition-all',
-          'duration-700'
-        );
+        // No ocultar inicialmente para evitar sensación de lentitud
         this.observer?.observe(element);
       });
     }
