@@ -23,14 +23,12 @@ export class AlertService {
   showDevelopmentAlert(): void {
     const developmentConfig: AlertConfig = {
       type: 'development',
-      title: '👨‍💻 Disponible para Oportunidades',
-      message: `¡Hola! 👋 Soy Jorge, desarrollador Full Stack especializado en Angular, Spring Boot y arquitecturas modernas.
+      title: '¡Hola! Soy Jorge y transformo ideas en realidad.',
+      message: `Soy un desarrollador que cree en los **fundamentos**: si domino **Java y Spring Boot**, puedo dominar cualquier lenguaje. Mi enfoque es la eficiencia, potenciada por las mejores herramientas de **IA** para entregar resultados excepcionales en tiempo récord.
 
-Actualmente en búsqueda activa de oportunidades donde pueda aportar valor con mi experiencia en desarrollo frontend, backend y despliegue de aplicaciones empresariales.
+🚀 **¿Tienes un desafío técnico?** Estoy listo para aportar mi experiencia Full Stack y mi capacidad de aprendizaje acelerado a tu equipo.
 
-Este portafolio está en constante evolución. Algunas secciones pueden estar incompletas mientras añado nuevos proyectos y funcionalidades.
-
-¿Tienes un proyecto desafiante o una oportunidad que podría encajar conmigo? ¡Me encantaría conectar!`,
+¡Hablemos!`,
       showIcon: true,
       dismissible: true,
       autoClose: 0,
@@ -39,10 +37,10 @@ Este portafolio está en constante evolución. Algunas secciones pueden estar in
       position: 'center',
       actions: [
         {
-          label: 'Ver Proyectos',
+          label: 'Ver mis Proyectos',
           action: 'view_available',
           style: 'primary',
-          icon: 'fas fa-code',
+          icon: 'fas fa-rocket',
         },
         {
           label: 'LinkedIn',
@@ -51,10 +49,10 @@ Este portafolio está en constante evolución. Algunas secciones pueden estar in
           icon: 'fab fa-linkedin',
         },
         {
-          label: 'GitHub',
-          action: 'github',
+          label: 'Contactar por Email',
+          action: 'email',
           style: 'secondary',
-          icon: 'fab fa-github',
+          icon: 'fas fa-envelope',
         },
       ],
     };

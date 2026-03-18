@@ -147,7 +147,7 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   @HostListener('document:keydown.escape', ['$event'])
-  onEscapePress(event: KeyboardEvent): void {
+  onEscapePress(event: any): void {
     if (
       this.isVisible &&
       this.config &&
@@ -413,7 +413,12 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   formatMessage(message: string): string {
-    return message.replace(/\n/g, '<br>');
+    if (!message) return '';
+    // Reemplazar saltos de línea por <br>
+    let formatted = message.replace(/\n/g, '<br>');
+    // Reemplazar **texto** por <strong>texto</strong>
+    formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    return formatted;
   }
 
   getTruncatedMessage(): string {
