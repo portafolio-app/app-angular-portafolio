@@ -12,7 +12,7 @@ export class AlertService {
   public currentAlert$ = this.currentAlertSubject.asObservable();
   public isVisible$ = this.isVisibleSubject.asObservable();
 
-  constructor() {}
+  constructor() { }
 
   showAlert(config: AlertConfig): void {
     const optimizedConfig = this.optimizeConfigForViewport(config);
@@ -24,7 +24,7 @@ export class AlertService {
     const developmentConfig: AlertConfig = {
       type: 'development',
       title: '¡Hola! Soy Jorge y transformo ideas en realidad.',
-      message: `Soy un desarrollador que cree en los **fundamentos**: si domino **Java y Spring Boot**, puedo dominar cualquier lenguaje. Mi enfoque es la eficiencia, potenciada por las mejores herramientas de **IA** para entregar resultados excepcionales en tiempo récord.
+      message: `Soy un desarrollador que cree en los **fundamentos**: si domino **Java y Spring Boot**, puedo dominar cualquier lenguaje. Mi enfoque es la eficiencia, potenciada por las mejores herramientas de **IA** para entregar resultados en tiempo récord.
 
 🚀 **¿Tienes un desafío técnico?** Estoy listo para aportar mi experiencia Full Stack y mi capacidad de aprendizaje acelerado a tu equipo.
 
@@ -41,6 +41,12 @@ export class AlertService {
           action: 'view_available',
           style: 'primary',
           icon: 'fas fa-rocket',
+        },
+        {
+          label: 'WhatsApp',
+          action: 'whatsapp',
+          style: 'success',
+          icon: 'fab fa-whatsapp',
         },
         {
           label: 'LinkedIn',

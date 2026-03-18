@@ -10,7 +10,7 @@ import {
   ViewChild,
   ChangeDetectorRef,
 } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import Typewriter from 'typewriter-effect/dist/core';
 import { NavbardComponent } from '../../shared/components/navbard/navbard.component';
 import { ThemeService } from '../../core/services/ThemeService';
@@ -65,7 +65,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     @Inject(PLATFORM_ID) private platformId: Object,
     private themeService: ThemeService,
     private alertService: AlertService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -181,7 +182,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       case 'view_available':
       case 'explore':
         this.alertService.hideAlert();
-        setTimeout(() => this.scrollToSection('proyectos'), 500);
+        setTimeout(() => this.router.navigate(['/proyectos']), 500);
         break;
 
       case 'about':
@@ -197,6 +198,11 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
       case 'linkedin':
         this.openLinkedIn();
+        this.alertService.hideAlert();
+        break;
+
+      case 'whatsapp':
+        this.openWhatsApp();
         this.alertService.hideAlert();
         break;
 
@@ -262,6 +268,13 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private openLinkedIn(): void {
     if (isPlatformBrowser(this.platformId)) {
       window.open('https://www.linkedin.com/in/jcastillov15', '_blank');
+    }
+  }
+
+  private openWhatsApp(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      const message = encodeURIComponent('¡Hola Jorge! Vi tu portafolio y me gustaría conversar contigo sobre un proyecto.');
+      window.open(`https://wa.me/51991185552?text=${message}`, '_blank');
     }
   }
 

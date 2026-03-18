@@ -390,7 +390,7 @@ export class AlertComponent implements OnInit, OnDestroy, OnChanges {
                   rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-95
                   flex items-center justify-center space-x-1.5 sm:space-x-2 focus:outline-none focus:ring-2
                   shadow-sm hover:shadow-md min-h-[40px] sm:min-h-[44px]
-                  disabled:opacity-50 disabled:cursor-not-allowed`;
+                  disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer`;
 
     const styles: Record<string, string> = {
       primary: `${base} bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white focus:ring-emerald-500 border border-emerald-600`,
