@@ -28,26 +28,26 @@
           <!-- Home -->
           <button (click)="scrollToSection('home')"
             class="group px-3 lg:px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 font-medium text-sm lg:text-base cursor-pointer">
-            Home
+            {{ 'NAVBAR.HOME' | translate }}
           </button>
 
           <!-- Proyectos (Página) -->
           <button (click)="navigateToPage('/proyectos')"
             class="group px-3 lg:px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 font-medium text-sm lg:text-base cursor-pointer">
-            Proyectos
+            {{ 'NAVBAR.PROJECTS' | translate }}
           </button>
 
           <!-- Sobre Mí -->
           <button (click)="scrollToSection('sobre-mi')"
             class="group px-3 lg:px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 font-medium text-sm lg:text-base cursor-pointer">
-            Sobre Mí
+            {{ 'NAVBAR.ABOUT' | translate }}
           </button>
 
           <!-- Más (Dropdown) -->
           <div class="relative">
             <button (click)="toggleDropdown($event)"
               class="group flex items-center px-3 lg:px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 font-medium text-sm lg:text-base cursor-pointer">
-              <span>Trayectoria</span>
+              <span>{{ 'NAVBAR.TRAYECTORIA' | translate }}</span>
               <i class="fas fa-chevron-down ml-1.5 text-xs transition-transform duration-300" [class.rotate-180]="isDropdownOpen"></i>
             </button>
 
@@ -57,17 +57,17 @@
               
               <button (click)="scrollToSection('experiencia')"
                 class="flex items-center w-full px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-green-900/20 hover:text-green-600 dark:hover:text-green-400 transition-colors">
-                <i class="fas fa-briefcase mr-3 w-4 text-center"></i> Experiencia
+                <i class="fas fa-briefcase mr-3 w-4 text-center"></i> {{ 'NAVBAR.EXPERIENCE' | translate }}
               </button>
               
               <button (click)="scrollToSection('certificaciones')"
                 class="flex items-center w-full px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-green-900/20 hover:text-green-600 dark:hover:text-green-400 transition-colors">
-                <i class="fas fa-award mr-3 w-4 text-center"></i> Certificaciones
+                <i class="fas fa-award mr-3 w-4 text-center"></i> {{ 'NAVBAR.CERTIFICATIONS' | translate }}
               </button>
               
               <button (click)="scrollToSection('tecnologias')"
                 class="flex items-center w-full px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-green-900/20 hover:text-green-600 dark:hover:text-green-400 transition-colors">
-                <i class="fas fa-cogs mr-3 w-4 text-center"></i> Tecnologías
+                <i class="fas fa-cogs mr-3 w-4 text-center"></i> {{ 'NAVBAR.TECHNOLOGIES' | translate }}
               </button>
 
             </div>
@@ -117,6 +117,26 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
         </button>
+
+        <!-- Language Switcher -->
+        <div class="hidden sm:flex items-center ml-2 space-x-1 bg-gray-100 dark:bg-gray-800 p-1 rounded-xl border border-gray-200 dark:border-gray-700">
+          <button (click)="switchLanguage('es')"
+            [class.bg-white]="currentLang === 'es'"
+            [class.dark:bg-gray-700]="currentLang === 'es'"
+            [class.shadow-sm]="currentLang === 'es'"
+            [class.text-green-600]="currentLang === 'es'"
+            class="px-2 py-1 rounded-lg text-[10px] font-black uppercase transition-all duration-300 hover:text-green-500">
+            ES
+          </button>
+          <button (click)="switchLanguage('en')"
+            [class.bg-white]="currentLang === 'en'"
+            [class.dark:bg-gray-700]="currentLang === 'en'"
+            [class.shadow-sm]="currentLang === 'en'"
+            [class.text-green-600]="currentLang === 'en'"
+            class="px-2 py-1 rounded-lg text-[10px] font-black uppercase transition-all duration-300 hover:text-green-500">
+            EN
+          </button>
+        </div>
       </div>
     </div>
 
@@ -131,7 +151,7 @@
           class="group flex items-center w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base cursor-pointer">
           <i
             class="fas fa-home mr-3 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300"></i>
-          <span class="font-medium">Home</span>
+          <span class="font-medium">{{ 'NAVBAR.HOME' | translate }}</span>
         </button>
 
         <!-- Proyectos (Página) -->
@@ -139,7 +159,7 @@
           class="group flex items-center w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base cursor-pointer">
           <i
             class="fas fa-folder mr-3 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300"></i>
-          <span class="font-medium">Proyectos</span>
+          <span class="font-medium">{{ 'NAVBAR.PROJECTS' | translate }}</span>
         </button>
 
         <!-- Sobre Mí -->
@@ -147,32 +167,32 @@
           class="group flex items-center w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base cursor-pointer">
           <i
             class="fas fa-user mr-3 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300"></i>
-          <span class="font-medium">Sobre Mí</span>
+          <span class="font-medium">{{ 'NAVBAR.ABOUT' | translate }}</span>
         </button>
 
         <div class="pt-2 pb-1 px-4 border-t border-gray-100 dark:border-gray-800">
-          <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Trayectoria</span>
+          <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">{{ 'NAVBAR.TRAYECTORIA' | translate }}</span>
         </div>
 
         <button (click)="scrollToSection('experiencia')"
           class="group flex items-center w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base cursor-pointer">
           <i
             class="fas fa-briefcase mr-3 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300"></i>
-          <span class="font-medium">Experiencia</span>
+          <span class="font-medium">{{ 'NAVBAR.EXPERIENCE' | translate }}</span>
         </button>
 
         <button (click)="scrollToSection('certificaciones')"
           class="group flex items-center w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base cursor-pointer">
           <i
             class="fas fa-award mr-3 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300"></i>
-          <span class="font-medium">Certificaciones</span>
+          <span class="font-medium">{{ 'NAVBAR.CERTIFICATIONS' | translate }}</span>
         </button>
 
         <button (click)="scrollToSection('tecnologias')"
           class="group flex items-center w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base cursor-pointer">
           <i
             class="fas fa-cogs mr-3 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300"></i>
-          <span class="font-medium">Tecnologías</span>
+          <span class="font-medium">{{ 'NAVBAR.TECHNOLOGIES' | translate }}</span>
         </button>
 
         <!-- Blog - OCULTO TEMPORALMENTE -->

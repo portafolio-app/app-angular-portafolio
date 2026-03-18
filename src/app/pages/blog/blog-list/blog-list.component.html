@@ -19,114 +19,105 @@
   <!-- Articles Grid -->
   <section class="container mx-auto px-4 py-16">
     @if (isLoading) {
-      <div class="flex justify-center items-center py-20">
-        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-green-500"></div>
-      </div>
+    <div class="flex justify-center items-center py-20">
+      <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-green-500"></div>
+    </div>
     } @else if (paginatedArticles.length === 0) {
-      <div class="text-center py-20">
-        <div class="text-6xl mb-4">🔍</div>
-        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-          No se encontraron artículos
-        </h3>
-        <p class="text-gray-600 dark:text-gray-400">
-          Intenta ajustar los filtros de búsqueda
-        </p>
-      </div>
+    <div class="text-center py-20">
+      <div class="text-6xl mb-4">🔍</div>
+      <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+        No se encontraron artículos
+      </h3>
+      <p class="text-gray-600 dark:text-gray-400">
+        Intenta ajustar los filtros de búsqueda
+      </p>
+    </div>
     } @else {
-      <div class="max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
         @for (article of paginatedArticles; track article.id) {
-          <article
-            (click)="viewArticle(article)"
-            class="w-full max-w-sm group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 cursor-pointer">
+        <article (click)="viewArticle(article)"
+          class="w-full max-w-sm group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 cursor-pointer">
 
-            <div class="relative overflow-hidden h-56">
-              <img
-                [src]="article.coverImage"
-                [alt]="article.title"
-                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                onerror="this.src='https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=800&h=600&fit=crop&q=80'">
+          <div class="relative overflow-hidden h-56">
+            <img [src]="article.coverImage" [alt]="article.title"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              onerror="this.src='https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=800&h=600&fit=crop&q=80'">
 
-              <!-- Video Indicator -->
-              @if (article.videoUrl) {
-                <div class="absolute bottom-4 left-4">
-                  <span class="inline-flex items-center px-2 py-1 bg-red-600 text-white text-xs font-semibold rounded-md shadow-lg">
-                    <i class="fab fa-youtube mr-1"></i>
-                    Video
-                  </span>
-                </div>
+            <!-- Video Indicator -->
+            @if (article.videoUrl) {
+            <div class="absolute bottom-4 left-4">
+              <span
+                class="inline-flex items-center px-2 py-1 bg-red-600 text-white text-xs font-semibold rounded-md shadow-lg">
+                <i class="fab fa-youtube mr-1"></i>
+                Video
+              </span>
+            </div>
+            }
+
+            <div class="absolute top-4 right-4">
+              <span [class]="getCategoryColor(article.category)"
+                class="px-3 py-1 rounded-full text-white text-xs font-semibold">
+                {{ getCategoryLabel(article.category) }}
+              </span>
+            </div>
+          </div>
+
+          <div class="p-6">
+            <h3
+              class="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors line-clamp-2">
+              {{ article.title }}
+            </h3>
+
+            <p class="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
+              {{ article.excerpt }}
+            </p>
+
+            <div class="flex flex-wrap gap-2 mb-4">
+              @for (tag of article.tags.slice(0, 3); track tag.id) {
+              <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-xs">
+                #{{ tag.name }}
+              </span>
               }
-
-              <div class="absolute top-4 right-4">
-                <span [class]="getCategoryColor(article.category)"
-                      class="px-3 py-1 rounded-full text-white text-xs font-semibold">
-                  {{ getCategoryLabel(article.category) }}
-                </span>
-              </div>
             </div>
 
-            <div class="p-6">
-              <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors line-clamp-2">
-                {{ article.title }}
-              </h3>
-
-              <p class="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
-                {{ article.excerpt }}
-              </p>
-
-              <div class="flex flex-wrap gap-2 mb-4">
-                @for (tag of article.tags.slice(0, 3); track tag.id) {
-                  <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-xs">
-                    #{{ tag.name }}
-                  </span>
-                }
-              </div>
-
-              <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                <span class="flex items-center gap-1">
-                  ⏱️ {{ article.readingTime }} min lectura
-                </span>
-              </div>
+            <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+              <span class="flex items-center gap-1">
+                ⏱️ {{ article.readingTime }} min lectura
+              </span>
             </div>
-          </article>
+          </div>
+        </article>
         }
       </div>
+    </div>
+
+    <!-- Pagination -->
+    @if (totalPages > 1) {
+    <div class="max-w-7xl mx-auto">
+      <div class="flex justify-center items-center gap-2 mt-12">
+        <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1"
+          class="px-4 py-2 rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+          « Anterior
+        </button>
+
+        @for (page of pages; track page) {
+        <button (click)="goToPage(page)" [class.bg-green-600]="page === currentPage"
+          [class.text-white]="page === currentPage" [class.bg-white]="page !== currentPage"
+          [class.dark:bg-gray-800]="page !== currentPage" [class.text-gray-700]="page !== currentPage"
+          [class.dark:text-gray-300]="page !== currentPage"
+          class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+          {{ page }}
+        </button>
+        }
+
+        <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages"
+          class="px-4 py-2 rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+          Siguiente »
+        </button>
       </div>
-
-      <!-- Pagination -->
-      @if (totalPages > 1) {
-        <div class="max-w-7xl mx-auto">
-        <div class="flex justify-center items-center gap-2 mt-12">
-          <button
-            (click)="goToPage(currentPage - 1)"
-            [disabled]="currentPage === 1"
-            class="px-4 py-2 rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-            « Anterior
-          </button>
-
-          @for (page of pages; track page) {
-            <button
-              (click)="goToPage(page)"
-              [class.bg-green-600]="page === currentPage"
-              [class.text-white]="page === currentPage"
-              [class.bg-white]="page !== currentPage"
-              [class.dark:bg-gray-800]="page !== currentPage"
-              [class.text-gray-700]="page !== currentPage"
-              [class.dark:text-gray-300]="page !== currentPage"
-              class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-              {{ page }}
-            </button>
-          }
-
-          <button
-            (click)="goToPage(currentPage + 1)"
-            [disabled]="currentPage === totalPages"
-            class="px-4 py-2 rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-            Siguiente »
-          </button>
-        </div>
-        </div>
-      }
+    </div>
+    }
     }
   </section>
 </div>

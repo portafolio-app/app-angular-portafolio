@@ -1,0 +1,464 @@
+{
+  "ALERT": {
+    "DEVELOPMENT": {
+      "TITLE": "Hi! I'm Jorge and I transform ideas into reality.",
+      "MESSAGE": "I'm a developer who believes in **fundamentals**: if I master **Java and Spring Boot**, I can master any language. My focus is efficiency, powered by the best **AI** tools to deliver results in record time.\n\n🚀 **Do you have a technical challenge?** I'm ready to bring my Full Stack experience and accelerated learning capacity to your team.\n\nLet's talk!",
+      "BTN_PROJECTS": "View my Projects",
+      "BTN_WHATSAPP": "WhatsApp",
+      "BTN_LINKEDIN": "LinkedIn",
+      "BTN_EMAIL": "Contact by Email"
+    }
+  },
+  "NAVBAR": {
+    "HOME": "Home",
+    "PROJECTS": "Projects",
+    "RESOURCES": "Resources",
+    "CERTIFICATIONS": "Certifications",
+    "CURRICULUM": "My CV",
+    "EXPERIENCE": "Experience",
+    "STACK": "Stack",
+    "ABOUT": "About Me",
+    "BLOG": "Blog",
+    "LANGUAGE": "Language",
+    "TRAYECTORIA": "Trajectory",
+    "TECHNOLOGIES": "Technologies"
+  },
+  "HERO": {
+    "HI": "Hi!",
+    "I_AM": "I am",
+    "GREETING": "Hi! I am",
+    "STACK_LABEL": "Stack:",
+    "ROLES": [
+      "Full Stack Developer",
+      "Spring Boot Specialist",
+      "Angular Enthusiast",
+      "AI Enthusiast"
+    ],
+    "DESCRIPTION": "Systems Engineer passionate about building high-impact technological solutions. Specialized in Java/Spring Boot and Angular, with a focus on software architecture and exceptional user experiences.",
+    "DESCRIPTION_PRE": "Passionate about creating ",
+    "DESCRIPTION_TECH": "technological solutions",
+    "DESCRIPTION_POST": " efficient and scalable that optimize the user experience.",
+    "EXPERIENCE": "+2 years of experience",
+    "CV_BUTTON": "Download CV",
+    "CONTACT_BUTTON": "Contact Me",
+    "VIEW_BLOG": "View Blog"
+  },
+  "HOME": {
+    "TITLE": "Full Stack Developer",
+    "SUBTITLE": "Transforming ideas into scalable technological solutions",
+    "EXPLORE_WORK": "Explore my work",
+    "CTA_PROJECTS_TITLE": "Want to see more of my",
+    "CTA_PROJECTS_SPAN": "work",
+    "CTA_PROJECTS_DESC": "Explore my full portfolio of projects, from comprehensive mobile apps to robust e-commerce systems and cutting-edge IoT solutions.",
+    "CTA_PROJECTS_BUTTON": "View Full Portfolio"
+  },
+  "ABOUT": {
+    "TAG": "About Me",
+    "TITLE_PRE": "Passion for",
+    "TITLE_SPAN": "development",
+    "TITLE_POST": "and innovation",
+    "P1": "As a Systems Engineer, my focus goes beyond writing code; it's about solving complex problems efficiently and scalably. I enjoy every phase of the software lifecycle, from architecture conception to final deployment.",
+    "P2_PRE": "My experience centers on the",
+    "P2_SPRING": "Java/Spring Boot",
+    "P2_MID": "ecosystem for the backend and",
+    "P2_ANGULAR": "Angular",
+    "P2_POST": "for the frontend, allowing me to build robust, secure, and highly interactive applications. I'm always exploring new technologies, currently deepening my use of AI to optimize development processes.",
+    "STATS_PROJECTS": "Projects Completed",
+    "STATS_DEDICATION": "Dedication",
+    "FEAT1_TITLE": "Clean Code",
+    "FEAT1_DESC": "Maintainable and scalable code.",
+    "FEAT2_TITLE": "High Performance",
+    "FEAT2_DESC": "Optimization and speed.",
+    "FEAT3_TITLE": "UX/UI Design",
+    "FEAT3_DESC": "Intuitive experiences."
+  },
+  "EXPERIENCE": {
+    "TAG": "Trajectory",
+    "TITLE_PRE": "My",
+    "TITLE_SPAN": "Experience",
+    "ACHIEVEMENTS_LABEL": "Key Achievements",
+    "TECH_LABEL": "Technologies",
+    "ITEMS": {
+      "GATO_FE": {
+        "TITLE": "Front End Software Developer",
+        "COMPANY": "Gato Marketing y Software S.A.C",
+        "PERIOD": "October 2025 - January 2026",
+        "LOCATION": "Lima, Peru (Remote)",
+        "DESCRIPTION": "Responsible for the maintenance and frontend development of multiple business projects for different clients: accounting ERP, human resources ERP, and management platform for photography studios.",
+        "ACHIEVEMENTS": {
+          "0": "Development of frontend architecture with Angular for a client's accounting ERP",
+          "1": "Maintenance and bug fixes in human resources ERP (React) for another client",
+          "2": "Creation of new modules and maintenance of photography studio management system",
+          "3": "Implementation of interactive interfaces with Fabric.js for graphic editing",
+          "4": "Continuous integration with REST APIs and coordination with backend teams for each project",
+          "5": "Resolution of critical incidents and improvements in multiple production systems",
+          "6": "Direct validation of requirements with different end clients"
+        }
+      },
+      "GATO_SW": {
+        "TITLE": "Software Engineer",
+        "COMPANY": "Gato Marketing y Software S.A.C",
+        "PERIOD": "August 2025 - January 2026",
+        "LOCATION": "Lima, Peru",
+        "DESCRIPTION": "Participation in the development team for an ERP accounting module, working on full stack architecture with agile methodologies.",
+        "ACHIEVEMENTS": {
+          "0": "Layout and integration of interfaces with Angular in the ERP accounting module",
+          "1": "Collaborative work in a team of 3 developers",
+          "2": "Bug management and task tracking in Jira",
+          "3": "Implementation of continuous improvements based on user feedback"
+        }
+      },
+      "INNOVASHOP": {
+        "TITLE": "Full Stack Developer",
+        "COMPANY": "InnovaShop System (Freelance)",
+        "PERIOD": "July 2024 - February 2025",
+        "LOCATION": "Trujillo, Peru",
+        "DESCRIPTION": "Complete design and development of a scalable e-commerce platform for selling electronic products, from architecture to production deployment.",
+        "ACHIEVEMENTS": {
+          "0": "Full stack development with Angular + Spring Boot, ensuring a dynamic user experience",
+          "1": "Implementation of security with JWT and Spring Security for protected transactions",
+          "2": "Containerization with Docker and successful deployment on AWS",
+          "3": "Performance testing with JMeter for high availability under traffic loads",
+          "4": "Development of a unit test suite with Mockito for code quality",
+          "5": "Design and implementation of an optimized MySQL database"
+        }
+      }
+    }
+  },
+  "CERTIFICATIONS": {
+    "TAG": "Accreditations",
+    "TITLE_PRE": "My",
+    "TITLE_SPAN": "Certifications",
+    "STATUS_COMPLETED": "Completed",
+    "STATUS_IN_PROGRESS": "In Progress",
+    "MONTHS_REMAINING": "{{ months }} months left",
+    "VIEW_CERTIFICATE": "View Certificate",
+    "SKILLS": "Skills",
+    "PROGRESS": "Progress",
+    "NEAR_COMPLETION": "Coming soon to completion",
+    "EMPTY_TITLE": "No certifications found",
+    "EMPTY_DESC": "I will add more certifications soon.",
+    "ITEMS": {
+      "ML_TENSORFLOW": {
+        "TITLE": "Machine Learning Specialization with TensorFlow and Keras",
+        "ISSUER": "DMC Institute",
+        "DESCRIPTION": "Comprehensive Machine Learning specialization using TensorFlow and Keras. Includes neural networks, deep learning, natural language processing, and computer vision."
+      },
+      "SOFT_ARCH": {
+        "TITLE": "SOFTWARE ARCHITECTURE Program",
+        "ISSUER": "CodiGo / TECSUP",
+        "DESCRIPTION": "Intensive Software Architecture bootcamp with Java, covering design patterns, microservices, cloud-native architecture, and enterprise development best practices."
+      }
+    }
+  },
+  "FOOTER": {
+    "SPECIALTIES": "Specialties",
+    "FE_DEV": "Frontend Development",
+    "BE_DEV": "Backend Development",
+    "MOBILE_DEV": "Mobile Development",
+    "DESKTOP_DEV": "Desktop Development",
+    "DB_DEV": "Database Design",
+    "CONTACT_INFO": "Contact Information",
+    "EMAIL": "Email Address",
+    "EMAIL_AVAIL": "Available for inquiries",
+    "PHONE": "Phone Number",
+    "PHONE_AVAIL": "Monday to Friday",
+    "LOCATION": "Location",
+    "LOCATION_AVAIL": "Lima, Peru",
+    "ABOUT": "About Me",
+    "ABOUT_DESC": "Systems Engineer passionate about building technological solutions that generate real impact.",
+    "PROJECT_AVAIL": "Available for new projects",
+    "RIGHTS": "All rights reserved.",
+    "MADE_WITH": "Made with",
+    "IN_PERU": "in Peru"
+  },
+  "STACK": {
+    "TAG": "Technologies",
+    "TITLE_PRE": "My Technology",
+    "TITLE_SPAN": "Stack",
+    "SUBTITLE_PRE": "I master a modern ecosystem to build",
+    "SUBTITLE_SPAN": "robust solutions.",
+    "CATEGORIES": {
+      "FRONTEND": {
+        "TITLE": "Frontend",
+        "SUBTITLE": "Interfaces & UX"
+      },
+      "BACKEND": {
+        "TITLE": "Backend",
+        "SUBTITLE": "Logic & APIs"
+      },
+      "DATABASES": {
+        "TITLE": "Databases",
+        "SUBTITLE": "Data Management"
+      },
+      "TOOLS": {
+        "TITLE": "DevOps & Cloud",
+        "SUBTITLE": "Infrastructure & Deployment"
+      }
+    }
+  },
+  "PROJECTS": {
+    "FILTER_TITLE": "Filter projects",
+    "TITLE": "Projects",
+    "TAG": "My Works",
+    "LOADING": "Loading projects...",
+    "ERROR_LOADING": "Error loading projects",
+    "RETRY": "Try again",
+    "LOADING_DETAIL": "Loading project...",
+    "ERROR_DETAIL": "Could not load project",
+    "GO_BACK": "Go back",
+    "FEATURED_ONLY": "Featured only",
+    "SEE_ALL": "View all",
+    "CLEAR_FILTERS": "Clear filters",
+    "CLEAR": "Clear",
+    "VIEW_DETAILS": "View details",
+    "VIEW_DETAILS_LONG": "View more details",
+    "VIEW_DETAILS_SHORT": "View details",
+    "SEE_MORE": "View more projects",
+    "SEE_LESS": "View less projects",
+    "SEE_LESS_LONG": "View less projects",
+    "SEE_LESS_SHORT": "View less",
+    "REMAINING": "{{ count }} remaining",
+    "NONE_FOUND": "No projects found",
+    "NONE_DESC": "No projects match your search. Try other terms.",
+    "NONE_AVAILABLE": "No projects available",
+    "NONE_AVAIL_DESC": "Projects will appear here once they are loaded.",
+    "RELOAD": "Reload",
+    "SEARCH_SUMMARY": "Showing results for: {{ query }}",
+    "BACK_TO_LIST": "Back to list",
+    "INTERESTED": "💡 Interested in my work?",
+    "CONTACT_PROMPT": "Do not hesitate to contact me to collaborate on new projects.",
+    "STACK_TITLE": "Technology Stack",
+    "MAIN_FEATURES": "Main Features",
+    "CHALLENGES_SOLUTIONS": "Challenges and Solutions",
+    "LINKS": "Links",
+    "INFO": "Information",
+    "CATEGORY": "Category",
+    "STATUS": "Status",
+    "YEAR": "Year",
+    "CATEGORIES": {
+      "ALL": "All",
+      "WEB": "Web",
+      "MOBILE": "Mobile",
+      "IOT": "IoT",
+      "FREELANCE": "Freelance"
+    },
+    "STATUS_LABELS": {
+      "completed": "Completed",
+      "in-progress": "In Progress",
+      "maintenance": "Maintenance",
+      "archived": "Archived"
+    },
+    "SECTION": {
+      "ALL": "All Projects",
+      "WEB": "Web Projects",
+      "MOBILE": "Mobile Projects",
+      "IOT": "IoT Projects",
+      "FREELANCE": "Freelance Projects",
+      "FEATURED_SUFFIX": "(Featured)",
+      "SEARCH_RESULTS": "Search Results"
+    },
+    "PAGINATION": {
+      "SHOWING_ALL": "Showing all {{ total }} projects",
+      "SHOWING_PARTIAL": "Showing {{ showing }} of {{ total }} projects"
+    },
+    "FILTER_SUMMARY": "Showing {{ filtered }} out of {{ total }} projects ({{ percentage }}%)",
+    "BUTTONS": {
+      "CODE": "Code",
+      "DEMO": "Demo",
+      "DOCS": "Docs",
+      "DOWNLOAD": "Download",
+      "WEB": "Web",
+      "REPO": "Repo",
+      "REPOSITORY": "Repository"
+    },
+    "ERRORS": {
+      "OFFLINE": "No internet connection. Please check your connection.",
+      "SERVER": "Server error. Please try again later.",
+      "NOT_FOUND": "No projects found.",
+      "DEFAULT": "Error loading projects."
+    },
+    "UBICATE_CAROUSEL": {
+      "SLIDE_1_TITLE": "Home Screen",
+      "SLIDE_1_DESC": "Login and initial configuration",
+      "SLIDE_1_FOOTER": "User authentication",
+      "SLIDE_2_TITLE": "Real-time Map",
+      "SLIDE_2_ETA": "Bus AVO-502 • Arrival: 8 min",
+      "SLIDE_2_FOOTER": "Real-time map",
+      "SLIDE_3_TITLE": "Available Routes",
+      "SLIDE_3_RUTA_A": "Route A • 12 min",
+      "SLIDE_3_RUTA_A_DESC": "Via Main Ave.",
+      "SLIDE_3_RUTA_B": "Route B • 18 min",
+      "SLIDE_3_RUTA_B_DESC": "Via Center",
+      "SLIDE_3_BTN": "Start navigation",
+      "SLIDE_3_FOOTER": "Route calculation",
+      "SLIDE_4_TITLE": "YouTube Demo",
+      "SLIDE_4_DESC": "Watch the application working in real time",
+      "SLIDE_4_BTN": "View Demo"
+    },
+    "ITEMS": {
+      "1": {
+        "TITLE": "GigaShop - Electronic Products E-commerce Platform",
+        "SHORT_DESC": "Secure e-commerce with online payments, real-time management, and admin panel for electronic products.",
+        "DESC": "In the electronic products trade, many businesses lack a unified platform that allows them to sell online securely, keep inventory updated, and process payments reliably. This limits their sales and reduces customer trust. GigaShop solves this problem with a full-stack e-commerce solution developed in Angular (with Tailwind CSS) and Spring Boot (with Spring Security and JWT). The system includes a user area with secure authentication, persistent cart, and online payments using Stripe; and an admin panel for product management, inventory, and real-time metrics, backed by MySQL. Its architecture follows Clean Code principles and is deployed with Docker, ensuring scalability and maintainability.",
+        "HIGHLIGHTS": [
+          "Identification and solution of a real e-commerce problem",
+          "Secure authentication with JWT and Spring Security",
+          "Persistent cart with Redis",
+          "Online payments with Stripe",
+          "Admin panel with real-time metrics",
+          "Product and inventory management",
+          "Hexagonal architecture and Clean Code principles",
+          "API documentation with Swagger",
+          "Deployment with Docker"
+        ],
+        "LINKS": {
+          "BACKEND_REPO": "Backend Repository"
+        }
+      },
+      "2": {
+        "TITLE": "FinanceTracker - Smart Debt and Loan Management",
+        "SHORT_DESC": "Control debts and loans with automatic calculations, reminders, and real-time synchronization.",
+        "DESC": "Many people do not keep precise control of their debts and loans, making it difficult to plan payments and calculate the impact of interest and taxes over time. FinanceTracker solves this problem with a web application developed in React + Vite, Tailwind CSS, and Firebase, allowing registration of debts, calculation of installments considering interest rates and Sales Tax, and receiving automatic expiration reminders. It offers secure authentication with Google, storage, and real-time synchronization through Firestore, as well as automatic expense categorization for better financial analysis.",
+        "HIGHLIGHTS": [
+          "Automatic installment calculation with interest and taxes",
+          "Real-time debt registration and visualization",
+          "Customizable push reminders",
+          "Secure authentication with Google",
+          "Multi-device synchronization with Firestore",
+          "Automatic expense categorization"
+        ],
+        "LINKS": {
+          "VIEW_CODE": "See Code",
+          "LIVE_DEMO": "Live Demo"
+        }
+      },
+      "3": {
+        "TITLE": "Ubícate - Public Transport GPS Tracking",
+        "SHORT_DESC": "Android app to see buses in real-time, calculate arrival times and routes to nearby stops.",
+        "DESC": "Native Android mobile application developed to improve the experience of public transport users through real-time geolocation. Ubicate allows visualizing bus locations on an interactive map, estimating time and distance to a selected stop, and tracing walking routes to reach the nearest point. The solution integrates Google Maps API for route calculation, Firebase for real-time synchronization and data management, and push notifications for important notices. TRAVEL WITH PEACE OF MIND - this mobile application is optimized to provide the best user experience on Android devices, with three main screens: real-time bus location, time and distance calculation to selected stops, and walking routes to nearby stops.",
+        "HIGHLIGHTS": [
+          "Real-time bus location with high precision",
+          "Calculation of time and distance to selected stops",
+          "Walking routes to nearby stops",
+          "Push notifications for relevant alerts",
+          "Material Design with intuitive interface for Android",
+          "TRAVEL WITH PEACE OF MIND - Optimized mobile app",
+          "Three main screens: real-time map, ETA calculations, and pedestrian routes",
+          "Full integration with Google Maps for navigation",
+          "Notification system for route updates"
+        ],
+        "LINKS": {
+          "SOURCE_CODE": "Source Code",
+          "FUNC_DEMO": "Functional Demo"
+        },
+        "CHALLENGES": {
+          "0": "Performance optimization for real-time GPS tracking",
+          "1": "Efficient battery management on Android devices",
+          "2": "Data synchronization across multiple users",
+          "3": "Implementation of efficient route calculation algorithms"
+        }
+      },
+      "4": {
+        "TITLE": "ProDent - Medical Schedule and Appointment Management",
+        "SHORT_DESC": "Android app for medical appointment management with history, ratings, and automatic reminders.",
+        "DESC": "Native Android mobile app to facilitate the management of medical appointments for both patients and doctors. Solves the coordination and follow-up problem of appointments, allowing patients to register, view, and manage their reservations, consult their medical history, rate doctors, and leave comments. Doctors can register their available schedules, confirm or reject appointments, and view their schedule on an interactive calendar. Includes push notifications to remind of upcoming appointments and is fully synchronized with Firebase for authentication and cloud data storage.",
+        "HIGHLIGHTS": [
+          "MVVM architecture with Clean Architecture",
+          "Registration and management of medical appointments",
+          "Interactive calendar with doctor availability",
+          "Push notifications for reminders",
+          "Medical history with details and attached documents",
+          "Rating and comments for doctors"
+        ],
+        "LINKS": {
+          "MAIN_REPO": "Main Repository"
+        }
+      },
+      "5": {
+        "TITLE": "SecureAuth - Enterprise MFA System",
+        "SHORT_DESC": "MFA authentication system with SSO, auditing, and advanced protection.",
+        "DESC": "Authentication system that implements Multi-Factor Authentication (MFA), Single Sign-On (SSO), and granular permission management. Developed with Spring Security, it includes protection against modern attacks, full auditing, and integration with corporate identity services.",
+        "HIGHLIGHTS": [
+          "MFA with TOTP, SMS, and biometrics",
+          "Single Sign-On (SSO) with SAML/OAuth2",
+          "Rate limiting and DDoS protection",
+          "Full auditing with immutable logs",
+          "Granular RBAC role management",
+          "Anomaly detection with ML",
+          "GDPR and SOC2 compliance",
+          "APIs for enterprise integration"
+        ],
+        "LINKS": {
+          "BACKEND_SEC": "Backend Security",
+          "FRONTEND_ANG": "Frontend Angular",
+          "SECURE_DEMO": "Secure Demo"
+        }
+      },
+      "6": {
+        "TITLE": "RoboControl - Smart IoT System",
+        "SHORT_DESC": "IoT platform with smart robot, advanced sensors, and Android app with Jetpack Compose.",
+        "DESC": "Complete IoT platform combining custom Arduino hardware with an advanced Android application. The robot includes smart sensors, programmable actuators, basic computer vision, and dual connectivity (WiFi/Bluetooth). The app uses Jetpack Compose with reactive architecture for real-time control and routine programming.",
+        "HIGHLIGHTS": [
+          "Custom firmware with FreeRTOS for multitasking",
+          "Sensors: ultrasonic, gyroscope, basic camera",
+          "Dual control: WiFi (TCP) and Bluetooth (BLE)",
+          "App with MVI architecture + Coroutines",
+          "Reactive UI with Compose animations",
+          "Automated routine programming",
+          "Real-time telemetry with graphics",
+          "OTA updates for remote firmware"
+        ],
+        "LINKS": {
+          "ANDROID_APP": "Android App"
+        }
+      },
+      "7": {
+        "TITLE": "UBICATE - Transport Management and Real-Time Geolocation",
+        "SHORT_DESC": "Angular + Firebase platform for bus tracking and transport management.",
+        "DESC": "UBICATE is a platform that allows users and drivers to visualize bus locations in real-time, consult ETA and routes on interactive maps. The backend implements Spring Security with JWT for authentication/roles and persists operational data in MySQL (drivers, buses, routes, companies). Locations are published and consumed in real-time from Firebase/Firestore for low latency in tracking. The solution integrates Google Maps for route and geofence tracing, and push notifications for critical alerts.",
+        "HIGHLIGHTS": [
+          "Spring Boot backend with Spring Security (JWT, roles, and permissions)",
+          "Operational persistence in MySQL (drivers, buses, routes, companies)",
+          "Real-time bus tracking with Firebase/Firestore",
+          "Enterprise panel for driver, route, and fleet management",
+          "Interactive maps with Google Maps and geofencing",
+          "Push notifications for events and user alerts",
+          "Responsive and accessible Angular frontend"
+        ],
+        "LINKS": {
+          "VIEW_DEMO": "View Demo"
+        },
+        "CHALLENGES": {
+          "0": "Performance optimization with large volume of locations",
+          "1": "Real-time data consistency between profiles",
+          "2": "Definition of security rules in Firebase"
+        }
+      },
+      "8": {
+        "TITLE": "Polule Ice - Sales and Inventory System",
+        "SHORT_DESC": "Comprehensive sales and inventory system with JWT authentication, automatic reports, and role management.",
+        "DESC": "Comprehensive sales and inventory management system developed as a freelance project. The application implements secure authentication with JWT and Spring Security, allowing the administration of two different roles: Administrator and Seller. The system offers a complete administrative panel for real-time inventory management, sales control, and generation of daily, weekly, and monthly reports. Developed with Angular on the frontend and Spring Boot on the backend, it uses MySQL as a database to guarantee the persistence and reliability of information. The architecture allows business scaling with features such as stock control, low inventory alerts, transaction history, and sales analysis.",
+        "HIGHLIGHTS": [
+          "Secure authentication with JWT and Spring Security",
+          "Role management: Administrator and Seller",
+          "Real-time inventory system",
+          "Daily, weekly, and monthly reports",
+          "Sales and transaction control",
+          "Automatic low stock alerts",
+          "Intuitive admin panel",
+          "Full operations history",
+          "Sales analysis with charts"
+        ],
+        "LINKS": {
+          "VIEW_DEMO": "View Demo"
+        },
+        "CHALLENGES": {
+          "0": "Implementation of granular permission system",
+          "1": "Query optimization for real-time reports",
+          "2": "Inventory synchronization between multiple users"
+        }
+      }
+    }
+  }
+}

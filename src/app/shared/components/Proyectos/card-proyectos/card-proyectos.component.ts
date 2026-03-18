@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, Input, Output, EventEmitter, ChangeDetectionStrategy, Inject, PLATFORM_ID, ChangeDetectorRef, ViewChild, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { CommonModule, isPlatformBrowser, DOCUMENT } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router'; // AGREGADO
 import { Subject } from 'rxjs';
 import { takeUntil, catchError, of } from 'rxjs';
@@ -13,7 +14,7 @@ import {
 @Component({
   selector: 'app-card-proyectos',
   standalone: true,
-  imports: [CommonModule], // REMOVIDO ProjectFilterComponent, InfoCardComponent
+  imports: [CommonModule, TranslateModule], // REMOVIDO ProjectFilterComponent, InfoCardComponent
   templateUrl: './card-proyectos.component.html',
   styleUrls: ['./card-proyectos.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -85,6 +86,7 @@ export class CardProyectosComponent implements OnInit, AfterViewInit, OnDestroy 
 
   constructor(
     private projectsService: ProjectsDataService,
+    private translate: TranslateService,
     private cdr: ChangeDetectorRef,
     private router: Router, // AGREGADO
     @Inject(PLATFORM_ID) platformId: Object,
@@ -347,40 +349,10 @@ export class CardProyectosComponent implements OnInit, AfterViewInit, OnDestroy 
     }
   }
 
-  // Helper methods
-  getSectionTitle(): string {
-    if (this.hasActiveSearch) {
-      return 'Resultados de búsqueda';
-    }
-    const categoryLabels: Record<'all' | 'web' | 'mobile' | 'iot' | 'freelance', string> = {
-      all: 'Todos los Proyectos',
-      web: 'Proyectos Web',
-      mobile: 'Proyectos Mobile',
-      iot: 'Proyectos IoT',
-      freelance: 'Proyectos Freelance',
-    };
-    const base = categoryLabels[this.selectedCategory] || 'Todos los Proyectos';
-    return this.showFeaturedOnly ? `${base} (Destacados)` : base;
-  }
-
-  getPaginationInfo(): string {
-    if (this.showingAll) {
-      return `Mostrando todos los ${this.availableProjects.length} proyectos`;
-    }
-    const showing = Math.min(this.projectsPerPage, this.availableProjects.length);
-    return `Mostrando ${showing} de ${this.availableProjects.length} proyectos`;
-  }
-
-  getFilterSummary(): string {
-    if (!this.hasActiveSearch) {
-      return '';
-    }
-
+  getSearchPercentage(): number {
     const total = this.allProjects.length;
     const filtered = this.filteredProjects.length;
-    const percentage = total > 0 ? Math.round((filtered / total) * 100) : 0;
-
-    return `Mostrando ${filtered} de ${total} proyectos (${percentage}%)`;
+    return total > 0 ? Math.round((filtered / total) * 100) : 0;
   }
 
   // Project interactions - MODIFICADO PARA NAVEGACIÓN
@@ -421,15 +393,15 @@ export class CardProyectosComponent implements OnInit, AfterViewInit, OnDestroy 
   // Error handling
   private getErrorMessage(error: any): string {
     if (error?.status === 0) {
-      return 'Sin conexión a internet. Verifica tu conexión.';
+      return this.translate.instant('PROJECTS.ERRORS.OFFLINE');
     }
     if (error?.status >= 500) {
-      return 'Error del servidor. Intenta más tarde.';
+      return this.translate.instant('PROJECTS.ERRORS.SERVER');
     }
     if (error?.status === 404) {
-      return 'No se encontraron proyectos.';
+      return this.translate.instant('PROJECTS.ERRORS.NOT_FOUND');
     }
-    return 'Error al cargar los proyectos.';
+    return this.translate.instant('PROJECTS.ERRORS.DEFAULT');
   }
 
   // Image error handling

@@ -8,9 +8,9 @@ export class CertificationService {
   private certifications: Certification[] = [
     {
       id: '1',
-      title: 'Especialización en Machine Learning con TensorFlow y Keras',
-      issuer: 'DMC Institute',
-      description: 'Especialización completa en Machine Learning utilizando TensorFlow y Keras. Incluye redes neuronales, deep learning, procesamiento de lenguaje natural y visión por computadora.',
+      title: 'CERTIFICATIONS.ITEMS.ML_TENSORFLOW.TITLE',
+      issuer: 'CERTIFICATIONS.ITEMS.ML_TENSORFLOW.ISSUER',
+      description: 'CERTIFICATIONS.ITEMS.ML_TENSORFLOW.DESCRIPTION',
       date: new Date('2025-12-01'),
       status: 'completed',
       image: '/assets/certifications/ml-tensorflow.jpg',
@@ -20,9 +20,9 @@ export class CertificationService {
     },
     {
       id: '2',
-      title: 'Programa ARQUITECTURA DE SOFTWARE',
-      issuer: 'CodiGo / TECSUP',
-      description: 'Bootcamp intensivo en Arquitectura de Software con Java, cubriendo patrones de diseño, microservicios, arquitectura cloud-native, y mejores prácticas de desarrollo empresarial.',
+      title: 'CERTIFICATIONS.ITEMS.SOFT_ARCH.TITLE',
+      issuer: 'CERTIFICATIONS.ITEMS.SOFT_ARCH.ISSUER',
+      description: 'CERTIFICATIONS.ITEMS.SOFT_ARCH.DESCRIPTION',
       date: new Date('2025-12-01'),
       endDate: new Date('2026-03-31'),
       status: 'in-progress',

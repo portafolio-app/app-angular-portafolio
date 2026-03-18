@@ -6,30 +6,30 @@
       <div class="space-y-6">
         <div class="inline-flex items-center px-4 py-2 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 text-sm font-semibold">
           <i class="fas fa-user mr-2"></i>
-          Sobre Mí
+          {{ 'ABOUT.TAG' | translate }}
         </div>
         
         <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white leading-tight">
-          Pasión por el código, <span class="text-emerald-600 dark:text-emerald-400">dedicación</span> al detalle
+          {{ 'ABOUT.TITLE_PRE' | translate }} <span class="text-emerald-600 dark:text-emerald-400">{{ 'ABOUT.TITLE_SPAN' | translate }}</span> {{ 'ABOUT.TITLE_POST' | translate }}
         </h2>
         
         <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-          Soy un desarrollador con más de 2 años de experiencia creando soluciones que no solo funcionan, sino que escalan y aportan valor real al usuario. Mi viaje en la tecnología comenzó con la curiosidad de entender cómo funcionaban las aplicaciones que usamos a diario, y hoy esa curiosidad se ha transformado en un compromiso con la excelencia técnica.
+          {{ 'ABOUT.P1' | translate }}
         </p>
         
         <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-          Me especializo en ecosistemas modernos como <span class="font-semibold text-emerald-600 dark:text-emerald-400">Java/Spring Boot</span> para arquitecturas robustas y <span class="font-semibold text-red-600 dark:text-red-400">Angular</span> para interfaces fluidas. Creo firmemente que un buen software es aquel que resuelve problemas complejos de forma sencilla e intuitiva.
+          {{ 'ABOUT.P2_PRE' | translate }} <span class="font-semibold text-emerald-600 dark:text-emerald-400">{{ 'ABOUT.P2_SPRING' | translate }}</span> {{ 'ABOUT.P2_MID' | translate }} <span class="font-semibold text-red-600 dark:text-red-400">{{ 'ABOUT.P2_ANGULAR' | translate }}</span> {{ 'ABOUT.P2_POST' | translate }}
         </p>
 
         <!-- Dynamic Values -->
         <div class="grid grid-cols-2 gap-6 pt-4">
           <div class="space-y-2">
             <div class="text-emerald-600 dark:text-emerald-400 text-2xl font-bold">+20</div>
-            <div class="text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wider font-semibold">Proyectos Realizados</div>
+            <div class="text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wider font-semibold">{{ 'ABOUT.STATS_PROJECTS' | translate }}</div>
           </div>
           <div class="space-y-2">
             <div class="text-emerald-600 dark:text-emerald-400 text-2xl font-bold">100%</div>
-            <div class="text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wider font-semibold">Dedicación al detalle</div>
+            <div class="text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wider font-semibold">{{ 'ABOUT.STATS_DEDICATION' | translate }}</div>
           </div>
         </div>
       </div>
@@ -44,8 +44,8 @@
                 <i class="fas fa-terminal text-2xl"></i>
               </div>
               <div>
-                <h4 class="font-bold text-gray-900 dark:text-white">Formación Continua</h4>
-                <p class="text-sm text-gray-500 dark:text-gray-400">Siempre aprendiendo lo último de la industria.</p>
+                <h4 class="font-bold text-gray-900 dark:text-white">{{ 'ABOUT.FEAT1_TITLE' | translate }}</h4>
+                <p class="text-sm text-gray-500 dark:text-gray-400">{{ 'ABOUT.FEAT1_DESC' | translate }}</p>
               </div>
             </div>
             
@@ -54,8 +54,8 @@
                 <i class="fas fa-rocket text-2xl"></i>
               </div>
               <div>
-                <h4 class="font-bold text-gray-900 dark:text-white">Mentalidad Ágil</h4>
-                <p class="text-sm text-gray-500 dark:text-gray-400">Entrega rápida y adaptabilidad al cambio.</p>
+                <h4 class="font-bold text-gray-900 dark:text-white">{{ 'ABOUT.FEAT2_TITLE' | translate }}</h4>
+                <p class="text-sm text-gray-500 dark:text-gray-400">{{ 'ABOUT.FEAT2_DESC' | translate }}</p>
               </div>
             </div>
 
@@ -64,8 +64,8 @@
                 <i class="fas fa-eye text-2xl"></i>
               </div>
               <div>
-                <h4 class="font-bold text-gray-900 dark:text-white">Foco en el Usuario</h4>
-                <p class="text-sm text-gray-500 dark:text-gray-400">Interfaces intuitivas y experiencias memorables.</p>
+                <h4 class="font-bold text-gray-900 dark:text-white">{{ 'ABOUT.FEAT3_TITLE' | translate }}</h4>
+                <p class="text-sm text-gray-500 dark:text-gray-400">{{ 'ABOUT.FEAT3_DESC' | translate }}</p>
               </div>
             </div>
           </div>

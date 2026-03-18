@@ -3,10 +3,10 @@
     <!-- Header -->
     <div class="text-center mb-12">
       <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-        Certificaciones & Formación
+        {{ 'CERTIFICATIONS.TITLE_PRE' | translate }} <span class="text-emerald-600 dark:text-emerald-400">{{ 'CERTIFICATIONS.TITLE_SPAN' | translate }}</span>
       </h2>
       <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-        Mi compromiso continuo con el aprendizaje y la excelencia profesional
+        {{ 'NAVBAR.CERTIFICATIONS' | translate }} & {{ 'NAVBAR.TRAYECTORIA' | translate }}
       </p>
     </div>
 
@@ -24,7 +24,7 @@
               <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
               </svg>
-              Completado
+              {{ 'CERTIFICATIONS.STATUS_COMPLETED' | translate }}
             </span>
             <span *ngIf="cert.status === 'in-progress'"
                   class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
@@ -32,7 +32,7 @@
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
-              En curso
+              {{ 'CERTIFICATIONS.STATUS_IN_PROGRESS' | translate }}
             </span>
             <span class="text-sm text-gray-500 dark:text-gray-400">
               {{ cert.date | date: 'yyyy' }}
@@ -41,25 +41,23 @@
           </div>
 
           <!-- Title & Issuer -->
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
-            {{ cert.title }}
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-2">
+            {{ cert.title | translate }}
           </h3>
-          <p class="text-emerald-600 dark:text-emerald-400 font-medium mb-3">
-            {{ cert.issuer }}
+          <p class="text-sm font-semibold text-emerald-600 dark:text-emerald-500 mb-3">
+            {{ cert.issuer | translate }}
           </p>
 
           <!-- Description -->
-          <p class="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
-            {{ cert.description }}
+          <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-3 leading-relaxed mb-4">
+            {{ cert.description | translate }}
           </p>
 
           <!-- Progress Bar for In-Progress -->
           <div *ngIf="cert.status === 'in-progress'" class="mb-4">
-            <div class="flex justify-between items-center mb-2">
-              <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Progreso</span>
-              <span class="text-sm font-medium text-blue-600 dark:text-blue-400">
-                {{ getProgressPercentage(cert) | number: '1.0-0' }}%
-              </span>
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ 'CERTIFICATIONS.PROGRESS' | translate }}</span>
+              <span class="text-[10px] font-black text-emerald-600 dark:text-emerald-400">{{ getProgressPercentage(cert) | number: '1.0-0' }}%</span>
             </div>
             <div class="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
               <div class="bg-gradient-to-r from-blue-500 to-emerald-500 h-2 rounded-full transition-all duration-300"
@@ -68,17 +66,17 @@
             </div>
             <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">
               <span *ngIf="getMonthsRemaining(cert) > 0">
-                Faltan {{ getMonthsRemaining(cert) }} mes<span *ngIf="getMonthsRemaining(cert) !== 1">es</span> para completar
+                {{ 'CERTIFICATIONS.MONTHS_REMAINING' | translate:{ months: getMonthsRemaining(cert) } }}
               </span>
               <span *ngIf="getMonthsRemaining(cert) === 0">
-                Próximo a completar
+                {{ 'CERTIFICATIONS.NEAR_COMPLETION' | translate }}
               </span>
             </p>
           </div>
 
           <!-- Skills -->
           <div class="mb-4">
-            <p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Skills:</p>
+            <p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ 'CERTIFICATIONS.SKILLS' | translate }}:</p>
             <div class="flex flex-wrap gap-2">
               <span *ngFor="let skill of cert.skills"
                     class="px-3 py-1 bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-gray-300 text-xs rounded-full border border-gray-300 dark:border-slate-700">
@@ -95,7 +93,7 @@
               <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
               </svg>
-              Ver Credencial
+              {{ 'CERTIFICATIONS.VIEW_CERTIFICATE' | translate }}
             </a>
           </div>
         </div>
@@ -108,8 +106,8 @@
       <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
       </svg>
-      <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">No hay certificaciones</h3>
-      <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Pronto agregaré más certificaciones.</p>
+      <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">{{ 'CERTIFICATIONS.EMPTY_TITLE' | translate }}</h3>
+      <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ 'CERTIFICATIONS.EMPTY_DESC' | translate }}</p>
     </div>
   </div>
 </section>

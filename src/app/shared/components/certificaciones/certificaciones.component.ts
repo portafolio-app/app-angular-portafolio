@@ -1,11 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { Certification } from '../../../core/models/certification.interface';
 import { CertificationService } from '../../../core/services/certification.service';
 
 @Component({
   selector: 'app-certificaciones',
-  imports: [CommonModule],
+  standalone: true,
+  imports: [CommonModule, TranslateModule],
   templateUrl: './certificaciones.component.html',
   styleUrl: './certificaciones.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush

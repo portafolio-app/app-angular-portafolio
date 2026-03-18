@@ -4,7 +4,7 @@
     <!-- Título -->
     <div class="text-center mb-10 sm:mb-12 md:mb-16">
       <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-4">
-        Mi <span class="text-emerald-600 dark:text-emerald-400">Experiencia</span>
+        {{ 'EXPERIENCE.TITLE_PRE' | translate }} <span class="text-emerald-600 dark:text-emerald-400">{{ 'EXPERIENCE.TITLE_SPAN' | translate }}</span>
       </h2>
     </div>
 
@@ -28,13 +28,13 @@
               <div class="flex items-start gap-2 sm:gap-3 flex-1 min-w-0">
                 <i [ngClass]="[getTypeIcon(exp.type)]" class="text-lg sm:text-xl md:text-2xl text-emerald-600 dark:text-emerald-400 mt-1 flex-shrink-0"></i>
                 <div class="flex-1 min-w-0">
-                  <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-1 break-words">{{ exp.title }}</h3>
-                  <p class="text-base sm:text-lg text-emerald-600 dark:text-emerald-400 font-semibold mb-2 break-words">{{ exp.company }}</p>
+                  <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-1 break-words">{{ exp.title | translate }}</h3>
+                  <p class="text-base sm:text-lg text-emerald-600 dark:text-emerald-400 font-semibold mb-2 break-words">{{ exp.company | translate }}</p>
 
                   <!-- Ubicación (solo móvil) -->
                   <div class="flex sm:hidden items-center gap-1.5 text-xs text-gray-600 dark:text-gray-400 mb-2">
                     <i class="fas fa-map-marker-alt"></i>
-                    <span class="break-words">{{ exp.location }}</span>
+                    <span class="break-words">{{ exp.location | translate }}</span>
                   </div>
                 </div>
               </div>
@@ -43,35 +43,35 @@
               <div class="hidden sm:flex flex-col items-end text-right flex-shrink-0">
                 <div class="flex items-center gap-1.5 text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-1">
                   <i class="fas fa-calendar"></i>
-                  <span class="whitespace-nowrap">{{ exp.period }}</span>
+                  <span class="whitespace-nowrap">{{ exp.period | translate }}</span>
                 </div>
                 <div class="flex items-center gap-1.5 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                   <i class="fas fa-map-marker-alt"></i>
-                  <span class="whitespace-nowrap">{{ exp.location }}</span>
+                  <span class="whitespace-nowrap">{{ exp.location | translate }}</span>
                 </div>
               </div>
 
               <!-- Período (solo móvil) -->
               <div class="flex sm:hidden flex-col items-end text-right flex-shrink-0">
                 <div class="text-xs text-gray-600 dark:text-gray-400">
-                  <span class="whitespace-nowrap">{{ exp.period }}</span>
+                  <span class="whitespace-nowrap">{{ exp.period | translate }}</span>
                 </div>
               </div>
             </div>
 
             <!-- Descripción -->
-            <p class="text-sm sm:text-base text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">{{ exp.description }}</p>
+            <p class="text-sm sm:text-base text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">{{ exp.description | translate }}</p>
 
             <!-- Logros -->
             <div class="mb-4">
               <h4 class="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white mb-2 sm:mb-3 uppercase tracking-wide">
-                Logros Destacados
+                {{ 'EXPERIENCE.ACHIEVEMENTS_LABEL' | translate }}
               </h4>
               <ul class="space-y-2">
                 <li *ngFor="let achievement of exp.achievements"
                     class="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                   <i class="fas fa-chevron-right text-emerald-600 dark:text-emerald-400 mt-1 sm:mt-1.5 text-[8px] sm:text-xs flex-shrink-0"></i>
-                  <span class="leading-relaxed">{{ achievement }}</span>
+                  <span class="leading-relaxed">{{ achievement | translate }}</span>
                 </li>
               </ul>
             </div>
@@ -79,7 +79,7 @@
             <!-- Tecnologías -->
             <div>
               <h4 class="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white mb-2 sm:mb-3 uppercase tracking-wide">
-                Tecnologías
+                {{ 'EXPERIENCE.TECH_LABEL' | translate }}
               </h4>
               <div class="flex flex-wrap gap-1.5 sm:gap-2">
                 <span *ngFor="let tech of exp.technologies"

@@ -1,12 +1,13 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Component, EventEmitter, Input, Output, HostListener, ElementRef, Inject, PLATFORM_ID, OnInit } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { trigger, transition, style, animate, state } from '@angular/animations';
 
 @Component({
   selector: 'app-navbard',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TranslateModule],
   templateUrl: './navbard.component.html',
   animations: [
     trigger('slideDown', [
@@ -54,11 +55,25 @@ export class NavbardComponent implements OnInit {
   @Input() isDarkMode!: boolean;
   @Output() themeToggle = new EventEmitter<void>();
 
+  currentLang: string = 'es';
+
   constructor(
     private elementRef: ElementRef,
     private router: Router,
+    private translate: TranslateService,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  ) {
+    this.translate.setDefaultLang('es');
+    
+    // Recuperar idioma guardado
+    let savedLang = 'es';
+    if (isPlatformBrowser(this.platformId)) {
+      savedLang = localStorage.getItem('language') || 'es';
+    }
+    
+    this.translate.use(savedLang);
+    this.currentLang = savedLang;
+  }
 
   ngOnInit(): void {
     // Mostrar navbar inmediatamente para mejorar la percepción de velocidad
@@ -122,6 +137,15 @@ export class NavbardComponent implements OnInit {
   navigateToPage(route: string): void {
     this.closeMenu();
     this.router.navigate([route]);
+  }
+
+  switchLanguage(lang: string): void {
+    this.translate.use(lang);
+    this.currentLang = lang;
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('language', lang);
+    }
+    this.closeDropdown();
   }
 
   // Resto de tus métodos existentes...

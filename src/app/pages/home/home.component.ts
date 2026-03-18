@@ -11,6 +11,7 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import Typewriter from 'typewriter-effect/dist/core';
 import { NavbardComponent } from '../../shared/components/navbard/navbard.component';
 import { ThemeService } from '../../core/services/ThemeService';
@@ -44,12 +45,11 @@ import { ChangeDetectionStrategy } from '@angular/core';
     StackTecnologicoComponent,
     ExperienciaComponent,
     AlertComponent,
+    TranslateModule
   ],
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('typewriter', { static: false }) typewriterElement!: ElementRef;
-
   isDarkMode: boolean = false;
   private typewriterInstance: any;
   private observer: IntersectionObserver | null = null;
@@ -66,7 +66,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     private themeService: ThemeService,
     private alertService: AlertService,
     private cdr: ChangeDetectorRef,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -81,14 +82,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.initScrollAnimations();
-      this.initTypewriterEffect();
     }
   }
 
   ngOnDestroy(): void {
-    if (this.typewriterInstance) {
-      this.typewriterInstance.stop();
-    }
 
     if (this.observer) {
       this.observer.disconnect();
@@ -281,33 +278,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private openGitHub(): void {
     if (isPlatformBrowser(this.platformId)) {
       window.open('https://github.com/VCL-tt', '_blank');
-    }
-  }
-
-  private initTypewriterEffect(): void {
-    if (this.typewriterElement?.nativeElement) {
-      this.typewriterInstance = new Typewriter(
-        this.typewriterElement.nativeElement,
-        {
-          loop: false,
-          delay: 75,
-          cursor: '|',
-        }
-      );
-
-      this.typewriterInstance
-        .typeString('Jorge Luis ')
-        .pauseFor(500)
-        .typeString(
-          '<span class="text-green-600 dark:text-green-400">Castillo Vega</span>'
-        )
-        .pauseFor(500)
-        .deleteChars(13)
-        .pauseFor(500)
-        .typeString(
-          '<span class="text-green-600 dark:text-green-400">Desarrollador Full Stack</span>'
-        )
-        .start();
     }
   }
 

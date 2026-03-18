@@ -2,18 +2,20 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, ArrowLeft, Menu, X, Sun, Moon } from 'lucide-angular';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ThemeService } from '../../../../core/services/ThemeService';
 
 @Component({
   selector: 'app-blog-navbar',
   standalone: true,
-  imports: [CommonModule, RouterModule, LucideAngularModule],
+  imports: [CommonModule, RouterModule, LucideAngularModule, TranslateModule],
   templateUrl: './blog-navbar.component.html',
   styleUrls: ['./blog-navbar.component.css']
 })
 export class BlogNavbarComponent {
   isMobileMenuOpen = false;
   isDarkMode = false;
+  currentLang: string = 'es';
 
   // Lucide Icons
   readonly ArrowLeft = ArrowLeft;
@@ -27,8 +29,10 @@ export class BlogNavbarComponent {
   constructor(
     private location: Location,
     private router: Router,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private translate: TranslateService
   ) {
+    this.currentLang = this.translate.currentLang || 'es';
     // Subscribe to theme changes
     this.themeService.isDarkMode$.subscribe(
       isDark => this.isDarkMode = isDark
@@ -69,7 +73,12 @@ export class BlogNavbarComponent {
   }
 
   navigateToProjects(): void {
-    this.router.navigate(['/'], { fragment: 'proyectos' });
+    this.router.navigate(['/proyectos']);
     this.closeMobileMenu();
+  }
+
+  switchLanguage(lang: string): void {
+    this.translate.use(lang);
+    this.currentLang = lang;
   }
 }

@@ -7,6 +7,7 @@ import {
   PLATFORM_ID,
 } from '@angular/core';
 import { CommonModule, isPlatformBrowser, Location } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil, catchError, of } from 'rxjs';
 
@@ -25,8 +26,8 @@ import { ThemeService } from '../../core/services/ThemeService';
 @Component({
   selector: 'app-project-detail',
   standalone: true,
-  imports: [CommonModule, InfoCardComponent, NavbardComponent],
-templateUrl: './project-detail.component.html',
+  imports: [CommonModule, InfoCardComponent, NavbardComponent, TranslateModule],
+  templateUrl: './project-detail.component.html',
   styleUrl: './project-detail.component.css',
 })
 export class ProjectDetailComponent implements OnInit, OnDestroy {
@@ -72,7 +73,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
         }
         this.loadProject(projectId);
       } else {
-        this.router.navigate(['/projects']);
+        this.router.navigate(['/proyectos']);
       }
     });
   }
@@ -115,7 +116,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
   }
 
   goToProjects(): void {
-    this.router.navigate(['/projects']);
+    this.router.navigate(['/proyectos']);
   }
 
   // ======== EVENT HANDLERS DEL INFO CARD ========
@@ -140,7 +141,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
       console.error('Invalid URL:', link.url);
     }
   }
-    toggleTheme():void{
+  toggleTheme(): void {
     this.themeService.toggleTheme();
   }
 }

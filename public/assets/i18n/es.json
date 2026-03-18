@@ -1,0 +1,464 @@
+{
+  "ALERT": {
+    "DEVELOPMENT": {
+      "TITLE": "¡Hola! Soy Jorge y transformo ideas en realidad.",
+      "MESSAGE": "Soy un desarrollador que cree en los **fundamentos**: si domino **Java y Spring Boot**, puedo dominar cualquier lenguaje. Mi enfoque es la eficiencia, potenciada por las mejores herramientas de **IA** para entregar resultados en tiempo récord.\n\n🚀 **¿Tienes un desafío técnico?** Estoy listo para aportar mi experiencia Full Stack y mi capacidad de aprendizaje acelerado a tu equipo.\n\n¡Hablemos!",
+      "BTN_PROJECTS": "Ver mis Proyectos",
+      "BTN_WHATSAPP": "WhatsApp",
+      "BTN_LINKEDIN": "LinkedIn",
+      "BTN_EMAIL": "Contactar por Email"
+    }
+  },
+  "NAVBAR": {
+    "HOME": "Inicio",
+    "PROJECTS": "Proyectos",
+    "RESOURCES": "Recursos",
+    "CERTIFICATIONS": "Certificaciones",
+    "CURRICULUM": "Mi CV",
+    "EXPERIENCE": "Experiencia",
+    "STACK": "Stack",
+    "ABOUT": "Sobre Mí",
+    "BLOG": "Blog",
+    "LANGUAGE": "Idioma",
+    "TRAYECTORIA": "Trayectoria",
+    "TECHNOLOGIES": "Tecnologías"
+  },
+  "HERO": {
+    "HI": "¡Hola!",
+    "I_AM": "Soy",
+    "GREETING": "¡Hola! Soy",
+    "STACK_LABEL": "Stack:",
+    "ROLES": [
+      "Desarrollador Full Stack",
+      "Especialista en Spring Boot",
+      "Apasionado por Angular",
+      "Entusiasta de la IA"
+    ],
+    "DESCRIPTION": "Ingeniero de Sistemas apasionado por construir soluciones tecnológicas de alto impacto. Especializado en Java/Spring Boot y Angular, con enfoque en arquitectura de software y experiencias de usuario excepcionales.",
+    "DESCRIPTION_PRE": "Apasionado por crear ",
+    "DESCRIPTION_TECH": "soluciones tecnológicas",
+    "DESCRIPTION_POST": " eficientes y escalables que optimizan la experiencia de usuario.",
+    "EXPERIENCE": "+2 años de experiencia",
+    "CV_BUTTON": "Descargar CV",
+    "CONTACT_BUTTON": "Contáctame",
+    "VIEW_BLOG": "Ver Blog"
+  },
+  "HOME": {
+    "TITLE": "Desarrollador Full Stack",
+    "SUBTITLE": "Transformando ideas en soluciones tecnológicas escalables",
+    "EXPLORE_WORK": "Explorar mi trabajo",
+    "CTA_PROJECTS_TITLE": "¿Quieres ver más de mi",
+    "CTA_PROJECTS_SPAN": "trabajo",
+    "CTA_PROJECTS_DESC": "Explora mi portafolio completo de proyectos, desde aplicaciones móviles integrales hasta robustos sistemas e-commerce y soluciones IoT de vanguardia.",
+    "CTA_PROJECTS_BUTTON": "Ver Portafolio Completo"
+  },
+  "ABOUT": {
+    "TAG": "Sobre Mí",
+    "TITLE_PRE": "Pasión por el",
+    "TITLE_SPAN": "desarrollo",
+    "TITLE_POST": "e innovación",
+    "P1": "Como Ingeniero de Sistemas, mi enfoque va más allá de escribir código; se trata de resolver problemas complejos de manera eficiente y escalable. Disfruto cada fase del ciclo de vida del software, desde la concepción de la arquitectura hasta el despliegue final.",
+    "P2_PRE": "Mi experiencia se centra en el ecosistema",
+    "P2_SPRING": "Java/Spring Boot",
+    "P2_MID": "para el backend y",
+    "P2_ANGULAR": "Angular",
+    "P2_POST": "para el frontend, lo que me permite construir aplicaciones robustas, seguras y altamente interactivas. Siempre estoy explorando nuevas tecnologías, actualmente profundizando en el uso de IA para optimizar procesos de desarrollo.",
+    "STATS_PROJECTS": "Proyectos Completados",
+    "STATS_DEDICATION": "Dedicación",
+    "FEAT1_TITLE": "Clean Code",
+    "FEAT1_DESC": "Código mantenible y escalable.",
+    "FEAT2_TITLE": "Alto Rendimiento",
+    "FEAT2_DESC": "Optimización y velocidad.",
+    "FEAT3_TITLE": "Diseño UX/UI",
+    "FEAT3_DESC": "Experiencias intuitivas."
+  },
+  "EXPERIENCE": {
+    "TAG": "Trayectoria",
+    "TITLE_PRE": "Mi",
+    "TITLE_SPAN": "Experiencia",
+    "ACHIEVEMENTS_LABEL": "Logros Destacados",
+    "TECH_LABEL": "Tecnologías",
+    "ITEMS": {
+      "GATO_FE": {
+        "TITLE": "Desarrollador de Software Front End",
+        "COMPANY": "Gato Marketing y Software S.A.C",
+        "PERIOD": "Octubre 2025 - Enero 2026",
+        "LOCATION": "Lima, Perú (Remoto)",
+        "DESCRIPTION": "Encargado del mantenimiento y desarrollo frontend de múltiples proyectos empresariales para distintos clientes: ERP contable, ERP de recursos humanos y plataforma de gestión para estudios fotográficos.",
+        "ACHIEVEMENTS": {
+          "0": "Desarrollo de arquitectura frontend con Angular para ERP contable de empresa cliente",
+          "1": "Mantenimiento y corrección de errores en ERP de recursos humanos (React) para otro cliente",
+          "2": "Creación de nuevos módulos y mantenimiento de sistema de gestión de estudios fotográficos",
+          "3": "Implementación de interfaces interactivas con Fabric.js para edición gráfica",
+          "4": "Integración continua con APIs REST y coordinación con equipos backend de cada proyecto",
+          "5": "Resolución de incidencias críticas y mejoras en múltiples sistemas en producción",
+          "6": "Validación directa de requerimientos con diferentes clientes finales"
+        }
+      },
+      "GATO_SW": {
+        "TITLE": "Ingeniero de Software",
+        "COMPANY": "Gato Marketing y Software S.A.C",
+        "PERIOD": "Agosto 2025 - Enero 2026",
+        "LOCATION": "Lima, Perú",
+        "DESCRIPTION": "Participación en equipo de desarrollo para módulo contable de ERP, trabajando en arquitectura full stack con metodologías ágiles.",
+        "ACHIEVEMENTS": {
+          "0": "Maquetación e integración de interfaces con Angular en módulo contable ERP",
+          "1": "Trabajo colaborativo en equipo de 3 desarrolladores",
+          "2": "Gestión de bugs y seguimiento de tareas en Jira",
+          "3": "Implementación de mejoras continuas basadas en feedback de usuarios"
+        }
+      },
+      "INNOVASHOP": {
+        "TITLE": "Full Stack Developer",
+        "COMPANY": "Sistema InnovaShop (Freelance)",
+        "PERIOD": "Julio 2024 - Febrero 2025",
+        "LOCATION": "Trujillo, Perú",
+        "DESCRIPTION": "Diseño y desarrollo completo de plataforma e-commerce escalable para venta de productos electrónicos, desde la arquitectura hasta el despliegue en producción.",
+        "ACHIEVEMENTS": {
+          "0": "Desarrollo full stack con Angular + Spring Boot, garantizando experiencia de usuario dinámica",
+          "1": "Implementación de seguridad con JWT y Spring Security para transacciones protegidas",
+          "2": "Contenedorización con Docker y despliegue exitoso en AWS",
+          "3": "Pruebas de rendimiento con JMeter para alta disponibilidad bajo cargas de tráfico",
+          "4": "Desarrollo de suite de pruebas unitarias con Mockito para calidad de código",
+          "5": "Diseño e implementación de base de datos MySQL optimizada"
+        }
+      }
+    }
+  },
+  "CERTIFICATIONS": {
+    "TAG": "Acreditaciones",
+    "TITLE_PRE": "Mis",
+    "TITLE_SPAN": "Certificaciones",
+    "STATUS_COMPLETED": "Completado",
+    "STATUS_IN_PROGRESS": "En Curso",
+    "MONTHS_REMAINING": "Faltan {{ months }} meses",
+    "VIEW_CERTIFICATE": "Ver Certificado",
+    "SKILLS": "Habilidades",
+    "PROGRESS": "Progreso",
+    "NEAR_COMPLETION": "Próximo a completar",
+    "EMPTY_TITLE": "No hay certificaciones",
+    "EMPTY_DESC": "Pronto agregaré más certificaciones.",
+    "ITEMS": {
+      "ML_TENSORFLOW": {
+        "TITLE": "Especialización en Machine Learning con TensorFlow y Keras",
+        "ISSUER": "DMC Institute",
+        "DESCRIPTION": "Especialización completa en Machine Learning utilizando TensorFlow y Keras. Incluye redes neuronales, deep learning, procesamiento de lenguaje natural y visión por computadora."
+      },
+      "SOFT_ARCH": {
+        "TITLE": "Programa ARQUITECTURA DE SOFTWARE",
+        "ISSUER": "CodiGo / TECSUP",
+        "DESCRIPTION": "Bootcamp intensivo en Arquitectura de Software con Java, cubriendo patrones de diseño, microservicios, arquitectura cloud-native, y mejores prácticas de desarrollo empresarial."
+      }
+    }
+  },
+  "FOOTER": {
+    "SPECIALTIES": "Especialidades",
+    "FE_DEV": "Desarrollo Frontend",
+    "BE_DEV": "Desarrollo Backend",
+    "MOBILE_DEV": "Desarrollo Mobile",
+    "DESKTOP_DEV": "Desarrollo Desktop",
+    "DB_DEV": "Base de Datos",
+    "CONTACT_INFO": "Información de Contacto",
+    "EMAIL": "Correo Electrónico",
+    "EMAIL_AVAIL": "Disponible para consultas",
+    "PHONE": "Teléfono",
+    "PHONE_AVAIL": "Lunes a Viernes",
+    "LOCATION": "Ubicación",
+    "LOCATION_AVAIL": "Lima, Perú",
+    "ABOUT": "Sobre Mí",
+    "ABOUT_DESC": "Ingeniero de Sistemas apasionado por construir soluciones tecnológicas que generen impacto real.",
+    "PROJECT_AVAIL": "Disponible para nuevos proyectos",
+    "RIGHTS": "Todos los derechos reservados.",
+    "MADE_WITH": "Hecho con",
+    "IN_PERU": "en Perú"
+  },
+  "STACK": {
+    "TAG": "Tecnologías",
+    "TITLE_PRE": "Mi Stack",
+    "TITLE_SPAN": "Tecnológico",
+    "SUBTITLE_PRE": "Domino un ecosistema moderno para construir",
+    "SUBTITLE_SPAN": "soluciones robustas.",
+    "CATEGORIES": {
+      "FRONTEND": {
+        "TITLE": "Frontend",
+        "SUBTITLE": "Interfaces & UX"
+      },
+      "BACKEND": {
+        "TITLE": "Backend",
+        "SUBTITLE": "Lógica & APIs"
+      },
+      "DATABASES": {
+        "TITLE": "Bases de Datos",
+        "SUBTITLE": "Gestión de Datos"
+      },
+      "TOOLS": {
+        "TITLE": "DevOps & Cloud",
+        "SUBTITLE": "Infraestructura & Despliegue"
+      }
+    }
+  },
+  "PROJECTS": {
+    "FILTER_TITLE": "Filtrar proyectos",
+    "TITLE": "Proyectos",
+    "TAG": "Mis Trabajos",
+    "LOADING": "Cargando proyectos...",
+    "ERROR_LOADING": "Error al cargar proyectos",
+    "RETRY": "Reintentar",
+    "LOADING_DETAIL": "Cargando proyecto...",
+    "ERROR_DETAIL": "No se pudo cargar el proyecto",
+    "GO_BACK": "Volver atrás",
+    "FEATURED_ONLY": "Solo destacados",
+    "SEE_ALL": "Ver todos",
+    "CLEAR_FILTERS": "Limpiar filtros",
+    "CLEAR": "Limpiar",
+    "VIEW_DETAILS": "Ver detalles",
+    "VIEW_DETAILS_LONG": "Ver más detalles",
+    "VIEW_DETAILS_SHORT": "Ver detalles",
+    "SEE_MORE": "Ver más proyectos",
+    "SEE_LESS": "Ver menos proyectos",
+    "SEE_LESS_LONG": "Ver menos proyectos",
+    "SEE_LESS_SHORT": "Ver menos",
+    "REMAINING": "{{ count }} restantes",
+    "NONE_FOUND": "No se encontraron proyectos",
+    "NONE_DESC": "No hay proyectos que coincidan con tu búsqueda. Intenta con otros términos.",
+    "NONE_AVAILABLE": "No hay proyectos disponibles",
+    "NONE_AVAIL_DESC": "Los proyectos aparecerán aquí una vez que estén cargados.",
+    "RELOAD": "Recargar",
+    "SEARCH_SUMMARY": "Mostrando resultados para: {{ query }}",
+    "BACK_TO_LIST": "Volver a la lista",
+    "INTERESTED": "💡 ¿Te interesa mi trabajo?",
+    "CONTACT_PROMPT": "No dudes en contactarme para colaborar en nuevos proyectos.",
+    "STACK_TITLE": "Stack Tecnológico",
+    "MAIN_FEATURES": "Características Principales",
+    "CHALLENGES_SOLUTIONS": "Desafíos y Soluciones",
+    "LINKS": "Enlaces",
+    "INFO": "Información",
+    "CATEGORY": "Categoría",
+    "STATUS": "Estado",
+    "YEAR": "Año",
+    "CATEGORIES": {
+      "ALL": "Todos",
+      "WEB": "Web",
+      "MOBILE": "Mobile",
+      "IOT": "IoT",
+      "FREELANCE": "Freelance"
+    },
+    "STATUS_LABELS": {
+      "completed": "Completado",
+      "in-progress": "En Curso",
+      "maintenance": "Mantenimiento",
+      "archived": "Archivado"
+    },
+    "SECTION": {
+      "ALL": "Todos los Proyectos",
+      "WEB": "Proyectos Web",
+      "MOBILE": "Proyectos Mobile",
+      "IOT": "Proyectos IoT",
+      "FREELANCE": "Proyectos Freelance",
+      "FEATURED_SUFFIX": "(Destacados)",
+      "SEARCH_RESULTS": "Resultados de búsqueda"
+    },
+    "PAGINATION": {
+      "SHOWING_ALL": "Mostrando todos los {{ total }} proyectos",
+      "SHOWING_PARTIAL": "Mostrando {{ showing }} de {{ total }} proyectos"
+    },
+    "FILTER_SUMMARY": "Mostrando {{ filtered }} de {{ total }} proyectos ({{ percentage }}%)",
+    "BUTTONS": {
+      "CODE": "Código",
+      "DEMO": "Demo",
+      "DOCS": "Docs",
+      "DOWNLOAD": "Descargar",
+      "WEB": "Web",
+      "REPO": "Repo",
+      "REPOSITORY": "Repositorio"
+    },
+    "ERRORS": {
+      "OFFLINE": "Sin conexión a internet. Verifica tu conexión.",
+      "SERVER": "Error del servidor. Intenta más tarde.",
+      "NOT_FOUND": "No se encontraron proyectos.",
+      "DEFAULT": "Error al cargar los proyectos."
+    },
+    "UBICATE_CAROUSEL": {
+      "SLIDE_1_TITLE": "Pantalla de Inicio",
+      "SLIDE_1_DESC": "Login y configuración inicial",
+      "SLIDE_1_FOOTER": "Autenticación de usuario",
+      "SLIDE_2_TITLE": "Mapa en tiempo real",
+      "SLIDE_2_ETA": "Bus AVO-502 • Llegada: 8 min",
+      "SLIDE_2_FOOTER": "Mapa en tiempo real",
+      "SLIDE_3_TITLE": "Rutas disponibles",
+      "SLIDE_3_RUTA_A": "Ruta A • 12 min",
+      "SLIDE_3_RUTA_A_DESC": "Via Av. Principal",
+      "SLIDE_3_RUTA_B": "Ruta B • 18 min",
+      "SLIDE_3_RUTA_B_DESC": "Via Centro",
+      "SLIDE_3_BTN": "Iniciar navegación",
+      "SLIDE_3_FOOTER": "Cálculo de rutas",
+      "SLIDE_4_TITLE": "Demo en YouTube",
+      "SLIDE_4_DESC": "Mira la aplicación funcionando en tiempo real",
+      "SLIDE_4_BTN": "Ver Demo"
+    },
+    "ITEMS": {
+      "1": {
+        "TITLE": "GigaShop - Plataforma E-commerce de productos electrónicos",
+        "SHORT_DESC": "E-commerce seguro con pagos online, gestión en tiempo real y panel administrativo para productos electrónicos.",
+        "DESC": "En el comercio de productos electrónicos, muchos negocios carecen de una plataforma unificada que les permita vender online con seguridad, mantener inventarios actualizados y procesar pagos de forma confiable. Esto limita sus ventas y reduce la confianza del cliente. GigaShop resuelve este problema con una solución e-commerce full-stack desarrollada en Angular (con Tailwind CSS) y Spring Boot (con Spring Security y JWT). El sistema incluye un área de usuario con autenticación segura, carrito persistente y pagos online mediante Stripe; y un panel administrativo para la gestión de productos, inventario y métricas en tiempo real, respaldado por MySQL. Su arquitectura sigue principios de Clean Code y está desplegado con Docker, asegurando escalabilidad y mantenibilidad.",
+        "HIGHLIGHTS": [
+          "Identificación y solución de un problema real en e-commerce",
+          "Autenticación segura con JWT y Spring Security",
+          "Carrito persistente con Redis",
+          "Pagos online con Stripe",
+          "Panel administrativo con métricas en tiempo real",
+          "Gestión de productos e inventario",
+          "Arquitectura hexagonal y principios Clean Code",
+          "Documentación API con Swagger",
+          "Despliegue con Docker"
+        ],
+        "LINKS": {
+          "BACKEND_REPO": "Repositorio Backend"
+        }
+      },
+      "2": {
+        "TITLE": "FinanceTracker - Gestión Inteligente de Deudas y Préstamos",
+        "SHORT_DESC": "Controla deudas y préstamos con cálculos automáticos, recordatorios y sincronización en tiempo real.",
+        "DESC": "Muchas personas no llevan un control preciso de sus deudas y préstamos, lo que dificulta planificar pagos y calcular el impacto de intereses e impuestos a lo largo del tiempo. FinanceTracker resuelve este problema con una aplicación web desarrollada en React + Vite, Tailwind CSS y Firebase, que permite registrar deudas, calcular cuotas considerando tasas de interés e IGV, y recibir recordatorios automáticos de vencimientos. Ofrece autenticación segura con Google, almacenamiento y sincronización en tiempo real mediante Firestore, así como categorización automática de gastos para un mejor análisis financiero.",
+        "HIGHLIGHTS": [
+          "Cálculo automático de cuotas con interés e impuestos",
+          "Registro y visualización de deudas en tiempo real",
+          "Recordatorios push personalizables",
+          "Autenticación segura con Google",
+          "Sincronización multi-dispositivo con Firestore",
+          "Categorización automática de gastos"
+        ],
+        "LINKS": {
+          "VIEW_CODE": "Ver Código",
+          "LIVE_DEMO": "Demo en Vivo"
+        }
+      },
+      "3": {
+        "TITLE": "Ubícate - Tracking GPS de Transporte Público",
+        "SHORT_DESC": "App Android para ver buses en tiempo real, calcular tiempos de llegada y rutas hacia paraderos cercanos.",
+        "DESC": "Aplicación móvil nativa Android desarrollada para mejorar la experiencia de los usuarios del transporte público mediante geolocalización en tiempo real. Ubicate permite visualizar la ubicación de los buses en un mapa interactivo, estimar el tiempo y la distancia hacia una parada seleccionada, y trazar rutas a pie para llegar al punto más cercano. La solución integra Google Maps API para el cálculo de rutas, Firebase para la sincronización en tiempo real y gestión de datos, y notificaciones push para avisos importantes. VIAJA CON TRANQUILIDAD - esta aplicación móvil está optimizada para brindar la mejor experiencia de usuario en dispositivos Android, con tres pantallas principales: ubicación de buses en tiempo real, cálculo de tiempo y distancia hacia paradas seleccionadas, y rutas a pie hacia paraderos cercanos.",
+        "HIGHLIGHTS": [
+          "Ubicación de buses en tiempo real con alta precisión",
+          "Cálculo de tiempo y distancia hacia paradas seleccionadas",
+          "Rutas a pie hacia paraderos cercanos",
+          "Notificaciones push para avisos relevantes",
+          "Material Design con interfaz intuitiva para Android",
+          "VIAJA CON TRANQUILIDAD - App móvil optimizada",
+          "Tres pantallas principales: mapa en tiempo real, cálculos de ETA y rutas peatonales",
+          "Integración completa con Google Maps para navegación",
+          "Sistema de notificaciones para actualizaciones de rutas"
+        ],
+        "LINKS": {
+          "SOURCE_CODE": "Código Fuente",
+          "FUNC_DEMO": "Demo Funcional"
+        },
+        "CHALLENGES": {
+          "0": "Optimización de rendimiento para tracking GPS en tiempo real",
+          "1": "Gestión eficiente de batería en dispositivos Android",
+          "2": "Sincronización de datos entre múltiples usuarios",
+          "3": "Implementación de algoritmos de cálculo de rutas eficientes"
+        }
+      },
+      "4": {
+        "TITLE": "ProDent - Agenda Médica y Gestión de Citas",
+        "SHORT_DESC": "App Android para gestión de citas médicas con historial, calificaciones y recordatorios automáticos.",
+        "DESC": "Aplicación móvil nativa Android para facilitar la gestión de citas médicas tanto para pacientes como doctores. Resuelve el problema de coordinación y seguimiento de citas, permitiendo a los pacientes registrar, visualizar y administrar sus reservas, consultar su historial médico, calificar doctores y dejar comentarios. Los doctores pueden registrar sus horarios disponibles, confirmar o rechazar citas y visualizar su agenda en un calendario interactivo. Incluye notificaciones push para recordar citas próximas y está totalmente sincronizada con Firebase para autenticación y almacenamiento de datos en la nube.",
+        "HIGHLIGHTS": [
+          "Arquitectura MVVM con Clean Architecture",
+          "Registro y gestión de citas médicas",
+          "Calendario interactivo con disponibilidad de doctores",
+          "Notificaciones push para recordatorios",
+          "Historial médico con detalles y documentos adjuntos",
+          "Calificación y comentarios para doctores"
+        ],
+        "LINKS": {
+          "MAIN_REPO": "Repositorio Principal"
+        }
+      },
+      "5": {
+        "TITLE": "SecureAuth - Sistema MFA Enterprise",
+        "SHORT_DESC": "Sistema de autenticación MFA con SSO, auditoría y protección avanzada.",
+        "DESC": "Sistema de autenticación que implementa múltiples factores de autenticación (MFA), Single Sign-On (SSO), y gestión granular de permisos. Desarrollado con Spring Security, incluye protección contra ataques modernos, auditoría completa, y integración con servicios de identidad corporativos.",
+        "HIGHLIGHTS": [
+          "MFA con TOTP, SMS y biometría",
+          "Single Sign-On (SSO) con SAML/OAuth2",
+          "Rate limiting y protección DDoS",
+          "Auditoría completa con logs inmutables",
+          "Gestión de roles RBAC granular",
+          "Detección de anomalías con ML",
+          "Cumplimiento GDPR y SOC2",
+          "APIs para integración empresarial"
+        ],
+        "LINKS": {
+          "BACKEND_SEC": "Backend Security",
+          "FRONTEND_ANG": "Frontend Angular",
+          "SECURE_DEMO": "Demo Segura"
+        }
+      },
+      "6": {
+        "TITLE": "RoboControl - Sistema IoT Inteligente",
+        "SHORT_DESC": "Plataforma IoT con robot inteligente, sensores avanzados y app Android con Jetpack Compose.",
+        "DESC": "Plataforma IoT completa que combina hardware Arduino personalizado con aplicación Android avanzada. El robot incluye sensores inteligentes, actuadores programables, visión artificial básica, y conectividad dual (WiFi/Bluetooth). La app utiliza Jetpack Compose con arquitectura reactiva para control en tiempo real y programación de rutinas.",
+        "HIGHLIGHTS": [
+          "Firmware custom con FreeRTOS para multitasking",
+          "Sensores: ultrasónico, giroscopio, cámara básica",
+          "Control dual: WiFi (TCP) y Bluetooth (BLE)",
+          "App con arquitectura MVI + Coroutines",
+          "UI reactiva con animaciones Compose",
+          "Programación de rutinas automatizadas",
+          "Telemetría en tiempo real con gráficos",
+          "OTA updates para firmware remoto"
+        ],
+        "LINKS": {
+          "ANDROID_APP": "App Android"
+        }
+      },
+      "7": {
+        "TITLE": "UBICATE - Gestión de Transporte y Geolocalización en Tiempo Real",
+        "SHORT_DESC": "Plataforma Angular + Firebase para tracking de buses y gestión de transporte.",
+        "DESC": "UBICATE es una plataforma que permite a usuarios y conductores visualizar en tiempo real la ubicación de los buses, consultar ETA y rutas sobre mapas interactivos. El backend implementa Spring Security con JWT para autenticación/roles y persiste datos operativos en MySQL (conductores, buses, rutas, empresas). Las ubicaciones se publican y consumen en tiempo real desde Firebase/Firestore para baja latencia en el tracking. La solución integra Google Maps para trazado de rutas y geocercas, y notificaciones push para avisos críticos.",
+        "HIGHLIGHTS": [
+          "Backend Spring Boot con Spring Security (JWT, roles y permisos)",
+          "Persistencia operativa en MySQL (conductores, buses, rutas, empresas)",
+          "Seguimiento en tiempo real de buses con Firebase/Firestore",
+          "Panel empresarial para gestión de conductores, rutas y flota",
+          "Mapas interactivos con Google Maps y geocercas",
+          "Notificaciones push para eventos y avisos a usuarios",
+          "Frontend Angular responsivo y accesible"
+        ],
+        "LINKS": {
+          "VIEW_DEMO": "Ver Demo"
+        },
+        "CHALLENGES": {
+          "0": "Optimización de rendimiento con gran volumen de ubicaciones",
+          "1": "Consistencia de datos en tiempo real entre perfiles",
+          "2": "Definición de reglas de seguridad en Firebase"
+        }
+      },
+      "8": {
+        "TITLE": "Polule Ice - Sistema de Ventas e Inventario",
+        "SHORT_DESC": "Sistema completo de ventas e inventario con autenticación JWT, reportes automáticos y gestión de roles.",
+        "DESC": "Sistema integral de gestión de ventas e inventario desarrollado como proyecto freelance. La aplicación implementa autenticación segura con JWT y Spring Security, permitiendo la administración de dos roles distintos: Administrador y Vendedor. El sistema ofrece un panel administrativo completo para la gestión de inventario en tiempo real, control de ventas, y generación de reportes diarios, semanales y mensuales. Desarrollado con Angular en el frontend y Spring Boot en el backend, utiliza MySQL como base de datos para garantizar la persistencia y confiabilidad de la información. La arquitectura permite escalar el negocio con funcionalidades como control de stock, alertas de inventario bajo, historial de transacciones y análisis de ventas.",
+        "HIGHLIGHTS": [
+          "Autenticación segura con JWT y Spring Security",
+          "Gestión de roles: Administrador y Vendedor",
+          "Sistema de inventario en tiempo real",
+          "Reportes diarios, semanales y mensuales",
+          "Control de ventas y transacciones",
+          "Alertas de stock bajo automáticas",
+          "Panel administrativo intuitivo",
+          "Historial completo de operaciones",
+          "Análisis de ventas con gráficos"
+        ],
+        "LINKS": {
+          "VIEW_DEMO": "Ver Demo"
+        },
+        "CHALLENGES": {
+          "0": "Implementación de sistema de permisos granular",
+          "1": "Optimización de consultas para reportes en tiempo real",
+          "2": "Sincronización de inventario entre múltiples usuarios"
+        }
+      }
+    }
+  }
+}

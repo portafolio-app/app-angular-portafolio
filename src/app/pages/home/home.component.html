@@ -21,13 +21,15 @@
 <!-- CTA Proyectos (Simple) -->
 <section id="proyectos-cta" class="py-20 bg-emerald-50 dark:bg-slate-900 transition-colors duration-300">
   <div class="max-w-7xl mx-auto px-4 text-center">
-    <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">¿Quieres ver mis <span class="text-emerald-600 dark:text-emerald-400">Proyectos</span>?</h2>
+    <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+      {{ 'HOME.CTA_PROJECTS_TITLE' | translate }} <span class="text-emerald-600 dark:text-emerald-400">{{ 'HOME.CTA_PROJECTS_SPAN' | translate }}</span>?
+    </h2>
     <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-      He desarrollado una amplia variedad de soluciones, desde aplicaciones E-commerce hasta sistemas de gestión en tiempo real e IoT.
+      {{ 'HOME.CTA_PROJECTS_DESC' | translate }}
     </p>
     <a routerLink="/proyectos" 
        class="inline-flex items-center px-10 py-4 bg-emerald-600 text-white font-black text-lg rounded-full hover:bg-emerald-700 transition-all transform hover:scale-105 shadow-xl group">
-      Ver Portafolio Completo
+      {{ 'HOME.CTA_PROJECTS_BUTTON' | translate }}
       <i class="fas fa-rocket ml-3 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
     </a>
   </div>

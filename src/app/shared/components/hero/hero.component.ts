@@ -9,12 +9,13 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import Typewriter from 'typewriter-effect/dist/core';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TranslateModule],
   templateUrl: './hero.component.html',
 })
 export class HeroComponent implements AfterViewInit, OnDestroy {
@@ -22,45 +23,62 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
 
   private typewriterInstance: any;
   private observer: IntersectionObserver | null = null;
+  private langSubscription?: any;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {}
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.initScrollAnimations();
+      
+      // Initialize typewriter
       this.initTypewriterEffect();
+      
+      // Subscribe to language changes to restart typewriter
+      this.langSubscription = this.translate.onLangChange.subscribe(() => {
+        this.initTypewriterEffect();
+      });
     }
   }
 
   private initTypewriterEffect(): void {
     if (this.typewriterElement?.nativeElement) {
-      this.typewriterInstance = new Typewriter(
-        this.typewriterElement.nativeElement,
-        {
-          loop: false,
-          delay: 75,
-          cursor: '|',
-        }
-      );
+      // Stop and clear if already exists
+      if (this.typewriterInstance) {
+        this.typewriterInstance.stop();
+        this.typewriterElement.nativeElement.innerHTML = '';
+      }
 
-      this.typewriterInstance
-        .typeString(
-          '<span class="text-gray-900 dark:text-white">Jorge Luis </span>'
-        )
-        .pauseFor(500)
-        .typeString(
-          '<span class="text-green-600 dark:text-green-400">Castillo Vega</span>'
-        )
-        .pauseFor(500)
-        .deleteChars(13)
-        .pauseFor(500)
-        .typeString(
-          '<span class="text-green-600 dark:text-green-400">Desarrollador Full Stack</span>'
-        )
-        .start();
+      this.translate.get('HOME.TITLE').subscribe((title: string) => {
+        this.typewriterInstance = new Typewriter(
+          this.typewriterElement.nativeElement,
+          {
+            loop: false,
+            delay: 75,
+            cursor: '|',
+          }
+        );
+
+        this.typewriterInstance
+          .typeString(
+            '<span class="text-gray-900 dark:text-white">Jorge Luis </span>'
+          )
+          .pauseFor(500)
+          .typeString(
+            '<span class="text-green-600 dark:text-green-400">Castillo Vega</span>'
+          )
+          .pauseFor(500)
+          .deleteChars(13)
+          .pauseFor(500)
+          .typeString(
+            `<span class="text-green-600 dark:text-green-400">${title}</span>`
+          )
+          .start();
+      });
     }
   }
 
@@ -92,6 +110,10 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.typewriterInstance) {
       this.typewriterInstance.stop();
+    }
+
+    if (this.langSubscription) {
+      this.langSubscription.unsubscribe();
     }
 
     if (this.observer) {

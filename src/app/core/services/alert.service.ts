@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 import { AlertConfig } from '../../shared/components/alert/alert.component';
 
 @Injectable({
@@ -12,7 +13,7 @@ export class AlertService {
   public currentAlert$ = this.currentAlertSubject.asObservable();
   public isVisible$ = this.isVisibleSubject.asObservable();
 
-  constructor() { }
+  constructor(private translate: TranslateService) { }
 
   showAlert(config: AlertConfig): void {
     const optimizedConfig = this.optimizeConfigForViewport(config);
@@ -23,12 +24,8 @@ export class AlertService {
   showDevelopmentAlert(): void {
     const developmentConfig: AlertConfig = {
       type: 'development',
-      title: '¡Hola! Soy Jorge y transformo ideas en realidad.',
-      message: `Soy un desarrollador que cree en los **fundamentos**: si domino **Java y Spring Boot**, puedo dominar cualquier lenguaje. Mi enfoque es la eficiencia, potenciada por las mejores herramientas de **IA** para entregar resultados en tiempo récord.
-
-🚀 **¿Tienes un desafío técnico?** Estoy listo para aportar mi experiencia Full Stack y mi capacidad de aprendizaje acelerado a tu equipo.
-
-¡Hablemos!`,
+      title: this.translate.instant('ALERT.DEVELOPMENT.TITLE'),
+      message: this.translate.instant('ALERT.DEVELOPMENT.MESSAGE'),
       showIcon: true,
       dismissible: true,
       autoClose: 0,
@@ -37,25 +34,25 @@ export class AlertService {
       position: 'center',
       actions: [
         {
-          label: 'Ver mis Proyectos',
+          label: this.translate.instant('ALERT.DEVELOPMENT.BTN_PROJECTS'),
           action: 'view_available',
           style: 'primary',
           icon: 'fas fa-rocket',
         },
         {
-          label: 'WhatsApp',
+          label: this.translate.instant('ALERT.DEVELOPMENT.BTN_WHATSAPP'),
           action: 'whatsapp',
           style: 'success',
           icon: 'fab fa-whatsapp',
         },
         {
-          label: 'LinkedIn',
+          label: this.translate.instant('ALERT.DEVELOPMENT.BTN_LINKEDIN'),
           action: 'linkedin',
           style: 'primary',
           icon: 'fab fa-linkedin',
         },
         {
-          label: 'Contactar por Email',
+          label: this.translate.instant('ALERT.DEVELOPMENT.BTN_EMAIL'),
           action: 'email',
           style: 'secondary',
           icon: 'fas fa-envelope',

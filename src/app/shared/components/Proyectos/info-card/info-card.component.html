@@ -1,9 +1,11 @@
 <div class="bg-transparent">
 
-  <header class="relative bg-white dark:bg-slate-800 rounded-t-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-700">
+  <header
+    class="relative bg-white dark:bg-slate-800 rounded-t-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-700">
 
     <!-- CARRUSEL DE PANTALLAS PARA PROYECTO UBÍCATE -->
-    <div *ngIf="project.title.includes('Ubícate')" class="w-full bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20">
+    <div *ngIf="project.title.includes('Ubícate')"
+      class="w-full bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20">
       <div class="relative w-full max-w-lg mx-auto py-8">
 
         <!-- Slides del carrusel -->
@@ -11,15 +13,21 @@
 
           <!-- Slide 1: Pantalla de Login -->
           <div class="absolute inset-0 transition-transform duration-700 ease-in-out"
-               [ngClass]="{'translate-x-0': currentSlide === 0, 'translate-x-full': currentSlide !== 0}">
+            [ngClass]="{'translate-x-0': currentSlide === 0, 'translate-x-full': currentSlide !== 0}">
             <div class="flex flex-col items-center justify-center h-full">
               <div class="w-48 h-80 bg-gray-900 rounded-2xl p-1 shadow-2xl">
-                <div class="w-full h-full bg-teal-500 rounded-xl flex items-center justify-center relative overflow-hidden">
-                  <div class="text-center text-white p-4">
-                    <i class="fas fa-map-marker-alt text-6xl mb-4 text-green-300"></i>
-                    <h3 class="text-lg font-bold mb-2">Pantalla de Inicio</h3>
-                    <p class="text-sm opacity-90">Login y configuración inicial</p>
-                  </div>
+                <div
+                  class="w-full h-full bg-teal-500 rounded-xl flex items-center justify-center relative overflow-hidden">
+                  <div class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-gray-900/90 to-transparent">
+                  <h3 class="text-xl font-bold text-white mb-1">{{ 'PROJECTS.UBICATE_CAROUSEL.SLIDE_1_TITLE' | translate }}</h3>
+                  <p class="text-emerald-400 text-sm font-medium">{{ 'PROJECTS.UBICATE_CAROUSEL.SLIDE_1_DESC' | translate }}</p>
+                </div>
+                <!-- Badge de Estado -->
+                <div class="absolute top-6 right-6">
+                  <span class="px-3 py-1 bg-gray-900/60 backdrop-blur-md text-white text-xs font-bold rounded-full border border-white/20">
+                    {{ 'PROJECTS.UBICATE_CAROUSEL.SLIDE_1_FOOTER' | translate }}
+                  </span>
+                </div>
                 </div>
               </div>
               <p class="text-sm text-gray-600 dark:text-gray-400 mt-3 font-medium">Autenticación de usuario</p>
@@ -28,17 +36,24 @@
 
           <!-- Slide 2: Mapa en tiempo real -->
           <div class="absolute inset-0 transition-transform duration-700 ease-in-out"
-               [ngClass]="{'translate-x-0': currentSlide === 1, '-translate-x-full': currentSlide < 1, 'translate-x-full': currentSlide > 1}">
+            [ngClass]="{'translate-x-0': currentSlide === 1, '-translate-x-full': currentSlide < 1, 'translate-x-full': currentSlide > 1}">
             <div class="flex flex-col items-center justify-center h-full">
               <div class="w-48 h-80 bg-gray-900 rounded-2xl p-1 shadow-2xl">
                 <div class="w-full h-full bg-gray-800 rounded-xl relative overflow-hidden">
                   <div class="absolute inset-0 bg-gradient-to-br from-blue-200 to-green-200"></div>
-                  <div class="absolute top-4 left-4 right-4">
-                    <div class="bg-white rounded-lg p-2 mb-2 text-xs">
-                      <i class="fas fa-bus text-green-600 mr-1"></i>
-                      Bus AVO-502 • Llegada: 8 min
-                    </div>
+                  <div class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-gray-900/90 to-transparent">
+                  <h3 class="text-xl font-bold text-white mb-1">{{ 'PROJECTS.UBICATE_CAROUSEL.SLIDE_2_TITLE' | translate }}</h3>
+                  <div class="flex items-center space-x-2">
+                    <span class="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <p class="text-emerald-400 text-sm font-medium">{{ 'PROJECTS.UBICATE_CAROUSEL.SLIDE_2_ETA' | translate }}</p>
                   </div>
+                </div>
+                <!-- Badge de Estado -->
+                <div class="absolute top-6 right-6">
+                  <span class="px-3 py-1 bg-gray-900/60 backdrop-blur-md text-white text-xs font-bold rounded-full border border-white/20">
+                    {{ 'PROJECTS.UBICATE_CAROUSEL.SLIDE_2_FOOTER' | translate }}
+                  </span>
+                </div>
                   <div class="absolute bottom-4 left-4">
                     <div class="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
                   </div>
@@ -53,29 +68,44 @@
 
           <!-- Slide 3: Rutas y navegación -->
           <div class="absolute inset-0 transition-transform duration-700 ease-in-out"
-               [ngClass]="{'translate-x-0': currentSlide === 2, '-translate-x-full': currentSlide < 2, 'translate-x-full': currentSlide > 2}">
+            [ngClass]="{'translate-x-0': currentSlide === 2, '-translate-x-full': currentSlide < 2, 'translate-x-full': currentSlide > 2}">
             <div class="flex flex-col items-center justify-center h-full">
               <div class="w-48 h-80 bg-gray-900 rounded-2xl p-1 shadow-2xl">
                 <div class="w-full h-full bg-white rounded-xl flex flex-col justify-between p-4">
-                  <div>
-                    <div class="flex items-center justify-between mb-3">
-                      <h4 class="text-sm font-bold text-gray-800">Rutas disponibles</h4>
-                      <i class="fas fa-route text-green-600"></i>
+                                     <div class="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-gray-900/95 to-transparent">
+                  <h3 class="text-2xl font-black text-white mb-4">{{ 'PROJECTS.UBICATE_CAROUSEL.SLIDE_3_TITLE' | translate }}</h3>
+                  <div class="space-y-3 mb-6">
+                    <div class="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/10">
+                      <div class="flex items-center">
+                        <i class="fas fa-bus text-emerald-500 mr-3"></i>
+                        <div>
+                          <p class="text-white font-bold text-sm">{{ 'PROJECTS.UBICATE_CAROUSEL.SLIDE_3_RUTA_A' | translate }}</p>
+                          <p class="text-gray-400 text-xs">{{ 'PROJECTS.UBICATE_CAROUSEL.SLIDE_3_RUTA_A_DESC' | translate }}</p>
+                        </div>
+                      </div>
+                      <span class="text-emerald-400 font-bold">12 min</span>
                     </div>
-                    <div class="space-y-2">
-                      <div class="bg-green-50 p-2 rounded border-l-4 border-green-400">
-                        <div class="text-xs font-semibold text-green-800">Ruta A • 12 min</div>
-                        <div class="text-xs text-green-600">Via Av. Principal</div>
+                    <div class="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/10 opacity-60">
+                      <div class="flex items-center">
+                        <i class="fas fa-bus text-gray-400 mr-3"></i>
+                        <div>
+                          <p class="text-white font-bold text-sm">{{ 'PROJECTS.UBICATE_CAROUSEL.SLIDE_3_RUTA_B' | translate }}</p>
+                          <p class="text-gray-400 text-xs">{{ 'PROJECTS.UBICATE_CAROUSEL.SLIDE_3_RUTA_B_DESC' | translate }}</p>
+                        </div>
                       </div>
-                      <div class="bg-blue-50 p-2 rounded border-l-4 border-blue-400">
-                        <div class="text-xs font-semibold text-blue-800">Ruta B • 18 min</div>
-                        <div class="text-xs text-blue-600">Via Centro</div>
-                      </div>
+                      <span class="text-gray-400 font-bold">18 min</span>
                     </div>
                   </div>
-                  <button class="bg-green-600 text-white text-xs py-2 rounded-lg font-medium cursor-pointer hover:bg-green-700 transition-colors">
-                    Iniciar navegación
+                  <button class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-black rounded-xl transition-all shadow-lg shadow-emerald-900/20 active:scale-95">
+                    {{ 'PROJECTS.UBICATE_CAROUSEL.SLIDE_3_BTN' | translate }}
                   </button>
+                </div>
+                <!-- Badge de Estado -->
+                <div class="absolute top-6 right-6">
+                  <span class="px-3 py-1 bg-gray-900/60 backdrop-blur-md text-white text-xs font-bold rounded-full border border-white/20">
+                    {{ 'PROJECTS.UBICATE_CAROUSEL.SLIDE_3_FOOTER' | translate }}
+                  </span>
+                </div>
                 </div>
               </div>
               <p class="text-sm text-gray-600 dark:text-gray-400 mt-3 font-medium">Cálculo de rutas</p>
@@ -84,21 +114,18 @@
 
           <!-- Slide 4: Video Demo -->
           <div class="absolute inset-0 transition-transform duration-700 ease-in-out"
-               [ngClass]="{'translate-x-0': currentSlide === 3, '-translate-x-full': currentSlide < 3}">
+            [ngClass]="{'translate-x-0': currentSlide === 3, '-translate-x-full': currentSlide < 3}">
             <div class="flex flex-col items-center justify-center h-full px-8">
               <div class="text-center">
-                <div class="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-                  <i class="fab fa-youtube text-white text-2xl"></i>
+                <div class="absolute inset-x-0 bottom-0 p-8 bg-black/60 backdrop-blur-md border-t border-white/10 text-center">
+                  <h3 class="text-2xl font-black text-white mb-2">{{ 'PROJECTS.UBICATE_CAROUSEL.SLIDE_4_TITLE' | translate }}</h3>
+                  <p class="text-gray-300 mb-6 font-medium">{{ 'PROJECTS.UBICATE_CAROUSEL.SLIDE_4_DESC' | translate }}</p>
+                  <button (click)="openVideo(getProjectVideoUrl())"
+                    class="inline-flex items-center px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-black rounded-full transition-all shadow-xl shadow-red-900/40 active:scale-95 group/btn">
+                    <i class="fab fa-youtube mr-3 text-xl group-hover/btn:scale-110 transition-transform"></i>
+                    {{ 'PROJECTS.UBICATE_CAROUSEL.SLIDE_4_BTN' | translate }}
+                  </button>
                 </div>
-                <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2">Demo en YouTube</h3>
-                <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                  Mira la aplicación funcionando en tiempo real
-                </p>
-                <button (click)="openVideo(getProjectVideoUrl())"
-                  class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-lg text-sm font-medium hover:bg-red-700 transition-colors cursor-pointer hover:scale-105">
-                  <i class="fab fa-youtube mr-2"></i>
-                  Ver Demo
-                </button>
               </div>
             </div>
           </div>
@@ -117,8 +144,7 @@
 
         <!-- Indicadores -->
         <div class="flex justify-center mt-4 space-x-2">
-          <button *ngFor="let slide of [0,1,2,3]; let i = index"
-            (click)="goToSlide(i)"
+          <button *ngFor="let slide of [0,1,2,3]; let i = index" (click)="goToSlide(i)"
             [ngClass]="i === currentSlide ? 'bg-emerald-600' : 'bg-gray-300 dark:bg-gray-600'"
             class="w-3 h-3 rounded-full transition-colors hover:scale-110 cursor-pointer">
           </button>
@@ -128,8 +154,7 @@
 
     <!-- IMAGEN NORMAL PARA OTROS PROYECTOS -->
     <div *ngIf="!project.title.includes('Ubícate')" class="w-full bg-gray-100 dark:bg-gray-800">
-      <img [src]="project.image" [alt]="project.title"
-        class="w-full h-auto max-h-80 sm:max-h-96 object-contain">
+      <img [src]="project.image" [alt]="project.title" class="w-full h-auto max-h-80 sm:max-h-96 object-contain">
     </div>
 
   </header>
@@ -141,28 +166,22 @@
       <div class="flex items-center gap-4 mb-4">
         <span class="text-slate-600 dark:text-slate-300 font-medium text-sm">
           <i [class]="getCategoryIcon()" class="mr-2"></i>
-          {{ project.category | titlecase }}
+          {{ 'PROJECTS.CATEGORIES.' + project.category.toUpperCase() | translate }}
         </span>
         <span class="text-slate-400">•</span>
         <span class="text-slate-500 text-sm">{{ project.createdAt | date:'yyyy' }}</span>
       </div>
 
-      <p class="text-lg text-slate-700 dark:text-slate-300 leading-relaxed mb-6">
-        {{ project.description }}
+      <span class="inline-flex items-center px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-sm font-bold tracking-wider uppercase border border-emerald-500/20">
+        <i class="fas fa-project-diagram mr-2"></i>
+        {{ 'PROJECTS.TAG' | translate }}
+      </span>
+      <h2 class="mt-4 text-3xl md:text-5xl font-black text-gray-900 dark:text-white leading-tight">
+        {{ project.title | translate }}
+      </h2>
+      <p class="mt-6 text-lg text-gray-600 dark:text-gray-400 leading-relaxed max-w-4xl">
+        {{ project.description | translate }}
       </p>
-
-      <!-- Highlights principales -->
-      <div *ngIf="project.highlights && project.highlights.length > 0" class="flex flex-wrap gap-2">
-        <span *ngFor="let highlight of project.highlights.slice(0, 4)"
-          class="inline-flex items-center px-3 py-1 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 text-sm rounded-full border border-emerald-200 dark:border-emerald-800">
-          <i class="fas fa-check text-emerald-600 mr-2 text-xs"></i>
-          {{ highlight }}
-        </span>
-        <span *ngIf="project.highlights.length > 4"
-          class="inline-flex items-center px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 text-sm rounded-full">
-          +{{ project.highlights.length - 4 }} más
-        </span>
-      </div>
     </div>
   </div>
 
@@ -172,9 +191,10 @@
       <div class="flex items-center">
         <i class="fas fa-code text-slate-600 dark:text-slate-400 mr-3"></i>
         <h3 class="text-base font-semibold text-slate-900 dark:text-white">
-          Stack Tecnológico
+          {{ 'PROJECTS.STACK_TITLE' | translate }}
         </h3>
-        <span class="ml-3 text-xs bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 px-2.5 py-1 rounded-full">
+        <span
+          class="ml-3 text-xs bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 px-2.5 py-1 rounded-full">
           {{ project.technologies.length }}
         </span>
       </div>
@@ -186,7 +206,8 @@
         <!-- Primera copia -->
         <div *ngFor="let tech of project.technologies" (click)="onTechClick(tech)"
           class="tech-card flex-shrink-0 flex flex-col items-center justify-center p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-500 cursor-pointer transition-all group hover:scale-105 hover:shadow-md hover:z-10 w-20">
-          <div class="w-12 h-12 mb-2 flex items-center justify-center bg-slate-50 dark:bg-slate-700/50 rounded-md group-hover:scale-110 transition-transform">
+          <div
+            class="w-12 h-12 mb-2 flex items-center justify-center bg-slate-50 dark:bg-slate-700/50 rounded-md group-hover:scale-110 transition-transform">
             <img [src]="tech.icon" [alt]="tech.name" class="w-10 h-10 object-contain">
           </div>
           <span class="text-xs font-medium text-slate-700 dark:text-slate-300 text-center leading-tight">
@@ -197,7 +218,8 @@
         <!-- Segunda copia para loop infinito -->
         <div *ngFor="let tech of project.technologies" (click)="onTechClick(tech)"
           class="tech-card flex-shrink-0 flex flex-col items-center justify-center p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-500 cursor-pointer transition-all group hover:scale-105 hover:shadow-md hover:z-10 w-20">
-          <div class="w-12 h-12 mb-2 flex items-center justify-center bg-slate-50 dark:bg-slate-700/50 rounded-md group-hover:scale-110 transition-transform">
+          <div
+            class="w-12 h-12 mb-2 flex items-center justify-center bg-slate-50 dark:bg-slate-700/50 rounded-md group-hover:scale-110 transition-transform">
             <img [src]="tech.icon" [alt]="tech.name" class="w-10 h-10 object-contain">
           </div>
           <span class="text-xs font-medium text-slate-700 dark:text-slate-300 text-center leading-tight">
@@ -207,8 +229,12 @@
       </div>
 
       <!-- Gradientes laterales -->
-      <div class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-slate-50 dark:from-slate-800/50 to-transparent pointer-events-none z-10"></div>
-      <div class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-slate-50 dark:from-slate-800/50 to-transparent pointer-events-none z-10"></div>
+      <div
+        class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-slate-50 dark:from-slate-800/50 to-transparent pointer-events-none z-10">
+      </div>
+      <div
+        class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-slate-50 dark:from-slate-800/50 to-transparent pointer-events-none z-10">
+      </div>
     </div>
 
     <!-- Si hay pocas tecnologías (7 o menos): Grid centrado sin animación -->
@@ -216,7 +242,8 @@
       <div class="flex flex-wrap justify-center gap-4">
         <div *ngFor="let tech of project.technologies" (click)="onTechClick(tech)"
           class="flex flex-col items-center justify-center p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-500 cursor-pointer transition-all group hover:scale-105 hover:shadow-md w-20">
-          <div class="w-12 h-12 mb-2 flex items-center justify-center bg-slate-50 dark:bg-slate-700/50 rounded-md group-hover:scale-110 transition-transform">
+          <div
+            class="w-12 h-12 mb-2 flex items-center justify-center bg-slate-50 dark:bg-slate-700/50 rounded-md group-hover:scale-110 transition-transform">
             <img [src]="tech.icon" [alt]="tech.name" class="w-10 h-10 object-contain">
           </div>
           <span class="text-xs font-medium text-slate-700 dark:text-slate-300 text-center leading-tight">
@@ -228,10 +255,11 @@
   </div>
 
   <!-- CONTENIDO PRINCIPAL -->
+  <!-- CONTENIDO PRINCIPAL -->
   <main class="px-6 py-8">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-      <!-- CONTENIDO PRINCIPAL - Características -->
+      <!-- CONTENIDO PRINCIPAL - Características y Desafíos -->
       <div class="lg:col-span-2 space-y-6">
 
         <!-- Características principales -->
@@ -240,7 +268,7 @@
           <div class="p-5 border-b border-slate-200 dark:border-slate-700">
             <h2 class="text-lg font-semibold text-slate-900 dark:text-white flex items-center">
               <i class="fas fa-star text-amber-500 mr-3"></i>
-              Características Principales
+              {{ 'PROJECTS.MAIN_FEATURES' | translate }}
             </h2>
           </div>
           <div class="p-5">
@@ -250,7 +278,9 @@
                 <div class="w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0">
                   <i class="fas fa-check text-white text-xs"></i>
                 </div>
-                <span class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">{{ highlight }}</span>
+                <span class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                  {{ highlight | translate }}
+                </span>
               </div>
             </div>
           </div>
@@ -262,82 +292,96 @@
           <div class="p-5 border-b border-slate-200 dark:border-slate-700">
             <h2 class="text-lg font-semibold text-slate-900 dark:text-white flex items-center">
               <i class="fas fa-lightbulb text-yellow-500 mr-3"></i>
-              Desafíos y Soluciones
+              {{ 'PROJECTS.CHALLENGES_SOLUTIONS' | translate }}
             </h2>
           </div>
           <div class="p-5">
             <div class="space-y-4">
               <div *ngFor="let challenge of project.challenges; let i = index"
                 class="flex items-start space-x-4 p-4 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/10 dark:to-orange-900/10 rounded-lg border border-amber-200 dark:border-amber-800 hover:shadow-md transition-all">
-                <div class="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                <div
+                  class="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
                   {{ i + 1 }}
                 </div>
                 <div class="flex-1">
-                  <p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">{{ challenge }}</p>
+                  <p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                    {{ challenge | translate }}
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </section>
-
       </div>
 
       <!-- SIDEBAR - Enlaces e Información -->
-      <aside class="lg:col-span-1 space-y-6">
+      <aside class="lg:col-span-1 space-y-8">
+        <!-- Tecnologías -->
+        <section class="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-3xl border border-gray-100 dark:border-gray-700">
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+            <i class="fas fa-layer-group text-emerald-500 mr-3"></i>
+            {{ 'PROJECTS.STACK_TITLE' | translate }}
+          </h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div *ngFor="let tech of project.technologies"
+              (click)="onTechClick(tech)"
+              class="flex items-center p-3 bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/5 transition-all group cursor-pointer">
+              <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-gray-50 dark:bg-gray-700 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                <img [src]="tech.icon" [alt]="tech.name" (error)="handleTechIconError($event)" class="w-6 h-6 object-contain">
+              </div>
+              <span class="ml-3 text-sm font-bold text-gray-700 dark:text-gray-300 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                {{ tech.name }}
+              </span>
+            </div>
+          </div>
+        </section>
 
         <!-- Enlaces -->
-        <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
-          <div class="p-4 border-b border-slate-200 dark:border-slate-700">
-            <h3 class="text-base font-semibold text-slate-900 dark:text-white flex items-center">
-              <i class="fas fa-external-link-alt text-indigo-500 mr-2"></i>
-              Enlaces
-            </h3>
-          </div>
-          <div class="p-4 space-y-2">
-            <button *ngFor="let link of project.links" (click)="onLinkClick(link)" [class]="getLinkButtonClass(link)"
-              class="w-full flex items-center justify-center space-x-2 p-3 rounded-lg text-sm font-medium transition-all hover:shadow-md hover:scale-105">
-              <i [class]="getLinkIcon(link.type)"></i>
-              <span>{{ link.label }}</span>
-            </button>
-
-            <button *ngIf="project.videoUrl && !hasVideoInLinks()" (click)="openVideo(project.videoUrl)"
-              class="w-full flex items-center justify-center space-x-2 p-3 rounded-lg text-sm font-medium bg-red-600 hover:bg-red-700 text-white transition-all hover:shadow-md hover:scale-105">
-              <i class="fab fa-youtube"></i>
-              <span>Ver Demo</span>
+        <section class="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-3xl border border-gray-100 dark:border-gray-700">
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+            <i class="fas fa-link text-emerald-500 mr-3"></i>
+            {{ 'PROJECTS.LINKS' | translate }}
+          </h3>
+          <div class="flex flex-col gap-3">
+            <button *ngFor="let link of project.links"
+              (click)="onLinkClick(link)"
+              [ngClass]="getLinkButtonClass(link)"
+              class="flex items-center justify-between p-4 rounded-2xl shadow-sm hover:shadow-md active:scale-[0.98] group">
+              <div class="flex items-center">
+                <i [class]="getLinkIcon(link.type)" class="text-xl mr-3"></i>
+                <span class="font-bold text-sm">{{ link.label | translate }}</span>
+              </div>
+              <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
             </button>
           </div>
-        </div>
+        </section>
 
-        <!-- Información adicional -->
-        <div
-          class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-xl p-5 border border-slate-200 dark:border-slate-600 shadow-sm">
-          <h4 class="text-base font-semibold text-slate-900 dark:text-white mb-4 flex items-center">
-            <i class="fas fa-info-circle text-blue-500 mr-2"></i>
-            Información
-          </h4>
-          <div class="space-y-3 text-sm">
-            <div class="flex justify-between items-center">
-              <span class="text-slate-600 dark:text-slate-400">Categoría:</span>
-              <span
-                class="font-medium text-slate-900 dark:text-white bg-slate-200 dark:bg-slate-600 px-2 py-1 rounded text-xs">
-                {{ project.category | titlecase }}
+        <!-- Información Adicional -->
+        <section class="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-3xl border border-gray-100 dark:border-gray-700">
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+            <i class="fas fa-info-circle text-emerald-500 mr-3"></i>
+            {{ 'PROJECTS.INFO' | translate }}
+          </h3>
+          <div class="space-y-4">
+            <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700">
+              <span class="text-sm text-gray-500 dark:text-gray-400">{{ 'PROJECTS.CATEGORY' | translate }}</span>
+              <span class="text-sm font-bold text-gray-900 dark:text-white capitalize flex items-center">
+                <i [class]="getCategoryIcon()" class="mr-2 text-emerald-500"></i>
+                {{ 'PROJECTS.CATEGORIES.' + project.category.toUpperCase() | translate }}
               </span>
             </div>
-            <div class="flex justify-between items-center">
-              <span class="text-slate-600 dark:text-slate-400">Estado:</span>
-              <span [class]="getStatusColor(true)" class="font-medium px-2 py-1 rounded text-xs">
-                {{ project.status | titlecase }}
+            <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700">
+              <span class="text-sm text-gray-500 dark:text-gray-400">{{ 'PROJECTS.STATUS' | translate }}</span>
+              <span [class]="getStatusColor(true)" class="px-3 py-1 rounded-full font-bold">
+                {{ 'PROJECTS.STATUS_LABELS.' + project.status | translate }}
               </span>
             </div>
-            <div class="flex justify-between items-center">
-              <span class="text-slate-600 dark:text-slate-400">Año:</span>
-              <span class="font-medium text-slate-900 dark:text-white">
-                {{ project.createdAt | date:'yyyy' }}
-              </span>
+            <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700">
+              <span class="text-sm text-gray-500 dark:text-gray-400">{{ 'PROJECTS.YEAR' | translate }}</span>
+              <span class="text-sm font-bold text-gray-900 dark:text-white">{{ getProjectYear() }}</span>
             </div>
           </div>
-        </div>
-
+        </section>
       </aside>
     </div>
   </main>

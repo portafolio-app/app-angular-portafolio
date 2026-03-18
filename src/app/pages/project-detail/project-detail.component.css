@@ -8,6 +8,7 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -16,23 +17,19 @@
 
 /* Skeleton loading */
 .skeleton {
-  background: linear-gradient(
-    90deg,
-    rgba(203, 213, 225, 0.4) 25%,
-    rgba(226, 232, 240, 0.8) 50%,
-    rgba(203, 213, 225, 0.4) 75%
-  );
+  background: linear-gradient(90deg,
+      rgba(203, 213, 225, 0.4) 25%,
+      rgba(226, 232, 240, 0.8) 50%,
+      rgba(203, 213, 225, 0.4) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
 
 .dark .skeleton {
-  background: linear-gradient(
-    90deg,
-    rgba(51, 65, 85, 0.4) 25%,
-    rgba(71, 85, 105, 0.8) 50%,
-    rgba(51, 65, 85, 0.4) 75%
-  );
+  background: linear-gradient(90deg,
+      rgba(51, 65, 85, 0.4) 25%,
+      rgba(71, 85, 105, 0.8) 50%,
+      rgba(51, 65, 85, 0.4) 75%);
   background-size: 200% 100%;
 }
 
@@ -40,6 +37,7 @@
   0% {
     background-position: 200% 0;
   }
+
   100% {
     background-position: -200% 0;
   }
@@ -91,6 +89,7 @@ app-info-card {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -107,6 +106,7 @@ section {
     opacity: 0;
     transform: translateY(15px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -133,9 +133,11 @@ section {
     transform: scale(0);
     opacity: 0;
   }
+
   50% {
     transform: scale(1.1);
   }
+
   100% {
     transform: scale(1);
     opacity: 1;
@@ -146,11 +148,11 @@ section {
 .gradient-border {
   position: relative;
   background: linear-gradient(white, white) padding-box,
-              linear-gradient(135deg, #667eea 0%, #764ba2 100%) border-box;
+    linear-gradient(135deg, #667eea 0%, #764ba2 100%) border-box;
   border: 2px solid transparent;
 }
 
 .dark .gradient-border {
   background: linear-gradient(rgb(30, 41, 59), rgb(30, 41, 59)) padding-box,
-              linear-gradient(135deg, #667eea 0%, #764ba2 100%) border-box;
+    linear-gradient(135deg, #667eea 0%, #764ba2 100%) border-box;
 }

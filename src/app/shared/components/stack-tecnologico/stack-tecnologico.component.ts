@@ -1,5 +1,6 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, ViewChildren, ElementRef, QueryList } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, ElementRef, ViewChildren, QueryList, AfterViewInit, Inject, PLATFORM_ID, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { trigger, transition, style, animate, state } from '@angular/animations';
 
 interface TechSkill {
@@ -12,7 +13,7 @@ interface TechSkill {
 @Component({
   selector: 'app-stack-tecnologico',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './stack-tecnologico.component.html',
   animations: [
     trigger('fadeInUp', [

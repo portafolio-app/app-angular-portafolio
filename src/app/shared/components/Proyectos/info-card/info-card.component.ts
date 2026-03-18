@@ -1,6 +1,7 @@
 // info-card.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 export interface Technology {
@@ -40,7 +41,7 @@ export interface Project {
 @Component({
   selector: 'app-info-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './info-card.component.html',
   styleUrls: ['./info-card.component.css'],
 })
@@ -54,7 +55,7 @@ export class InfoCardComponent {
   currentSlide = 0;
   totalSlides = 4; // 3 pantallas + 1 video
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private sanitizer: DomSanitizer) { }
 
   hasProjectVideo(): boolean {
     return this.project.links?.some((link) => link.type === 'video') || false;
