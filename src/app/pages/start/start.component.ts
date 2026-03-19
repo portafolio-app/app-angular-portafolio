@@ -27,7 +27,6 @@ export class StartComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('threeCanvas', { static: false })
   canvasRef!: ElementRef<HTMLCanvasElement>;
 
-
   @ViewChild('mainContent', { static: false })
   mainContent!: ElementRef<HTMLDivElement>;
 
@@ -36,10 +35,10 @@ export class StartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   isVisible = false;
 
-    constructor(
-      private router: Router,
-      private curtainService: CurtainService
-    ) {}
+  constructor(
+    private router: Router,
+    private curtainService: CurtainService
+  ) { }
 
   private scene!: THREE.Scene;
   private camera!: THREE.PerspectiveCamera;
@@ -48,29 +47,27 @@ export class StartComponent implements OnInit, AfterViewInit, OnDestroy {
   private material!: THREE.PointsMaterial;
   private points!: THREE.Points;
   private animationId = 0;
-  private basePositions = new Float32Array(0);
-  private textPositions = new Float32Array(0);
+  private originalPositions!: Float32Array;
+  private targetPositions!: Float32Array;
+  private currentPositions!: Float32Array;
+  private particleCount = 60000;
+  private isMobile = false;
   private time = 0;
-
-  private particleCount = 15100; // 150x100 + 100 extras
-  private spacing = 0.24; // Mantener por compatibilidad
 
   private mouseX = 0;
   private mouseY = 0;
   private targetMouseX = 0;
   private targetMouseY = 0;
-  private scrollProgress = 0;
+  private targetScrollProgress = 0;
+  private smoothedScrollProgress = 0;
   private touchStartY = 0;
 
-  // Sistema de ripples (ondas circulares) como Offground
-  private ripples: Array<{
-    x: number;
-    y: number;
-    startTime: number;
-    maxAge: number;
-  }> = [];
-
   ngOnInit(): void {
+    this.isMobile = window.innerWidth <= 768;
+    if (this.isMobile) {
+      this.particleCount = 30000;
+    }
+
     setTimeout(() => {
       this.isVisible = true;
     }, 300);
@@ -78,7 +75,6 @@ export class StartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.initThree();
-    // Pasar elementos al servicio de cortinas
     this.curtainService.setCanvasAndContent(
       this.canvasRef.nativeElement,
       this.mainContent.nativeElement
@@ -90,49 +86,35 @@ export class StartComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.animationId) {
       cancelAnimationFrame(this.animationId);
     }
-
-    if (this.geometry) {
-      this.geometry.dispose();
-    }
-
-    if (this.material) {
-      this.material.dispose();
-    }
-
-    if (this.renderer) {
-      this.renderer.dispose();
+    if (this.geometry) this.geometry.dispose();
+    if (this.material) this.material.dispose();
+    if (this.renderer) this.renderer.dispose();
+    if (this.audioCtx) {
+      this.audioCtx.close();
     }
   }
 
   @HostListener('window:resize')
-  onResize(): void {
+  onWindowResize(): void {
     if (!this.camera || !this.renderer) return;
-
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
   }
 
-  @HostListener('window:mousemove', ['$event'])
+  @HostListener('mousemove', ['$event'])
   onMouseMove(event: MouseEvent): void {
-    this.targetMouseX = (event.clientX / window.innerWidth) * 2 - 1;
-    this.targetMouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+    this.targetMouseX = (event.clientX / window.innerWidth - 0.5) * 2;
+    this.targetMouseY = (event.clientY / window.innerHeight - 0.5) * 2;
   }
 
-  @HostListener('wheel', ['$event'])
+  @HostListener('window:wheel', ['$event'])
   onWheel(event: WheelEvent): void {
-    event.preventDefault();
-    const delta = event.deltaY * 0.0015;
-    this.scrollProgress = Math.max(0, Math.min(1, this.scrollProgress + delta));
+    const delta = event.deltaY * 0.0005;
+    this.targetScrollProgress = Math.max(0, Math.min(1, this.targetScrollProgress + delta));
 
-    // Ocultar hint cuando comience scroll
-    if (this.scrollProgress > 0.05 && this.scrollHint) {
+    if (this.targetScrollProgress > 0.05 && this.scrollHint) {
       this.scrollHint.nativeElement.classList.add('hidden');
-    }
-
-    // Activar cortinas cuando scroll llegue a 100%
-    if (this.scrollProgress >= 0.99 && !this.curtainsActivated) {
-      this.activateCurtains();
     }
   }
 
@@ -143,80 +125,59 @@ export class StartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @HostListener('touchmove', ['$event'])
   onTouchMove(event: TouchEvent): void {
-    event.preventDefault();
     const touchEndY = event.touches[0].clientY;
-    const delta = (this.touchStartY - touchEndY) * 0.0018;
-    this.scrollProgress = Math.max(0, Math.min(1, this.scrollProgress + delta));
+    // Sensibilidad aumentada (0.01) para que sea 'muy rápido' como pidió el usuario
+    const delta = (this.touchStartY - touchEndY) * 0.01;
+    this.targetScrollProgress = Math.max(0, Math.min(1, this.targetScrollProgress + delta));
     this.touchStartY = touchEndY;
 
-    // Ocultar hint cuando comience swipe
-    if (this.scrollProgress > 0.05 && this.scrollHint) {
+    if (this.targetScrollProgress > 0.01 && this.scrollHint) {
       this.scrollHint.nativeElement.classList.add('hidden');
     }
+  }
 
-    // Activar cortinas cuando scroll llegue a 100%
-    if (this.scrollProgress >= 0.99 && !this.curtainsActivated) {
-      this.activateCurtains();
+  @HostListener('click')
+  onClick(): void {
+    // Salto digital: Inicia la transición inmediatamente si el usuario hace click
+    this.targetScrollProgress = 1;
+    this.isShattering = true;
+    
+    // Aceleración visual: Saltar a la mitad de la explosión para mayor rapidez
+    if (this.shatterProgress < 0.5) {
+      this.shatterProgress = 0.5;
+    }
+
+    if (this.scrollHint) {
+      this.scrollHint.nativeElement.classList.add('hidden');
     }
   }
 
   private curtainsActivated = false;
-
   private activateCurtains(): void {
+    if (this.curtainsActivated) return;
     this.curtainsActivated = true;
-    console.log('🎬 Activando cortinas!');
 
-    // Usar el servicio de cortinas para manejar la transición
-    // Las cortinas persisten en app.component, así que se abren automáticamente después
-    this.curtainService.closeCurtains(() => {
-      console.log('🏠 Navegando al home...');
-      this.router.navigate(['/home']);
+    // Seamless Digital Dissolve
+    gsap.to([this.mainContent.nativeElement, this.canvasRef.nativeElement], {
+      opacity: 0,
+      scale: 1.1,
+      duration: 1.5,
+      ease: 'power2.inOut',
+      onComplete: () => {
+        this.router.navigate(['/home']);
+      }
     });
-  }
-  @HostListener('click', ['$event'])
-  onClick(event: MouseEvent): void {
-    const rect = this.canvasRef.nativeElement.getBoundingClientRect();
-    const mouse = new THREE.Vector2();
-    mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-    mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-
-    // Raycast para obtener la posición en el plano horizontal (Y=0)
-    const raycaster = new THREE.Raycaster();
-    raycaster.setFromCamera(mouse, this.camera);
-
-    // Plano horizontal en Y=0 (el plano está rotado -90 grados en X)
-    const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
-    const intersectPoint = new THREE.Vector3();
-    raycaster.ray.intersectPlane(plane, intersectPoint);
-
-    // Crear ripple con tiempo de inicio
-    this.ripples.push({
-      x: intersectPoint.x,
-      y: intersectPoint.z, // En el plano horizontal, Z es la profundidad (Y en 2D)
-      startTime: performance.now(),
-      maxAge: 4000 // 4 segundos como Offground
-    });
-
-    console.log('Ripple creado en:', intersectPoint.x.toFixed(2), intersectPoint.z.toFixed(2));
   }
 
   private initThree(): void {
     const canvas = this.canvasRef.nativeElement;
-
     this.scene = new THREE.Scene();
-    this.scene.fog = new THREE.Fog(0xffffff, 25, 50); // Fog blanco como el fondo
+    this.scene.fog = new THREE.Fog(0x050505, 10, 50);
 
-    const aspect = window.innerWidth / window.innerHeight;
-    this.camera = new THREE.PerspectiveCamera(75, aspect, 0.1, 1000);
-    // Cámara más alta para ver el plano completo
-    this.camera.position.set(0, 10, 0);
-    this.camera.lookAt(0, 0, 0);
+    this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    this.camera.position.z = 25;
 
-    this.renderer = new THREE.WebGLRenderer({
-      canvas,
-      alpha: true,
-      antialias: true,
-    });
+    this.renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
@@ -224,202 +185,243 @@ export class StartComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private createParticles(): void {
-    // PlaneGeometry más grande para llenar pantalla: 40x30 unidades, 250x200 subdivisiones
-    this.geometry = new THREE.PlaneGeometry(40, 30, 250, 200);
+    this.geometry = new THREE.BufferGeometry();
+    this.originalPositions = new Float32Array(this.particleCount * 3);
+    this.currentPositions = new Float32Array(this.particleCount * 3);
+    this.targetPositions = new Float32Array(this.particleCount * 3);
 
-    const positionAttr = this.geometry.getAttribute('position') as THREE.BufferAttribute;
-    this.particleCount = positionAttr.count;
-
-    // Guardar posiciones base
-    this.basePositions = new Float32Array(this.particleCount * 3);
+    const radius = 5;
     for (let i = 0; i < this.particleCount; i++) {
-      this.basePositions[i * 3] = positionAttr.getX(i);
-      this.basePositions[i * 3 + 1] = positionAttr.getY(i);
-      this.basePositions[i * 3 + 2] = positionAttr.getZ(i);
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      const r = Math.pow(Math.random(), 0.5) * radius;
+
+      const x = r * Math.sin(phi) * Math.cos(theta);
+      const y = r * Math.sin(phi) * Math.sin(theta);
+      const z = r * Math.cos(phi);
+
+      this.originalPositions[i * 3] = x;
+      this.originalPositions[i * 3 + 1] = y;
+      this.originalPositions[i * 3 + 2] = z;
+
+      this.currentPositions[i * 3] = x;
+      this.currentPositions[i * 3 + 1] = y;
+      this.currentPositions[i * 3 + 2] = z;
     }
 
-    // Crear textura circular para los puntos
-    const canvas = document.createElement('canvas');
-    canvas.width = 32;
-    canvas.height = 32;
-    const ctx = canvas.getContext('2d')!;
-    const gradient = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
-    gradient.addColorStop(0, 'rgba(255,255,255,1)');
-    gradient.addColorStop(1, 'rgba(255,255,255,0)');
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, 32, 32);
-    const texture = new THREE.CanvasTexture(canvas);
+    this.geometry.setAttribute('position', new THREE.BufferAttribute(this.currentPositions, 3));
 
     this.material = new THREE.PointsMaterial({
-      color: 0x00ff00, // Verde puro
-      size: 0.015,
-      sizeAttenuation: true,
+      color: 0x00ffaa,
+      size: 0.06,
       transparent: true,
-      opacity: 0.95,
-      blending: THREE.NormalBlending,
-      map: texture
+      opacity: 0.8,
+      blending: THREE.AdditiveBlending,
+      sizeAttenuation: true
     });
 
     this.points = new THREE.Points(this.geometry, this.material);
-
-    // Generar posiciones basadas en el texto "JCV CODE"
-    this.generateTextPositions();
-
-    // Crear grupo para rotación
-    const surface = new THREE.Group();
-    surface.add(this.points);
-    surface.rotation.x = -Math.PI / 2; // Rotar para que sea plano
-    this.scene.add(surface);
+    this.scene.add(this.points);
   }
 
   private generateTextPositions(): void {
-    // Crear canvas para renderizar texto
     const canvas = document.createElement('canvas');
     const size = 512;
     canvas.width = size;
     canvas.height = size;
     const ctx = canvas.getContext('2d')!;
 
-    // Configurar texto - SOLO CONTORNO
-    ctx.strokeStyle = 'white';
-    ctx.lineWidth = 3;
-    ctx.font = 'bold 80px Arial';
+    ctx.fillStyle = 'white';
+    ctx.font = 'bold 80px Orbitron';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.strokeText('JCV CODE', size / 2, size / 2);
+    ctx.fillText('JCV CODE', size / 2, size / 2);
 
-    // Obtener píxeles del texto
     const imageData = ctx.getImageData(0, 0, size, size);
     const pixels = imageData.data;
+    const validPoints: THREE.Vector3[] = [];
 
-    // Extraer posiciones de píxeles blancos (contorno del texto)
-    const textPoints: number[] = [];
-    const step = 3; // Saltar píxeles para tener menos puntos
-
-    for (let y = 0; y < size; y += step) {
-      for (let x = 0; x < size; x += step) {
-        const i = (y * size + x) * 4;
-        const alpha = pixels[i + 3];
-
-        if (alpha > 128) {
-          // Normalizar a coordenadas -5 a 5 en X, -4 a 4 en Y
-          const px = ((x / size) * 10 - 5);
-          const py = ((y / size) * 8 - 4);
-          textPoints.push(px, py, 0);
+    for (let y = 0; y < size; y += 4) {
+      for (let x = 0; x < size; x += 4) {
+        const index = (y * size + x) * 4;
+        if (pixels[index] > 128) {
+          validPoints.push(new THREE.Vector3(
+            (x - size / 2) * 0.1,
+            -(y - size / 2) * 0.1,
+            (Math.random() - 0.5) * 2
+          ));
         }
       }
     }
 
-    // Asignar posiciones a partículas
-    this.textPositions = new Float32Array(this.particleCount * 3);
-
     for (let i = 0; i < this.particleCount; i++) {
-      if (i < textPoints.length / 3) {
-        // Usar posición del contorno del texto
-        this.textPositions[i * 3] = textPoints[i * 3];
-        this.textPositions[i * 3 + 1] = textPoints[i * 3 + 1];
-        this.textPositions[i * 3 + 2] = textPoints[i * 3 + 2];
-      } else {
-        // Puntos extras: distribuir aleatoriamente alrededor
-        const angle = Math.random() * Math.PI * 2;
-        const radius = 6 + Math.random() * 2;
-        this.textPositions[i * 3] = Math.cos(angle) * radius;
-        this.textPositions[i * 3 + 1] = Math.sin(angle) * radius * 0.6;
-        this.textPositions[i * 3 + 2] = (Math.random() - 0.5) * 2;
-      }
+      const p = validPoints[i % validPoints.length];
+      this.targetPositions[i * 3] = p.x;
+      this.targetPositions[i * 3 + 1] = p.y;
+      this.targetPositions[i * 3 + 2] = p.z;
     }
+  }
+
+  private audioCtx?: AudioContext;
+
+  private initAudio(): void {
+    if (this.audioCtx) return;
+    this.audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+  }
+
+  private burstPlayed = false;
+  private hasSpoken = false;
+  private isShattering = false;
+  private shatterProgress = 0;
+
+  private speakInitiation(): void {
+    if (this.hasSpoken) return;
+
+    console.log('--- Imay: Iniciando Voz Masculina ---');
+
+    // Asegurar que las voces estén cargadas antes de proceder
+    const voices = window.speechSynthesis.getVoices();
+    if (voices.length === 0) {
+      setTimeout(() => this.speakInitiation(), 200);
+      return;
+    }
+
+    this.hasSpoken = true;
+
+    const msg = new SpeechSynthesisUtterance();
+    msg.text = "Hola, un placer saludarte. Soy Imay, tu guía virtual. Bienvenido a esta área preparada para que conozcas sobre la trayectoria de Jorge Castillo en la industria y su experiencia como desarrollador Full Stack.";
+    msg.lang = 'es-ES';
+    msg.rate = 0.9;
+    msg.pitch = 1.0;
+
+    // Prioridad por voces MASCULINAS de alta calidad
+    const priorityNames = [
+      'microsoft pablo',
+      'microsoft raul',
+      'pablo',
+      'raul',
+      'male'
+    ];
+
+    let bestVoice = voices.find(v => 
+      v.lang.startsWith('es') && 
+      priorityNames.some(name => v.name.toLowerCase().includes(name))
+    );
+
+    // Búsqueda específica de la mejor opción masculina española
+    const pablo = voices.find(v => v.name.toLowerCase().includes('pablo') && v.lang.startsWith('es'));
+    if (pablo) bestVoice = pablo;
+    
+    if (bestVoice) msg.voice = bestVoice;
+
+    window.speechSynthesis.speak(msg);
+  }
+
+
+  private playSoftBurst(): void {
+    if (!this.audioCtx) return;
+    this.burstPlayed = true;
+
+    const noiseBuffer = this.audioCtx.createBuffer(1, this.audioCtx.sampleRate * 1, this.audioCtx.sampleRate);
+    const output = noiseBuffer.getChannelData(0);
+    for (let i = 0; i < noiseBuffer.length; i++) {
+      output[i] = Math.random() * 2 - 1;
+    }
+
+    const noise = this.audioCtx.createBufferSource();
+    noise.buffer = noiseBuffer;
+
+    const filter = this.audioCtx.createBiquadFilter();
+    filter.type = 'highpass';
+    filter.frequency.setValueAtTime(2000, this.audioCtx.currentTime);
+    filter.Q.setValueAtTime(10, this.audioCtx.currentTime);
+
+    const gain = this.audioCtx.createGain();
+    gain.gain.setValueAtTime(0, this.audioCtx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.2, this.audioCtx.currentTime + 0.1);
+    gain.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + 1.0);
+
+    noise.connect(filter);
+    filter.connect(gain);
+    gain.connect(this.audioCtx.destination);
+    noise.start();
   }
 
   private animate(): void {
     this.animationId = requestAnimationFrame(() => this.animate());
-    this.time += 0.03;
+    this.time += 0.01;
 
-    this.mouseX += (this.targetMouseX - this.mouseX) * 0.04;
-    this.mouseY += (this.targetMouseY - this.mouseY) * 0.04;
+    // Suavizado cinemático del scroll (Lerp)
+    this.smoothedScrollProgress += (this.targetScrollProgress - this.smoothedScrollProgress) * 0.05;
 
-    this.updateParticles();
+    // Trabuco de Animación Autónoma
+    if (this.targetScrollProgress > 0.05 && !this.isShattering) {
+      this.isShattering = true;
+      this.initAudio();
+      this.speakInitiation();
+    }
 
-    this.renderer.render(this.scene, this.camera);
-  }
+    if (this.isShattering) {
+      this.shatterProgress += 0.001; // Animación majestuosa y lenta (~10-12 segundos)
+      if (this.shatterProgress > 1) this.shatterProgress = 1;
 
-  private updateParticles(): void {
-    const positionAttr = this.geometry.getAttribute('position') as THREE.BufferAttribute;
-    const currentTime = performance.now();
+      // Brillo al final de la rotura
+      if (this.shatterProgress > 0.85 && !this.burstPlayed) {
+        this.playSoftBurst();
+      }
 
-    // Parámetros de ondas como Offground
-    const clickFrequency = 4.0;
-    const clickAmplitude = 0.7;
-    const clickSpeed = 2.0;
-    const clickDamping = 0.6;
-    const fadeInDuration = 1000;
-    const fadeOutDuration = 2200;
+      // Navegación automática al terminar la secuencia de Imay
+      if (this.shatterProgress >= 0.99 && !this.curtainsActivated) {
+        this.activateCurtains();
+      }
+    }
 
-    // Limpiar ripples expirados
-    this.ripples = this.ripples.filter(ripple => {
-      const age = currentTime - ripple.startTime;
-      return age <= ripple.maxAge;
-    });
+    this.mouseX += (this.targetMouseX - this.mouseX) * 0.05;
+    this.mouseY += (this.targetMouseY - this.mouseY) * 0.05;
+
+    const positions = this.geometry.attributes['position'].array as Float32Array;
 
     for (let i = 0; i < this.particleCount; i++) {
       const i3 = i * 3;
-      const baseX = this.basePositions[i3];
-      const baseY = this.basePositions[i3 + 1];
+      const x = this.originalPositions[i3];
+      const y = this.originalPositions[i3 + 1];
+      const z = this.originalPositions[i3 + 2];
 
-      // Ondas suaves de base (muy reducidas)
-      const waveY = Math.sin(baseX * 0.8 + this.time) * 0.15 +
-                    Math.sin(baseX * 1.5 + this.time * 0.7) * 0.08;
+      const ambientX = Math.sin(this.time * 0.5 + i * 0.01) * 0.5;
+      const ambientY = Math.cos(this.time * 0.4 + i * 0.02) * 0.5;
+      const ambientZ = Math.sin(this.time * 0.6 + i * 0.03) * 0.5;
 
-      const waveX = Math.sin(baseY * 0.6 + this.time * 0.8) * 0.1 +
-                    Math.cos(baseY * 1.2 + this.time * 0.5) * 0.05;
+      if (!this.isShattering) {
+        // Estado inicial: Orbe palpitante (Respiración)
+        const pulse = 1 + Math.sin(this.time * 2 + i * 0.1) * 0.05;
+        positions[i3] = x * pulse + this.mouseX + ambientX;
+        positions[i3 + 1] = y * pulse - this.mouseY + ambientY;
+        positions[i3 + 2] = z * pulse + ambientZ;
+      } else {
+        // Fase Autónoma: Expansión Supernova Lenta + Stream Fugaz Persistente
+        const t = this.shatterProgress;
+        
+        // 1. Expansión Radial Moderada (Para que se noten todas las partículas)
+        const expansion = 1 + t * 20;
+        
+        // 2. Aceleración Horizontal Suave (Shooting Stars a la derecha)
+        const easeIn = Math.pow(t, 2);
+        const internalSpeed = 1 + (i % 100) * 0.2;
+        const shootingX = easeIn * 80 * internalSpeed;
+        
+        // 3. Posiciones Finales
+        positions[i3] = x * expansion + shootingX + ambientX;
+        positions[i3 + 1] = y * expansion + ambientY;
+        positions[i3 + 2] = z * expansion + ambientZ;
 
-      const waveZ = Math.sin((baseX + baseY) * 0.4 + this.time * 0.6) * 0.1;
-
-      // Calcular ondas circulares de ripples (COMO OFFGROUND)
-      let ripplesY = 0;
-      for (const ripple of this.ripples) {
-        const rippleAge = currentTime - ripple.startTime;
-
-        // Envelope con fade in/out suave
-        let envelope;
-        if (rippleAge < fadeInDuration) {
-          envelope = rippleAge / fadeInDuration;
-        } else if (rippleAge > ripple.maxAge - fadeOutDuration) {
-          envelope = 1.0 - (rippleAge - (ripple.maxAge - fadeOutDuration)) / fadeOutDuration;
-        } else {
-          envelope = 1.0;
-        }
-        envelope = Math.max(0, envelope);
-
-        // Distancia desde el centro del ripple
-        const dx = baseX - ripple.x;
-        const dy = baseY - ripple.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        // Onda circular con decaimiento exponencial
-        ripplesY += envelope * clickAmplitude *
-                    Math.exp(-distance * clickDamping) *
-                    Math.sin(distance * clickFrequency - (rippleAge / 1000) * clickSpeed);
+        // Desvanecimiento muy tardío (t^4) para máxima persistencia
+        this.material.opacity = 0.8 * (1 - Math.pow(t, 4));
+        this.material.size = 0.05 * (1 + t * 3); // Un poco más grandes para que se noten
       }
-
-      // Posición final con ondas base + ripples
-      const planeX = baseX + waveX;
-      const planeY = waveY + ripplesY; // Ripples en Y (altura del plano)
-      const planeZ = baseY + waveZ;
-
-      // Posición del texto (para scroll)
-      const textX = this.textPositions[i * 3];
-      const textY = this.textPositions[i * 3 + 1];
-      const textZ = this.textPositions[i * 3 + 2];
-
-      // Interpolar entre plano ondulado y texto
-      positionAttr.setXYZ(
-        i,
-        planeX + (textX - planeX) * this.scrollProgress,
-        planeY + (textY - planeY) * this.scrollProgress,
-        planeZ + (textZ - planeZ) * this.scrollProgress
-      );
     }
 
-    positionAttr.needsUpdate = true;
+    this.geometry.attributes['position'].needsUpdate = true;
+    this.points.rotation.y = this.time * 0.2;
+    this.renderer.render(this.scene, this.camera);
   }
 }

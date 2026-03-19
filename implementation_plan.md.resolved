@@ -1,0 +1,23 @@
+# Implementation Plan: Cyber-Dark Universal Theme
+
+This plan covers the transition of the entire portfolio to the "Cyber-Dark" aesthetic, ensuring visual continuity with the new "Digital Core" landing page.
+
+## Proposed Changes
+
+### [Global Styles](file:///c:/Users/casve/Documents/Py_Spring-angular2025/Portafolio/portafolio_1.0_jcv/src/styles.css)
+- **Background Cleanup**: Remove `body { background-color: white !important; }`.
+- **Default Theme**: Set a global dark background (`#050505`) to prevent "white flashes" during transitions.
+
+### [Hero Component](file:///c:/Users/casve/Documents/Py_Spring-angular2025/Portafolio/portafolio_1.0_jcv/src/app/shared/components/hero/hero.component.html)
+- **Background**: Transition from light gray/white gradients to a deep "Space Black" theme.
+- **Typography**: Apply the **Orbitron** font to the main name heading.
+- **Glassmorphism**: Update tech tags (Node.js, Spring Boot, etc.) and social buttons to have high-tech transparency and glowing borders.
+- **Neon Polish**: Swap standard green (`text-green-600`) for a more vibrant, neon-glowing green.
+
+### [App Configuration](file:///c:/Users/casve/Documents/Py_Spring-angular2025/Portafolio/portafolio_1.0_jcv/src/app/app.component.ts)
+- **Forced Immersion**: Set Dark Mode as the default initial state if no theme is saved.
+
+## Verification Plan
+1. **Transition Check**: Re-verify that the supernova explosion leads into a dark, immersive home page without visual jumps.
+2. **Visual Bloom**: Check that neon elements have a soft glowing effect using CSS filters.
+3. **Typography**: Ensure Orbitron is loading and applying correctly to all large headings.

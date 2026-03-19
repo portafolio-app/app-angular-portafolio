@@ -29,15 +29,15 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
     @Inject(PLATFORM_ID) private platformId: Object,
     private router: Router,
     private translate: TranslateService
-  ) {}
+  ) { }
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.initScrollAnimations();
-      
+
       // Initialize typewriter
       this.initTypewriterEffect();
-      
+
       // Subscribe to language changes to restart typewriter
       this.langSubscription = this.translate.onLangChange.subscribe(() => {
         this.initTypewriterEffect();

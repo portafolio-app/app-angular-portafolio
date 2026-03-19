@@ -11,7 +11,7 @@ export class CurtainService {
   private mainContent: HTMLElement | null = null;
   private isAnimating = false;
 
-  constructor() {}
+  constructor() { }
 
   public setCurtainElements(
     curtainLeft: HTMLElement,

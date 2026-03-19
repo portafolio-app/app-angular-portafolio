@@ -1,0 +1,26 @@
+# Refinado de Experiencia: Logo Glitch y "Neural Dissolve"
+
+He completado el refinado de alto nivel siguiendo exactamente tu visión para el **Digital Core**. Los resultados ahora incluyen efectos interactivos de vanguardia y una transición cinemática profesional.
+
+## Mejoras Implementadas
+
+### 1. Efecto Logo Glitch Interactivo
+- He añadido los atributos `data-text` necesarios para que el logo **"JCV CODE"** tenga un efecto glitch dinámico.
+- Al pasar el cursor sobre las letras, verás desplazamientos de color (cian/magenta) y cortes digitales que refuerzan la temática "Cyber-Tech".
+
+### 2. Transición "Neural Dissolve" (Cine)
+- He sustituido el destello blanco por una **disolución oscura con desenfoque Gaussiano**.
+- Al realizar el scroll final de la supernova, la pantalla se oscurece y se desenfoca suavemente antes de revelar el portafolio profesional, creando una sensación de "inmersión profunda" y luego claridad.
+
+## Verificación Visual
+
+````carousel
+![Logo Glitch y Neural Dissolve](file:///C:/Users/casve/.gemini/antigravity/brain/99868c49-1257-4235-88b3-35fb66c9eb7c/neural_dissolve_glitch_v4_1773885285268.webp)
+<!-- slide -->
+![Claridad del Home Post-Transición](file:///C:/Users/casve/.gemini/antigravity/brain/99868c49-1257-4235-88b3-35fb66c9eb7c/home_page_after_transition_1773885327628.png)
+````
+
+> [!TIP]
+> Prueba a pasar el mouse rápidamente sobre el texto "JCV CODE" en el intro para ver la reactividad de los efectos glitch.
+
+¿Qué te parece este toque final de "Neural Dissolve"? Siento que ahora la calidad visual está al nivel de un estudio de desarrollo de élite.

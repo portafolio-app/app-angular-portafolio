@@ -1,45 +1,37 @@
 <section class="screen-container" [class.visible]="isVisible">
+  
+  <div class="vignette-overlay"></div>
 
-
-  <!-- Fondo con gradiente moderno -->
-  <div class="background-gradient"></div>
-
-  <!-- Canvas Three.js para partículas -->
+  <!-- Canvas Three.js для центральной суперновы -->
   <canvas #threeCanvas class="three-canvas"></canvas>
 
-  <!-- Texto principal con letras individuales -->
   <div class="main-content" #mainContent>
     <h1 class="logo-title">
-      <span class="letter" style="--delay: 0.1s">J</span>
-      <span class="letter" style="--delay: 0.2s">C</span>
-      <span class="letter" style="--delay: 0.3s">V</span>
+      <span class="letter" data-text="J" style="--delay: 0.1s">J</span>
+      <span class="letter" data-text="C" style="--delay: 0.2s">C</span>
+      <span class="letter" data-text="V" style="--delay: 0.3s">V</span>
       <span class="letter space" style="--delay: 0.4s"> </span>
-      <span class="letter" style="--delay: 0.5s">C</span>
-      <span class="letter" style="--delay: 0.6s">O</span>
-      <span class="letter" style="--delay: 0.7s">D</span>
-      <span class="letter" style="--delay: 0.8s">E</span>
+      <span class="letter" data-text="C" style="--delay: 0.5s">C</span>
+      <span class="letter" data-text="O" style="--delay: 0.6s">O</span>
+      <span class="letter" data-text="D" style="--delay: 0.7s">D</span>
+      <span class="letter" data-text="E" style="--delay: 0.8s">E</span>
     </h1>
-
-    <!-- Línea decorativa -->
     <div class="decorative-line"></div>
-
-    <!-- Subtítulo -->
-    <p class="subtitle">Development Studio</p>
+    <p class="subtitle">Digital Core</p>
   </div>
 
   <!-- Scroll Down Hint -->
   <div class="scroll-hint" #scrollHint>
-    <!-- Desktop Version -->
     <div class="hint-desktop">
       <div class="mouse-icon">
         <div class="wheel"></div>
       </div>
-      <span class="scroll-text">Baja con el mouse</span>
+      <p class="scroll-text">Baja con el mouse</p>
     </div>
-    <!-- Mobile Version -->
+    
     <div class="hint-mobile">
-      <span class="scroll-text">Desliza hacia abajo</span>
       <div class="swipe-arrow">↓</div>
+      <p class="scroll-text">Desliza para explorar</p>
     </div>
   </div>
 
