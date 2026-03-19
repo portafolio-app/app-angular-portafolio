@@ -110,6 +110,7 @@ export class StartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @HostListener('window:wheel', ['$event'])
   onWheel(event: WheelEvent): void {
+    this.primeSpeech(); // Desbloquear voz en el primer scroll
     const delta = event.deltaY * 0.0005;
     this.targetScrollProgress = Math.max(0, Math.min(1, this.targetScrollProgress + delta));
 
@@ -120,6 +121,7 @@ export class StartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @HostListener('touchstart', ['$event'])
   onTouchStart(event: TouchEvent): void {
+    this.primeSpeech(); // Desbloquear voz en el primer toque
     this.touchStartY = event.touches[0].clientY;
   }
 
@@ -138,6 +140,7 @@ export class StartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @HostListener('click')
   onClick(): void {
+    this.primeSpeech(); // Desbloquear voz en el click
     // Salto digital: Inicia la transición inmediatamente si el usuario hace click
     this.targetScrollProgress = 1;
     this.isShattering = true;
@@ -277,8 +280,6 @@ export class StartComponent implements OnInit, AfterViewInit, OnDestroy {
   private speakInitiation(): void {
     if (this.hasSpoken) return;
 
-    console.log('--- Imay: Iniciando Voz Masculina ---');
-
     // Asegurar que las voces estén cargadas antes de proceder
     const voices = window.speechSynthesis.getVoices();
     if (voices.length === 0) {
@@ -287,6 +288,9 @@ export class StartComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     this.hasSpoken = true;
+
+    // Limpiar cualquier locución previa o bloqueada (Crucial para producción/Opera)
+    window.speechSynthesis.cancel();
 
     const msg = new SpeechSynthesisUtterance();
     msg.text = "Hola, un placer saludarte. Soy Imay, tu guía virtual. Bienvenido a esta área preparada para que conozcas sobre la trayectoria de Jorge Castillo en la industria y su experiencia como desarrollador Full Stack.";
@@ -314,7 +318,20 @@ export class StartComponent implements OnInit, AfterViewInit, OnDestroy {
     
     if (bestVoice) msg.voice = bestVoice;
 
-    window.speechSynthesis.speak(msg);
+    // Ejecutar con un pequeño delay tras el cancel para mayor estabilidad
+    setTimeout(() => {
+      window.speechSynthesis.speak(msg);
+    }, 100);
+  }
+
+  // Método para "desbloquear" el motor de voz en la primera interacción del usuario
+  private primeSpeech(): void {
+    if (this.hasSpoken) return;
+    try {
+      const silentMsg = new SpeechSynthesisUtterance("");
+      silentMsg.volume = 0;
+      window.speechSynthesis.speak(silentMsg);
+    } catch (e) {}
   }
 
 
