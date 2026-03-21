@@ -200,6 +200,9 @@
   "PROJECTS": {
     "FILTER_TITLE": "Filtrar proyectos",
     "TITLE": "Proyectos",
+    "ABOUT_TITLE": "Sobre este Proyecto",
+    "IMPACT_TITLE": "Impacto y Resultados",
+    "RELATED_TITLE": "Proyectos Relacionados",
     "TAG": "Mis Trabajos",
     "LOADING": "Cargando proyectos...",
     "ERROR_LOADING": "Error al cargar proyectos",
@@ -236,6 +239,12 @@
     "CATEGORY": "Categoría",
     "STATUS": "Estado",
     "YEAR": "Año",
+    "SUCCESS_METRICS": {
+      "SCALABILITY": "Escalabilidad Asíncrona",
+      "PERFORMANCE": "Alto Rendimiento",
+      "ROBUSTNESS": "Backend Robusto",
+      "MODULARITY": "Arquitectura Modular"
+    },
     "CATEGORIES": {
       "ALL": "Todos",
       "WEB": "Web",
@@ -457,6 +466,23 @@
           "0": "Implementación de sistema de permisos granular",
           "1": "Optimización de consultas para reportes en tiempo real",
           "2": "Sincronización de inventario entre múltiples usuarios"
+        }
+      },
+      "9": {
+        "TITLE": "MsgService - Notificador de Eventos con RabbitMQ",
+        "SHORT_DESC": "Microservicio orientado a eventos para gestión de usuarios y notificaciones automáticas.",
+        "DESC": "Backend robusto con Java y Spring Boot que implementa una arquitectura orientada a eventos (EDA). Utiliza RabbitMQ como broker para desacoplar procesos y gestionar notificaciones asíncronas. Incluye API REST, validación de datos, JPA/H2 e integración de correos con Spring Mail, todo contenedorizado con Docker.",
+        "HIGHLIGHTS": [
+          "Arquitectura orientada a eventos con RabbitMQ",
+          "Gestión asíncrona de notificaciones por email",
+          "API REST robusta con validación de datos (Jakarta)",
+          "Contenedorización completa con Docker y Docker Compose",
+          "Persistencia de datos con Spring Data JPA",
+          "Sistema de salud (Health-check) integrado",
+          "Configuración lista para producción con perfiles de Maven"
+        ],
+        "LINKS": {
+          "REPO": "Repositorio GitHub"
         }
       }
     }

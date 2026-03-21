@@ -36,6 +36,7 @@ export interface Project {
   challenges?: string[];
   metrics?: ProjectMetrics;
   videoUrl?: string;
+  techFocus?: string; // Nuevo: Para resaltar el enfoque (p.ej. "Backend Architecture")
 }
 
 @Injectable({
@@ -52,64 +53,39 @@ export class ProjectsDataService {
   private initializeProjects(): void {
     const projects: Project[] = [
       {
-        id: '1',
-        title: 'PROJECTS.ITEMS.1.TITLE',
-        description: 'PROJECTS.ITEMS.1.DESC',
-        shortDescription: 'PROJECTS.ITEMS.1.SHORT_DESC',
-        image: '../assets/banner-ventaas.webp',
+        id: '9',
+        title: 'PROJECTS.ITEMS.9.TITLE',
+        description: 'PROJECTS.ITEMS.9.DESC',
+        shortDescription: 'PROJECTS.ITEMS.9.SHORT_DESC',
+        image: '../assets/msg-service-banner.png',
         technologies: [
-          {
-            name: 'Angular',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg',
-          },
-          {
-            name: 'Spring Boot',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg',
-          },
-          {
-            name: 'TypeScript',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
-          },
-          {
-            name: 'Tailwind CSS',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg',
-          },
-          {
-            name: 'MySQL',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-plain-wordmark.svg',
-          },
-          {
-            name: 'Java',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
-          },
+          { name: 'Java', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
+          { name: 'Spring Boot', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg' },
+          { name: 'RabbitMQ', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rabbitmq/rabbitmq-original.svg' },
+          { name: 'Docker', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
+          { name: 'Maven', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/maven/maven-original.svg' },
         ],
         links: [
           {
             type: 'github',
-            url: 'https://github.com/App-GigaShop/aapp-Gigashop-Back.git',
-            label: 'PROJECTS.ITEMS.1.LINKS.BACKEND_REPO',
+            url: 'https://github.com/VCL-tt/msg-messenger-service.git',
+            label: 'PROJECTS.ITEMS.9.LINKS.REPO',
           },
         ],
-        category: 'freelance',
+        category: 'web',
         status: 'completed',
         featured: true,
-        createdAt: new Date('2024-03-15'),
+        createdAt: new Date('2024-11-25'),
+        techFocus: 'Backend Architecture & EDA',
         highlights: [
-          'PROJECTS.ITEMS.1.HIGHLIGHTS.0',
-          'PROJECTS.ITEMS.1.HIGHLIGHTS.1',
-          'PROJECTS.ITEMS.1.HIGHLIGHTS.2',
-          'PROJECTS.ITEMS.1.HIGHLIGHTS.3',
-          'PROJECTS.ITEMS.1.HIGHLIGHTS.4',
-          'PROJECTS.ITEMS.1.HIGHLIGHTS.5',
-          'PROJECTS.ITEMS.1.HIGHLIGHTS.6',
-          'PROJECTS.ITEMS.1.HIGHLIGHTS.7',
-          'PROJECTS.ITEMS.1.HIGHLIGHTS.8',
+          'PROJECTS.ITEMS.9.HIGHLIGHTS.0',
+          'PROJECTS.ITEMS.9.HIGHLIGHTS.1',
+          'PROJECTS.ITEMS.9.HIGHLIGHTS.2',
+          'PROJECTS.ITEMS.9.HIGHLIGHTS.3',
+          'PROJECTS.ITEMS.9.HIGHLIGHTS.4',
+          'PROJECTS.ITEMS.9.HIGHLIGHTS.5',
+          'PROJECTS.ITEMS.9.HIGHLIGHTS.6',
         ],
-        metrics: {
-          stars: 28,
-          forks: 12,
-          downloads: 180,
-        },
       },
       {
         id: '7',
@@ -139,6 +115,7 @@ export class ProjectsDataService {
         status: 'completed',
         featured: true,
         createdAt: new Date('2024-09-10'),
+        techFocus: 'Enterprise Logic & Security',
         highlights: [
           'PROJECTS.ITEMS.7.HIGHLIGHTS.0',
           'PROJECTS.ITEMS.7.HIGHLIGHTS.1',
@@ -202,6 +179,7 @@ export class ProjectsDataService {
         status: 'completed',
         featured: true,
         createdAt: new Date('2025-01-17'),
+        techFocus: 'Scalable Fullstack System',
         highlights: [
           'PROJECTS.ITEMS.8.HIGHLIGHTS.0',
           'PROJECTS.ITEMS.8.HIGHLIGHTS.1',
@@ -222,6 +200,55 @@ export class ProjectsDataService {
           stars: 20,
           forks: 8,
           downloads: 120,
+        },
+      },
+      {
+        id: '1',
+        title: 'PROJECTS.ITEMS.1.TITLE',
+        description: 'PROJECTS.ITEMS.1.DESC',
+        shortDescription: 'PROJECTS.ITEMS.1.SHORT_DESC',
+        image: '../assets/banner-ventaas.webp',
+        technologies: [
+          {
+            name: 'Angular',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg',
+          },
+          {
+            name: 'Spring Boot',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg',
+          },
+          {
+            name: 'Java',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
+          },
+        ],
+        links: [
+          {
+            type: 'github',
+            url: 'https://github.com/App-GigaShop/aapp-Gigashop-Back.git',
+            label: 'PROJECTS.ITEMS.1.LINKS.BACKEND_REPO',
+          },
+        ],
+        category: 'freelance',
+        status: 'completed',
+        featured: true,
+        createdAt: new Date('2024-03-15'),
+        techFocus: 'E-commerce Engine Logic',
+        highlights: [
+          'PROJECTS.ITEMS.1.HIGHLIGHTS.0',
+          'PROJECTS.ITEMS.1.HIGHLIGHTS.1',
+          'PROJECTS.ITEMS.1.HIGHLIGHTS.2',
+          'PROJECTS.ITEMS.1.HIGHLIGHTS.3',
+          'PROJECTS.ITEMS.1.HIGHLIGHTS.4',
+          'PROJECTS.ITEMS.1.HIGHLIGHTS.5',
+          'PROJECTS.ITEMS.1.HIGHLIGHTS.6',
+          'PROJECTS.ITEMS.1.HIGHLIGHTS.7',
+          'PROJECTS.ITEMS.1.HIGHLIGHTS.8',
+        ],
+        metrics: {
+          stars: 28,
+          forks: 12,
+          downloads: 180,
         },
       },
       {
@@ -378,14 +405,15 @@ export class ProjectsDataService {
         links: [
           {
             type: 'github',
-            url: 'https://github.com/App-GigaShop/app-ProDent.git',
+            url: 'https://github.com/App-Android-Prodent/App-Prodent.git',
             label: 'PROJECTS.ITEMS.4.LINKS.MAIN_REPO',
           },
         ],
         category: 'mobile',
         status: 'completed',
-        featured: false,
+        featured: true,
         createdAt: new Date('2023-11-15'),
+        techFocus: 'Mobile Healthcare Logic',
         highlights: [
           'PROJECTS.ITEMS.4.HIGHLIGHTS.0',
           'PROJECTS.ITEMS.4.HIGHLIGHTS.1',
@@ -393,6 +421,7 @@ export class ProjectsDataService {
           'PROJECTS.ITEMS.4.HIGHLIGHTS.3',
           'PROJECTS.ITEMS.4.HIGHLIGHTS.4',
           'PROJECTS.ITEMS.4.HIGHLIGHTS.5',
+          'PROJECTS.ITEMS.4.HIGHLIGHTS.6',
         ],
         metrics: {
           downloads: 300,
@@ -419,41 +448,30 @@ export class ProjectsDataService {
             name: 'JWT',
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg',
           },
-          {
-            name: 'Angular',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg',
-          },
         ],
         links: [
           {
             type: 'github',
-            url: '#',
+            url: 'https://github.com/App-Authenticator/App-JWT-Auth-Backend',
             label: 'PROJECTS.ITEMS.5.LINKS.BACKEND_SEC',
           },
           {
             type: 'github',
-            url: '#',
+            url: 'https://github.com/App-Authenticator/App-JWT-Auth-FrontEnd',
             label: 'PROJECTS.ITEMS.5.LINKS.FRONTEND_ANG',
-          },
-          {
-            type: 'demo',
-            url: '#',
-            label: 'PROJECTS.ITEMS.5.LINKS.SECURE_DEMO',
           },
         ],
         category: 'web',
-        status: 'in-progress',
-        featured: false,
+        status: 'completed',
+        featured: true,
         createdAt: new Date('2024-11-20'),
+        techFocus: 'Enterprise Security & JWT',
         highlights: [
           'PROJECTS.ITEMS.5.HIGHLIGHTS.0',
           'PROJECTS.ITEMS.5.HIGHLIGHTS.1',
           'PROJECTS.ITEMS.5.HIGHLIGHTS.2',
           'PROJECTS.ITEMS.5.HIGHLIGHTS.3',
           'PROJECTS.ITEMS.5.HIGHLIGHTS.4',
-          'PROJECTS.ITEMS.5.HIGHLIGHTS.5',
-          'PROJECTS.ITEMS.5.HIGHLIGHTS.6',
-          'PROJECTS.ITEMS.5.HIGHLIGHTS.7',
         ],
         metrics: {
           stars: 45,
@@ -480,31 +498,24 @@ export class ProjectsDataService {
             name: 'Android',
             icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg',
           },
-          {
-            name: 'Jetpack Compose',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg',
-          },
         ],
         links: [
           {
             type: 'github',
-            url: '#',
+            url: 'https://github.com/app-carroControl/app-control-IoT.git',
             label: 'PROJECTS.ITEMS.6.LINKS.ANDROID_APP',
           },
         ],
         category: 'iot',
-        status: 'maintenance',
-        featured: false,
+        status: 'completed',
+        featured: true,
         createdAt: new Date('2024-05-12'),
+        techFocus: 'IoT Systems & Hardware Interface',
         highlights: [
           'PROJECTS.ITEMS.6.HIGHLIGHTS.0',
           'PROJECTS.ITEMS.6.HIGHLIGHTS.1',
           'PROJECTS.ITEMS.6.HIGHLIGHTS.2',
           'PROJECTS.ITEMS.6.HIGHLIGHTS.3',
-          'PROJECTS.ITEMS.6.HIGHLIGHTS.4',
-          'PROJECTS.ITEMS.6.HIGHLIGHTS.5',
-          'PROJECTS.ITEMS.6.HIGHLIGHTS.6',
-          'PROJECTS.ITEMS.6.HIGHLIGHTS.7',
         ],
         metrics: {
           stars: 52,

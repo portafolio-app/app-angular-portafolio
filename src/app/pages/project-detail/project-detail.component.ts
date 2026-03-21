@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { CommonModule, isPlatformBrowser, Location } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Subject, takeUntil, catchError, of } from 'rxjs';
 
 import {
@@ -26,12 +26,13 @@ import { ThemeService } from '../../core/services/ThemeService';
 @Component({
   selector: 'app-project-detail',
   standalone: true,
-  imports: [CommonModule, InfoCardComponent, NavbardComponent, TranslateModule],
+  imports: [CommonModule, InfoCardComponent, NavbardComponent, TranslateModule, RouterModule],
   templateUrl: './project-detail.component.html',
   styleUrl: './project-detail.component.css',
 })
 export class ProjectDetailComponent implements OnInit, OnDestroy {
   project: Project | null = null;
+  relatedProjects: Project[] = [];
   isLoading: boolean = true;
   error: string | null = null;
   isDarkMode: boolean = false;
@@ -102,10 +103,22 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
       .subscribe((project) => {
         if (project) {
           this.project = project;
+          this.loadRelatedProjects(id);
         } else {
           this.error = 'Proyecto no encontrado';
         }
         this.isLoading = false;
+      });
+  }
+
+  private loadRelatedProjects(currentId: string): void {
+    this.projectsService.getProjects()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(projects => {
+        this.relatedProjects = projects
+          .filter(p => p.id !== currentId)
+          .sort(() => 0.5 - Math.random())
+          .slice(0, 3);
       });
   }
 

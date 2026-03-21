@@ -200,7 +200,10 @@
   "PROJECTS": {
     "FILTER_TITLE": "Filter projects",
     "TITLE": "Projects",
-    "TAG": "My Works",
+    "ABOUT_TITLE": "About this Project",
+    "IMPACT_TITLE": "Impact & Results",
+    "RELATED_TITLE": "Related Projects",
+    "TAG": "My Work",
     "LOADING": "Loading projects...",
     "ERROR_LOADING": "Error loading projects",
     "RETRY": "Try again",
@@ -236,6 +239,12 @@
     "CATEGORY": "Category",
     "STATUS": "Status",
     "YEAR": "Year",
+    "SUCCESS_METRICS": {
+      "SCALABILITY": "Async Scalability",
+      "PERFORMANCE": "High Performance",
+      "ROBUSTNESS": "Robust Backend",
+      "MODULARITY": "Modular Architecture"
+    },
     "CATEGORIES": {
       "ALL": "All",
       "WEB": "Web",
@@ -457,6 +466,23 @@
           "0": "Implementation of granular permission system",
           "1": "Query optimization for real-time reports",
           "2": "Inventory synchronization between multiple users"
+        }
+      },
+      "9": {
+        "TITLE": "MsgService - Event-Driven Notifier with RabbitMQ",
+        "SHORT_DESC": "Event-oriented microservice for user management and automated notifications.",
+        "DESC": "Robust backend system developed with Java and Spring Boot implementing an Event-Driven Architecture (EDA). It utilizes RabbitMQ as a message broker to decouple processes and manage notifications asynchronously. The solution includes a REST API for user administration, data validation, persistence with JPA/H2, and an integrated email system using Spring Mail. The entire environment is containerized with Docker and orchestrated with Docker Compose.",
+        "HIGHLIGHTS": [
+          "Event-Driven Architecture with RabbitMQ",
+          "Asynchronous email notification management",
+          "Robust REST API with data validation (Jakarta)",
+          "Full containerization with Docker and Docker Compose",
+          "Data persistence with Spring Data JPA",
+          "Integrated health-check system",
+          "Production-ready configuration with Maven profiles"
+        ],
+        "LINKS": {
+          "REPO": "GitHub Repository"
         }
       }
     }

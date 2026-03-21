@@ -281,4 +281,28 @@ export class InfoCardComponent {
   getProjectYear(): number {
     return this.project.createdAt.getFullYear();
   }
+
+  /**
+   * Obtiene métricas de éxito (Technical Wins) dinámicas
+   */
+  getSuccessMetrics(): { icon: string; label: string; color: string }[] {
+    const metricsMap: Record<string, { icon: string; label: string; color: string }[]> = {
+      '9': [ // MsgService
+        { icon: 'fas fa-rocket', label: 'PROJECTS.SUCCESS_METRICS.SCALABILITY', color: 'bg-emerald-500' },
+        { icon: 'fas fa-shield-alt', label: 'PROJECTS.SUCCESS_METRICS.ROBUSTNESS', color: 'bg-blue-500' },
+        { icon: 'fas fa-microchip', label: 'PROJECTS.SUCCESS_METRICS.MODULARITY', color: 'bg-purple-500' }
+      ],
+      '7': [ // Ubicate
+        { icon: 'fas fa-map-marker-alt', label: 'PROJECTS.SUCCESS_METRICS.PERFORMANCE', color: 'bg-emerald-500' },
+        { icon: 'fas fa-users', label: 'PROJECTS.SUCCESS_METRICS.SCALABILITY', color: 'bg-blue-500' },
+        { icon: 'fas fa-sync', label: 'PROJECTS.SUCCESS_METRICS.ROBUSTNESS', color: 'bg-teal-500' }
+      ]
+    };
+
+    return metricsMap[this.project.id] || [
+      { icon: 'fas fa-check-circle', label: 'PROJECTS.SUCCESS_METRICS.PERFORMANCE', color: 'bg-emerald-500' },
+      { icon: 'fas fa-code', label: 'PROJECTS.SUCCESS_METRICS.ROBUSTNESS', color: 'bg-blue-500' },
+      { icon: 'fas fa-cog', label: 'PROJECTS.SUCCESS_METRICS.MODULARITY', color: 'bg-purple-500' }
+    ];
+  }
 }
