@@ -140,15 +140,25 @@ export class StartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @HostListener('click')
   onClick(): void {
-    this.primeSpeech(); // Desbloquear voz en el click
-    // Salto digital: Inicia la transición inmediatamente si el usuario hace click
+    this.skipAnimation();
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent): void {
+    this.skipAnimation();
+  }
+
+  public skipAnimation(): void {
+    if (this.curtainsActivated) return;
+    
+    this.primeSpeech(); 
+    window.speechSynthesis.cancel(); // Silenciar inmediatamente la voz
+    
     this.targetScrollProgress = 1;
     this.isShattering = true;
     
-    // Aceleración visual: Saltar a la mitad de la explosión para mayor rapidez
-    if (this.shatterProgress < 0.5) {
-      this.shatterProgress = 0.5;
-    }
+    // Salto Instantáneo: Ir directamente al final de la explosión
+    this.shatterProgress = 0.95; 
 
     if (this.scrollHint) {
       this.scrollHint.nativeElement.classList.add('hidden');
