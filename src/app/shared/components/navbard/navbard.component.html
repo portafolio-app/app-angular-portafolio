@@ -79,6 +79,12 @@
       <!-- Controles derecha (tema + menú móvil) -->
       <div [@fadeIn]="menuItemsState" class="flex items-center space-x-1 sm:space-x-2">
 
+        <!-- Arcade Mode Toggle -->
+        <button (click)="toggleArcadeMode()" aria-label="Modo Arcade"
+          class="group p-2 sm:p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-green-100 dark:hover:bg-green-900/30 transition-all duration-300 hover:scale-105 cursor-pointer">
+          <i class="fas fa-gamepad w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-400 flex items-center justify-center"></i>
+        </button>
+
         <!-- Toggle de tema responsivo -->
         <button (click)="toggleTheme()" aria-label="Cambiar tema"
           class="group p-2 sm:p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-green-100 dark:hover:bg-green-900/30 transition-all duration-300 hover:scale-105 cursor-pointer">
@@ -185,6 +191,13 @@
           <i
             class="fas fa-award mr-3 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300"></i>
           <span class="font-medium">{{ 'NAVBAR.CERTIFICATIONS' | translate }}</span>
+        </button>
+
+        <button (click)="toggleArcadeMode()"
+          class="group flex items-center w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base cursor-pointer">
+          <i
+            class="fas fa-gamepad mr-3 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300"></i>
+          <span class="font-medium">Modo Arcade</span>
         </button>
 
         <button (click)="scrollToSection('tecnologias')"

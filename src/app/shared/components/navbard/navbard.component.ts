@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output, HostListener, ElementRef, Injec
 import { RouterModule, Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { trigger, transition, style, animate, state } from '@angular/animations';
+import { ArcadeModeService } from '../../../core/services/arcade-mode.service';
 
 @Component({
   selector: 'app-navbard',
@@ -61,6 +62,7 @@ export class NavbardComponent implements OnInit {
     private elementRef: ElementRef,
     private router: Router,
     private translate: TranslateService,
+    private arcadeService: ArcadeModeService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.translate.setDefaultLang('es');
@@ -214,5 +216,9 @@ export class NavbardComponent implements OnInit {
   onMenuItemClick() {
     this.closeMenu();
     this.closeDropdown();
+  }
+
+  toggleArcadeMode(): void {
+    this.arcadeService.toggle();
   }
 }

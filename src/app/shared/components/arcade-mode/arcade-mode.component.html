@@ -1,0 +1,72 @@
+<div class="arcade-overlay" *ngIf="isActive$ | async" [@fadeInOut]>
+  
+  <!-- Ship (SVG) -->
+  <div id="arcade-ship" class="ship">
+    <div *ngIf="isInvulnerable" class="shield-aura"></div>
+    <svg width="60" height="60" viewBox="0 0 60 60">
+      <!-- Main Hull -->
+      <path d="M30 10 L50 45 L30 38 L10 45 Z" fill="#00ff88" stroke="#00ff88" stroke-width="2" />
+      <!-- Cockpit -->
+      <path d="M30 20 L38 35 L30 32 L22 35 Z" fill="#000" opacity="0.6" />
+      <!-- Thruster flame -->
+      <path id="arcade-thruster" d="M25 45 L30 58 L35 45 Z" fill="#00ff88" style="opacity: 0;">
+        <animate attributeName="opacity" values="1;0.3;1" dur="0.1s" repeatCount="indefinite" />
+      </path>
+    </svg>
+    <div class="ship-glow"></div>
+    <div class="laser-sight"></div>
+  </div>
+
+  <!-- Projectiles Container -->
+  <div id="arcade-bullets" class="bullets-container"></div>
+
+  <div class="arcade-ui">
+    <div class="stats-bar">
+      <div class="score-display">
+        <span class="label">SCORE</span>
+        <span class="value">{{ score | number:'5.0-0' }}</span>
+      </div>
+      <div class="lives-counter">
+        <span *ngFor="let i of [1,2,3]" 
+              class="life-icon" 
+              [class.lost]="i > lives">
+          🛸
+        </span>
+      </div>
+      <div class="weapon-info">
+        <span class="label">WEAPON</span>
+        <span class="lvl">LVL {{ weaponLevel }}</span>
+      </div>
+    </div>
+
+    <div class="game-controls">
+      <span><i class="fas fa-arrows-alt"></i> ARROWS / WASD: MOVER</span>
+      <span><i class="fas fa-keyboard"></i> ESPACIO: DISPARAR</span>
+    </div>
+    
+    <button class="exit-btn" (click)="deactivate()">
+      <i class="fas fa-undo"></i> RESTAURAR REALIDAD
+    </button>
+  </div>
+
+  <!-- Game Over Screen -->
+  <div *ngIf="isGameOver" class="game-over-overlay">
+    <div class="terminal-box">
+      <div class="glitch-title" data-text="GAME OVER">GAME OVER</div>
+      <p class="error-msg">¿REINTENTAR?</p>
+      
+      <div class="game-over-actions">
+        <button class="reboot-btn" (click)="restoreAll()">
+          <i class="fas fa-redo"></i> REINTENTAR
+        </button>
+        <button class="abandon-btn" (click)="deactivate()">
+          <i class="fas fa-sign-out-alt"></i> SALIR
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Glitch Overlay -->
+  <div id="arcade-flash" class="glitch-flash"></div>
+
+</div>
