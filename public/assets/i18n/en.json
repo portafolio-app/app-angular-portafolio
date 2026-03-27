@@ -326,6 +326,28 @@
       "SLIDE_4_BTN": "View Demo"
     },
     "ITEMS": {
+      "10": {
+        "TITLE": "CODLIX - Multi-tenant ERP & POS for Restaurants",
+        "SHORT_DESC": "SaaS platform with POS, inventory, reservations, cash shifts, and SUNAT electronic invoicing.",
+        "DESC": "Codlix is a modular SaaS platform designed for comprehensive restaurant management. It implements Hexagonal Architecture and Domain-Driven Design (DDD) to ensure full decoupling between business logic and infrastructure. The backend was built with Java 21 and Spring Boot, using Spring Security + JWT for secure authentication in multi-tenant environments. The frontend was developed in Angular with Tailwind CSS, optimized for performance at points of sale (POS). It includes key modules: Inventory Control (Kardex), Point of Sale, Reservation Management, Cash Shift Auditing, Electronic Invoicing with SUNAT, and an analytical Dashboard with ApexCharts.",
+        "HIGHLIGHTS": [
+          "Hexagonal Architecture (Ports & Adapters) and DDD for full decoupling between business and infrastructure layers",
+          "Multi-tenant ERP system with Java 21 and Spring Boot, managing multiple restaurants from a single platform",
+          "POS module optimized in Angular + Tailwind CSS for real-time order management and table handling",
+          "Electronic invoicing integrated with SUNAT for automated issuance of electronic tax receipts",
+          "Inventory Control (Kardex) with detailed stock movement tracking and category management",
+          "Cash Shift Auditing with strict turn validations and complete financial traceability",
+          "Analytical Dashboard with ApexCharts for real-time sales and performance monitoring"
+        ],
+        "CHALLENGES": [
+          "Multi-tenancy: secure data isolation for different restaurants within PostgreSQL using per-tenant partitioning",
+          "Decoupling: Hexagonal Architecture allowed changing persistence layers without modifying business logic",
+          "Performance: optimization of POS and Dashboard for fluid operation under high request concurrency"
+        ],
+        "LINKS": {
+          "LIVE_DEMO": "View Live Demo"
+        }
+      },
       "1": {
         "TITLE": "GigaShop - Electronic Products E-commerce Platform",
         "SHORT_DESC": "Secure e-commerce with online payments, real-time management, and admin panel for electronic products.",

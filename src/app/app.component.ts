@@ -5,12 +5,13 @@ import { filter } from 'rxjs/operators';
 import { ViewportScroller } from '@angular/common';
 import { FlowbiteService } from './flowbite.service';
 import { ArcadeModeComponent } from './shared/components/arcade-mode/arcade-mode.component';
+import { PromoPopupComponent } from './shared/components/promo-popup/promo-popup.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, RouterModule, ArcadeModeComponent],
+  imports: [CommonModule, RouterModule, ArcadeModeComponent, PromoPopupComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })

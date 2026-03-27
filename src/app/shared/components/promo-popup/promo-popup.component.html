@@ -1,0 +1,60 @@
+<!-- Promo Popup: RESTO DEV SaaS -->
+<div *ngIf="isVisible" class="promo-backdrop" (click)="dismiss()">
+  <div class="promo-card" (click)="$event.stopPropagation()">
+
+    <!-- Close button -->
+    <button class="promo-close" (click)="dismiss()" aria-label="Cerrar">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <!-- Header badge -->
+    <div class="promo-badge">
+      <span class="promo-pulse"></span>
+      <span>LIVE — En Producción</span>
+    </div>
+
+    <!-- Icon + Title -->
+    <div class="promo-header">
+      <div class="promo-icon">🍽️</div>
+      <div>
+        <h2 class="promo-title">CODLIX</h2>
+        <p class="promo-subtitle">ERP & POS para Restaurantes</p>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <p class="promo-desc">
+      Plataforma SaaS multi-tenant <strong>desplegada en mi propia VPS</strong> con Docker &amp; Dokploy.<br>
+      Gestiona inventario, mesas, reservas, caja y emite comprobantes electrónicos con <strong>SUNAT</strong> 🇵🇪
+    </p>
+
+    <!-- Feature chips -->
+    <div class="promo-chips">
+      <span>🏪 POS Rápido</span>
+      <span>📦 Inventario</span>
+      <span>📅 Reservas</span>
+      <span>💰 Caja & Turnos</span>
+      <span>🧾 SUNAT</span>
+      <span>📊 Analytics</span>
+    </div>
+
+    <!-- Stack -->
+    <p class="promo-stack">Java 21 · Spring Boot · Angular · PostgreSQL · Kafka · Docker</p>
+
+    <!-- CTA -->
+    <div class="promo-actions">
+      <button class="promo-btn-primary" (click)="openApp()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="inline mr-1">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+        </svg>
+        Ver la App en Vivo
+      </button>
+      <button class="promo-btn-ghost" (click)="dismiss()">Quizás después</button>
+    </div>
+
+    <!-- Footer note -->
+    <p class="promo-footer">⚡ Hosted on my own VPS · Contabo · Dokploy</p>
+  </div>
+</div>

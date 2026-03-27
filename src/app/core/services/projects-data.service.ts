@@ -53,6 +53,54 @@ export class ProjectsDataService {
   private initializeProjects(): void {
     const projects: Project[] = [
       {
+        id: '10',
+        title: 'PROJECTS.ITEMS.10.TITLE',
+        description: 'PROJECTS.ITEMS.10.DESC',
+        shortDescription: 'PROJECTS.ITEMS.10.SHORT_DESC',
+        image: '../assets/resto-dev.png',
+        technologies: [
+          { name: 'Java 21', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
+          { name: 'Spring Boot', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg' },
+          { name: 'Angular', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg' },
+          { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
+          { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
+          { name: 'Docker', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
+          { name: 'Kafka', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg' },
+          { name: 'Tailwind CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg' },
+        ],
+        links: [
+          {
+            type: 'demo',
+            url: 'http://app.167.86.80.167.sslip.io',
+            label: 'PROJECTS.ITEMS.10.LINKS.LIVE_DEMO',
+          },
+        ],
+        category: 'freelance',
+        status: 'in-progress',
+        featured: true,
+        createdAt: new Date('2025-01-01'),
+        techFocus: 'Hexagonal Architecture & SaaS',
+        highlights: [
+          'PROJECTS.ITEMS.10.HIGHLIGHTS.0',
+          'PROJECTS.ITEMS.10.HIGHLIGHTS.1',
+          'PROJECTS.ITEMS.10.HIGHLIGHTS.2',
+          'PROJECTS.ITEMS.10.HIGHLIGHTS.3',
+          'PROJECTS.ITEMS.10.HIGHLIGHTS.4',
+          'PROJECTS.ITEMS.10.HIGHLIGHTS.5',
+          'PROJECTS.ITEMS.10.HIGHLIGHTS.6',
+        ],
+        challenges: [
+          'PROJECTS.ITEMS.10.CHALLENGES.0',
+          'PROJECTS.ITEMS.10.CHALLENGES.1',
+          'PROJECTS.ITEMS.10.CHALLENGES.2',
+        ],
+        metrics: {
+          stars: 35,
+          forks: 12,
+          downloads: 200,
+        },
+      },
+      {
         id: '9',
         title: 'PROJECTS.ITEMS.9.TITLE',
         description: 'PROJECTS.ITEMS.9.DESC',

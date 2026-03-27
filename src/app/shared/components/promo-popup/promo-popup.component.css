@@ -1,0 +1,282 @@
+/* ============================
+   Promo Popup - CODLIX / RESTO DEV
+   Dark + Light Mode Support
+   ============================ */
+
+/* Backdrop */
+.promo-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: backdropIn 0.3s ease-out;
+}
+
+@keyframes backdropIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── CARD BASE (Light Mode default) ── */
+.promo-card {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 420px;
+  width: 100%;
+  box-shadow:
+    0 0 0 1px rgba(16, 185, 129, 0.15),
+    0 25px 60px rgba(0, 0, 0, 0.15),
+    0 0 60px rgba(16, 185, 129, 0.06);
+  animation: cardIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+}
+
+/* Top glow line */
+.promo-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 10%; right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #10b981, transparent);
+  border-radius: 9999px;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(30px) scale(0.94); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── DARK MODE CARD ── */
+:host-context(.dark) .promo-card {
+  background: linear-gradient(145deg, #0f1923 0%, #111827 60%, #0d1f15 100%);
+  border-color: rgba(16, 185, 129, 0.3);
+  box-shadow:
+    0 0 0 1px rgba(16, 185, 129, 0.15),
+    0 25px 60px rgba(0, 0, 0, 0.6),
+    0 0 80px rgba(16, 185, 129, 0.08);
+}
+
+/* Close button */
+.promo-close {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  color: rgba(0,0,0,0.35);
+  background: rgba(0,0,0,0.06);
+  border: none;
+  border-radius: 8px;
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.promo-close:hover {
+  color: #111;
+  background: rgba(0,0,0,0.12);
+}
+:host-context(.dark) .promo-close {
+  color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.06);
+}
+:host-context(.dark) .promo-close:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.12);
+}
+
+/* Badge */
+.promo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #059669;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  margin-bottom: 1.2rem;
+}
+:host-context(.dark) .promo-badge {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.12);
+}
+
+/* Pulsing dot */
+.promo-pulse {
+  display: inline-block;
+  width: 7px; height: 7px;
+  background: #10b981;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(1.4); }
+}
+
+/* Header */
+.promo-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 1rem;
+}
+
+.promo-icon {
+  font-size: 2.4rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.35));
+}
+
+.promo-title {
+  font-size: 1.7rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #064e3b 0%, #10b981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  line-height: 1.1;
+}
+:host-context(.dark) .promo-title {
+  background: linear-gradient(135deg, #ffffff 0%, #10b981 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.promo-subtitle {
+  color: rgba(0,0,0,0.45);
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin: 0;
+  margin-top: 2px;
+}
+:host-context(.dark) .promo-subtitle {
+  color: rgba(255,255,255,0.5);
+}
+
+/* Description */
+.promo-desc {
+  color: rgba(0,0,0,0.7);
+  font-size: 0.88rem;
+  line-height: 1.65;
+  margin-bottom: 1rem;
+}
+:host-context(.dark) .promo-desc {
+  color: rgba(255,255,255,0.75);
+}
+.promo-desc strong {
+  color: #059669;
+}
+:host-context(.dark) .promo-desc strong {
+  color: #10b981;
+}
+
+/* Feature chips */
+.promo-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 1rem;
+}
+.promo-chips span {
+  background: rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.1);
+  color: rgba(0,0,0,0.65);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+:host-context(.dark) .promo-chips span {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.7);
+}
+
+/* Stack line */
+.promo-stack {
+  color: rgba(5, 150, 105, 0.7);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.4rem;
+  text-align: center;
+}
+:host-context(.dark) .promo-stack {
+  color: rgba(16, 185, 129, 0.6);
+}
+
+/* Actions */
+.promo-actions {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.promo-btn-primary {
+  background: linear-gradient(135deg, #059669, #10b981);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: all 0.25s;
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.35);
+  letter-spacing: 0.01em;
+}
+.promo-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(16, 185, 129, 0.5);
+  background: linear-gradient(135deg, #047857, #059669);
+}
+.promo-btn-primary:active { transform: translateY(0); }
+
+.promo-btn-ghost {
+  background: transparent;
+  color: rgba(0,0,0,0.35);
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  transition: color 0.2s;
+  text-align: center;
+}
+.promo-btn-ghost:hover { color: rgba(0,0,0,0.65); }
+:host-context(.dark) .promo-btn-ghost { color: rgba(255,255,255,0.3); }
+:host-context(.dark) .promo-btn-ghost:hover { color: rgba(255,255,255,0.65); }
+
+/* Footer note */
+.promo-footer {
+  color: rgba(0,0,0,0.22);
+  font-size: 10px;
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 0;
+  letter-spacing: 0.04em;
+}
+:host-context(.dark) .promo-footer {
+  color: rgba(255,255,255,0.22);
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .promo-card { padding: 1.5rem; border-radius: 16px; }
+  .promo-title { font-size: 1.4rem; }
+}
