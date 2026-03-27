@@ -33,7 +33,7 @@ export class PromoPopupComponent implements OnInit {
 
   openApp(): void {
     if (isPlatformBrowser(this.platformId)) {
-      window.open('http://app.167.86.80.167.sslip.io', '_blank');
+      window.open('https://app.codlyp.website', '_blank');
     }
     this.dismiss();
   }

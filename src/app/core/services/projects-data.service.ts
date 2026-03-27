@@ -71,7 +71,7 @@ export class ProjectsDataService {
         links: [
           {
             type: 'demo',
-            url: 'http://app.167.86.80.167.sslip.io',
+            url: 'https://app.codlyp.website',
             label: 'PROJECTS.ITEMS.10.LINKS.LIVE_DEMO',
           },
         ],
