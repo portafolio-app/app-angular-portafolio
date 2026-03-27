@@ -112,15 +112,30 @@
         "TITLE": "Full Stack Developer",
         "COMPANY": "InnovaShop System (Freelance)",
         "PERIOD": "July 2024 - February 2025",
-        "LOCATION": "Trujillo, Peru",
+        "LOCATION": "Trujillo, Peru (Remote)",
         "DESCRIPTION": "Complete design and development of a scalable e-commerce platform for selling electronic products, from architecture to production deployment.",
         "ACHIEVEMENTS": {
-          "0": "Full stack development with Angular + Spring Boot, ensuring a dynamic user experience",
-          "1": "Implementation of security with JWT and Spring Security for protected transactions",
-          "2": "Containerization with Docker and successful deployment on AWS",
-          "3": "Performance testing with JMeter for high availability under traffic loads",
-          "4": "Development of a unit test suite with Mockito for code quality",
+          "0": "Technical leadership of a 2-person team in the design, planning, and full development of an e-commerce platform",
+          "1": "Definition of system architecture, task assignment, and oversight of the complete development lifecycle",
+          "2": "Full stack development with Angular + Spring Boot, implementing robust security with JWT and Spring Security",
+          "3": "Production deployment on VPS (Contabo) configured with Dokploy through Docker containerization",
+          "4": "Quality assurance with unit testing (Mockito) and performance testing (JMeter)",
           "5": "Design and implementation of an optimized MySQL database"
+        }
+      },
+      "RESTO_DEV": {
+        "TITLE": "Freelance Lead Full Stack Developer",
+        "COMPANY": "RESTO DEV - Codlix (Freelance)",
+        "PERIOD": "2025",
+        "LOCATION": "Peru (Remote)",
+        "DESCRIPTION": "Technical leadership of a 3-person team for the design, planning, and development of a multi-tenant restaurant management platform with SUNAT electronic invoicing.",
+        "ACHIEVEMENTS": {
+          "0": "Technical leadership of a 3-person team, handling full planning, database architecture, and Full Stack development",
+          "1": "Design of a hexagonal multi-tenant architecture for the restaurant sector, optimizing scalability and maintainability",
+          "2": "Implementation of real-time distributed communication using Kafka and WebSockets for critical information flows",
+          "3": "Direct electronic invoicing integration with SUNAT, enabling automated tax compliance for multiple companies",
+          "4": "Service orchestration with Docker, deployment on VPS (Contabo) with Dokploy, and robust JWT-based security",
+          "5": "Technical documentation with Swagger and automated tax compliance"
         }
       }
     }
@@ -148,6 +163,11 @@
         "TITLE": "SOFTWARE ARCHITECTURE Program",
         "ISSUER": "CodiGo / TECSUP",
         "DESCRIPTION": "Intensive Software Architecture bootcamp with Java, covering design patterns, microservices, cloud-native architecture, and enterprise development best practices."
+      },
+      "TS_PLATZI": {
+        "TITLE": "TypeScript Certification",
+        "ISSUER": "Platzi",
+        "DESCRIPTION": "Comprehensive TypeScript certification, covering advanced types, interfaces, generics, decorators, and best practices for developing robust and scalable applications."
       }
     }
   },

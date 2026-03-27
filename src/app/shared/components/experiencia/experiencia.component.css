@@ -44,3 +44,24 @@ h3, p, span, li {
     line-height: 1.5 !important;
   }
 }
+
+/* Animación de entrada del contenido colapsable */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.collapse-content {
+  animation: fadeInDown 0.25s ease-out forwards;
+}
+
+/* Chevron rotation */
+.rotate-180 {
+  transform: rotate(180deg);
+}

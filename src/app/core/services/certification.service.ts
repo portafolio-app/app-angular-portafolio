@@ -13,7 +13,7 @@ export class CertificationService {
       description: 'CERTIFICATIONS.ITEMS.ML_TENSORFLOW.DESCRIPTION',
       date: new Date('2025-12-01'),
       status: 'completed',
-      image: '/assets/certifications/ml-tensorflow.jpg',
+      image: '/assets/certifications/ml-tensorflow.png',
       skills: ['TensorFlow', 'Keras', 'Deep Learning', 'Neural Networks', 'Python', 'Computer Vision', 'NLP'],
       category: CertificationCategory.MACHINE_LEARNING,
       credentialUrl: '/certificados/certificado_dmc.pdf'
@@ -26,9 +26,21 @@ export class CertificationService {
       date: new Date('2025-12-01'),
       endDate: new Date('2026-03-31'),
       status: 'in-progress',
-      image: '/assets/certifications/software-architecture.jpg',
+      image: '/assets/certifications/software-architecture.png',
       skills: ['Java', 'Microservicios', 'Design Patterns', 'Cloud Architecture', 'DDD', 'SOLID', 'Clean Architecture', 'Event-Driven Architecture'],
       category: CertificationCategory.SOFTWARE_ARCHITECTURE
+    },
+    {
+      id: '3',
+      title: 'CERTIFICATIONS.ITEMS.TS_PLATZI.TITLE',
+      issuer: 'CERTIFICATIONS.ITEMS.TS_PLATZI.ISSUER',
+      description: 'CERTIFICATIONS.ITEMS.TS_PLATZI.DESCRIPTION',
+      date: new Date('2024-06-15'),
+      status: 'completed',
+      image: '/assets/certifications/platzi-typescript.png',
+      skills: ['TypeScript', 'JavaScript', 'ES6+', 'Web Development', 'OOP', 'Type Systems'],
+      category: CertificationCategory.FRONTEND,
+      credentialUrl: '/certificados/platzi-ts.pdf'
     }
   ];
 

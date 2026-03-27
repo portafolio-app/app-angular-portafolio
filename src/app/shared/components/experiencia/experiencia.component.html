@@ -20,74 +20,93 @@
           <!-- Punto en la línea de tiempo -->
           <div class="absolute left-0 sm:left-6 transform -translate-x-1/2 w-3 h-3 sm:w-4 sm:h-4 bg-emerald-600 dark:bg-emerald-400 rounded-full border-2 sm:border-4 border-white dark:border-gray-900 z-10"></div>
 
-          <!-- Contenido sin card -->
+          <!-- Contenido -->
           <div class="pb-6 sm:pb-8 border-b border-gray-200 dark:border-gray-700 last:border-0">
 
-            <!-- Header con fecha a la derecha -->
-            <div class="flex items-start justify-between gap-3 mb-3">
-              <div class="flex items-start gap-2 sm:gap-3 flex-1 min-w-0">
-                <i [ngClass]="[getTypeIcon(exp.type)]" class="text-lg sm:text-xl md:text-2xl text-emerald-600 dark:text-emerald-400 mt-1 flex-shrink-0"></i>
-                <div class="flex-1 min-w-0">
-                  <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-1 break-words">{{ exp.title | translate }}</h3>
-                  <p class="text-base sm:text-lg text-emerald-600 dark:text-emerald-400 font-semibold mb-2 break-words">{{ exp.company | translate }}</p>
+            <!-- Header clicable -->
+            <button
+              (click)="toggleExpand(exp.id)"
+              class="w-full text-left focus:outline-none group/btn"
+              [attr.aria-expanded]="isExpanded(exp.id)"
+            >
+              <div class="flex items-start justify-between gap-3">
+                <div class="flex items-start gap-2 sm:gap-3 flex-1 min-w-0">
+                  <i [ngClass]="[getTypeIcon(exp.type)]" class="text-lg sm:text-xl md:text-2xl text-emerald-600 dark:text-emerald-400 mt-1 flex-shrink-0"></i>
+                  <div class="flex-1 min-w-0">
+                    <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-1 break-words group-hover/btn:text-emerald-600 dark:group-hover/btn:text-emerald-400 transition-colors">
+                      {{ exp.title | translate }}
+                    </h3>
+                    <p class="text-base sm:text-lg text-emerald-600 dark:text-emerald-400 font-semibold mb-2 break-words">{{ exp.company | translate }}</p>
 
-                  <!-- Ubicación (solo móvil) -->
-                  <div class="flex sm:hidden items-center gap-1.5 text-xs text-gray-600 dark:text-gray-400 mb-2">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span class="break-words">{{ exp.location | translate }}</span>
+                    <!-- Ubicación (solo móvil) -->
+                    <div class="flex sm:hidden items-center gap-1.5 text-xs text-gray-600 dark:text-gray-400 mb-2">
+                      <i class="fas fa-map-marker-alt"></i>
+                      <span class="break-words">{{ exp.location | translate }}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Derecha: período + ubicación (desktop) + chevron -->
+                <div class="flex flex-col items-end gap-1 flex-shrink-0">
+                  <!-- Período y ubicación desktop -->
+                  <div class="hidden sm:flex flex-col items-end text-right">
+                    <div class="flex items-center gap-1.5 text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-1">
+                      <i class="fas fa-calendar"></i>
+                      <span class="whitespace-nowrap">{{ exp.period | translate }}</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+                      <i class="fas fa-map-marker-alt"></i>
+                      <span class="whitespace-nowrap">{{ exp.location | translate }}</span>
+                    </div>
+                  </div>
+
+                  <!-- Período (solo móvil) -->
+                  <div class="flex sm:hidden text-xs text-gray-600 dark:text-gray-400">
+                    <span class="whitespace-nowrap">{{ exp.period | translate }}</span>
+                  </div>
+
+                  <!-- Chevron -->
+                  <div class="mt-2 flex items-center justify-center w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-800 transition-transform duration-300"
+                       [class.rotate-180]="isExpanded(exp.id)">
+                    <i class="fas fa-chevron-down text-emerald-600 dark:text-emerald-400 text-xs"></i>
                   </div>
                 </div>
               </div>
+            </button>
 
-              <!-- Período y ubicación a la derecha (desktop/tablet) -->
-              <div class="hidden sm:flex flex-col items-end text-right flex-shrink-0">
-                <div class="flex items-center gap-1.5 text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-1">
-                  <i class="fas fa-calendar"></i>
-                  <span class="whitespace-nowrap">{{ exp.period | translate }}</span>
-                </div>
-                <div class="flex items-center gap-1.5 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                  <i class="fas fa-map-marker-alt"></i>
-                  <span class="whitespace-nowrap">{{ exp.location | translate }}</span>
-                </div>
+            <!-- Contenido colapsable -->
+            <div *ngIf="isExpanded(exp.id)" class="mt-4 collapse-content">
+              <!-- Descripción -->
+              <p class="text-sm sm:text-base text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">{{ exp.description | translate }}</p>
+
+              <!-- Logros -->
+              <div class="mb-4">
+                <h4 class="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white mb-2 sm:mb-3 uppercase tracking-wide">
+                  {{ 'EXPERIENCE.ACHIEVEMENTS_LABEL' | translate }}
+                </h4>
+                <ul class="space-y-2">
+                  <li *ngFor="let achievement of exp.achievements"
+                      class="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+                    <i class="fas fa-chevron-right text-emerald-600 dark:text-emerald-400 mt-1 sm:mt-1.5 text-[8px] sm:text-xs flex-shrink-0"></i>
+                    <span class="leading-relaxed">{{ achievement | translate }}</span>
+                  </li>
+                </ul>
               </div>
 
-              <!-- Período (solo móvil) -->
-              <div class="flex sm:hidden flex-col items-end text-right flex-shrink-0">
-                <div class="text-xs text-gray-600 dark:text-gray-400">
-                  <span class="whitespace-nowrap">{{ exp.period | translate }}</span>
+              <!-- Tecnologías -->
+              <div>
+                <h4 class="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white mb-2 sm:mb-3 uppercase tracking-wide">
+                  {{ 'EXPERIENCE.TECH_LABEL' | translate }}
+                </h4>
+                <div class="flex flex-wrap gap-1.5 sm:gap-2">
+                  <span *ngFor="let tech of exp.technologies"
+                        class="text-emerald-600 dark:text-emerald-400 text-xs sm:text-sm font-medium whitespace-nowrap">
+                    {{ tech }}
+                  </span>
                 </div>
               </div>
             </div>
 
-            <!-- Descripción -->
-            <p class="text-sm sm:text-base text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">{{ exp.description | translate }}</p>
-
-            <!-- Logros -->
-            <div class="mb-4">
-              <h4 class="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white mb-2 sm:mb-3 uppercase tracking-wide">
-                {{ 'EXPERIENCE.ACHIEVEMENTS_LABEL' | translate }}
-              </h4>
-              <ul class="space-y-2">
-                <li *ngFor="let achievement of exp.achievements"
-                    class="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                  <i class="fas fa-chevron-right text-emerald-600 dark:text-emerald-400 mt-1 sm:mt-1.5 text-[8px] sm:text-xs flex-shrink-0"></i>
-                  <span class="leading-relaxed">{{ achievement | translate }}</span>
-                </li>
-              </ul>
-            </div>
-
-            <!-- Tecnologías -->
-            <div>
-              <h4 class="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white mb-2 sm:mb-3 uppercase tracking-wide">
-                {{ 'EXPERIENCE.TECH_LABEL' | translate }}
-              </h4>
-              <div class="flex flex-wrap gap-1.5 sm:gap-2">
-                <span *ngFor="let tech of exp.technologies"
-                      class="text-emerald-600 dark:text-emerald-400 text-xs sm:text-sm font-medium whitespace-nowrap">
-                  {{ tech }}
-                </span>
-              </div>
-            </div>
           </div>
         </div>
       </div>

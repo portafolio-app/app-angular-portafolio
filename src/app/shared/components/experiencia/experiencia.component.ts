@@ -24,6 +24,20 @@ export interface Experience {
 })
 export class ExperienciaComponent {
 
+  expandedIds = new Set<string>();
+
+  toggleExpand(id: string): void {
+    if (this.expandedIds.has(id)) {
+      this.expandedIds.delete(id);
+    } else {
+      this.expandedIds.add(id);
+    }
+  }
+
+  isExpanded(id: string): boolean {
+    return this.expandedIds.has(id);
+  }
+
   experiences: Experience[] = [
     {
       id: '1',
@@ -80,6 +94,25 @@ export class ExperienciaComponent {
         'EXPERIENCE.ITEMS.INNOVASHOP.ACHIEVEMENTS.5'
       ],
       technologies: ['Angular', 'Spring Boot', 'MySQL', 'Docker', 'AWS', 'JWT', 'Spring Security', 'JMeter', 'Mockito']
+    },
+    {
+      id: '4',
+      title: 'EXPERIENCE.ITEMS.RESTO_DEV.TITLE',
+      company: 'EXPERIENCE.ITEMS.RESTO_DEV.COMPANY',
+      period: 'EXPERIENCE.ITEMS.RESTO_DEV.PERIOD',
+      location: 'EXPERIENCE.ITEMS.RESTO_DEV.LOCATION',
+      type: 'freelance',
+      current: false,
+      description: 'EXPERIENCE.ITEMS.RESTO_DEV.DESCRIPTION',
+      achievements: [
+        'EXPERIENCE.ITEMS.RESTO_DEV.ACHIEVEMENTS.0',
+        'EXPERIENCE.ITEMS.RESTO_DEV.ACHIEVEMENTS.1',
+        'EXPERIENCE.ITEMS.RESTO_DEV.ACHIEVEMENTS.2',
+        'EXPERIENCE.ITEMS.RESTO_DEV.ACHIEVEMENTS.3',
+        'EXPERIENCE.ITEMS.RESTO_DEV.ACHIEVEMENTS.4',
+        'EXPERIENCE.ITEMS.RESTO_DEV.ACHIEVEMENTS.5'
+      ],
+      technologies: ['Angular', 'Spring Boot', 'Kafka', 'WebSockets', 'Docker', 'JWT', 'SUNAT', 'Swagger', 'Dokploy', 'MySQL']
     }
   ];
 
