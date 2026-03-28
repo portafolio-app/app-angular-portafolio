@@ -330,20 +330,20 @@
         "TITLE": "CODLIX - Multi-tenant ERP & POS for Restaurants",
         "SHORT_DESC": "SaaS platform with POS, inventory, reservations, cash shifts, and SUNAT electronic invoicing.",
         "DESC": "Codlix is a modular SaaS platform designed for comprehensive restaurant management. It implements Hexagonal Architecture and Domain-Driven Design (DDD) to ensure full decoupling between business logic and infrastructure. The backend was built with Java 21 and Spring Boot, using Spring Security + JWT for secure authentication in multi-tenant environments. The frontend was developed in Angular with Tailwind CSS, optimized for performance at points of sale (POS). It includes key modules: Inventory Control (Kardex), Point of Sale, Reservation Management, Cash Shift Auditing, Electronic Invoicing with SUNAT, and an analytical Dashboard with ApexCharts.",
-        "HIGHLIGHTS": [
-          "Hexagonal Architecture (Ports & Adapters) and DDD for full decoupling between business and infrastructure layers",
-          "Multi-tenant ERP system with Java 21 and Spring Boot, managing multiple restaurants from a single platform",
-          "POS module optimized in Angular + Tailwind CSS for real-time order management and table handling",
-          "Electronic invoicing integrated with SUNAT for automated issuance of electronic tax receipts",
-          "Inventory Control (Kardex) with detailed stock movement tracking and category management",
-          "Cash Shift Auditing with strict turn validations and complete financial traceability",
-          "Analytical Dashboard with ApexCharts for real-time sales and performance monitoring"
-        ],
-        "CHALLENGES": [
-          "Multi-tenancy: secure data isolation for different restaurants within PostgreSQL using per-tenant partitioning",
-          "Decoupling: Hexagonal Architecture allowed changing persistence layers without modifying business logic",
-          "Performance: optimization of POS and Dashboard for fluid operation under high request concurrency"
-        ],
+        "HIGHLIGHTS": {
+          "0": "Hexagonal Architecture (Ports & Adapters) and DDD for full decoupling between business and infrastructure layers",
+          "1": "Multi-tenant ERP system with Java 21 and Spring Boot, managing multiple restaurants from a single platform",
+          "2": "POS module optimized in Angular + Tailwind CSS for real-time order management and table handling",
+          "3": "Electronic invoicing integrated with SUNAT for automated issuance of electronic tax receipts",
+          "4": "Inventory Control (Kardex) with detailed stock movement tracking and category management",
+          "5": "Cash Shift Auditing with strict turn validations and complete financial traceability",
+          "6": "Analytical Dashboard with ApexCharts for real-time sales and performance monitoring"
+        },
+        "CHALLENGES": {
+          "0": "Multi-tenancy: secure data isolation for different restaurants within PostgreSQL using per-tenant partitioning",
+          "1": "Decoupling: Hexagonal Architecture allowed changing persistence layers without modifying business logic",
+          "2": "Performance: optimization of POS and Dashboard for fluid operation under high request concurrency"
+        },
         "LINKS": {
           "LIVE_DEMO": "View Live Demo"
         }
@@ -352,17 +352,17 @@
         "TITLE": "GigaShop - Electronic Products E-commerce Platform",
         "SHORT_DESC": "Secure e-commerce with online payments, real-time management, and admin panel for electronic products.",
         "DESC": "In the electronic products trade, many businesses lack a unified platform that allows them to sell online securely, keep inventory updated, and process payments reliably. This limits their sales and reduces customer trust. GigaShop solves this problem with a full-stack e-commerce solution developed in Angular (with Tailwind CSS) and Spring Boot (with Spring Security and JWT). The system includes a user area with secure authentication, persistent cart, and online payments using Stripe; and an admin panel for product management, inventory, and real-time metrics, backed by MySQL. Its architecture follows Clean Code principles and is deployed with Docker, ensuring scalability and maintainability.",
-        "HIGHLIGHTS": [
-          "Identification and solution of a real e-commerce problem",
-          "Secure authentication with JWT and Spring Security",
-          "Persistent cart with Redis",
-          "Online payments with Stripe",
-          "Admin panel with real-time metrics",
-          "Product and inventory management",
-          "Hexagonal architecture and Clean Code principles",
-          "API documentation with Swagger",
-          "Deployment with Docker"
-        ],
+        "HIGHLIGHTS": {
+          "0": "Identification and solution of a real e-commerce problem",
+          "1": "Secure authentication with JWT and Spring Security",
+          "2": "Persistent cart with Redis",
+          "3": "Online payments with Stripe",
+          "4": "Admin panel with real-time metrics",
+          "5": "Product and inventory management",
+          "6": "Hexagonal architecture and Clean Code principles",
+          "7": "API documentation with Swagger",
+          "8": "Deployment with Docker"
+        },
         "LINKS": {
           "BACKEND_REPO": "Backend Repository"
         }
@@ -371,14 +371,14 @@
         "TITLE": "FinanceTracker - Smart Debt and Loan Management",
         "SHORT_DESC": "Control debts and loans with automatic calculations, reminders, and real-time synchronization.",
         "DESC": "Many people do not keep precise control of their debts and loans, making it difficult to plan payments and calculate the impact of interest and taxes over time. FinanceTracker solves this problem with a web application developed in React + Vite, Tailwind CSS, and Firebase, allowing registration of debts, calculation of installments considering interest rates and Sales Tax, and receiving automatic expiration reminders. It offers secure authentication with Google, storage, and real-time synchronization through Firestore, as well as automatic expense categorization for better financial analysis.",
-        "HIGHLIGHTS": [
-          "Automatic installment calculation with interest and taxes",
-          "Real-time debt registration and visualization",
-          "Customizable push reminders",
-          "Secure authentication with Google",
-          "Multi-device synchronization with Firestore",
-          "Automatic expense categorization"
-        ],
+        "HIGHLIGHTS": {
+          "0": "Automatic installment calculation with interest and taxes",
+          "1": "Real-time debt registration and visualization",
+          "2": "Customizable push reminders",
+          "3": "Secure authentication with Google",
+          "4": "Multi-device synchronization with Firestore",
+          "5": "Automatic expense categorization"
+        },
         "LINKS": {
           "VIEW_CODE": "See Code",
           "LIVE_DEMO": "Live Demo"
@@ -388,17 +388,17 @@
         "TITLE": "Ubícate - Public Transport GPS Tracking",
         "SHORT_DESC": "Android app to see buses in real-time, calculate arrival times and routes to nearby stops.",
         "DESC": "Native Android mobile application developed to improve the experience of public transport users through real-time geolocation. Ubicate allows visualizing bus locations on an interactive map, estimating time and distance to a selected stop, and tracing walking routes to reach the nearest point. The solution integrates Google Maps API for route calculation, Firebase for real-time synchronization and data management, and push notifications for important notices. TRAVEL WITH PEACE OF MIND - this mobile application is optimized to provide the best user experience on Android devices, with three main screens: real-time bus location, time and distance calculation to selected stops, and walking routes to nearby stops.",
-        "HIGHLIGHTS": [
-          "Real-time bus location with high precision",
-          "Calculation of time and distance to selected stops",
-          "Walking routes to nearby stops",
-          "Push notifications for relevant alerts",
-          "Material Design with intuitive interface for Android",
-          "TRAVEL WITH PEACE OF MIND - Optimized mobile app",
-          "Three main screens: real-time map, ETA calculations, and pedestrian routes",
-          "Full integration with Google Maps for navigation",
-          "Notification system for route updates"
-        ],
+        "HIGHLIGHTS": {
+          "0": "Real-time bus location with high precision",
+          "1": "Calculation of time and distance to selected stops",
+          "2": "Walking routes to nearby stops",
+          "3": "Push notifications for relevant alerts",
+          "4": "Material Design for Android",
+          "5": "TRAVEL WITH PEACE OF MIND - Optimized app",
+          "6": "Three main screens: real-time map, ETA calculations, and pedestrian routes",
+          "7": "Full integration with Google Maps for navigation",
+          "8": "Notification system for route updates"
+        },
         "LINKS": {
           "SOURCE_CODE": "Source Code",
           "FUNC_DEMO": "Functional Demo"
@@ -414,14 +414,14 @@
         "TITLE": "ProDent - Medical Schedule and Appointment Management",
         "SHORT_DESC": "Android app for medical appointment management with history, ratings, and automatic reminders.",
         "DESC": "Native Android mobile app to facilitate the management of medical appointments for both patients and doctors. Solves the coordination and follow-up problem of appointments, allowing patients to register, view, and manage their reservations, consult their medical history, rate doctors, and leave comments. Doctors can register their available schedules, confirm or reject appointments, and view their schedule on an interactive calendar. Includes push notifications to remind of upcoming appointments and is fully synchronized with Firebase for authentication and cloud data storage.",
-        "HIGHLIGHTS": [
-          "MVVM architecture with Clean Architecture",
-          "Registration and management of medical appointments",
-          "Interactive calendar with doctor availability",
-          "Push notifications for reminders",
-          "Medical history with details and attached documents",
-          "Rating and comments for doctors"
-        ],
+        "HIGHLIGHTS": {
+          "0": "MVVM architecture with Clean Architecture",
+          "1": "Registration and management of medical appointments",
+          "2": "Interactive calendar with doctor availability",
+          "3": "Push notifications for reminders",
+          "4": "Medical history with details and attached documents",
+          "5": "Rating and comments for doctors"
+        },
         "LINKS": {
           "MAIN_REPO": "Main Repository"
         }
@@ -430,16 +430,16 @@
         "TITLE": "SecureAuth - Enterprise MFA System",
         "SHORT_DESC": "MFA authentication system with SSO, auditing, and advanced protection.",
         "DESC": "Authentication system that implements Multi-Factor Authentication (MFA), Single Sign-On (SSO), and granular permission management. Developed with Spring Security, it includes protection against modern attacks, full auditing, and integration with corporate identity services.",
-        "HIGHLIGHTS": [
-          "MFA with TOTP, SMS, and biometrics",
-          "Single Sign-On (SSO) with SAML/OAuth2",
-          "Rate limiting and DDoS protection",
-          "Full auditing with immutable logs",
-          "Granular RBAC role management",
-          "Anomaly detection with ML",
-          "GDPR and SOC2 compliance",
-          "APIs for enterprise integration"
-        ],
+        "HIGHLIGHTS": {
+          "0": "MFA with TOTP, SMS, and biometrics",
+          "1": "Single Sign-On (SSO) with SAML/OAuth2",
+          "2": "Rate limiting and DDoS protection",
+          "3": "Full auditing with immutable logs",
+          "4": "Granular RBAC role management",
+          "5": "Anomaly detection with ML",
+          "6": "GDPR and SOC2 compliance",
+          "7": "APIs for enterprise integration"
+        },
         "LINKS": {
           "BACKEND_SEC": "Backend Security",
           "FRONTEND_ANG": "Frontend Angular",
@@ -450,16 +450,16 @@
         "TITLE": "RoboControl - Smart IoT System",
         "SHORT_DESC": "IoT platform with smart robot, advanced sensors, and Android app with Jetpack Compose.",
         "DESC": "Complete IoT platform combining custom Arduino hardware with an advanced Android application. The robot includes smart sensors, programmable actuators, basic computer vision, and dual connectivity (WiFi/Bluetooth). The app uses Jetpack Compose with reactive architecture for real-time control and routine programming.",
-        "HIGHLIGHTS": [
-          "Custom firmware with FreeRTOS for multitasking",
-          "Sensors: ultrasonic, gyroscope, basic camera",
-          "Dual control: WiFi (TCP) and Bluetooth (BLE)",
-          "App with MVI architecture + Coroutines",
-          "Reactive UI with Compose animations",
-          "Automated routine programming",
-          "Real-time telemetry with graphics",
-          "OTA updates for remote firmware"
-        ],
+        "HIGHLIGHTS": {
+          "0": "Custom firmware with FreeRTOS for multitasking",
+          "1": "Sensors: ultrasonic, gyroscope, basic camera",
+          "2": "Dual control: WiFi (TCP) and Bluetooth (BLE)",
+          "3": "App with MVI architecture + Coroutines",
+          "4": "Reactive UI with Compose animations",
+          "5": "Automated routine programming",
+          "6": "Real-time telemetry with graphics",
+          "7": "OTA updates for remote firmware"
+        },
         "LINKS": {
           "ANDROID_APP": "Android App"
         }
@@ -468,15 +468,15 @@
         "TITLE": "UBICATE - Transport Management and Real-Time Geolocation",
         "SHORT_DESC": "Angular + Firebase platform for bus tracking and transport management.",
         "DESC": "UBICATE is a platform that allows users and drivers to visualize bus locations in real-time, consult ETA and routes on interactive maps. The backend implements Spring Security with JWT for authentication/roles and persists operational data in MySQL (drivers, buses, routes, companies). Locations are published and consumed in real-time from Firebase/Firestore for low latency in tracking. The solution integrates Google Maps for route and geofence tracing, and push notifications for critical alerts.",
-        "HIGHLIGHTS": [
-          "Spring Boot backend with Spring Security (JWT, roles, and permissions)",
-          "Operational persistence in MySQL (drivers, buses, routes, companies)",
-          "Real-time bus tracking with Firebase/Firestore",
-          "Enterprise panel for driver, route, and fleet management",
-          "Interactive maps with Google Maps and geofencing",
-          "Push notifications for events and user alerts",
-          "Responsive and accessible Angular frontend"
-        ],
+        "HIGHLIGHTS": {
+          "0": "Spring Boot backend with Spring Security (JWT, roles, and permissions)",
+          "1": "Operational persistence in MySQL (drivers, buses, routes, companies)",
+          "2": "Real-time bus tracking with Firebase/Firestore",
+          "3": "Enterprise panel for driver, route, and fleet management",
+          "4": "Interactive maps with Google Maps and geofencing",
+          "5": "Push notifications for events and user alerts",
+          "6": "Responsive and accessible Angular frontend"
+        },
         "LINKS": {
           "VIEW_DEMO": "View Demo"
         },
@@ -490,17 +490,17 @@
         "TITLE": "Polule Ice - Sales and Inventory System",
         "SHORT_DESC": "Comprehensive sales and inventory system with JWT authentication, automatic reports, and role management.",
         "DESC": "Comprehensive sales and inventory management system developed as a freelance project. The application implements secure authentication with JWT and Spring Security, allowing the administration of two different roles: Administrator and Seller. The system offers a complete administrative panel for real-time inventory management, sales control, and generation of daily, weekly, and monthly reports. Developed with Angular on the frontend and Spring Boot on the backend, it uses MySQL as a database to guarantee the persistence and reliability of information. The architecture allows business scaling with features such as stock control, low inventory alerts, transaction history, and sales analysis.",
-        "HIGHLIGHTS": [
-          "Secure authentication with JWT and Spring Security",
-          "Role management: Administrator and Seller",
-          "Real-time inventory system",
-          "Daily, weekly, and monthly reports",
-          "Sales and transaction control",
-          "Automatic low stock alerts",
-          "Intuitive admin panel",
-          "Full operations history",
-          "Sales analysis with charts"
-        ],
+        "HIGHLIGHTS": {
+          "0": "Secure authentication with JWT and Spring Security",
+          "1": "Role management: Administrator and Seller",
+          "2": "Real-time inventory system",
+          "3": "Daily, weekly, and monthly reports",
+          "4": "Sales and transaction control",
+          "5": "Automatic low stock alerts",
+          "6": "Intuitive admin panel",
+          "7": "Full operations history",
+          "8": "Sales analysis with charts"
+        },
         "LINKS": {
           "VIEW_DEMO": "View Demo"
         },
@@ -514,15 +514,15 @@
         "TITLE": "MsgService - Event-Driven Notifier with RabbitMQ",
         "SHORT_DESC": "Event-oriented microservice for user management and automated notifications.",
         "DESC": "Robust backend system developed with Java and Spring Boot implementing an Event-Driven Architecture (EDA). It utilizes RabbitMQ as a message broker to decouple processes and manage notifications asynchronously. The solution includes a REST API for user administration, data validation, persistence with JPA/H2, and an integrated email system using Spring Mail. The entire environment is containerized with Docker and orchestrated with Docker Compose.",
-        "HIGHLIGHTS": [
-          "Event-Driven Architecture with RabbitMQ",
-          "Asynchronous email notification management",
-          "Robust REST API with data validation (Jakarta)",
-          "Full containerization with Docker and Docker Compose",
-          "Data persistence with Spring Data JPA",
-          "Integrated health-check system",
-          "Production-ready configuration with Maven profiles"
-        ],
+        "HIGHLIGHTS": {
+          "0": "Event-Driven Architecture with RabbitMQ",
+          "1": "Asynchronous email notification management",
+          "2": "Robust REST API with data validation (Jakarta)",
+          "3": "Full containerization with Docker and Docker Compose",
+          "4": "Data persistence with Spring Data JPA",
+          "5": "Integrated health-check system",
+          "6": "Production-ready configuration with Maven profiles"
+        },
         "LINKS": {
           "REPO": "GitHub Repository"
         }

@@ -66,6 +66,32 @@
     </div>
   </div>
 
+  <!-- Mobile Controls -->
+  <div class="mobile-controls" *ngIf="isMobile">
+    <div class="d-pad">
+      <button class="ctrl-btn up" (touchstart)="startMoving('up'); $event.preventDefault()" (touchend)="stopMoving('up'); $event.preventDefault()">
+        <i class="fas fa-chevron-up"></i>
+      </button>
+      <div class="mid-row">
+        <button class="ctrl-btn left" (touchstart)="startMoving('left'); $event.preventDefault()" (touchend)="stopMoving('left'); $event.preventDefault()">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="ctrl-btn down" (touchstart)="startMoving('down'); $event.preventDefault()" (touchend)="stopMoving('down'); $event.preventDefault()">
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <button class="ctrl-btn right" (touchstart)="startMoving('right'); $event.preventDefault()" (touchend)="stopMoving('right'); $event.preventDefault()">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div class="action-buttons">
+      <button class="fire-btn" (touchstart)="startFiring(); $event.preventDefault()" (touchend)="stopFiring(); $event.preventDefault()">
+        <i class="fas fa-fire"></i>
+      </button>
+    </div>
+  </div>
+
   <!-- Global Glitch Overlay -->
   <div id="arcade-flash" class="glitch-flash"></div>
 

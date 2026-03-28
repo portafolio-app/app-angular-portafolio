@@ -335,3 +335,121 @@
   color: #fff;
   box-shadow: 0 0 40px #ff0055;
 }
+
+/* 📱 Mobile Controls */
+.mobile-controls {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10005;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 1.5rem;
+}
+
+.d-pad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  pointer-events: auto;
+  margin-bottom: 20px;
+}
+
+.mid-row {
+  display: flex;
+  gap: 10px;
+}
+
+.action-buttons {
+  pointer-events: auto;
+  margin-bottom: 20px;
+  margin-right: 10px;
+}
+
+.ctrl-btn, .fire-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 255, 136, 0.3);
+  background: rgba(10, 10, 10, 0.4);
+  color: #00ff88;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.1);
+  transition: transform 0.1s ease;
+  user-select: none;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ctrl-btn:active, .fire-btn:active {
+  background: rgba(0, 255, 136, 0.15);
+  transform: scale(0.92);
+  border-color: #00ff88;
+}
+
+.fire-btn {
+  width: 85px;
+  height: 85px;
+  border-color: rgba(255, 0, 85, 0.4);
+  color: #ff0055;
+  font-size: 2rem;
+}
+
+.fire-btn:active {
+  background: rgba(255, 0, 85, 0.2);
+  border-color: #ff0055;
+  box-shadow: 0 0 25px rgba(255, 0, 85, 0.4);
+}
+
+/* Responsiveness */
+@media (max-width: 1024px) {
+  .game-controls {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-bar {
+    bottom: auto;
+    top: 1rem;
+    right: 1rem;
+    left: 1rem;
+    right: auto;
+    width: auto;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.3rem 0.8rem;
+    transform: none;
+  }
+  
+  .exit-btn {
+    top: 4.5rem;
+    bottom: auto;
+    left: 1rem;
+    padding: 0.4rem 1rem;
+    font-size: 0.7rem;
+  }
+
+  .terminal-box {
+    padding: 2rem;
+    width: 90%;
+  }
+
+  .glitch-title {
+    font-size: 2.5rem;
+  }
+
+  .life-icon {
+    font-size: 0.9rem;
+  }
+
+  .score-display .value {
+    font-size: 1rem;
+  }
+}

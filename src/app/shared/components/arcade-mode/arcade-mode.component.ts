@@ -71,6 +71,8 @@ export class ArcadeModeComponent implements OnInit, OnDestroy {
   score = 0;
   weaponLevel = 1; // 1: Single, 2: Double, 3: Trident
   isGameOver = false;
+  isMobile = false;
+  private touchStates: { [key: string]: boolean } = {};
   private items: { el: HTMLElement, x: number, y: number, type: string }[] = [];
   private speedMult = 1.0;
   private speedTimer: any = null;
@@ -97,6 +99,7 @@ export class ArcadeModeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
     this.injectGlobalStyles();
     this.isActive$.subscribe(active => {
       if (active) {
@@ -128,6 +131,30 @@ export class ArcadeModeComponent implements OnInit, OnDestroy {
     document.removeEventListener('keyup', this.handleKeyUp);
     document.removeEventListener('mousemove', this.handleMouseMove);
   }
+
+  // --- Mobile Controls ---
+  startMoving(dir: string): void {
+    this.touchStates[dir] = true;
+    if (this.audioCtx && this.audioCtx.state === 'suspended') {
+      this.audioCtx.resume();
+    }
+  }
+
+  stopMoving(dir: string): void {
+    this.touchStates[dir] = false;
+  }
+
+  startFiring(): void {
+    this.touchStates['fire'] = true;
+    if (this.audioCtx && this.audioCtx.state === 'suspended') {
+      this.audioCtx.resume();
+    }
+  }
+
+  stopFiring(): void {
+    this.touchStates['fire'] = false;
+  }
+  // -------------------------
 
   private handleMouseMove = (e: MouseEvent) => {
     if (this.isGameOver) return;
@@ -195,11 +222,15 @@ export class ArcadeModeComponent implements OnInit, OnDestroy {
     }
 
     // 1. Inputs
-    if (this.keys['ArrowLeft'] || this.keys['KeyA']) this.shipAngle -= 0.04; // Very slow rotation
-    if (this.keys['ArrowRight'] || this.keys['KeyD']) this.shipAngle += 0.04;
+    if (this.keys['ArrowLeft'] || this.keys['KeyA'] || this.touchStates['left']) this.shipAngle -= 0.04;
+    if (this.keys['ArrowRight'] || this.keys['KeyD'] || this.touchStates['right']) this.shipAngle += 0.04;
 
-    const propelling = this.keys['ArrowUp'] || this.keys['KeyW'];
-    const reversing = this.keys['ArrowDown'] || this.keys['KeyS'];
+    const propelling = this.keys['ArrowUp'] || this.keys['KeyW'] || this.touchStates['up'];
+    const reversing = this.keys['ArrowDown'] || this.keys['KeyS'] || this.touchStates['down'];
+    
+    if (this.touchStates['fire']) {
+      this.fire();
+    }
     
     // 🔄 Visual Flip
     let visualAngleOffset = 0;

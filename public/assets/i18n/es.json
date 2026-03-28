@@ -330,20 +330,20 @@
         "TITLE": "CODLIX - ERP & POS Multi-tenant para Restaurantes",
         "SHORT_DESC": "Plataforma SaaS con POS, inventario, reservas, arqueo de caja y facturación electrónica SUNAT.",
         "DESC": "Codlix es una plataforma SaaS modular diseñada para la gestión integral de restaurantes. Implementa Arquitectura Hexagonal y Domain-Driven Design (DDD) para garantizar el desacoplamiento total entre la lógica de negocio y la infraestructura. El backend fue construido con Java 21 y Spring Boot, usando Spring Security + JWT para autenticación segura en entornos multi-tenant. El frontend fue desarrollado en Angular con Tailwind CSS, optimizado para el rendimiento en puntos de venta (POS). Incluye módulos clave como Control de Inventarios (Kardex), Punto de Venta, Gestión de Reservas, Arqueo de Caja, Facturación Electrónica con SUNAT, y un Dashboard analítico con ApexCharts.",
-        "HIGHLIGHTS": [
-          "Arquitectura Hexagonal (Ports & Adapters) y DDD para desacoplamiento total entre negocio e infraestructura",
-          "Sistema ERP multi-tenant con Java 21 y Spring Boot, gestionando múltiples restaurantes desde una sola plataforma",
-          "Módulo POS optimizado en Angular + Tailwind CSS para toma de pedidos y gestión de mesas en tiempo real",
-          "Facturación electrónica integrada con SUNAT para emisión automatizada de comprobantes electrónicos",
-          "Control de Inventarios (Kardex) con seguimiento detallado de movimientos y gestión de categorías",
-          "Arqueo de Caja con validaciones estrictas de turnos y trazabilidad financiera completa",
-          "Dashboard analítico con ApexCharts para monitoreo de ventas y rendimiento en tiempo real"
-        ],
-        "CHALLENGES": [
-          "Multi-tenancy: separación segura de datos de diferentes restaurantes en PostgreSQL con aislamiento por tenant",
-          "Desacoplamiento: Arquitectura Hexagonal permitió cambiar capas de persistencia sin tocar la lógica de negocio",
-          "Performance: optimización del POS y Dashboard para fluidez bajo alta concurrencia de peticiones"
-        ],
+        "HIGHLIGHTS": {
+          "0": "Arquitectura Hexagonal (Ports & Adapters) y DDD para desacoplamiento total entre negocio e infraestructura",
+          "1": "Sistema ERP multi-tenant con Java 21 y Spring Boot, gestionando múltiples restaurantes desde una sola plataforma",
+          "2": "Módulo POS optimizado en Angular + Tailwind CSS para toma de pedidos y gestión de mesas en tiempo real",
+          "3": "Facturación electrónica integrada con SUNAT para emisión automatizada de comprobantes electrónicos",
+          "4": "Control de Inventarios (Kardex) con seguimiento detallado de movimientos y gestión de categorías",
+          "5": "Arqueo de Caja con validaciones estrictas de turnos y trazabilidad financiera completa",
+          "6": "Dashboard analítico con ApexCharts para monitoreo de ventas y rendimiento en tiempo real"
+        },
+        "CHALLENGES": {
+          "0": "Multi-tenancy: separación segura de datos de diferentes restaurantes en PostgreSQL con aislamiento por tenant",
+          "1": "Desacoplamiento: Arquitectura Hexagonal permitió cambiar capas de persistencia sin tocar la lógica de negocio",
+          "2": "Performance: optimización del POS y Dashboard para fluidez bajo alta concurrencia de peticiones"
+        },
         "LINKS": {
           "LIVE_DEMO": "Ver Demo en Vivo"
         }
@@ -352,17 +352,17 @@
         "TITLE": "GigaShop - Plataforma E-commerce de productos electrónicos",
         "SHORT_DESC": "E-commerce seguro con pagos online, gestión en tiempo real y panel administrativo para productos electrónicos.",
         "DESC": "En el comercio de productos electrónicos, muchos negocios carecen de una plataforma unificada que les permita vender online con seguridad, mantener inventarios actualizados y procesar pagos de forma confiable. Esto limita sus ventas y reduce la confianza del cliente. GigaShop resuelve este problema con una solución e-commerce full-stack desarrollada en Angular (con Tailwind CSS) y Spring Boot (con Spring Security y JWT). El sistema incluye un área de usuario con autenticación segura, carrito persistente y pagos online mediante Stripe; y un panel administrativo para la gestión de productos, inventario y métricas en tiempo real, respaldado por MySQL. Su arquitectura sigue principios de Clean Code y está desplegado con Docker, asegurando escalabilidad y mantenibilidad.",
-        "HIGHLIGHTS": [
-          "Identificación y solución de un problema real en e-commerce",
-          "Autenticación segura con JWT y Spring Security",
-          "Carrito persistente con Redis",
-          "Pagos online con Stripe",
-          "Panel administrativo con métricas en tiempo real",
-          "Gestión de productos e inventario",
-          "Arquitectura hexagonal y principios Clean Code",
-          "Documentación API con Swagger",
-          "Despliegue con Docker"
-        ],
+        "HIGHLIGHTS": {
+          "0": "Identificación y solución de un problema real en e-commerce",
+          "1": "Autenticación segura con JWT y Spring Security",
+          "2": "Carrito persistente con Redis",
+          "3": "Pagos online con Stripe",
+          "4": "Panel administrativo con métricas en tiempo real",
+          "5": "Gestión de productos e inventario",
+          "6": "Arquitectura hexagonal y principios Clean Code",
+          "7": "Documentación API con Swagger",
+          "8": "Despliegue con Docker"
+        },
         "LINKS": {
           "BACKEND_REPO": "Repositorio Backend"
         }
@@ -371,14 +371,14 @@
         "TITLE": "FinanceTracker - Gestión Inteligente de Deudas y Préstamos",
         "SHORT_DESC": "Controla deudas y préstamos con cálculos automáticos, recordatorios y sincronización en tiempo real.",
         "DESC": "Muchas personas no llevan un control preciso de sus deudas y préstamos, lo que dificulta planificar pagos y calcular el impacto de intereses e impuestos a lo largo del tiempo. FinanceTracker resuelve este problema con una aplicación web desarrollada en React + Vite, Tailwind CSS y Firebase, que permite registrar deudas, calcular cuotas considerando tasas de interés e IGV, y recibir recordatorios automáticos de vencimientos. Ofrece autenticación segura con Google, almacenamiento y sincronización en tiempo real mediante Firestore, así como categorización automática de gastos para un mejor análisis financiero.",
-        "HIGHLIGHTS": [
-          "Cálculo automático de cuotas con interés e impuestos",
-          "Registro y visualización de deudas en tiempo real",
-          "Recordatorios push personalizables",
-          "Autenticación segura con Google",
-          "Sincronización multi-dispositivo con Firestore",
-          "Categorización automática de gastos"
-        ],
+        "HIGHLIGHTS": {
+          "0": "Cálculo automático de cuotas con interés e impuestos",
+          "1": "Registro y visualización de deudas en tiempo real",
+          "2": "Recordatorios push personalizables",
+          "3": "Autenticación segura con Google",
+          "4": "Sincronización multi-dispositivo con Firestore",
+          "5": "Categorización automática de gastos"
+        },
         "LINKS": {
           "VIEW_CODE": "Ver Código",
           "LIVE_DEMO": "Demo en Vivo"
@@ -388,17 +388,17 @@
         "TITLE": "Ubícate - Tracking GPS de Transporte Público",
         "SHORT_DESC": "App Android para ver buses en tiempo real, calcular tiempos de llegada y rutas hacia paraderos cercanos.",
         "DESC": "Aplicación móvil nativa Android desarrollada para mejorar la experiencia de los usuarios del transporte público mediante geolocalización en tiempo real. Ubicate permite visualizar la ubicación de los buses en un mapa interactivo, estimar el tiempo y la distancia hacia una parada seleccionada, y trazar rutas a pie para llegar al punto más cercano. La solución integra Google Maps API para el cálculo de rutas, Firebase para la sincronización en tiempo real y gestión de datos, y notificaciones push para avisos importantes. VIAJA CON TRANQUILIDAD - esta aplicación móvil está optimizada para brindar la mejor experiencia de usuario en dispositivos Android, con tres pantallas principales: ubicación de buses en tiempo real, cálculo de tiempo y distancia hacia paradas seleccionadas, y rutas a pie hacia paraderos cercanos.",
-        "HIGHLIGHTS": [
-          "Ubicación de buses en tiempo real con alta precisión",
-          "Cálculo de tiempo y distancia hacia paradas seleccionadas",
-          "Rutas a pie hacia paraderos cercanos",
-          "Notificaciones push para avisos relevantes",
-          "Material Design con interfaz intuitiva para Android",
-          "VIAJA CON TRANQUILIDAD - App móvil optimizada",
-          "Tres pantallas principales: mapa en tiempo real, cálculos de ETA y rutas peatonales",
-          "Integración completa con Google Maps para navegación",
-          "Sistema de notificaciones para actualizaciones de rutas"
-        ],
+        "HIGHLIGHTS": {
+          "0": "Ubicación de buses en tiempo real con alta precisión",
+          "1": "Cálculo de tiempo y distancia hacia paradas seleccionadas",
+          "2": "Rutas a pie hacia paraderos cercanos",
+          "3": "Notificaciones push para avisos relevantes",
+          "4": "Material Design con interfaz intuitiva para Android",
+          "5": "VIAJA CON TRANQUILIDAD - App móvil optimizada",
+          "6": "Tres pantallas principales: mapa en tiempo real, cálculos de ETA y rutas peatonales",
+          "7": "Integración completa con Google Maps para navegación",
+          "8": "Sistema de notificaciones para actualizaciones de rutas"
+        },
         "LINKS": {
           "SOURCE_CODE": "Código Fuente",
           "FUNC_DEMO": "Demo Funcional"
@@ -414,14 +414,14 @@
         "TITLE": "ProDent - Agenda Médica y Gestión de Citas",
         "SHORT_DESC": "App Android para gestión de citas médicas con historial, calificaciones y recordatorios automáticos.",
         "DESC": "Aplicación móvil nativa Android para facilitar la gestión de citas médicas tanto para pacientes como doctores. Resuelve el problema de coordinación y seguimiento de citas, permitiendo a los pacientes registrar, visualizar y administrar sus reservas, consultar su historial médico, calificar doctores y dejar comentarios. Los doctores pueden registrar sus horarios disponibles, confirmar o rechazar citas y visualizar su agenda en un calendario interactivo. Incluye notificaciones push para recordar citas próximas y está totalmente sincronizada con Firebase para autenticación y almacenamiento de datos en la nube.",
-        "HIGHLIGHTS": [
-          "Arquitectura MVVM con Clean Architecture",
-          "Registro y gestión de citas médicas",
-          "Calendario interactivo con disponibilidad de doctores",
-          "Notificaciones push para recordatorios",
-          "Historial médico con detalles y documentos adjuntos",
-          "Calificación y comentarios para doctores"
-        ],
+        "HIGHLIGHTS": {
+          "0": "Arquitectura MVVM con Clean Architecture",
+          "1": "Registro y gestión de citas médicas",
+          "2": "Calendario interactivo con disponibilidad de doctores",
+          "3": "Notificaciones push para recordatorios",
+          "4": "Historial médico con detalles y documentos adjuntos",
+          "5": "Calificación y comentarios para doctores"
+        },
         "LINKS": {
           "MAIN_REPO": "Repositorio Principal"
         }
@@ -430,16 +430,16 @@
         "TITLE": "SecureAuth - Sistema MFA Enterprise",
         "SHORT_DESC": "Sistema de autenticación MFA con SSO, auditoría y protección avanzada.",
         "DESC": "Sistema de autenticación que implementa múltiples factores de autenticación (MFA), Single Sign-On (SSO), y gestión granular de permisos. Desarrollado con Spring Security, incluye protección contra ataques modernos, auditoría completa, y integración con servicios de identidad corporativos.",
-        "HIGHLIGHTS": [
-          "MFA con TOTP, SMS y biometría",
-          "Single Sign-On (SSO) con SAML/OAuth2",
-          "Rate limiting y protección DDoS",
-          "Auditoría completa con logs inmutables",
-          "Gestión de roles RBAC granular",
-          "Detección de anomalías con ML",
-          "Cumplimiento GDPR y SOC2",
-          "APIs para integración empresarial"
-        ],
+        "HIGHLIGHTS": {
+          "0": "MFA con TOTP, SMS y biometría",
+          "1": "Single Sign-On (SSO) con SAML/OAuth2",
+          "2": "Rate limiting y protección DDoS",
+          "3": "Auditoría completa con logs inmutables",
+          "4": "Gestión de roles RBAC granular",
+          "5": "Detección de anomalías con ML",
+          "6": "Cumplimiento GDPR y SOC2",
+          "7": "APIs para integración empresarial"
+        },
         "LINKS": {
           "BACKEND_SEC": "Backend Security",
           "FRONTEND_ANG": "Frontend Angular",
@@ -450,16 +450,16 @@
         "TITLE": "RoboControl - Sistema IoT Inteligente",
         "SHORT_DESC": "Plataforma IoT con robot inteligente, sensores avanzados y app Android con Jetpack Compose.",
         "DESC": "Plataforma IoT completa que combina hardware Arduino personalizado con aplicación Android avanzada. El robot incluye sensores inteligentes, actuadores programables, visión artificial básica, y conectividad dual (WiFi/Bluetooth). La app utiliza Jetpack Compose con arquitectura reactiva para control en tiempo real y programación de rutinas.",
-        "HIGHLIGHTS": [
-          "Firmware custom con FreeRTOS para multitasking",
-          "Sensores: ultrasónico, giroscopio, cámara básica",
-          "Control dual: WiFi (TCP) y Bluetooth (BLE)",
-          "App con arquitectura MVI + Coroutines",
-          "UI reactiva con animaciones Compose",
-          "Programación de rutinas automatizadas",
-          "Telemetría en tiempo real con gráficos",
-          "OTA updates para firmware remoto"
-        ],
+        "HIGHLIGHTS": {
+          "0": "Firmware custom con FreeRTOS para multitasking",
+          "1": "Sensores: ultrasónico, giroscopio, cámara básica",
+          "2": "Control dual: WiFi (TCP) y Bluetooth (BLE)",
+          "3": "App con arquitectura MVI + Coroutines",
+          "4": "UI reactiva con animaciones Compose",
+          "5": "Programación de rutinas automatizadas",
+          "6": "Telemetría en tiempo real con gráficos",
+          "7": "OTA updates para firmware remoto"
+        },
         "LINKS": {
           "ANDROID_APP": "App Android"
         }
@@ -468,15 +468,15 @@
         "TITLE": "UBICATE - Gestión de Transporte y Geolocalización en Tiempo Real",
         "SHORT_DESC": "Plataforma Angular + Firebase para tracking de buses y gestión de transporte.",
         "DESC": "UBICATE es una plataforma que permite a usuarios y conductores visualizar en tiempo real la ubicación de los buses, consultar ETA y rutas sobre mapas interactivos. El backend implementa Spring Security con JWT para autenticación/roles y persiste datos operativos en MySQL (conductores, buses, rutas, empresas). Las ubicaciones se publican y consumen en tiempo real desde Firebase/Firestore para baja latencia en el tracking. La solución integra Google Maps para trazado de rutas y geocercas, y notificaciones push para avisos críticos.",
-        "HIGHLIGHTS": [
-          "Backend Spring Boot con Spring Security (JWT, roles y permisos)",
-          "Persistencia operativa en MySQL (conductores, buses, rutas, empresas)",
-          "Seguimiento en tiempo real de buses con Firebase/Firestore",
-          "Panel empresarial para gestión de conductores, rutas y flota",
-          "Mapas interactivos con Google Maps y geocercas",
-          "Notificaciones push para eventos y avisos a usuarios",
-          "Frontend Angular responsivo y accesible"
-        ],
+        "HIGHLIGHTS": {
+          "0": "Backend Spring Boot con Spring Security (JWT, roles y permisos)",
+          "1": "Persistencia operativa en MySQL (conductores, buses, rutas, empresas)",
+          "2": "Seguimiento en tiempo real de buses con Firebase/Firestore",
+          "3": "Panel empresarial para gestión de conductores, rutas y flota",
+          "4": "Mapas interactivos con Google Maps y geocercas",
+          "5": "Notificaciones push para eventos y avisos a usuarios",
+          "6": "Frontend Angular responsivo y accesible"
+        },
         "LINKS": {
           "VIEW_DEMO": "Ver Demo"
         },
@@ -490,17 +490,17 @@
         "TITLE": "Polule Ice - Sistema de Ventas e Inventario",
         "SHORT_DESC": "Sistema completo de ventas e inventario con autenticación JWT, reportes automáticos y gestión de roles.",
         "DESC": "Sistema integral de gestión de ventas e inventario desarrollado como proyecto freelance. La aplicación implementa autenticación segura con JWT y Spring Security, permitiendo la administración de dos roles distintos: Administrador y Vendedor. El sistema ofrece un panel administrativo completo para la gestión de inventario en tiempo real, control de ventas, y generación de reportes diarios, semanales y mensuales. Desarrollado con Angular en el frontend y Spring Boot en el backend, utiliza MySQL como base de datos para garantizar la persistencia y confiabilidad de la información. La arquitectura permite escalar el negocio con funcionalidades como control de stock, alertas de inventario bajo, historial de transacciones y análisis de ventas.",
-        "HIGHLIGHTS": [
-          "Autenticación segura con JWT y Spring Security",
-          "Gestión de roles: Administrador y Vendedor",
-          "Sistema de inventario en tiempo real",
-          "Reportes diarios, semanales y mensuales",
-          "Control de ventas y transacciones",
-          "Alertas de stock bajo automáticas",
-          "Panel administrativo intuitivo",
-          "Historial completo de operaciones",
-          "Análisis de ventas con gráficos"
-        ],
+        "HIGHLIGHTS": {
+          "0": "Autenticación segura con JWT y Spring Security",
+          "1": "Gestión de roles: Administrador y Vendedor",
+          "2": "Sistema de inventario en tiempo real",
+          "3": "Reportes diarios, semanales y mensuales",
+          "4": "Control de ventas y transacciones",
+          "5": "Alertas de stock bajo automáticas",
+          "6": "Panel administrativo intuitivo",
+          "7": "Historial completo de operaciones",
+          "8": "Análisis de ventas con gráficos"
+        },
         "LINKS": {
           "VIEW_DEMO": "Ver Demo"
         },
@@ -514,15 +514,15 @@
         "TITLE": "MsgService - Notificador de Eventos con RabbitMQ",
         "SHORT_DESC": "Microservicio orientado a eventos para gestión de usuarios y notificaciones automáticas.",
         "DESC": "Backend robusto con Java y Spring Boot que implementa una arquitectura orientada a eventos (EDA). Utiliza RabbitMQ como broker para desacoplar procesos y gestionar notificaciones asíncronas. Incluye API REST, validación de datos, JPA/H2 e integración de correos con Spring Mail, todo contenedorizado con Docker.",
-        "HIGHLIGHTS": [
-          "Arquitectura orientada a eventos con RabbitMQ",
-          "Gestión asíncrona de notificaciones por email",
-          "API REST robusta con validación de datos (Jakarta)",
-          "Contenedorización completa con Docker y Docker Compose",
-          "Persistencia de datos con Spring Data JPA",
-          "Sistema de salud (Health-check) integrado",
-          "Configuración lista para producción con perfiles de Maven"
-        ],
+        "HIGHLIGHTS": {
+          "0": "Arquitectura orientada a eventos con RabbitMQ",
+          "1": "Gestión asíncrona de notificaciones por email",
+          "2": "API REST robusta con validación de datos (Jakarta)",
+          "3": "Contenedorización completa con Docker y Docker Compose",
+          "4": "Persistencia de datos con Spring Data JPA",
+          "5": "Sistema de salud (Health-check) integrado",
+          "6": "Configuración lista para producción con perfiles de Maven"
+        },
         "LINKS": {
           "REPO": "Repositorio GitHub"
         }
