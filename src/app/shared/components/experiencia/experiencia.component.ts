@@ -24,20 +24,6 @@ export interface Experience {
 })
 export class ExperienciaComponent {
 
-  expandedIds = new Set<string>();
-
-  toggleExpand(id: string): void {
-    if (this.expandedIds.has(id)) {
-      this.expandedIds.delete(id);
-    } else {
-      this.expandedIds.add(id);
-    }
-  }
-
-  isExpanded(id: string): boolean {
-    return this.expandedIds.has(id);
-  }
-
   experiences: Experience[] = [
     {
       id: '1',

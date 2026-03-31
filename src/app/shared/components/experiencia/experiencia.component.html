@@ -23,17 +23,13 @@
           <!-- Contenido -->
           <div class="pb-6 sm:pb-8 border-b border-gray-200 dark:border-gray-700 last:border-0">
 
-            <!-- Header clicable -->
-            <button
-              (click)="toggleExpand(exp.id)"
-              class="w-full text-left focus:outline-none group/btn"
-              [attr.aria-expanded]="isExpanded(exp.id)"
-            >
+            <!-- Header (Always Open) -->
+            <div class="w-full text-left">
               <div class="flex items-start justify-between gap-3">
                 <div class="flex items-start gap-2 sm:gap-3 flex-1 min-w-0">
                   <i [ngClass]="[getTypeIcon(exp.type)]" class="text-lg sm:text-xl md:text-2xl text-emerald-600 dark:text-emerald-400 mt-1 flex-shrink-0"></i>
                   <div class="flex-1 min-w-0">
-                    <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-1 break-words group-hover/btn:text-emerald-600 dark:group-hover/btn:text-emerald-400 transition-colors">
+                    <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-1 break-words">
                       {{ exp.title | translate }}
                     </h3>
                     <p class="text-base sm:text-lg text-emerald-600 dark:text-emerald-400 font-semibold mb-2 break-words">{{ exp.company | translate }}</p>
@@ -46,7 +42,7 @@
                   </div>
                 </div>
 
-                <!-- Derecha: período + ubicación (desktop) + chevron -->
+                <!-- Derecha: período + ubicación (desktop) -->
                 <div class="flex flex-col items-end gap-1 flex-shrink-0">
                   <!-- Período y ubicación desktop -->
                   <div class="hidden sm:flex flex-col items-end text-right">
@@ -64,18 +60,12 @@
                   <div class="flex sm:hidden text-xs text-gray-600 dark:text-gray-400">
                     <span class="whitespace-nowrap">{{ exp.period | translate }}</span>
                   </div>
-
-                  <!-- Chevron -->
-                  <div class="mt-2 flex items-center justify-center w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-800 transition-transform duration-300"
-                       [class.rotate-180]="isExpanded(exp.id)">
-                    <i class="fas fa-chevron-down text-emerald-600 dark:text-emerald-400 text-xs"></i>
-                  </div>
                 </div>
               </div>
-            </button>
+            </div>
 
-            <!-- Contenido colapsable -->
-            <div *ngIf="isExpanded(exp.id)" class="mt-4 collapse-content">
+            <!-- Contenido (Siempre Abierto) -->
+            <div class="mt-4">
               <!-- Descripción -->
               <p class="text-sm sm:text-base text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">{{ exp.description | translate }}</p>
 
