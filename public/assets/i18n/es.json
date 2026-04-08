@@ -326,7 +326,7 @@
       "SLIDE_4_BTN": "Ver Demo"
     },
     "ITEMS": {
-      "10": {
+      "codlix": {
         "TITLE": "CODLIX - ERP & POS Multi-tenant para Restaurantes",
         "SHORT_DESC": "Plataforma SaaS con POS, inventario, reservas, arqueo de caja y facturación electrónica SUNAT.",
         "DESC": "Codlix es una plataforma SaaS modular diseñada para la gestión integral de restaurantes. Implementa Arquitectura Hexagonal y Domain-Driven Design (DDD) para garantizar el desacoplamiento total entre la lógica de negocio y la infraestructura. El backend fue construido con Java 21 y Spring Boot, usando Spring Security + JWT para autenticación segura en entornos multi-tenant. El frontend fue desarrollado en Angular con Tailwind CSS, optimizado para el rendimiento en puntos de venta (POS). Incluye módulos clave como Control de Inventarios (Kardex), Punto de Venta, Gestión de Reservas, Arqueo de Caja, Facturación Electrónica con SUNAT, y un Dashboard analítico con ApexCharts.",

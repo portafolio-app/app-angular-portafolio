@@ -53,10 +53,10 @@ export class ProjectsDataService {
   private initializeProjects(): void {
     const projects: Project[] = [
       {
-        id: '10',
-        title: 'PROJECTS.ITEMS.10.TITLE',
-        description: 'PROJECTS.ITEMS.10.DESC',
-        shortDescription: 'PROJECTS.ITEMS.10.SHORT_DESC',
+        id: 'codlix',
+        title: 'PROJECTS.ITEMS.codlix.TITLE',
+        description: 'PROJECTS.ITEMS.codlix.DESC',
+        shortDescription: 'PROJECTS.ITEMS.codlix.SHORT_DESC',
         image: '../assets/resto-dev.png',
         technologies: [
           { name: 'Java 21', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
@@ -72,7 +72,7 @@ export class ProjectsDataService {
           {
             type: 'demo',
             url: 'https://app.codlyp.website',
-            label: 'PROJECTS.ITEMS.10.LINKS.LIVE_DEMO',
+            label: 'PROJECTS.ITEMS.codlix.LINKS.LIVE_DEMO',
           },
         ],
         category: 'freelance',
@@ -81,18 +81,18 @@ export class ProjectsDataService {
         createdAt: new Date('2025-01-01'),
         techFocus: 'Hexagonal Architecture & SaaS',
         highlights: [
-          'PROJECTS.ITEMS.10.HIGHLIGHTS.0',
-          'PROJECTS.ITEMS.10.HIGHLIGHTS.1',
-          'PROJECTS.ITEMS.10.HIGHLIGHTS.2',
-          'PROJECTS.ITEMS.10.HIGHLIGHTS.3',
-          'PROJECTS.ITEMS.10.HIGHLIGHTS.4',
-          'PROJECTS.ITEMS.10.HIGHLIGHTS.5',
-          'PROJECTS.ITEMS.10.HIGHLIGHTS.6',
+          'PROJECTS.ITEMS.codlix.HIGHLIGHTS.0',
+          'PROJECTS.ITEMS.codlix.HIGHLIGHTS.1',
+          'PROJECTS.ITEMS.codlix.HIGHLIGHTS.2',
+          'PROJECTS.ITEMS.codlix.HIGHLIGHTS.3',
+          'PROJECTS.ITEMS.codlix.HIGHLIGHTS.4',
+          'PROJECTS.ITEMS.codlix.HIGHLIGHTS.5',
+          'PROJECTS.ITEMS.codlix.HIGHLIGHTS.6',
         ],
         challenges: [
-          'PROJECTS.ITEMS.10.CHALLENGES.0',
-          'PROJECTS.ITEMS.10.CHALLENGES.1',
-          'PROJECTS.ITEMS.10.CHALLENGES.2',
+          'PROJECTS.ITEMS.codlix.CHALLENGES.0',
+          'PROJECTS.ITEMS.codlix.CHALLENGES.1',
+          'PROJECTS.ITEMS.codlix.CHALLENGES.2',
         ],
         metrics: {
           stars: 35,
