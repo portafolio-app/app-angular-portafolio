@@ -53,6 +53,55 @@ export class ProjectsDataService {
   private initializeProjects(): void {
     const projects: Project[] = [
       {
+        id: 'controlate',
+        title: 'PROJECTS.ITEMS.controlate.TITLE',
+        description: 'PROJECTS.ITEMS.controlate.DESC',
+        shortDescription: 'PROJECTS.ITEMS.controlate.SHORT_DESC',
+        image: '../assets/controlate-mockup.png',
+        technologies: [
+          { name: 'Angular 20', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg' },
+          { name: '.NET Core 9', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg' },
+          { name: 'Gemini AI', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg' },
+          { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
+          { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
+          { name: 'Docker', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
+          { name: 'Tailwind CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg' },
+          { name: 'Chart.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/chartjs/chartjs-original.svg' },
+        ],
+        links: [
+          {
+            type: 'demo',
+            url: 'https://controlate.codlyp.website',
+            label: 'PROJECTS.BUTTONS.WEB',
+          },
+          {
+            type: 'video',
+            url: 'https://www.youtube.com/watch?v=nDltqDPXCXQ',
+            label: 'PROJECTS.ITEMS.controlate.LINKS.VIEW_DEMO',
+          },
+        ],
+        category: 'web',
+        status: 'completed',
+        featured: true,
+        createdAt: new Date('2025-04-15'),
+        videoUrl: 'https://www.youtube.com/watch?v=nDltqDPXCXQ',
+        techFocus: 'AI & Task Management',
+        highlights: [
+          'PROJECTS.ITEMS.controlate.HIGHLIGHTS.0',
+          'PROJECTS.ITEMS.controlate.HIGHLIGHTS.1',
+          'PROJECTS.ITEMS.controlate.HIGHLIGHTS.2',
+          'PROJECTS.ITEMS.controlate.HIGHLIGHTS.3',
+          'PROJECTS.ITEMS.controlate.HIGHLIGHTS.4',
+          'PROJECTS.ITEMS.controlate.HIGHLIGHTS.5',
+          'PROJECTS.ITEMS.controlate.HIGHLIGHTS.6',
+        ],
+        challenges: [
+          'PROJECTS.ITEMS.controlate.CHALLENGES.0',
+          'PROJECTS.ITEMS.controlate.CHALLENGES.1',
+          'PROJECTS.ITEMS.controlate.CHALLENGES.2',
+        ],
+      },
+      {
         id: 'codlix',
         title: 'PROJECTS.ITEMS.codlix.TITLE',
         description: 'PROJECTS.ITEMS.codlix.DESC',

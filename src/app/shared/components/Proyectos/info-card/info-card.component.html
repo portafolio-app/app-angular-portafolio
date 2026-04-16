@@ -153,9 +153,19 @@
       </div>
     </div>
 
-    <!-- IMAGEN NORMAL PARA OTROS PROYECTOS -->
+    <!-- VIDEO O IMAGEN PARA OTROS PROYECTOS -->
     <div *ngIf="!project.title.includes('Ubícate')" class="w-full bg-gray-100 dark:bg-gray-800">
-      <img [src]="project.image" [alt]="project.title" class="w-full h-auto max-h-80 sm:max-h-96 object-contain">
+      <div *ngIf="hasProjectVideo(); else justImage" class="relative w-full aspect-video">
+        <iframe [src]="getVideoEmbedUrl(getProjectVideoUrl())" 
+                class="w-full h-full shadow-2xl" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" 
+                allowfullscreen>
+        </iframe>
+      </div>
+      <ng-template #justImage>
+        <img [src]="project.image" [alt]="project.title" class="w-full h-auto max-h-80 sm:max-h-96 object-contain">
+      </ng-template>
     </div>
 
   </header>
@@ -379,4 +389,29 @@
       </aside>
     </div>
   </main>
+
+  <!-- MODAL DE VIDEO PREMIUM -->
+  <div *ngIf="videoToPlay" 
+    class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/90 backdrop-blur-md transition-all duration-300"
+    (click)="closeVideo()">
+    
+    <!-- Contenedor del Video -->
+    <div class="relative w-full max-w-5xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/20 transform transition-all duration-500 scale-100"
+      (click)="$event.stopPropagation()">
+      
+      <!-- Botón Cerrar -->
+      <button (click)="closeVideo()" 
+        class="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center bg-black/50 hover:bg-black/80 text-white rounded-full backdrop-blur-md transition-all border border-white/10 hover:scale-110 active:scale-95">
+        <i class="fas fa-times text-lg"></i>
+      </button>
+
+      <!-- Iframe del Video -->
+      <iframe [src]="videoToPlay" 
+        class="w-full h-full" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" 
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
 </div>

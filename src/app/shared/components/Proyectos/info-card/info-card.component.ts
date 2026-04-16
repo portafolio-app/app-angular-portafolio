@@ -55,6 +55,9 @@ export class InfoCardComponent {
   currentSlide = 0;
   totalSlides = 4; // 3 pantallas + 1 video
 
+  // Variable para el modal de video
+  videoToPlay: SafeResourceUrl | null = null;
+
   constructor(private sanitizer: DomSanitizer) { }
 
   hasProjectVideo(): boolean {
@@ -102,7 +105,11 @@ export class InfoCardComponent {
   }
 
   openVideo(url: string): void {
-    window.open(url, '_blank', 'noopener noreferrer');
+    this.videoToPlay = this.getVideoEmbedUrl(url);
+  }
+
+  closeVideo(): void {
+    this.videoToPlay = null;
   }
 
   // ======== EVENTOS ========

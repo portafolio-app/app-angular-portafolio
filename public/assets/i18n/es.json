@@ -326,6 +326,28 @@
       "SLIDE_4_BTN": "Ver Demo"
     },
     "ITEMS": {
+      "controlate": {
+        "TITLE": "Controlate - Gestión de Tareas con Gemini AI",
+        "SHORT_DESC": "Plataforma tipo Jira/Kanban para gestión de tareas impulsada por IA, optimizando el flujo de trabajo con Gemini.",
+        "DESC": "Controlate es una plataforma avanzada de gestión de tareas estilo Kanban diseñada para equipos que buscan maximizar su productividad. Integra de manera nativa la API de Google Gemini AI para proporcionar sugerencias inteligentes, resúmenes automáticos de sprints y análisis predictivo de carga de trabajo. Desarrollado con una arquitectura moderna que incluye .NET Core 9 para el backend y Angular 20 para una experiencia de usuario fluida y reactiva. Implementa funcionalidades críticas como drag-and-drop intuitivo, gestión multitenant, paneles de métricas con Chart.js y edición de texto enriquecido con Quill.",
+        "HIGHLIGHTS": {
+          "0": "Integración nativa con Google Gemini AI para optimización de tareas y generación de resúmenes",
+          "1": "Arquitectura robusta con .NET Core 9 y Angular 20, asegurando alta escalabilidad y rendimiento",
+          "2": "Sistema de gestión Kanban interactivo con drag-and-drop mediante Angular CDK",
+          "3": "Dashboard analítico integrado con Chart.js para monitoreo de productividad y métricas de sprint",
+          "4": "Backend multi-tenant con aislamiento de datos seguro y arquitectura limpia",
+          "5": "Soporte para edición de contenido enriquecido con Markdown y Quill",
+          "6": "Contenedorización completa con Docker para despliegues ágiles y consistentes"
+        },
+        "CHALLENGES": {
+          "0": "Integración de IA: Sincronización asíncrona de las sugerencias de Gemini sin afectar la latencia de la UI",
+          "1": "UX Interactiva: Implementación de un flujo de drag-and-drop optimista para una respuesta instantánea al usuario",
+          "2": "Seguridad Multi-tenant: Garantizar el aislamiento estricto de datos sensibles entre diferentes proyectos y organizaciones"
+        },
+        "LINKS": {
+          "VIEW_DEMO": "Ver Demo en YouTube"
+        }
+      },
       "codlix": {
         "TITLE": "CODLIX - ERP & POS Multi-tenant para Restaurantes",
         "SHORT_DESC": "Plataforma SaaS con POS, inventario, reservas, arqueo de caja y facturación electrónica SUNAT.",

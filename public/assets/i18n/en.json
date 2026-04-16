@@ -326,6 +326,28 @@
       "SLIDE_4_BTN": "View Demo"
     },
     "ITEMS": {
+      "controlate": {
+        "TITLE": "Controlate - Task Management with Gemini AI",
+        "SHORT_DESC": "AI-powered Jira/Kanban-style task management platform, optimizing workflow with Gemini.",
+        "DESC": "Controlate is an advanced Kanban-style task management platform designed for teams seeking to maximize productivity. It natively integrates the Google Gemini AI API to provide intelligent suggestions, automatic sprint summaries, and predictive workload analysis. Developed with a modern architecture featuring .NET Core 9 for the backend and Angular 20 for a smooth, reactive user experience. It implements critical features such as intuitive drag-and-drop, multi-tenant management, metrics dashboards with Chart.js, and rich text editing with Quill.",
+        "HIGHLIGHTS": {
+          "0": "Native integration with Google Gemini AI for task optimization and summary generation",
+          "1": "Robust architecture with .NET Core 9 and Angular 20, ensuring high scalability and performance",
+          "2": "Interactive Kanban management system with drag-and-drop using Angular CDK",
+          "3": "Integrated analytical dashboard with Chart.js for productivity monitoring and sprint metrics",
+          "4": "Multi-tenant backend with secure data isolation and clean architecture",
+          "5": "Support for rich content editing with Markdown and Quill",
+          "6": "Full containerization with Docker for agile and consistent deployments"
+        },
+        "CHALLENGES": {
+          "0": "AI Integration: Asynchronous synchronization of Gemini suggestions without affecting UI latency",
+          "1": "Interactive UX: Implementation of an optimistic drag-and-drop flow for instantaneous user feedback",
+          "2": "Multi-tenant Security: Ensuring strict data isolation between different projects and organizations"
+        },
+        "LINKS": {
+          "VIEW_DEMO": "Watch Demo on YouTube"
+        }
+      },
       "codlix": {
         "TITLE": "CODLIX - Multi-tenant ERP & POS for Restaurants",
         "SHORT_DESC": "SaaS platform with POS, inventory, reservations, cash shifts, and SUNAT electronic invoicing.",
