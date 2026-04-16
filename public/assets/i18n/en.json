@@ -299,7 +299,9 @@
       "DOWNLOAD": "Download",
       "WEB": "Web",
       "REPO": "Repo",
-      "REPOSITORY": "Repository"
+      "REPOSITORY": "Repository",
+      "GITHUB": "GitHub",
+      "VIDEO": "Video"
     },
     "ERRORS": {
       "OFFLINE": "No internet connection. Please check your connection.",

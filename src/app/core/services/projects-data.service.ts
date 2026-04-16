@@ -83,7 +83,7 @@ export class ProjectsDataService {
         category: 'web',
         status: 'completed',
         featured: true,
-        createdAt: new Date('2025-04-15'),
+        createdAt: new Date('2026-04-15'),
         videoUrl: 'https://www.youtube.com/watch?v=nDltqDPXCXQ',
         techFocus: 'AI & Task Management',
         highlights: [

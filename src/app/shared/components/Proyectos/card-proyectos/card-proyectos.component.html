@@ -162,8 +162,7 @@
                     'max-w-[80px] sm:max-w-none': project.links.slice(0, 2).length === 2
                   }">
                     <span class="hidden xl:inline">{{ link.label | translate }}</span>
-                    <span class="xl:hidden hidden sm:inline">{{ 'PROJECTS.BUTTONS.' + link.type.toUpperCase() | translate }}</span>
-                    <span class="sm:hidden">{{ 'PROJECTS.BUTTONS.' + link.type.toUpperCase() | translate }}</span>
+                    <span class="xl:hidden">{{ getShortButtonText(link.type, (link.label | translate)) }}</span>
                   </span>
                 </button>
               </div>

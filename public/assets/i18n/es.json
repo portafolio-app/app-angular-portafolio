@@ -299,7 +299,9 @@
       "DOWNLOAD": "Descargar",
       "WEB": "Web",
       "REPO": "Repo",
-      "REPOSITORY": "Repositorio"
+      "REPOSITORY": "Repositorio",
+      "GITHUB": "GitHub",
+      "VIDEO": "Video"
     },
     "ERRORS": {
       "OFFLINE": "Sin conexión a internet. Verifica tu conexión.",

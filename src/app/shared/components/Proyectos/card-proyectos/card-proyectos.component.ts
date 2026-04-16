@@ -440,6 +440,8 @@ export class CardProyectosComponent implements OnInit, AfterViewInit, OnDestroy 
         return 'Web';
       case 'repository':
         return 'Repo';
+      case 'video':
+        return 'Demo';
       default:
         if (originalLabel.toLowerCase().includes('repositorio')) {
           return 'Repositorio';
@@ -485,6 +487,8 @@ export class CardProyectosComponent implements OnInit, AfterViewInit, OnDestroy 
         return `${baseClasses} text-white bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 dark:from-green-600 dark:to-green-700 shadow-md`;
       case 'website':
         return `${baseClasses} text-white bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 dark:from-cyan-600 dark:to-cyan-700 shadow-md`;
+      case 'video':
+        return `${baseClasses} text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 dark:from-red-600 dark:to-red-700 shadow-md`;
       default:
         return `${baseClasses} text-white bg-gradient-to-r from-slate-500 to-slate-600 hover:from-slate-600 hover:to-slate-700 dark:from-slate-600 dark:to-slate-700 shadow-md`;
     }
@@ -502,6 +506,8 @@ export class CardProyectosComponent implements OnInit, AfterViewInit, OnDestroy 
         return 'fas fa-download';
       case 'website':
         return 'fas fa-globe';
+      case 'video':
+        return 'fab fa-youtube';
       default:
         return 'fas fa-link';
     }
