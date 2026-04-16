@@ -102,7 +102,7 @@
           #projectCard
           [attr.data-project-index]="i"
           [@scaleIn]="getAnimationState(i)"
-          class="bg-white dark:bg-slate-900 rounded-lg sm:rounded-xl shadow-md border border-emerald-100 dark:border-slate-800 hover:shadow-lg hover:border-emerald-200 dark:hover:border-slate-700 transition-all duration-300 cursor-pointer group"
+          class="h-full flex flex-col bg-white dark:bg-slate-900 rounded-lg sm:rounded-xl shadow-md border border-emerald-100 dark:border-slate-800 hover:shadow-lg hover:border-emerald-200 dark:hover:border-slate-700 transition-all duration-300 cursor-pointer group"
           (click)="onProjectClick(project)">
 
           <div
@@ -118,7 +118,7 @@
             </div>
           </div>
 
-          <div class="p-3 sm:p-4 xl:p-6">
+          <div class="flex-1 flex flex-col p-3 sm:p-4 xl:p-6">
             <!-- Tech Focus Badge (Recruiter Strategy) -->
             <div *ngIf="project.techFocus" class="mb-3">
               <span class="inline-flex items-center px-3 py-1 bg-emerald-600 dark:bg-emerald-500 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-full shadow-lg shadow-emerald-500/20">
@@ -130,7 +130,7 @@
             <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 leading-tight group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors duration-300">
             {{ project.title | translate }}
           </h3>
-          <p class="text-gray-600 dark:text-gray-400 text-sm line-clamp-3 leading-relaxed mb-6 flex-grow">
+          <p class="text-gray-600 dark:text-gray-400 text-sm line-clamp-3 leading-relaxed mb-4">
             {{ project.shortDescription | translate }}
           </p>
 
@@ -147,20 +147,18 @@
               </span>
             </div>
 
-            <div class="space-y-2">
+            <div class="mt-auto space-y-2">
               <div [ngClass]="{
                 'grid gap-1.5 sm:gap-2': true,
                 'grid-cols-1': project.links.slice(0, 2).length === 1,
                 'grid-cols-2': project.links.slice(0, 2).length === 2
               }">
                 <button *ngFor="let link of project.links.slice(0, 2); let i = index"
+                   type="button"
                   (click)="onLinkClick(project, link, $event)" [ngClass]="getLinkButtonClass(link.type)"
-                  class="px-1.5 sm:px-2 lg:px-3 py-2 sm:py-2.5 font-medium rounded-md sm:rounded-lg transition-all duration-200 flex items-center justify-center hover:scale-105 text-xs sm:text-sm min-h-[36px] sm:min-h-[40px] cursor-pointer">
+                  class="w-full px-1.5 sm:px-2 lg:px-3 py-2 sm:py-2.5 font-medium rounded-md sm:rounded-lg transition-all duration-200 flex items-center justify-center hover:scale-[1.02] text-xs sm:text-sm min-h-[36px] sm:min-h-[40px] cursor-pointer">
                   <i [class]="getLinkIcon(link.type)" class="text-xs sm:text-sm flex-shrink-0"></i>
-                  <span class="truncate ml-1 sm:ml-1.5" [ngClass]="{
-                    'max-w-none': project.links.slice(0, 2).length === 1,
-                    'max-w-[80px] sm:max-w-none': project.links.slice(0, 2).length === 2
-                  }">
+                  <span class="truncate ml-1 sm:ml-1.5">
                     <span class="hidden xl:inline">{{ link.label | translate }}</span>
                     <span class="xl:hidden">{{ getShortButtonText(link.type, (link.label | translate)) }}</span>
                   </span>

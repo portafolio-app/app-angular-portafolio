@@ -441,7 +441,7 @@ export class CardProyectosComponent implements OnInit, AfterViewInit, OnDestroy 
       case 'repository':
         return 'Repo';
       case 'video':
-        return 'Demo';
+        return 'Video';
       default:
         if (originalLabel.toLowerCase().includes('repositorio')) {
           return 'Repositorio';
