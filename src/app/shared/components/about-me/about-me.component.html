@@ -24,22 +24,23 @@
         <!-- Dynamic Values -->
         <div class="grid grid-cols-2 gap-6 pt-4">
           <div class="space-y-2">
-            <div class="text-emerald-600 dark:text-emerald-400 text-2xl font-bold">+20</div>
-            <div class="text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wider font-semibold">{{ 'ABOUT.STATS_PROJECTS' | translate }}</div>
+            <div class="text-emerald-600 dark:text-emerald-400 text-3xl font-bold">+20</div>
+            <div class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-widest font-semibold">{{ 'ABOUT.STATS_PROJECTS' | translate }}</div>
           </div>
           <div class="space-y-2">
-            <div class="text-emerald-600 dark:text-emerald-400 text-2xl font-bold">100%</div>
-            <div class="text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wider font-semibold">{{ 'ABOUT.STATS_DEDICATION' | translate }}</div>
+            <div class="text-emerald-600 dark:text-emerald-400 text-3xl font-bold">100%</div>
+            <div class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-widest font-semibold">{{ 'ABOUT.STATS_DEDICATION' | translate }}</div>
           </div>
         </div>
       </div>
 
-      <!-- Image/Visual Representation -->
+      <!-- Feature Card: Visual Representation -->
       <div class="relative">
-        <div class="relative bg-white dark:bg-slate-900 p-8 rounded-3xl border border-emerald-100 dark:border-slate-800 shadow-lg overflow-hidden group">
+        <div class="relative bg-white dark:bg-slate-900 p-8 rounded-3xl border border-emerald-100 dark:border-emerald-800/30 shadow-sm overflow-hidden group">
           <div class="flex flex-col gap-6">
+            <!-- Feature 1 -->
             <div class="flex items-center gap-4">
-              <div class="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400 border border-emerald-100/50 dark:border-emerald-800/50">
+              <div class="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400 border border-emerald-100/50 dark:border-emerald-800/50 transition-colors group-hover:bg-emerald-100">
                 <i class="fas fa-code text-xl"></i>
               </div>
               <div>
@@ -48,8 +49,9 @@
               </div>
             </div>
             
+            <!-- Feature 2 -->
             <div class="flex items-center gap-4">
-              <div class="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 dark:text-blue-400 border border-blue-100/50 dark:border-blue-800/50">
+              <div class="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 dark:text-blue-400 border border-blue-100/50 dark:border-blue-800/50 transition-colors group-hover:bg-blue-100">
                 <i class="fas fa-bolt text-xl"></i>
               </div>
               <div>
@@ -58,8 +60,9 @@
               </div>
             </div>
 
+            <!-- Feature 3 -->
             <div class="flex items-center gap-4">
-              <div class="w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center text-purple-600 dark:text-purple-400 border border-purple-100/50 dark:border-purple-800/50">
+              <div class="w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center text-purple-600 dark:text-purple-400 border border-purple-100/50 dark:border-purple-800/50 transition-colors group-hover:bg-purple-100">
                 <i class="fas fa-bezier-curve text-xl"></i>
               </div>
               <div>
@@ -69,8 +72,8 @@
             </div>
           </div>
           
-          <!-- Subtle Bottom Decoration (No blur) -->
-          <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-emerald-50 dark:bg-emerald-900/10 rounded-full border border-emerald-100/20 dark:border-emerald-800/20 transition-all group-hover:scale-110"></div>
+          <!-- Simple decoration -->
+          <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-emerald-50 dark:bg-emerald-900/10 rounded-full border border-emerald-100/20 dark:border-emerald-800/20"></div>
         </div>
       </div>
       

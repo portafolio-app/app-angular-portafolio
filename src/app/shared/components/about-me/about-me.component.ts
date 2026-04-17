@@ -7,9 +7,6 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [CommonModule, TranslateModule],
   templateUrl: './about-me.component.html',
-  styles: [`
-    :host { display: block; }
-  `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AboutMeComponent {}

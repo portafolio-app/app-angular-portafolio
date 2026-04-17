@@ -550,6 +550,28 @@
         "LINKS": {
           "REPO": "GitHub Repository"
         }
+      },
+      "lumina": {
+        "TITLE": "Lumina: Cycle & Adherence Control 🌙💊",
+        "SHORT_DESC": "Mobile app for menstrual cycle tracking and pill adherence through an emotional and visual system.",
+        "DESC": "Lumina is a mobile application developed in Flutter designed to help users maintain precise control over their menstrual cycle and, most importantly, ensure adherence to contraceptive pill taking through an emotional and visual system. It includes a flexible 'Virtual Pill Pack' (21, 28, 30 days), an interactive emotional companion whose mascot reflects your punctuality, and an Android home screen widget with instant synchronization. The application follows Hexagonal Architecture (Clean Architecture) principles to separate business logic from infrastructure and uses SQLite to guarantee total data privacy locally.",
+        "HIGHLIGHTS": {
+          "0": "Interactive Virtual Pill Pack with future day locking to avoid confusion",
+          "1": "Emotional Companion: Interactive mascot with dynamic states based on punctuality",
+          "2": "Android Home Screen Widget with instant updates",
+          "3": "Intelligent cycle prediction based on historical logs",
+          "4": "Hexagonal Architecture (Clean Architecture) with Flutter and Provider for state management",
+          "5": "Local persistence with SQLite for maximum privacy protection"
+        },
+        "CHALLENGES": {
+          "0": "Implementing pure business logic in the Domain layer for maximum maintainability",
+          "1": "Bi-directional state synchronization between the Flutter app and the native Android widget",
+          "2": "Designing a fluid interface with dynamic animations for the emotional mascot"
+        },
+        "LINKS": {
+          "VIEW_DEMO": "Watch Demo on YouTube",
+          "SOURCE_CODE": "View Code on GitHub"
+        }
       }
     }
   }

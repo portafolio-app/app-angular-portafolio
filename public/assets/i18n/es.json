@@ -550,6 +550,28 @@
         "LINKS": {
           "REPO": "Repositorio GitHub"
         }
+      },
+      "lumina": {
+        "TITLE": "Lumina: Control de Ciclo y Adherencia 🌙💊",
+        "SHORT_DESC": "App móvil para control del ciclo menstrual y adherencia a pastillas mediante un sistema emocional y visual.",
+        "DESC": "Lumina es una aplicación móvil desarrollada en Flutter diseñada para ayudar a las usuarias a llevar un control preciso de su ciclo menstrual y, lo más importante, asegurar la adherencia a la toma de pastillas anticonceptivas mediante un sistema emocional y visual. Incluye un 'Blíster Virtual' flexible (21, 28, 30 días), un acompañante emocional interactivo cuya mascota refleja tu puntualidad, y un widget de pantalla de inicio para Android con sincronización instantánea. La aplicación sigue los principios de Arquitectura Hexagonal (Clean Architecture) para separar la lógica de negocio de la infraestructura y utiliza SQLite para garantizar la privacidad total de los datos localmente.",
+        "HIGHLIGHTS": {
+          "0": "Blíster Virtual interactivo con bloqueo de días futuros para evitar confusiones",
+          "1": "Acompañante Emocional: Mascota interactiva con estados dinámicos basados en la puntualidad",
+          "2": "Widget de pantalla de inicio para Android con actualizaciones instantáneas",
+          "3": "Predicción inteligente de ciclos basada en registros históricos",
+          "4": "Arquitectura Hexagonal (Clean Architecture) con Flutter y Provider para gestión de estados",
+          "5": "Persistencia local con SQLite para máxima protección de la privacidad"
+        },
+        "CHALLENGES": {
+          "0": "Implementación de lógica de negocio pura en la capa de Domain para máxima mantenibilidad",
+          "1": "Sincronización bidireccional de estados entre la aplicación Flutter y el widget nativo de Android",
+          "2": "Diseño de una interfaz fluida con animaciones dinámicas para la mascota emocional"
+        },
+        "LINKS": {
+          "VIEW_DEMO": "Ver Demo en YouTube",
+          "SOURCE_CODE": "Ver Código en GitHub"
+        }
       }
     }
   }

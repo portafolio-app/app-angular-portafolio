@@ -1,1 +1,38 @@
+/* Elegant Icon-List Styles */
+.group {
+  transition: all 0.3s ease;
+}
 
+/* Subtil slide effect on text hover */
+.group:hover .flex-1 {
+  transform: translateX(4px);
+}
+
+.flex-1 {
+  transition: transform 0.3s ease;
+}
+
+/* Icon container animation */
+.rounded-2xl {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.group:hover .rounded-2xl {
+  transform: scale(1.05) rotate(5deg);
+  box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.1), 0 4px 6px -2px rgba(16, 185, 129, 0.05);
+}
+
+/* Dark mode specific adjustments */
+:host-context(.dark) .group:hover .flex-1 {
+  color: white;
+}
+
+@media (max-width: 640px) {
+  .group:hover .flex-1 {
+    transform: none;
+  }
+  
+  .group:hover .rounded-2xl {
+    transform: none;
+  }
+}

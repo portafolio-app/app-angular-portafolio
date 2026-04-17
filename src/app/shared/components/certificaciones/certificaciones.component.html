@@ -10,95 +10,61 @@
       </p>
     </div>
 
-    <!-- Certifications Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <!-- Certification Card -->
-      <div *ngFor="let cert of certifications"
-           class="bg-white dark:bg-slate-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 dark:border-slate-800">
+    <!-- Elegant Icon-List for Certifications -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-12 max-w-6xl mx-auto">
+      <div *ngFor="let cert of certifications" class="group flex items-start gap-6 pt-4">
+        
+        <!-- Icon Container (About-Me Style) -->
+        <div class="flex-shrink-0 w-14 h-14 rounded-2xl bg-emerald-50 dark:bg-emerald-900/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-800 transition-all duration-300 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-800/40">
+          <i class="fas fa-certificate text-xl"></i>
+        </div>
 
-        <!-- Status Badge -->
-        <div class="px-6 pt-6 pb-4">
-          <div class="flex items-center justify-between mb-4">
-            <span *ngIf="cert.status === 'completed'"
-                  class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-              <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-              </svg>
-              {{ 'CERTIFICATIONS.STATUS_COMPLETED' | translate }}
-            </span>
-            <span *ngIf="cert.status === 'in-progress'"
-                  class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
-              <svg class="w-4 h-4 mr-1 animate-spin" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-              {{ 'CERTIFICATIONS.STATUS_IN_PROGRESS' | translate }}
-            </span>
-            <span class="text-sm text-gray-500 dark:text-gray-400">
+        <!-- Content -->
+        <div class="flex-1 space-y-2">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors duration-300">
+              {{ cert.title | translate }}
+            </h3>
+            <span class="text-xs font-bold text-gray-400 dark:text-gray-500 tracking-wider">
               {{ cert.date | date: 'yyyy' }}
-              <span *ngIf="cert.endDate"> - {{ cert.endDate | date: 'yyyy' }}</span>
             </span>
           </div>
 
-          <!-- Title & Issuer -->
-          <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-2">
-            {{ cert.title | translate }}
-          </h3>
-          <p class="text-sm font-semibold text-emerald-600 dark:text-emerald-500 mb-3">
+          <p class="text-sm font-semibold text-emerald-600 dark:text-emerald-500 uppercase tracking-wide">
             {{ cert.issuer | translate }}
           </p>
 
-          <!-- Description -->
-          <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-3 leading-relaxed mb-4">
+          <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed max-w-md">
             {{ cert.description | translate }}
           </p>
 
-          <!-- Progress Bar for In-Progress -->
-          <div *ngIf="cert.status === 'in-progress'" class="mb-4">
-            <div class="flex items-center justify-between">
-              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ 'CERTIFICATIONS.PROGRESS' | translate }}</span>
-              <span class="text-[10px] font-black text-emerald-600 dark:text-emerald-400">{{ getProgressPercentage(cert) | number: '1.0-0' }}%</span>
+          <!-- Progress Bar for In-Progress (Minimal) -->
+          <div *ngIf="cert.status === 'in-progress'" class="pt-2">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{{ 'CERTIFICATIONS.PROGRESS' | translate }}</span>
+              <span class="text-[10px] font-bold text-emerald-600">{{ getProgressPercentage(cert) | number: '1.0-0' }}%</span>
             </div>
-            <div class="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
-              <div class="bg-gradient-to-r from-blue-500 to-emerald-500 h-2 rounded-full transition-all duration-300"
+            <div class="w-full bg-gray-100 dark:bg-slate-800 rounded-full h-1 overflow-hidden">
+              <div class="bg-emerald-500 h-full transition-all duration-1000"
                    [style.width.%]="getProgressPercentage(cert)">
               </div>
             </div>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">
-              <span *ngIf="getMonthsRemaining(cert) > 0">
-                {{ 'CERTIFICATIONS.MONTHS_REMAINING' | translate:{ months: getMonthsRemaining(cert) } }}
-              </span>
-              <span *ngIf="getMonthsRemaining(cert) === 0">
-                {{ 'CERTIFICATIONS.NEAR_COMPLETION' | translate }}
-              </span>
-            </p>
           </div>
 
-          <!-- Skills -->
-          <div class="mb-4">
-            <p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ 'CERTIFICATIONS.SKILLS' | translate }}:</p>
-            <div class="flex flex-wrap gap-2">
-              <span *ngFor="let skill of cert.skills"
-                    class="px-3 py-1 bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-gray-300 text-xs rounded-full border border-gray-300 dark:border-slate-700">
-                {{ skill }}
-              </span>
-            </div>
-          </div>
-
-          <!-- Credential Link -->
-          <div *ngIf="cert.credentialUrl && cert.status === 'completed'" class="mt-4">
-            <a [href]="cert.credentialUrl"
-               target="_blank"
-               class="inline-flex items-center px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition-colors duration-200">
-              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-              </svg>
-              {{ 'CERTIFICATIONS.VIEW_CERTIFICATE' | translate }}
+          <!-- Credential Link (Text style) -->
+          <div *ngIf="cert.credentialUrl && cert.status === 'completed'" class="pt-3">
+            <a [href]="cert.credentialUrl" 
+               target="_blank" 
+               class="inline-flex items-center text-sm font-bold text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-200 group/link">
+              <span>{{ 'CERTIFICATIONS.VIEW_CERTIFICATE' | translate }}</span>
+              <i class="fas fa-external-link-alt ml-2 text-xs opacity-50 group-hover/link:opacity-100 transition-opacity"></i>
             </a>
           </div>
         </div>
       </div>
     </div>
+
+
 
     <!-- Empty State -->
     <div *ngIf="certifications.length === 0"

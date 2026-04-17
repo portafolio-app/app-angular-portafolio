@@ -102,6 +102,53 @@ export class ProjectsDataService {
         ],
       },
       {
+        id: 'lumina',
+        title: 'PROJECTS.ITEMS.lumina.TITLE',
+        description: 'PROJECTS.ITEMS.lumina.DESC',
+        shortDescription: 'PROJECTS.ITEMS.lumina.SHORT_DESC',
+        image: '../assets/lumina-mockup.png',
+        technologies: [
+          { name: 'Flutter', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg' },
+          { name: 'Dart', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg' },
+          { name: 'SQLite', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg' },
+          { name: 'Provider', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg' },
+          { name: 'Clean Architecture', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg' },
+        ],
+        links: [
+          {
+            type: 'video',
+            url: 'https://www.youtube.com/watch?v=VsraYqsseXM',
+            label: 'PROJECTS.ITEMS.lumina.LINKS.VIEW_DEMO',
+            platform: 'youtube',
+          },
+          {
+            type: 'github',
+            url: 'https://github.com/VCL-tt/lumina-pill-tracker',
+            label: 'PROJECTS.ITEMS.lumina.LINKS.SOURCE_CODE',
+          },
+        ],
+        category: 'mobile',
+        status: 'completed',
+        featured: true,
+        createdAt: new Date('2024-04-16'), // Set to today
+        videoUrl: 'https://www.youtube.com/watch?v=VsraYqsseXM',
+        techFocus: 'Clean Architecture & Native Integration',
+        highlights: [
+          'PROJECTS.ITEMS.lumina.HIGHLIGHTS.0',
+          'PROJECTS.ITEMS.lumina.HIGHLIGHTS.1',
+          'PROJECTS.ITEMS.lumina.HIGHLIGHTS.2',
+          'PROJECTS.ITEMS.lumina.HIGHLIGHTS.3',
+          'PROJECTS.ITEMS.lumina.HIGHLIGHTS.4',
+          'PROJECTS.ITEMS.lumina.HIGHLIGHTS.5',
+        ],
+        challenges: [
+          'PROJECTS.ITEMS.lumina.CHALLENGES.0',
+          'PROJECTS.ITEMS.lumina.CHALLENGES.1',
+          'PROJECTS.ITEMS.lumina.CHALLENGES.2',
+        ],
+      },
+
+      {
         id: 'codlix',
         title: 'PROJECTS.ITEMS.codlix.TITLE',
         description: 'PROJECTS.ITEMS.codlix.DESC',
