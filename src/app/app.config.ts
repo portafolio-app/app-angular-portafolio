@@ -1,17 +1,16 @@
 import { ApplicationConfig, provideZoneChangeDetection, importProvidersFrom } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { routes } from './app.routes';
 import { Observable } from 'rxjs';
 
-// Custom loader to bypass dependency issues
+// Custom loader optimized for performance
 export class CustomTranslateLoader implements TranslateLoader {
   constructor(private http: HttpClient) {}
   getTranslation(lang: string): Observable<any> {
-    const v = new Date().getTime();
-    return this.http.get(`/assets/i18n/${lang}.json?v=${v}`);
+    return this.http.get(`/assets/i18n/${lang}.json`);
   }
 }
 
@@ -22,7 +21,10 @@ export function HttpLoaderFactory(http: HttpClient) {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(
+      routes,
+      withPreloading(PreloadAllModules)
+    ),
     provideAnimations(),
     provideHttpClient(),
     importProvidersFrom(
@@ -35,6 +37,6 @@ export const appConfig: ApplicationConfig = {
         defaultLanguage: 'es'
       })
     )
-    // Removido provideClientHydration para build estática
   ]
 };
+
