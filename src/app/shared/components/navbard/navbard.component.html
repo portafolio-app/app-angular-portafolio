@@ -43,6 +43,14 @@
             {{ 'NAVBAR.ABOUT' | translate }}
           </button>
 
+          <!-- Testimonios - Comentado por ahora -->
+          <!--
+          <button (click)="scrollToSection('testimonios')"
+            class="group px-3 lg:px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 font-medium text-sm lg:text-base cursor-pointer">
+            {{ 'NAVBAR.TESTIMONIALS' | translate }}
+          </button>
+          -->
+
           <!-- Más (Dropdown) -->
           <div class="relative">
             <button (click)="toggleDropdown($event)"
@@ -173,6 +181,16 @@
             class="fas fa-user mr-3 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300"></i>
           <span class="font-medium">{{ 'NAVBAR.ABOUT' | translate }}</span>
         </button>
+
+        <!-- Testimonios - Comentado por ahora -->
+        <!--
+        <button (click)="scrollToSection('testimonios')"
+          class="group flex items-center w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base cursor-pointer">
+          <i
+            class="fas fa-comment-dots mr-3 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300"></i>
+          <span class="font-medium">{{ 'NAVBAR.TESTIMONIALS' | translate }}</span>
+        </button>
+        -->
 
         <div class="pt-2 pb-1 px-4 border-t border-gray-100 dark:border-gray-800">
           <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">{{ 'NAVBAR.TRAYECTORIA' | translate

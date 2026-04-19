@@ -21,7 +21,8 @@
     "BLOG": "Blog",
     "LANGUAGE": "Language",
     "TRAYECTORIA": "Trajectory",
-    "TECHNOLOGIES": "Technologies"
+    "TECHNOLOGIES": "Technologies",
+    "TESTIMONIALS": "Testimonials"
   },
   "HERO": {
     "HI": "Hi!",
@@ -217,6 +218,19 @@
       }
     }
   },
+  "TESTIMONIALS": {
+    "TAG": "Testimonials",
+    "TITLE_PRE": "What they say",
+    "TITLE_SPAN": "about me",
+    "ITEMS": {
+      "JHOEL": {
+        "NAME": "Jhoel Maqui Saldaña",
+        "ROLE": "Semi-Senior Full Stack Developer",
+        "COMPANY": "Cayetano Heredia University",
+        "MESSAGE": "I worked with Jorge on highly complex projects and highlight his solid technical foundation in Spring Boot and Angular. He is a committed, detail-oriented developer with a great learning capacity."
+      }
+    }
+  },
   "PROJECTS": {
     "FILTER_TITLE": "Filter projects",
     "TITLE": "Projects",
@@ -369,7 +383,8 @@
           "2": "Performance: optimization of POS and Dashboard for fluid operation under high request concurrency"
         },
         "LINKS": {
-          "LIVE_DEMO": "View Live Demo"
+          "LIVE_DEMO": "View Live Demo",
+          "VIEW_DEMO": "Watch Demo on YouTube"
         }
       },
       "1": {

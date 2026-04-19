@@ -170,11 +170,17 @@ export class ProjectsDataService {
             url: 'https://app.codlyp.website',
             label: 'PROJECTS.ITEMS.codlix.LINKS.LIVE_DEMO',
           },
+          {
+            type: 'video',
+            url: 'https://www.youtube.com/watch?v=h26117Mdwno',
+            label: 'PROJECTS.ITEMS.codlix.LINKS.VIEW_DEMO',
+          },
         ],
         category: 'freelance',
         status: 'in-progress',
         featured: true,
         createdAt: new Date('2025-01-01'),
+        videoUrl: 'https://www.youtube.com/watch?v=h26117Mdwno',
         techFocus: 'Hexagonal Architecture & SaaS',
         highlights: [
           'PROJECTS.ITEMS.codlix.HIGHLIGHTS.0',

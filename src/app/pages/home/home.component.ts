@@ -27,6 +27,7 @@ import { StackTecnologicoComponent } from '../../shared/components/stack-tecnolo
 import { HeroComponent } from '../../shared/components/hero/hero.component';
 import { ExperienciaComponent } from '../../shared/components/experiencia/experiencia.component';
 import { CertificacionesComponent } from '../../shared/components/certificaciones/certificaciones.component';
+// import { TestimonialsComponent } from '../../shared/components/testimonials/testimonials.component';
 import { Subscription } from 'rxjs';
 import { ChangeDetectionStrategy } from '@angular/core';
 
@@ -45,6 +46,7 @@ import { ChangeDetectionStrategy } from '@angular/core';
     StackTecnologicoComponent,
     ExperienciaComponent,
     AlertComponent,
+    // TestimonialsComponent,
     TranslateModule
   ],
   templateUrl: './home.component.html',
