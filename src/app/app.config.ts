@@ -10,7 +10,9 @@ import { Observable } from 'rxjs';
 export class CustomTranslateLoader implements TranslateLoader {
   constructor(private http: HttpClient) {}
   getTranslation(lang: string): Observable<any> {
-    return this.http.get(`/assets/i18n/${lang}.json`);
+    // Add versioning to bypass browser cache
+    const version = '1.0.1'; // Increment this when changing translations
+    return this.http.get(`/assets/i18n/${lang}.json?v=${version}`);
   }
 }
 
