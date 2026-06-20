@@ -189,7 +189,7 @@ export class InfoCardComponent {
       case 'video':
         return `${baseClasses} text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600`;
       case 'documentation':
-        return `${baseClasses} text-white bg-emerald-600 hover:bg-emerald-700 focus:ring-4 focus:ring-emerald-300 dark:bg-emerald-500 dark:hover:bg-emerald-600`;
+        return `${baseClasses} text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600`;
       case 'download':
         return `${baseClasses} text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 dark:bg-purple-500 dark:hover:bg-purple-600`;
       default:
@@ -295,19 +295,19 @@ export class InfoCardComponent {
   getSuccessMetrics(): { icon: string; label: string; color: string }[] {
     const metricsMap: Record<string, { icon: string; label: string; color: string }[]> = {
       '9': [ // MsgService
-        { icon: 'fas fa-rocket', label: 'PROJECTS.SUCCESS_METRICS.SCALABILITY', color: 'bg-emerald-500' },
+        { icon: 'fas fa-rocket', label: 'PROJECTS.SUCCESS_METRICS.SCALABILITY', color: 'bg-blue-600'},
         { icon: 'fas fa-shield-alt', label: 'PROJECTS.SUCCESS_METRICS.ROBUSTNESS', color: 'bg-blue-500' },
         { icon: 'fas fa-microchip', label: 'PROJECTS.SUCCESS_METRICS.MODULARITY', color: 'bg-purple-500' }
       ],
       '7': [ // Ubicate
-        { icon: 'fas fa-map-marker-alt', label: 'PROJECTS.SUCCESS_METRICS.PERFORMANCE', color: 'bg-emerald-500' },
+        { icon: 'fas fa-map-marker-alt', label: 'PROJECTS.SUCCESS_METRICS.PERFORMANCE', color: 'bg-blue-600'},
         { icon: 'fas fa-users', label: 'PROJECTS.SUCCESS_METRICS.SCALABILITY', color: 'bg-blue-500' },
-        { icon: 'fas fa-sync', label: 'PROJECTS.SUCCESS_METRICS.ROBUSTNESS', color: 'bg-teal-500' }
+        { icon: 'fas fa-sync', label: 'PROJECTS.SUCCESS_METRICS.ROBUSTNESS', color: 'bg-blue-500'}
       ]
     };
 
     return metricsMap[this.project.id] || [
-      { icon: 'fas fa-check-circle', label: 'PROJECTS.SUCCESS_METRICS.PERFORMANCE', color: 'bg-emerald-500' },
+      { icon: 'fas fa-check-circle', label: 'PROJECTS.SUCCESS_METRICS.PERFORMANCE', color: 'bg-blue-600'},
       { icon: 'fas fa-code', label: 'PROJECTS.SUCCESS_METRICS.ROBUSTNESS', color: 'bg-blue-500' },
       { icon: 'fas fa-cog', label: 'PROJECTS.SUCCESS_METRICS.MODULARITY', color: 'bg-purple-500' }
     ];

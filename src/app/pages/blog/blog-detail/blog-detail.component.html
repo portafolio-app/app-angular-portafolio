@@ -1,12 +1,12 @@
 <!-- blog-detail.component.html -->
-<div class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+<div class="transition-colors duration-300" style="background: var(--bg); min-height: 100vh;">
 
   <!-- Blog Navbar Personalizado -->
   <app-blog-navbar (backClicked)="goBack()"></app-blog-navbar>
 
   @if (isLoading) {
   <div class="flex justify-center items-center py-20 pt-32">
-    <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-emerald-500"></div>
+    <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-600"></div>
   </div>
   } @else if (error) {
   <div class="container mx-auto px-4 py-20 pt-32">
@@ -14,7 +14,7 @@
       <lucide-angular [img]="AlertTriangle" class="w-16 h-16 mx-auto mb-4 text-red-500"></lucide-angular>
       <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">{{ error }}</h2>
       <button (click)="goBack()"
-        class="px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors flex items-center gap-2 mx-auto">
+        class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 mx-auto">
         <lucide-angular [img]="ArrowLeft" class="w-4 h-4"></lucide-angular>
         Volver al Blog
       </button>
@@ -49,7 +49,7 @@
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 md:p-6">
           <!-- Category Badge -->
           <div class="mb-3">
-            <span class="inline-block px-3 py-1 bg-emerald-600 text-white rounded-full text-sm font-semibold">
+            <span class="inline-block px-3 py-1 bg-blue-600 text-white rounded-full text-sm font-semibold">
               {{ getCategoryLabel(article.category) }}
             </span>
           </div>
@@ -57,16 +57,16 @@
           <div class="flex items-center gap-6 text-sm text-gray-600 dark:text-gray-400 mb-3 flex-wrap">
             @if (article.videoDuration) {
             <div class="flex items-center gap-2">
-              <lucide-angular [img]="Clock" class="w-4 h-4 text-emerald-500"></lucide-angular>
+              <lucide-angular [img]="Clock" class="w-4 h-4 text-blue-600"></lucide-angular>
               <span class="font-medium">{{ article.videoDuration }} min video</span>
             </div>
             }
             <div class="flex items-center gap-2">
-              <lucide-angular [img]="BookOpen" class="w-4 h-4 text-emerald-500"></lucide-angular>
+              <lucide-angular [img]="BookOpen" class="w-4 h-4 text-blue-600"></lucide-angular>
               <span class="font-medium">{{ article.readingTime }} min lectura</span>
             </div>
             <div class="flex items-center gap-2">
-              <lucide-angular [img]="Play" class="w-4 h-4 text-emerald-500"></lucide-angular>
+              <lucide-angular [img]="Play" class="w-4 h-4 text-blue-600"></lucide-angular>
               <span class="font-medium">Tutorial paso a paso</span>
             </div>
           </div>
@@ -84,7 +84,7 @@
         <div class="prose dark:prose-invert max-w-none prose-xl
                     prose-headings:text-gray-900 dark:prose-headings:text-white
                     prose-p:text-gray-700 dark:prose-p:text-gray-300
-                    prose-a:text-emerald-600 dark:prose-a:text-emerald-400
+                    prose-a:text-blue-600 dark:prose-a:text-blue-400
                     prose-code:bg-gray-100 dark:prose-code:bg-gray-700
                     prose-code:text-gray-900 dark:prose-code:text-gray-100
                     prose-pre:bg-gray-900 dark:prose-pre:bg-gray-950
