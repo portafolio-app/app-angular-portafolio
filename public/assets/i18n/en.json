@@ -389,6 +389,27 @@
           "VIEW_DEMO": "Watch Demo on YouTube"
         }
       },
+      "compugamer": {
+        "TITLE": "CompuGamer Trujillo - E-commerce Redesign",
+        "SHORT_DESC": "Visual and functional redesign proposal for a gaming store built with Angular, Spring Boot, and PostgreSQL.",
+        "DESC": "CompuGamer Trujillo is a redesign proposal for an online hardware and peripherals store focused on improving visual clarity, product hierarchy, and conversion. The concept reworks the landing page, categories, promotions, and product detail flow into a cleaner and more modern shopping experience. The solution is planned around Angular on the frontend, Spring Boot on the business layer, and PostgreSQL as the transactional database, leaving a solid base for catalog management, cart flows, authentication, and commercial administration.",
+        "HIGHLIGHTS": {
+          "0": "Landing page redesign with clearer hierarchy for promotions, categories, and featured products",
+          "1": "Full stack base prepared for catalog, cart, orders, and admin dashboard flows",
+          "2": "Responsive frontend focused on visual trust and a smoother buying experience across desktop and mobile",
+          "3": "Angular + Spring Boot + PostgreSQL architecture ready to scale inventory and commercial campaigns",
+          "4": "System planned for filters, search, product pages, and gamer-focused category navigation",
+          "5": "Proposal with a cleaner and more modern visual identity aligned with the tech retail market"
+        },
+        "CHALLENGES": {
+          "0": "Redesigning an existing store without losing the familiarity customers already have with the business",
+          "1": "Organizing many categories and promotions without overcrowding the primary interface",
+          "2": "Defining a technical base able to grow toward payments, stock control, and sales automation"
+        },
+        "LINKS": {
+          "CURRENT_STORE": "View Current Store"
+        }
+      },
       "1": {
         "TITLE": "GigaShop - Electronic Products E-commerce Platform",
         "SHORT_DESC": "Secure e-commerce with online payments, real-time management, and admin panel for electronic products.",

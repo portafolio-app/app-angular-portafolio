@@ -389,6 +389,27 @@
           "VIEW_DEMO": "Ver Demo en YouTube"
         }
       },
+      "compugamer": {
+        "TITLE": "CompuGamer Trujillo - Rediseño E-commerce",
+        "SHORT_DESC": "Propuesta de renovación visual y funcional para una tienda gamer con Angular, Spring Boot y PostgreSQL.",
+        "DESC": "CompuGamer Trujillo es una propuesta de rediseño para una tienda online de hardware y periféricos enfocada en mejorar claridad visual, jerarquía comercial y conversión. El planteamiento reorganiza portada, categorías, promociones y fichas de producto dentro de una experiencia más limpia y moderna. La arquitectura está pensada para trabajar con Angular en el frontend, Spring Boot en la capa de negocio y PostgreSQL como base de datos transaccional, dejando el terreno listo para catálogo, carrito, autenticación y administración comercial.",
+        "HIGHLIGHTS": {
+          "0": "Rediseño de home con mejor jerarquía para promociones, categorías y productos destacados",
+          "1": "Base full stack preparada para catálogo, carrito, pedidos y panel administrativo",
+          "2": "Frontend responsive orientado a claridad visual y mejor experiencia de compra en desktop y mobile",
+          "3": "Arquitectura Angular + Spring Boot + PostgreSQL lista para escalar inventario y campañas comerciales",
+          "4": "Sistema pensado para filtros, búsqueda, fichas de producto y navegación por familias gamer",
+          "5": "Propuesta con identidad visual más moderna, limpia y alineada al rubro tecnológico"
+        },
+        "CHALLENGES": {
+          "0": "Rediseñar una tienda existente sin romper la familiaridad que ya tiene el usuario con el negocio",
+          "1": "Ordenar gran cantidad de categorías y promociones sin saturar la interfaz principal",
+          "2": "Plantear una base técnica capaz de crecer hacia pagos, stock y automatización comercial"
+        },
+        "LINKS": {
+          "CURRENT_STORE": "Ver portal actual"
+        }
+      },
       "1": {
         "TITLE": "GigaShop - Plataforma E-commerce de productos electrónicos",
         "SHORT_DESC": "E-commerce seguro con pagos online, gestión en tiempo real y panel administrativo para productos electrónicos.",

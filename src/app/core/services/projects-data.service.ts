@@ -51,6 +51,67 @@ export class ProjectsDataService {
   }
 
   private initializeProjects(): void {
+    const compugamerMockupSvg = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-label="CompuGamer redesign mockup">
+        <defs>
+          <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#f7f9ff" />
+            <stop offset="100%" stop-color="#dbe7ff" />
+          </linearGradient>
+          <linearGradient id="hero" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#1f6bff" />
+            <stop offset="100%" stop-color="#0f44bf" />
+          </linearGradient>
+          <linearGradient id="cta" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#ff9a1f" />
+            <stop offset="100%" stop-color="#ff612e" />
+          </linearGradient>
+        </defs>
+        <rect width="1200" height="720" fill="url(#bg)" />
+        <circle cx="1080" cy="140" r="180" fill="#d8e3ff" opacity="0.55" />
+        <circle cx="240" cy="580" r="210" fill="#c6d6ff" opacity="0.4" />
+        <text x="86" y="150" fill="#3668ff" font-size="34" font-family="Arial, Helvetica, sans-serif">PORTFOLIO CASE</text>
+        <text x="86" y="240" fill="#0f1733" font-size="78" font-weight="700" font-family="Arial, Helvetica, sans-serif">CompuGamer</text>
+        <text x="86" y="320" fill="#0f1733" font-size="74" font-weight="700" font-family="Arial, Helvetica, sans-serif">E-commerce</text>
+        <text x="86" y="400" fill="#4d6cff" font-size="74" font-weight="700" font-family="Arial, Helvetica, sans-serif">Redesign</text>
+        <rect x="86" y="438" width="110" height="8" rx="4" fill="#4d6cff" />
+        <text x="86" y="505" fill="#4a556f" font-size="30" font-family="Arial, Helvetica, sans-serif">Angular, Spring Boot and PostgreSQL proposal</text>
+        <rect x="86" y="560" width="246" height="68" rx="34" fill="url(#cta)" />
+        <text x="129" y="604" fill="#ffffff" font-size="29" font-weight="700" font-family="Arial, Helvetica, sans-serif">View project</text>
+        <g transform="translate(560 42)">
+          <rect x="0" y="0" width="578" height="636" rx="28" fill="#ffffff" opacity="0.96" />
+          <rect x="0" y="0" width="578" height="56" rx="28" fill="#ffffff" />
+          <circle cx="38" cy="29" r="7" fill="#ffb2b2" />
+          <circle cx="62" cy="29" r="7" fill="#ffd27f" />
+          <circle cx="86" cy="29" r="7" fill="#91e8aa" />
+          <rect x="28" y="74" width="522" height="286" rx="28" fill="url(#hero)" />
+          <text x="58" y="120" fill="#87a8ff" font-size="16" letter-spacing="2" font-family="Arial, Helvetica, sans-serif">TECHNOLOGY  .  PERFORMANCE  .  TRUST</text>
+          <text x="58" y="178" fill="#ffffff" font-size="54" font-weight="700" font-family="Arial, Helvetica, sans-serif">Boost your play.</text>
+          <text x="58" y="238" fill="#ffffff" font-size="54" font-weight="700" font-family="Arial, Helvetica, sans-serif">Elevate your setup.</text>
+          <rect x="58" y="272" width="154" height="44" rx="22" fill="#ff8d1a" />
+          <rect x="224" y="272" width="154" height="44" rx="22" fill="#ffffff" opacity="0.95" />
+          <text x="91" y="300" fill="#182033" font-size="18" font-weight="700" font-family="Arial, Helvetica, sans-serif">Products</text>
+          <text x="257" y="300" fill="#2754d6" font-size="18" font-weight="700" font-family="Arial, Helvetica, sans-serif">Offers</text>
+          <rect x="420" y="92" width="110" height="226" rx="18" fill="#0e1224" opacity="0.88" />
+          <rect x="441" y="118" width="68" height="170" rx="10" fill="#162548" />
+          <circle cx="475" cy="152" r="18" fill="#2b8fff" />
+          <circle cx="475" cy="216" r="18" fill="#2b8fff" />
+          <circle cx="475" cy="280" r="18" fill="#2b8fff" />
+          <rect x="28" y="388" width="160" height="108" rx="22" fill="#ffffff" stroke="#dfe7ff" />
+          <rect x="208" y="388" width="160" height="108" rx="22" fill="#ffffff" stroke="#dfe7ff" />
+          <rect x="388" y="388" width="160" height="108" rx="22" fill="#ffffff" stroke="#dfe7ff" />
+          <text x="28" y="540" fill="#1c2640" font-size="34" font-weight="700" font-family="Arial, Helvetica, sans-serif">Main categories</text>
+          <rect x="28" y="562" width="72" height="44" rx="14" fill="#f4f7ff" stroke="#dfe7ff" />
+          <rect x="114" y="562" width="72" height="44" rx="14" fill="#f4f7ff" stroke="#dfe7ff" />
+          <rect x="200" y="562" width="72" height="44" rx="14" fill="#f4f7ff" stroke="#dfe7ff" />
+          <rect x="286" y="562" width="72" height="44" rx="14" fill="#f4f7ff" stroke="#dfe7ff" />
+          <rect x="372" y="562" width="72" height="44" rx="14" fill="#f4f7ff" stroke="#dfe7ff" />
+          <rect x="458" y="562" width="72" height="44" rx="14" fill="#f4f7ff" stroke="#dfe7ff" />
+        </g>
+      </svg>
+    `.trim();
+    const compugamerMockup = `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(compugamerMockupSvg)}`;
+
     const projects: Project[] = [
       {
         id: 'controlate',
@@ -201,6 +262,46 @@ export class ProjectsDataService {
           forks: 12,
           downloads: 200,
         },
+      },
+      {
+        id: 'compugamer',
+        title: 'PROJECTS.ITEMS.compugamer.TITLE',
+        description: 'PROJECTS.ITEMS.compugamer.DESC',
+        shortDescription: 'PROJECTS.ITEMS.compugamer.SHORT_DESC',
+        image: compugamerMockup,
+        technologies: [
+          { name: 'Angular', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg' },
+          { name: 'Spring Boot', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg' },
+          { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
+          { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
+          { name: 'Spring Security', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg' },
+          { name: 'Tailwind CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg' },
+        ],
+        links: [
+          {
+            type: 'demo',
+            url: 'https://compugamertrujillo.catalogst.com/#/place-detail-page',
+            label: 'PROJECTS.ITEMS.compugamer.LINKS.CURRENT_STORE',
+          },
+        ],
+        category: 'freelance',
+        status: 'prototype',
+        featured: true,
+        createdAt: new Date('2026-04-27'),
+        techFocus: 'E-commerce Redesign & UX',
+        highlights: [
+          'PROJECTS.ITEMS.compugamer.HIGHLIGHTS.0',
+          'PROJECTS.ITEMS.compugamer.HIGHLIGHTS.1',
+          'PROJECTS.ITEMS.compugamer.HIGHLIGHTS.2',
+          'PROJECTS.ITEMS.compugamer.HIGHLIGHTS.3',
+          'PROJECTS.ITEMS.compugamer.HIGHLIGHTS.4',
+          'PROJECTS.ITEMS.compugamer.HIGHLIGHTS.5',
+        ],
+        challenges: [
+          'PROJECTS.ITEMS.compugamer.CHALLENGES.0',
+          'PROJECTS.ITEMS.compugamer.CHALLENGES.1',
+          'PROJECTS.ITEMS.compugamer.CHALLENGES.2',
+        ],
       },
       {
         id: '9',
