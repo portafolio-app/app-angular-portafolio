@@ -13,6 +13,10 @@
 
       <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mb-1.5">
         <span class="text-xs font-semibold" style="color: var(--accent);">{{ exp.period | translate }}</span>
+        <span *ngIf="exp.current" class="inline-flex items-center gap-1.5 text-[0.65rem] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full"
+          style="background: var(--accent-soft); color: var(--accent);">
+          <span class="w-1.5 h-1.5 rounded-full" style="background: var(--accent);"></span>{{ 'EXPERIENCE.CURRENT' | translate }}
+        </span>
         <span class="text-[0.7rem]" style="color: var(--text-faint);">· {{ exp.location | translate }}</span>
       </div>
 

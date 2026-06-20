@@ -81,11 +81,12 @@
     "TITLE_SPAN": "Experience",
     "ACHIEVEMENTS_LABEL": "Key Achievements",
     "TECH_LABEL": "Technologies",
+    "CURRENT": "Present",
     "ITEMS": {
       "GATO_FE": {
         "TITLE": "Front End Software Developer",
         "COMPANY": "Gato Marketing y Software S.A.C",
-        "PERIOD": "October 2025 - January 2026",
+        "PERIOD": "October 2025 - February 2026",
         "LOCATION": "Lima, Peru (Remote)",
         "DESCRIPTION": "Responsible for the maintenance and frontend development of multiple business projects for different clients: accounting ERP, human resources ERP, and management platform for photography studios.",
         "ACHIEVEMENTS": {
@@ -129,7 +130,7 @@
       "RESTO_DEV": {
         "TITLE": "Freelance Lead Full Stack Developer",
         "COMPANY": "RESTO DEV - Codlix (Freelance)",
-        "PERIOD": "2025",
+        "PERIOD": "September 2023 - June 2024",
         "LOCATION": "Peru (Remote)",
         "DESCRIPTION": "Technical leadership of a 3-person team for the design, planning, and development of a multi-tenant restaurant management platform with SUNAT electronic invoicing.",
         "ACHIEVEMENTS": {
@@ -139,6 +140,45 @@
           "3": "Direct electronic invoicing integration with SUNAT, enabling automated tax compliance for multiple companies",
           "4": "Service orchestration with Docker, deployment on VPS (Contabo) with Dokploy, and robust JWT-based security",
           "5": "Technical documentation with Swagger and automated tax compliance"
+        }
+      },
+      "SINAPSIS": {
+        "TITLE": "Semi Senior Backend Developer",
+        "COMPANY": "Sinapsis Corp",
+        "PERIOD": "2026 - Present",
+        "LOCATION": "Peru (Remote)",
+        "DESCRIPTION": "Backend development of scalable enterprise applications, focused on designing robust APIs, service architecture, and performance optimization.",
+        "ACHIEVEMENTS": {
+          "0": "Development and maintenance of backend services for enterprise applications in production",
+          "1": "Design of REST APIs and business logic applying clean architecture and best practices",
+          "2": "Performance optimization, code quality, and team collaboration under agile methodologies"
+        }
+      },
+      "UBICATE": {
+        "TITLE": "Full Stack Developer",
+        "COMPANY": "UBICATE",
+        "PERIOD": "March 2025 - August 2025",
+        "LOCATION": "Peru (Remote)",
+        "DESCRIPTION": "End-to-end development of a real-time geolocation and transport management ecosystem, from architecture design to production deployment.",
+        "ACHIEVEMENTS": {
+          "0": "Distributed microservices architecture with Spring Boot, ensuring high availability, maintainability, and massive scalability",
+          "1": "High-concurrency asynchronous orchestration with RabbitMQ and critical latency optimization for geographic queries with Redis and PostgreSQL",
+          "2": "Cross-platform build: mobile app in Flutter (drivers) connected to a web control panel in Angular (administrators)",
+          "3": "Google Maps API integration for live fleet tracking, dynamic ETA calculation, and interactive route visualization",
+          "4": "Comprehensive security with Spring Security and JWT, with role-based access control (Administrator, Driver, End User)",
+          "5": "Complete cloud infrastructure setup on VPS (Contabo), ensuring optimal performance and uninterrupted deployment"
+        }
+      },
+      "VOXSCALE": {
+        "TITLE": "Cloud Engineer / SRE",
+        "COMPANY": "VoxScale - IP Communications",
+        "PERIOD": "March 2024 - August 2024",
+        "LOCATION": "Peru (Remote)",
+        "DESCRIPTION": "Orchestration of highly available IP telephony infrastructure on AWS, with deployment automation and serverless logic for real-time call flow control.",
+        "ACHIEVEMENTS": {
+          "0": "Orchestration of IP telephony infrastructure on AWS with FreeSWITCH for high-availability call processing and messaging",
+          "1": "Implementation of serverless logic with AWS Lambda and API Gateway for dynamic control of call flows and real-time events",
+          "2": "Deployment automation with Terraform, Docker, and GitHub Actions, optimizing node scalability and reducing latency"
         }
       }
     }

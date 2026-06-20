@@ -26,6 +26,22 @@ export class ExperienciaComponent {
 
   experiences: Experience[] = [
     {
+      id: '0',
+      title: 'EXPERIENCE.ITEMS.SINAPSIS.TITLE',
+      company: 'EXPERIENCE.ITEMS.SINAPSIS.COMPANY',
+      period: 'EXPERIENCE.ITEMS.SINAPSIS.PERIOD',
+      location: 'EXPERIENCE.ITEMS.SINAPSIS.LOCATION',
+      type: 'work',
+      current: true,
+      description: 'EXPERIENCE.ITEMS.SINAPSIS.DESCRIPTION',
+      achievements: [
+        'EXPERIENCE.ITEMS.SINAPSIS.ACHIEVEMENTS.0',
+        'EXPERIENCE.ITEMS.SINAPSIS.ACHIEVEMENTS.1',
+        'EXPERIENCE.ITEMS.SINAPSIS.ACHIEVEMENTS.2'
+      ],
+      technologies: ['Java', 'Spring Boot', '.NET', 'PostgreSQL', 'Docker', 'REST APIs']
+    },
+    {
       id: '1',
       title: 'EXPERIENCE.ITEMS.GATO_FE.TITLE',
       company: 'EXPERIENCE.ITEMS.GATO_FE.COMPANY',
@@ -63,6 +79,25 @@ export class ExperienciaComponent {
       technologies: ['Angular', 'Express.js', 'Node.js', 'Jira', 'Git']
     },
     {
+      id: 'ubicate',
+      title: 'EXPERIENCE.ITEMS.UBICATE.TITLE',
+      company: 'EXPERIENCE.ITEMS.UBICATE.COMPANY',
+      period: 'EXPERIENCE.ITEMS.UBICATE.PERIOD',
+      location: 'EXPERIENCE.ITEMS.UBICATE.LOCATION',
+      type: 'freelance',
+      current: false,
+      description: 'EXPERIENCE.ITEMS.UBICATE.DESCRIPTION',
+      achievements: [
+        'EXPERIENCE.ITEMS.UBICATE.ACHIEVEMENTS.0',
+        'EXPERIENCE.ITEMS.UBICATE.ACHIEVEMENTS.1',
+        'EXPERIENCE.ITEMS.UBICATE.ACHIEVEMENTS.2',
+        'EXPERIENCE.ITEMS.UBICATE.ACHIEVEMENTS.3',
+        'EXPERIENCE.ITEMS.UBICATE.ACHIEVEMENTS.4',
+        'EXPERIENCE.ITEMS.UBICATE.ACHIEVEMENTS.5'
+      ],
+      technologies: ['Spring Boot', 'Angular', 'Flutter', 'RabbitMQ', 'Redis', 'PostgreSQL', 'Google Maps API', 'Spring Security', 'JWT', 'Docker']
+    },
+    {
       id: '3',
       title: 'EXPERIENCE.ITEMS.INNOVASHOP.TITLE',
       company: 'EXPERIENCE.ITEMS.INNOVASHOP.COMPANY',
@@ -80,6 +115,22 @@ export class ExperienciaComponent {
         'EXPERIENCE.ITEMS.INNOVASHOP.ACHIEVEMENTS.5'
       ],
       technologies: ['Angular', 'Spring Boot', 'MySQL', 'Docker', 'AWS', 'JWT', 'Spring Security', 'JMeter', 'Mockito']
+    },
+    {
+      id: 'voxscale',
+      title: 'EXPERIENCE.ITEMS.VOXSCALE.TITLE',
+      company: 'EXPERIENCE.ITEMS.VOXSCALE.COMPANY',
+      period: 'EXPERIENCE.ITEMS.VOXSCALE.PERIOD',
+      location: 'EXPERIENCE.ITEMS.VOXSCALE.LOCATION',
+      type: 'freelance',
+      current: false,
+      description: 'EXPERIENCE.ITEMS.VOXSCALE.DESCRIPTION',
+      achievements: [
+        'EXPERIENCE.ITEMS.VOXSCALE.ACHIEVEMENTS.0',
+        'EXPERIENCE.ITEMS.VOXSCALE.ACHIEVEMENTS.1',
+        'EXPERIENCE.ITEMS.VOXSCALE.ACHIEVEMENTS.2'
+      ],
+      technologies: ['AWS', 'FreeSWITCH', 'AWS Lambda', 'API Gateway', 'Terraform', 'Docker', 'GitHub Actions']
     },
     {
       id: '4',

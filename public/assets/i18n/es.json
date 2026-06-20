@@ -82,11 +82,12 @@
     "TITLE_SPAN": "Experiencia",
     "ACHIEVEMENTS_LABEL": "Logros Destacados",
     "TECH_LABEL": "Tecnologías",
+    "CURRENT": "Actualidad",
     "ITEMS": {
       "GATO_FE": {
         "TITLE": "Desarrollador de Software Front End",
         "COMPANY": "Gato Marketing y Software S.A.C",
-        "PERIOD": "Octubre 2025 - Enero 2026",
+        "PERIOD": "Octubre 2025 - Febrero 2026",
         "LOCATION": "Lima, Perú (Remoto)",
         "DESCRIPTION": "Encargado del mantenimiento y desarrollo frontend de múltiples proyectos empresariales para distintos clientes: ERP contable, ERP de recursos humanos y plataforma de gestión para estudios fotográficos.",
         "ACHIEVEMENTS": {
@@ -130,7 +131,7 @@
       "RESTO_DEV": {
         "TITLE": "Freelance Lead Full Stack Developer",
         "COMPANY": "RESTO DEV - Codlix (Freelance)",
-        "PERIOD": "2025",
+        "PERIOD": "Septiembre 2023 - Junio 2024",
         "LOCATION": "Perú (Remoto)",
         "DESCRIPTION": "Liderazgo técnico de un equipo de 3 personas para el diseño, planificación y desarrollo de una plataforma de gestión gastronómica multi-tenant con facturación electrónica SUNAT.",
         "ACHIEVEMENTS": {
@@ -140,6 +141,45 @@
           "3": "Integración de facturación electrónica directa con SUNAT, permitiendo el cumplimiento tributario automatizado para múltiples empresas",
           "4": "Orquestación de servicios mediante Docker, despliegue en VPS (Contabo) con Dokploy y seguridad robusta basada en JWT",
           "5": "Documentación técnica con Swagger y cumplimiento tributario automatizado"
+        }
+      },
+      "SINAPSIS": {
+        "TITLE": "Backend Developer Semi Senior",
+        "COMPANY": "Sinapsis Corp",
+        "PERIOD": "2026 - Actualidad",
+        "LOCATION": "Perú (Remoto)",
+        "DESCRIPTION": "Desarrollo backend de aplicaciones empresariales escalables, enfocado en el diseño de APIs robustas, arquitectura de servicios y optimización del rendimiento.",
+        "ACHIEVEMENTS": {
+          "0": "Desarrollo y mantenimiento de servicios backend para aplicaciones empresariales en producción",
+          "1": "Diseño de APIs REST y lógica de negocio aplicando arquitectura limpia y buenas prácticas",
+          "2": "Optimización de rendimiento, calidad de código y colaboración en equipo bajo metodologías ágiles"
+        }
+      },
+      "UBICATE": {
+        "TITLE": "Full Stack Developer",
+        "COMPANY": "UBICATE",
+        "PERIOD": "Marzo 2025 - Agosto 2025",
+        "LOCATION": "Perú (Remoto)",
+        "DESCRIPTION": "Desarrollo integral de un ecosistema de geolocalización y gestión de transporte en tiempo real, desde el diseño de la arquitectura hasta el despliegue en producción.",
+        "ACHIEVEMENTS": {
+          "0": "Arquitectura distribuida orientada a microservicios con Spring Boot, garantizando alta disponibilidad, mantenibilidad y escalabilidad masiva",
+          "1": "Orquestación asíncrona de alta concurrencia con RabbitMQ y optimización crítica de latencia en consultas geográficas con Redis y PostgreSQL",
+          "2": "Construcción multiplataforma: app móvil en Flutter (conductores) conectada con un panel de control web en Angular (administradores)",
+          "3": "Integración de la API de Google Maps para tracking en vivo de flotas, cálculo dinámico de ETA y visualización interactiva de rutas",
+          "4": "Seguridad integral con Spring Security y JWT, con control de accesos por roles (Administrador, Conductor, Usuario Final)",
+          "5": "Configuración completa de infraestructura cloud en VPS (Contabo), asegurando rendimiento óptimo y despliegue ininterrumpido"
+        }
+      },
+      "VOXSCALE": {
+        "TITLE": "Cloud Engineer / SRE",
+        "COMPANY": "VoxScale - Comunicaciones IP",
+        "PERIOD": "Marzo 2024 - Agosto 2024",
+        "LOCATION": "Perú (Remoto)",
+        "DESCRIPTION": "Orquestación de infraestructura de telefonía IP en alta disponibilidad sobre AWS, con automatización de despliegues y lógica serverless para el control de flujos de llamadas en tiempo real.",
+        "ACHIEVEMENTS": {
+          "0": "Orquestación de infraestructura de telefonía IP sobre AWS con FreeSWITCH para procesamiento de llamadas y mensajería en alta disponibilidad",
+          "1": "Implementación de lógica serverless con AWS Lambda y API Gateway para el control dinámico de flujos de llamadas y eventos en tiempo real",
+          "2": "Automatización de despliegues con Terraform, Docker y GitHub Actions, optimizando la escalabilidad de los nodos y reduciendo la latencia"
         }
       }
     }
