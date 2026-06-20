@@ -3,14 +3,254 @@
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
 
-
 /* input.css */
 @custom-variant dark (&:where(.dark, .dark *));
 
-body {
-  background-color: white !important;
+/* ============================================================
+   DESIGN SYSTEM — Professional / Resume (sans-serif, azul)
+   Layout tipo CV en columna central con tarjetas, acento azul
+   corporativo y tipografía Inter en toda la interfaz.
+   ============================================================ */
+
+:root {
+  /* Superficies */
+  --bg: #f6f8fb;          /* fondo de página */
+  --bg-elev: #ffffff;     /* tarjetas */
+  --surface: #f1f5f9;     /* paneles internos */
+
+  /* Texto */
+  --text: #0f172a;        /* slate-900 */
+  --text-muted: #475569;  /* slate-600 */
+  --text-faint: #94a3b8;  /* slate-400 */
+
+  /* Líneas */
+  --border: #e6eaf0;
+  --border-strong: #d4dae3;
+
+  /* Acento */
+  --accent: #2563eb;      /* blue-600 */
+  --accent-strong: #1d4ed8;
+  --accent-soft: rgba(37, 99, 235, 0.08);
+
+  /* Compat. legacy */
+  --primary-color: var(--accent);
+  --primary-dark: var(--accent-strong);
+  --primary-light: var(--accent);
+
+  --radius: 14px;
+  --radius-sm: 9px;
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 12px 32px -16px rgba(15, 23, 42, 0.18);
 }
 
-body {
-  background-color: #050505;
+.dark {
+  --bg: #0a0f1c;
+  --bg-elev: #0f172a;
+  --surface: #141d33;
+
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-faint: #64748b;
+
+  --border: #1e293b;
+  --border-strong: #2c3a52;
+
+  --accent: #3b82f6;
+  --accent-strong: #60a5fa;
+  --accent-soft: rgba(59, 130, 246, 0.12);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 18px 44px -18px rgba(0, 0, 0, 0.7);
 }
+
+/* ---------------------------- Base ---------------------------- */
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Inter", system-ui, sans-serif;
+  color: var(--text);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+p { color: var(--text-muted); }
+
+::selection { background: var(--accent); color: #fff; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+  border: 3px solid var(--bg);
+}
+
+/* ------------------------ Layout ------------------------- */
+
+/* Columna central tipo CV */
+.container-ed {
+  width: 100%;
+  max-width: 64rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+/* Espacio entre tarjetas/secciones */
+.stack-ed { display: flex; flex-direction: column; gap: 1.25rem; }
+
+/* ------------------------ Componentes ------------------------- */
+
+/* Tarjeta base */
+.card-ed {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Padding estándar de tarjeta */
+.card-pad { padding: 1.75rem; }
+@media (min-width: 768px) { .card-pad { padding: 2rem; } }
+
+/* Encabezado de sección: icono + título */
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1.5rem;
+}
+.section-head i { color: var(--accent); font-size: 1rem; }
+.section-head h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Eyebrow / rol */
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Botones */
+.btn-ed {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.7rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 9px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    color 0.2s ease, transform 0.15s ease;
+}
+.btn-ed:active { transform: translateY(1px); }
+
+.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn-primary:hover { background: var(--accent-strong); border-color: var(--accent-strong); }
+
+.btn-ghost { background: transparent; color: var(--text); border-color: var(--border-strong); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Enlace con subrayado */
+.link-ed {
+  position: relative;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+.link-ed:hover { color: var(--accent); }
+
+/* Chip de tecnología (pill con borde) */
+.chip-ed {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+}
+.chip-ed img, .chip-ed i { width: 1rem; height: 1rem; font-size: 0.95rem; }
+
+/* Chip plano (dentro de tarjetas de proyecto) */
+.tag-ed {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--surface);
+  border-radius: 6px;
+}
+
+/* Botón-icono */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 8px;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+.icon-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+/* Regla fina */
+.rule-ed { height: 1px; background: var(--border); border: 0; }
+
+/* Cifras destacadas */
+.stat-num { font-size: 1.85rem; font-weight: 700; line-height: 1; color: var(--accent); }
+.stat-label {
+  font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-faint); font-weight: 600;
+}
+
+/* Punto del timeline */
+.tl-dot {
+  width: 0.7rem; height: 0.7rem; border-radius: 999px;
+  background: var(--accent); flex-shrink: 0;
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+/* Utilidades sobre tokens */
+.text-ink { color: var(--text); }
+.text-muted-ed { color: var(--text-muted); }
+.text-faint-ed { color: var(--text-faint); }
+.text-accent-ed { color: var(--accent); }
+.bg-paper { background: var(--bg); }
+.bg-elev { background: var(--bg-elev); }
+.bg-surface { background: var(--surface); }
+.border-ed { border-color: var(--border); }

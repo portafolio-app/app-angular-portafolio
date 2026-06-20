@@ -1,79 +1,42 @@
-<section class="py-16 bg-white dark:bg-slate-950 transition-colors duration-300">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!-- Header -->
-    <div class="text-center mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-        {{ 'CERTIFICATIONS.TITLE_PRE' | translate }} <span class="text-emerald-600 dark:text-emerald-400">{{ 'CERTIFICATIONS.TITLE_SPAN' | translate }}</span>
-      </h2>
-      <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-        {{ 'NAVBAR.CERTIFICATIONS' | translate }} & {{ 'NAVBAR.TRAYECTORIA' | translate }}
-      </p>
-    </div>
+<div class="card-ed card-pad">
+  <div class="section-head">
+    <i class="fas fa-award"></i>
+    <h2>{{ 'NAVBAR.CERTIFICATIONS' | translate }}</h2>
+  </div>
 
-    <!-- Elegant Icon-List for Certifications -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-12 max-w-6xl mx-auto">
-      <div *ngFor="let cert of certifications" class="group flex items-start gap-6 pt-4">
-        
-        <!-- Icon Container (About-Me Style) -->
-        <div class="flex-shrink-0 w-14 h-14 rounded-2xl bg-emerald-50 dark:bg-emerald-900/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-800 transition-all duration-300 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-800/40">
-          <i class="fas fa-certificate text-xl"></i>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+    <div *ngFor="let cert of certifications" class="flex items-start gap-4">
+      <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center"
+        style="background: var(--accent-soft); color: var(--accent);">
+        <i class="fas fa-certificate"></i>
+      </div>
+
+      <div class="flex-1 min-w-0">
+        <div class="flex items-start justify-between gap-3">
+          <h3 class="text-[0.92rem] font-bold leading-snug">{{ cert.title | translate }}</h3>
+          <span class="text-[0.7rem] font-semibold flex-shrink-0 mt-0.5" style="color: var(--text-faint);">{{ cert.date | date: 'yyyy' }}</span>
+        </div>
+        <p class="text-[0.75rem] font-semibold uppercase tracking-wide mt-0.5" style="color: var(--accent);">{{ cert.issuer | translate }}</p>
+        <p class="text-[0.82rem] leading-relaxed mt-1.5" style="color: var(--text-muted);">{{ cert.description | translate }}</p>
+
+        <!-- Progreso (en curso) -->
+        <div *ngIf="cert.status === 'in-progress'" class="mt-3">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-[0.65rem] font-bold uppercase tracking-widest" style="color: var(--text-faint);">{{ 'CERTIFICATIONS.PROGRESS' | translate }}</span>
+            <span class="text-[0.65rem] font-bold" style="color: var(--accent);">{{ getProgressPercentage(cert) | number: '1.0-0' }}%</span>
+          </div>
+          <div class="w-full h-1 rounded-full overflow-hidden" style="background: var(--surface);">
+            <div class="h-full rounded-full" style="background: var(--accent);" [style.width.%]="getProgressPercentage(cert)"></div>
+          </div>
         </div>
 
-        <!-- Content -->
-        <div class="flex-1 space-y-2">
-          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
-            <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors duration-300">
-              {{ cert.title | translate }}
-            </h3>
-            <span class="text-xs font-bold text-gray-400 dark:text-gray-500 tracking-wider">
-              {{ cert.date | date: 'yyyy' }}
-            </span>
-          </div>
-
-          <p class="text-sm font-semibold text-emerald-600 dark:text-emerald-500 uppercase tracking-wide">
-            {{ cert.issuer | translate }}
-          </p>
-
-          <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed max-w-md">
-            {{ cert.description | translate }}
-          </p>
-
-          <!-- Progress Bar for In-Progress (Minimal) -->
-          <div *ngIf="cert.status === 'in-progress'" class="pt-2">
-            <div class="flex items-center justify-between mb-1.5">
-              <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{{ 'CERTIFICATIONS.PROGRESS' | translate }}</span>
-              <span class="text-[10px] font-bold text-emerald-600">{{ getProgressPercentage(cert) | number: '1.0-0' }}%</span>
-            </div>
-            <div class="w-full bg-gray-100 dark:bg-slate-800 rounded-full h-1 overflow-hidden">
-              <div class="bg-emerald-500 h-full transition-all duration-1000"
-                   [style.width.%]="getProgressPercentage(cert)">
-              </div>
-            </div>
-          </div>
-
-          <!-- Credential Link (Text style) -->
-          <div *ngIf="cert.credentialUrl && cert.status === 'completed'" class="pt-3">
-            <a [href]="cert.credentialUrl" 
-               target="_blank" 
-               class="inline-flex items-center text-sm font-bold text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-200 group/link">
-              <span>{{ 'CERTIFICATIONS.VIEW_CERTIFICATE' | translate }}</span>
-              <i class="fas fa-external-link-alt ml-2 text-xs opacity-50 group-hover/link:opacity-100 transition-opacity"></i>
-            </a>
-          </div>
-        </div>
+        <!-- Enlace credencial -->
+        <a *ngIf="cert.credentialUrl && cert.status === 'completed'" [href]="cert.credentialUrl" target="_blank"
+          class="inline-flex items-center gap-1.5 text-[0.8rem] font-semibold mt-2.5 link-ed">
+          <span>{{ 'CERTIFICATIONS.VIEW_CERTIFICATE' | translate }}</span>
+          <i class="fas fa-external-link-alt text-[0.65rem]"></i>
+        </a>
       </div>
     </div>
-
-
-
-    <!-- Empty State -->
-    <div *ngIf="certifications.length === 0"
-         class="text-center py-12">
-      <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-      </svg>
-      <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">{{ 'CERTIFICATIONS.EMPTY_TITLE' | translate }}</h3>
-      <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ 'CERTIFICATIONS.EMPTY_DESC' | translate }}</p>
-    </div>
   </div>
-</section>
+</div>

@@ -1,238 +1,76 @@
-<!-- Navbar completamente responsivo -->
+<!-- Navbar profesional -->
 <nav [@slideDown]="navbarState"
-  class="fixed top-0 left-0 w-full z-50 bg-gray-50/95 dark:bg-gray-900/95 backdrop-blur-lg border-b border-gray-200/50 dark:border-gray-700/50 transition-all duration-300">
-  <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-14 sm:h-16 md:h-18">
+  class="fixed top-0 left-0 w-full z-50 border-b backdrop-blur-md"
+  style="background: color-mix(in srgb, var(--bg) 90%, transparent); border-color: var(--border);">
+  <div class="container-ed">
+    <div class="flex items-center justify-between h-16">
 
-      <!-- Logo responsivo -->
-      <div [@fadeIn]="menuItemsState" class="flex items-center min-w-0 flex-shrink-0">
-        <a (click)="navigateToPage('/')"
-          class="group flex items-center space-x-2 sm:space-x-3 hover:scale-105 transition-transform duration-300 cursor-pointer">
-          <!-- Icono circular -->
-          <div
-            class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-green-500/25 transition-all duration-300">
-            <span class="text-white font-bold text-xs sm:text-sm">JC</span>
-          </div>
-          <!-- Texto del logo responsivo -->
-          <span
-            class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-300 truncate">
-            <span class="hidden xs:inline">Jorge Castillo</span>
-            <span class="xs:hidden">Jcv Code</span>
-          </span>
-        </a>
-      </div>
+      <!-- Wordmark -->
+      <a (click)="navigateToPage('/')" class="group flex items-center gap-2.5 cursor-pointer select-none">
+        <span class="inline-flex items-center justify-center w-8 h-8 rounded-md text-sm font-bold"
+          style="background: var(--accent-soft); color: var(--accent);">&lt;/&gt;</span>
+        <span class="text-[1rem] font-bold tracking-tight" style="color: var(--text);">Jorge Castillo</span>
+      </a>
 
       <!-- Navegación desktop -->
-      <div [@fadeIn]="menuItemsState" class="hidden md:flex md:items-center md:space-x-1 lg:space-x-2">
-        <nav class="flex items-center space-x-1">
-          <!-- Home -->
-          <button (click)="scrollToSection('home')"
-            class="group px-3 lg:px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 font-medium text-sm lg:text-base cursor-pointer">
-            {{ 'NAVBAR.HOME' | translate }}
-          </button>
-
-          <!-- Proyectos (Página) -->
-          <button (click)="navigateToPage('/proyectos')"
-            class="group px-3 lg:px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 font-medium text-sm lg:text-base cursor-pointer">
-            {{ 'NAVBAR.PROJECTS' | translate }}
-          </button>
-
-          <!-- Sobre Mí -->
-          <button (click)="scrollToSection('sobre-mi')"
-            class="group px-3 lg:px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 font-medium text-sm lg:text-base cursor-pointer">
-            {{ 'NAVBAR.ABOUT' | translate }}
-          </button>
-
-          <!-- Testimonios - Comentado por ahora -->
-          <!--
-          <button (click)="scrollToSection('testimonios')"
-            class="group px-3 lg:px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 font-medium text-sm lg:text-base cursor-pointer">
-            {{ 'NAVBAR.TESTIMONIALS' | translate }}
-          </button>
-          -->
-
-          <!-- Más (Dropdown) -->
-          <div class="relative">
-            <button (click)="toggleDropdown($event)"
-              class="group flex items-center px-3 lg:px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 font-medium text-sm lg:text-base cursor-pointer">
-              <span>{{ 'NAVBAR.TRAYECTORIA' | translate }}</span>
-              <i class="fas fa-chevron-down ml-1.5 text-xs transition-transform duration-300"
-                [class.rotate-180]="isDropdownOpen"></i>
-            </button>
-
-            <!-- Dropdown Menu -->
-            <div *ngIf="isDropdownOpen"
-              class="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-100 dark:border-gray-700 py-2 z-50 animate__animated animate__fadeInUp animate__faster">
-
-              <button (click)="scrollToSection('experiencia')"
-                class="flex items-center w-full px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-green-900/20 hover:text-green-600 dark:hover:text-green-400 transition-colors">
-                <i class="fas fa-briefcase mr-3 w-4 text-center"></i> {{ 'NAVBAR.EXPERIENCE' | translate }}
-              </button>
-
-              <button (click)="scrollToSection('certificaciones')"
-                class="flex items-center w-full px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-green-900/20 hover:text-green-600 dark:hover:text-green-400 transition-colors">
-                <i class="fas fa-award mr-3 w-4 text-center"></i> {{ 'NAVBAR.CERTIFICATIONS' | translate }}
-              </button>
-
-              <button (click)="scrollToSection('tecnologias')"
-                class="flex items-center w-full px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-green-900/20 hover:text-green-600 dark:hover:text-green-400 transition-colors">
-                <i class="fas fa-cogs mr-3 w-4 text-center"></i> {{ 'NAVBAR.TECHNOLOGIES' | translate }}
-              </button>
-
-            </div>
-          </div>
-        </nav>
+      <div [@fadeIn]="menuItemsState" class="hidden md:flex items-center gap-6 text-[0.875rem] font-medium">
+        <button (click)="scrollToSection('home')" class="link-ed py-1">{{ 'NAVBAR.HOME' | translate }}</button>
+        <button (click)="scrollToSection('sobre-mi')" class="link-ed py-1">{{ 'NAVBAR.ABOUT' | translate }}</button>
+        <button (click)="scrollToSection('tecnologias')" class="link-ed py-1">{{ 'NAVBAR.TECHNOLOGIES' | translate }}</button>
+        <button (click)="navigateToPage('/proyectos')" class="link-ed py-1">{{ 'NAVBAR.PROJECTS' | translate }}</button>
+        <button (click)="scrollToSection('experiencia')" class="link-ed py-1">{{ 'NAVBAR.EXPERIENCE' | translate }}</button>
+        <button (click)="scrollToSection('certificaciones')" class="link-ed py-1">{{ 'NAVBAR.CERTIFICATIONS' | translate }}</button>
       </div>
 
-      <!-- Controles derecha (tema + menú móvil) -->
-      <div [@fadeIn]="menuItemsState" class="flex items-center space-x-1 sm:space-x-2">
+      <!-- Controles derecha -->
+      <div [@fadeIn]="menuItemsState" class="flex items-center gap-2">
+        <!-- Idioma -->
+        <div class="hidden sm:flex items-center text-xs font-medium">
+          <button (click)="switchLanguage('es')" class="px-1.5 py-1"
+            [style.color]="currentLang === 'es' ? 'var(--accent)' : 'var(--text-faint)'">ES</button>
+          <span style="color: var(--border-strong);">/</span>
+          <button (click)="switchLanguage('en')" class="px-1.5 py-1"
+            [style.color]="currentLang === 'en' ? 'var(--accent)' : 'var(--text-faint)'">EN</button>
+        </div>
 
-        <!-- Arcade Mode Toggle -->
-        <button (click)="toggleArcadeMode()" aria-label="Modo Arcade"
-          class="group p-2 sm:p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-green-100 dark:hover:bg-green-900/30 transition-all duration-300 hover:scale-105 cursor-pointer">
-          <i class="fas fa-gamepad w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-400 flex items-center justify-center"></i>
-        </button>
-
-        <!-- Toggle de tema responsivo -->
-        <button (click)="toggleTheme()" aria-label="Cambiar tema"
-          class="group p-2 sm:p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-green-100 dark:hover:bg-green-900/30 transition-all duration-300 hover:scale-105 cursor-pointer">
-          <!-- Sol (modo claro) -->
-          <svg *ngIf="!isDarkMode"
-            class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 group-hover:text-green-600 transition-all duration-300 group-hover:rotate-180"
-            fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <!-- Tema -->
+        <button (click)="toggleTheme()" aria-label="Cambiar tema" class="icon-btn">
+          <svg *ngIf="!isDarkMode" class="w-[1.05rem] h-[1.05rem]" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round"
-              d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.071-7.071l-1.414 1.414M6.343 17.657l-1.414 1.414M17.657 17.657l1.414 1.414M6.343 6.343L4.929 4.929M12 6a6 6 0 100 12 6 6 0 000-12z">
-            </path>
+              d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.071-7.071l-1.414 1.414M6.343 17.657l-1.414 1.414M17.657 17.657l1.414 1.414M6.343 6.343L4.929 4.929M12 6a6 6 0 100 12 6 6 0 000-12z"></path>
           </svg>
-          <!-- Luna (modo oscuro) -->
-          <svg *ngIf="isDarkMode"
-            class="w-4 h-4 sm:w-5 sm:h-5 text-gray-300 group-hover:text-green-400 transition-all duration-300 group-hover:rotate-12"
-            fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 1021 12.79z">
-            </path>
+          <svg *ngIf="isDarkMode" class="w-[1.05rem] h-[1.05rem]" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 1021 12.79z"></path>
           </svg>
         </button>
 
-        <!-- Botón menú móvil mejorado -->
+        <!-- Menú móvil -->
         <button (click)="toggleMenu()" id="menu-toggle" type="button"
           [attr.aria-label]="isMenuOpen ? 'Cerrar menú' : 'Abrir menú'" [attr.aria-expanded]="isMenuOpen"
-          class="md:hidden group p-2 sm:p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-green-100 dark:hover:bg-green-900/30 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900">
-
-          <!-- Hamburger icon -->
-          <svg *ngIf="!isMenuOpen"
-            class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-300"
-            fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          class="md:hidden icon-btn">
+          <svg *ngIf="!isMenuOpen" class="w-[1.05rem] h-[1.05rem]" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
-
-          <!-- Close X icon -->
-          <svg *ngIf="isMenuOpen"
-            class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-300"
-            fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <svg *ngIf="isMenuOpen" class="w-[1.05rem] h-[1.05rem]" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
         </button>
-
-        <!-- Language Switcher -->
-        <div
-          class="hidden sm:flex items-center ml-2 space-x-1 bg-gray-100 dark:bg-gray-800 p-1 rounded-xl border border-gray-200 dark:border-gray-700">
-          <button (click)="switchLanguage('es')" [class.bg-white]="currentLang === 'es'"
-            [class.dark:bg-gray-700]="currentLang === 'es'" [class.shadow-sm]="currentLang === 'es'"
-            [class.text-green-600]="currentLang === 'es'"
-            class="px-2 py-1 rounded-lg text-[10px] font-black uppercase transition-all duration-300 hover:text-green-500 text-gray-500 dark:text-gray-400">
-            ES
-          </button>
-          <button (click)="switchLanguage('en')" [class.bg-white]="currentLang === 'en'"
-            [class.dark:bg-gray-700]="currentLang === 'en'" [class.shadow-sm]="currentLang === 'en'"
-            [class.text-green-600]="currentLang === 'en'"
-            class="px-2 py-1 rounded-lg text-[10px] font-black uppercase transition-all duration-300 hover:text-green-500 text-gray-500 dark:text-gray-400">
-            EN
-          </button>
-        </div>
       </div>
     </div>
 
-    <!-- Menú móvil completamente responsivo -->
-    <div *ngIf="isMenuOpen" @mobileMenu
-      class="md:hidden overflow-hidden bg-gray-50/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-700/50 shadow-lg">
-
-      <!-- Menú móvil con funciones corregidas -->
-      <div class="px-3 sm:px-4 py-4 sm:py-6 space-y-2 sm:space-y-3">
-        <!-- Home -->
-        <button (click)="scrollToSection('home')"
-          class="group flex items-center w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base cursor-pointer">
-          <i
-            class="fas fa-home mr-3 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300"></i>
-          <span class="font-medium">{{ 'NAVBAR.HOME' | translate }}</span>
-        </button>
-
-        <!-- Proyectos (Página) -->
-        <button (click)="navigateToPage('/proyectos')"
-          class="group flex items-center w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base cursor-pointer">
-          <i
-            class="fas fa-folder mr-3 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300"></i>
-          <span class="font-medium">{{ 'NAVBAR.PROJECTS' | translate }}</span>
-        </button>
-
-        <!-- Sobre Mí -->
-        <button (click)="scrollToSection('sobre-mi')"
-          class="group flex items-center w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base cursor-pointer">
-          <i
-            class="fas fa-user mr-3 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300"></i>
-          <span class="font-medium">{{ 'NAVBAR.ABOUT' | translate }}</span>
-        </button>
-
-        <!-- Testimonios - Comentado por ahora -->
-        <!--
-        <button (click)="scrollToSection('testimonios')"
-          class="group flex items-center w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base cursor-pointer">
-          <i
-            class="fas fa-comment-dots mr-3 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300"></i>
-          <span class="font-medium">{{ 'NAVBAR.TESTIMONIALS' | translate }}</span>
-        </button>
-        -->
-
-        <div class="pt-2 pb-1 px-4 border-t border-gray-100 dark:border-gray-800">
-          <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">{{ 'NAVBAR.TRAYECTORIA' | translate
-            }}</span>
+    <!-- Menú móvil -->
+    <div *ngIf="isMenuOpen" @mobileMenu class="md:hidden border-t py-3" style="border-color: var(--border);">
+      <div class="flex flex-col text-[0.95rem] font-medium">
+        <button (click)="scrollToSection('home')" class="text-left py-2.5" style="color: var(--text);">{{ 'NAVBAR.HOME' | translate }}</button>
+        <button (click)="scrollToSection('sobre-mi')" class="text-left py-2.5" style="color: var(--text);">{{ 'NAVBAR.ABOUT' | translate }}</button>
+        <button (click)="scrollToSection('tecnologias')" class="text-left py-2.5" style="color: var(--text);">{{ 'NAVBAR.TECHNOLOGIES' | translate }}</button>
+        <button (click)="navigateToPage('/proyectos')" class="text-left py-2.5" style="color: var(--text);">{{ 'NAVBAR.PROJECTS' | translate }}</button>
+        <button (click)="scrollToSection('experiencia')" class="text-left py-2.5" style="color: var(--text);">{{ 'NAVBAR.EXPERIENCE' | translate }}</button>
+        <button (click)="scrollToSection('certificaciones')" class="text-left py-2.5" style="color: var(--text);">{{ 'NAVBAR.CERTIFICATIONS' | translate }}</button>
+        <div class="flex items-center gap-3 pt-3 mt-2 border-t text-sm" style="border-color: var(--border);">
+          <button (click)="switchLanguage('es')" [style.color]="currentLang === 'es' ? 'var(--accent)' : 'var(--text-faint)'">ES</button>
+          <button (click)="switchLanguage('en')" [style.color]="currentLang === 'en' ? 'var(--accent)' : 'var(--text-faint)'">EN</button>
         </div>
-
-        <button (click)="scrollToSection('experiencia')"
-          class="group flex items-center w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base cursor-pointer">
-          <i
-            class="fas fa-briefcase mr-3 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300"></i>
-          <span class="font-medium">{{ 'NAVBAR.EXPERIENCE' | translate }}</span>
-        </button>
-
-        <button (click)="scrollToSection('certificaciones')"
-          class="group flex items-center w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base cursor-pointer">
-          <i
-            class="fas fa-award mr-3 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300"></i>
-          <span class="font-medium">{{ 'NAVBAR.CERTIFICATIONS' | translate }}</span>
-        </button>
-
-        <button (click)="toggleArcadeMode()"
-          class="group flex items-center w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base cursor-pointer">
-          <i
-            class="fas fa-gamepad mr-3 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300"></i>
-          <span class="font-medium">Modo Arcade</span>
-        </button>
-
-        <button (click)="scrollToSection('tecnologias')"
-          class="group flex items-center w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base cursor-pointer">
-          <i
-            class="fas fa-cogs mr-3 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300"></i>
-          <span class="font-medium">{{ 'NAVBAR.TECHNOLOGIES' | translate }}</span>
-        </button>
-
-        <!-- Blog - OCULTO TEMPORALMENTE -->
-        <!-- <button (click)="navigateToPage('/blog')"
-          class="group flex items-center w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 text-sm sm:text-base cursor-pointer">
-          <i
-            class="fas fa-blog mr-3 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300"></i>
-          <span class="font-medium">Blog</span>
-        </button> -->
-
       </div>
     </div>
   </div>

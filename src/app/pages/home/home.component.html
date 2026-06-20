@@ -1,69 +1,14 @@
 <app-navbard [isDarkMode]="isDarkMode" (themeToggle)="toggleTheme()"></app-navbard>
 
-<!-- Hero Section -->
-<section id="home">
-  <app-hero></app-hero>
-</section>
+<main class="container-ed pb-16">
+  <!-- Hero (tarjeta) -->
+  <section id="home">
+    <app-hero></app-hero>
+  </section>
 
-<!-- Testimonios Section - Comentado por ahora -->
-<!-- <app-testimonials id="testimonios"></app-testimonials> -->
-
-<!-- About Me Section -->
-<app-about-me id="sobre-mi"></app-about-me>
-
-<!-- Certificaciones Section -->
-<section id="certificaciones" class="bg-white dark:bg-slate-950 py-16">
-  <app-certificaciones></app-certificaciones>
-</section>
-
-<!-- Experiencia Section -->
-<section id="experiencia" class="bg-white dark:bg-slate-950 py-16">
-  <app-experiencia></app-experiencia>
-</section>
-
-<!-- CTA Proyectos (Simple) -->
-<section id="proyectos-cta" class="py-20 bg-emerald-50 dark:bg-slate-900 transition-colors duration-300">
-  <div class="max-w-7xl mx-auto px-4 text-center">
-    <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-      {{ 'HOME.CTA_PROJECTS_TITLE' | translate }} <span class="text-emerald-600 dark:text-emerald-400">{{ 'HOME.CTA_PROJECTS_SPAN' | translate }}</span>?
-    </h2>
-    <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-      {{ 'HOME.CTA_PROJECTS_DESC' | translate }}
-    </p>
-    <a routerLink="/proyectos" 
-       class="inline-flex items-center px-10 py-4 bg-emerald-600 text-white font-black text-lg rounded-full hover:bg-emerald-700 transition-all transform hover:scale-105 shadow-xl group">
-      {{ 'HOME.CTA_PROJECTS_BUTTON' | translate }}
-      <i class="fas fa-rocket ml-3 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
-    </a>
-  </div>
-</section>
-
-<!-- Stack Tecnológico Section -->
-<section id="tecnologias" class="bg-white dark:bg-slate-950">
-  <app-stack-tecnologico></app-stack-tecnologico>
-</section>
-
-
-<!-- Footer -->
-<app-footer></app-footer>
-
-<!-- BOTÓN DE INFORMACIÓN -->
-<div class="fixed inset-0 pointer-events-none z-50">
-  <div class="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 pointer-events-auto">
-    <div class="relative group">
-      <div class="absolute inset-0 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-full opacity-20 animate-ping"></div>
-      <button type="button" (click)="showDevelopmentInfo()" class="relative w-12 h-12 xs:w-14 xs:h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 lg:w-20 lg:h-20
-               bg-gradient-to-br from-emerald-500 via-emerald-600 to-emerald-700
-               hover:from-emerald-600 hover:via-emerald-700 hover:to-emerald-800
-               text-white rounded-full shadow-lg transform transition-all duration-300
-               hover:scale-110 active:scale-95 group cursor-pointer" [disabled]="isAlertVisible">
-        <i class="fas fa-info text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl" [class.animate-spin]="isButtonLoading"></i>
-      </button>
-    </div>
-  </div>
-</div>
-
-<!-- Componente de Alert -->
-<app-alert *ngIf="currentAlert && isAlertVisible" [config]="currentAlert" [isVisible]="isAlertVisible"
-  (actionClicked)="onAlertAction($event)" (closed)="onAlertClosed($event)">
-</app-alert>
+  <div class="mt-5"><app-about-me id="sobre-mi"></app-about-me></div>
+  <div class="mt-5"><app-stack-tecnologico id="tecnologias"></app-stack-tecnologico></div>
+  <div class="mt-5"><app-experiencia id="experiencia"></app-experiencia></div>
+  <div class="mt-5"><app-certificaciones id="certificaciones"></app-certificaciones></div>
+  <div class="mt-5"><app-footer></app-footer></div>
+</main>

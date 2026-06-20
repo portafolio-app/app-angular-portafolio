@@ -1,36 +1,22 @@
-/* src/styles/theme-variables.css */
+/* src/styles/theme-variables.css
+   Compatibilidad: las clases legacy ahora heredan los tokens del
+   sistema editorial definido en styles.css (--accent y derivados). */
 
-:root {
-  /* Colores principales - fáciles de cambiar */
-  --primary-color: #10b981;      /* green-500 */
-  --primary-dark: #059669;       /* green-600 */
-  --primary-light: #34d399;      /* green-400 */
+/* Clases de utilidad legacy mapeadas al acento editorial */
+.text-primary { color: var(--accent); }
+.text-primary-dark { color: var(--accent-strong); }
+.text-primary-light { color: var(--accent); }
 
-  --secondary-color: #14b8a6;    /* teal-500 */
-  --secondary-dark: #0d9488;     /* teal-600 */
-  --secondary-light: #2dd4bf;    /* teal-400 */
+.bg-primary { background-color: var(--accent); }
+.bg-primary-dark { background-color: var(--accent-strong); }
 
-  --accent-color: #10b981;       /* emerald-500 */
-  --accent-dark: #059669;        /* emerald-600 */
-  --accent-light: #34d399;       /* emerald-400 */
-}
+.text-secondary { color: var(--accent); }
+.text-secondary-dark { color: var(--accent-strong); }
+.text-secondary-light { color: var(--accent); }
 
-/* Clases de utilidad simples */
-.text-primary { color: var(--primary-color); }
-.text-primary-dark { color: var(--primary-dark); }
-.text-primary-light { color: var(--primary-light); }
+.border-primary { border-color: var(--accent); }
+.border-accent { border-color: var(--accent); }
 
-.bg-primary { background-color: var(--primary-color); }
-.bg-primary-dark { background-color: var(--primary-dark); }
-
-.text-secondary { color: var(--secondary-color); }
-.text-secondary-dark { color: var(--secondary-dark); }
-.text-secondary-light { color: var(--secondary-light); }
-
-.border-primary { border-color: var(--primary-color); }
-.border-accent { border-color: var(--accent-color); }
-
-/* Hover states */
-.hover\:bg-primary-dark:hover { background-color: var(--primary-dark); }
-.hover\:text-primary:hover { color: var(--primary-color); }
-.hover\:text-secondary:hover { color: var(--secondary-color); }
+.hover\:bg-primary-dark:hover { background-color: var(--accent-strong); }
+.hover\:text-primary:hover { color: var(--accent); }
+.hover\:text-secondary:hover { color: var(--accent); }
