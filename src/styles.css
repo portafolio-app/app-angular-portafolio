@@ -107,9 +107,12 @@ p { color: var(--text-muted); }
 /* Columna central tipo CV */
 .container-ed {
   width: 100%;
-  max-width: 64rem;
+  max-width: 76rem;
   margin-inline: auto;
   padding-inline: 1.25rem;
+}
+@media (min-width: 1280px) {
+  .container-ed { padding-inline: 2rem; }
 }
 
 /* Espacio entre tarjetas/secciones */
@@ -173,6 +176,27 @@ p { color: var(--text-muted); }
 
 .btn-ghost { background: transparent; color: var(--text); border-color: var(--border-strong); }
 .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+.btn-sm { padding: 0.5rem 0.85rem; font-size: 0.8rem; gap: 0.4rem; }
+
+/* Tab / filtro de categoría */
+.tab-ed {
+  padding: 0.45rem 0.95rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg-elev);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.tab-ed:hover { border-color: var(--border-strong); color: var(--text); }
+.tab-ed[data-active="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
 
 /* Enlace con subrayado */
 .link-ed {
