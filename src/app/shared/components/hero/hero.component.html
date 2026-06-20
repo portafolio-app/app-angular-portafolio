@@ -1,10 +1,10 @@
 <div class="pt-24 lg:pt-28">
   <!-- Tarjeta principal -->
   <div class="card-ed card-pad">
-    <div class="flex flex-col sm:flex-row gap-7 lg:gap-9">
+    <div class="flex flex-col lg:flex-row gap-7 lg:gap-9">
 
       <!-- Foto -->
-      <div class="flex-shrink-0 mx-auto sm:mx-0">
+      <div class="flex-shrink-0 mx-auto lg:mx-0">
         <div class="overflow-hidden rounded-xl" style="border: 1px solid var(--border); width: 11.5rem;">
           <img src="2.jpg" alt="Jorge Luis Castillo Vega" class="w-full object-cover"
             style="aspect-ratio: 1/1.12;" fetchpriority="high">
@@ -12,18 +12,18 @@
       </div>
 
       <!-- Texto -->
-      <div class="flex-1 min-w-0 text-center sm:text-left">
+      <div class="flex-1 min-w-0 text-center lg:text-left">
         <p class="eyebrow mb-2.5">{{ 'HERO.GREETING' | translate }}</p>
         <h1 class="mb-2" style="font-size: clamp(2.25rem, 5vw, 3.25rem);">Jorge Castillo Vega</h1>
         <p class="text-[1.05rem] font-medium mb-4" style="color: var(--text);">
           {{ 'HOME.TITLE' | translate }}
         </p>
-        <p class="text-[0.95rem] leading-relaxed mb-6" style="color: var(--text-muted); max-width: 38rem;">
+        <p class="text-[0.95rem] leading-relaxed mb-6" style="color: var(--text-muted); max-width: 34rem;">
           {{ 'HERO.DESCRIPTION_PRE' | translate }}{{ 'HERO.DESCRIPTION_TECH' | translate }}{{ 'HERO.DESCRIPTION_POST' | translate }}
         </p>
 
         <!-- CTAs + social -->
-        <div class="flex flex-wrap items-center justify-center sm:justify-start gap-3">
+        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3">
           <a routerLink="/proyectos" class="btn-ed btn-primary">
             <i class="fas fa-folder-open text-xs"></i>
             {{ 'NAVBAR.PROJECTS' | translate }}
@@ -46,6 +46,41 @@
           </a>
         </div>
       </div>
+
+      <!-- Ficha lateral de datos clave -->
+      <div class="lg:w-60 lg:flex-shrink-0 lg:border-l lg:pl-8 flex flex-col gap-4 pt-2 lg:pt-1"
+        style="border-color: var(--border);">
+        <!-- Disponibilidad -->
+        <div class="flex items-center gap-2">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60" style="background: var(--accent);"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2" style="background: var(--accent);"></span>
+          </span>
+          <span class="text-[0.8rem] font-semibold" style="color: var(--accent);">{{ 'FOOTER.PROJECT_AVAIL' | translate }}</span>
+        </div>
+
+        <div class="rule-ed"></div>
+
+        <!-- Rol actual -->
+        <div>
+          <div class="stat-label mb-1">{{ 'HERO.CURRENT_LABEL' | translate }}</div>
+          <div class="text-[0.88rem] font-semibold" style="color: var(--text);">Backend Semi Senior</div>
+          <div class="text-[0.8rem]" style="color: var(--text-muted);">Sinapsis Corp</div>
+        </div>
+
+        <!-- Ubicación -->
+        <div>
+          <div class="stat-label mb-1">{{ 'HERO.LOCATION_LABEL' | translate }}</div>
+          <div class="text-[0.88rem]" style="color: var(--text);">Perú — {{ 'HERO.RELOCATION' | translate }}</div>
+        </div>
+
+        <!-- Experiencia -->
+        <div>
+          <div class="stat-label mb-1">{{ 'HERO.EXP_LABEL' | translate }}</div>
+          <div class="text-[0.88rem]" style="color: var(--text);">{{ 'HERO.EXPERIENCE' | translate }}</div>
+        </div>
+      </div>
+
     </div>
   </div>
 

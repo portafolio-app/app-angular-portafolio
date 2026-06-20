@@ -45,7 +45,10 @@
     "VIEW_BLOG": "Ver Blog",
     "FREELANCE_WEB": "Web Freelance",
     "TIKTOK": "TikTok",
-    "RELOCATION": "Disponible para reubicación"
+    "RELOCATION": "Disponible para reubicación",
+    "CURRENT_LABEL": "Actualmente",
+    "LOCATION_LABEL": "Ubicación",
+    "EXP_LABEL": "Experiencia"
   },
   "HOME": {
     "TITLE": "Desarrollador Full Stack",

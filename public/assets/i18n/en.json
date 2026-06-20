@@ -44,7 +44,11 @@
     "CONTACT_BUTTON": "Contact Me",
     "VIEW_BLOG": "View Blog",
     "FREELANCE_WEB": "Freelance Web",
-    "TIKTOK": "TikTok"
+    "TIKTOK": "TikTok",
+    "RELOCATION": "Open to relocation",
+    "CURRENT_LABEL": "Currently",
+    "LOCATION_LABEL": "Location",
+    "EXP_LABEL": "Experience"
   },
   "HOME": {
     "TITLE": "Full Stack Developer",
