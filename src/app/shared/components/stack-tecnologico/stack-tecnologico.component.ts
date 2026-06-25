@@ -79,8 +79,14 @@ export class StackTecnologicoComponent implements OnInit, AfterViewInit, OnDestr
     },
     {
       name: 'Angular',
-      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg',
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg',
       level: 82,
+      category: 'frontend'
+    },
+    {
+      name: 'React',
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+      level: 80,
       category: 'frontend'
     },
     {
