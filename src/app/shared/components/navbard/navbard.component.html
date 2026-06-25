@@ -1,77 +1,121 @@
-<!-- Navbar profesional -->
-<nav [@slideDown]="navbarState"
-  class="fixed top-0 left-0 w-full z-50 border-b backdrop-blur-md"
-  style="background: color-mix(in srgb, var(--bg) 90%, transparent); border-color: var(--border);">
-  <div class="container-ed">
-    <div class="flex items-center justify-between h-16">
+<!-- ============ Plantilla reutilizable de enlaces ============ -->
+<ng-template #navLinks>
+  <button (click)="scrollToSection('home')" class="side-link" [attr.data-active]="isActive('home')">
+    <i class="fas fa-house"></i><span>{{ 'NAVBAR.HOME' | translate }}</span>
+  </button>
+  <button (click)="scrollToSection('sobre-mi')" class="side-link" [attr.data-active]="isActive('sobre-mi')">
+    <i class="fas fa-user"></i><span>{{ 'NAVBAR.ABOUT' | translate }}</span>
+  </button>
+  <button (click)="scrollToSection('tecnologias')" class="side-link" [attr.data-active]="isActive('tecnologias')">
+    <i class="fas fa-layer-group"></i><span>{{ 'NAVBAR.TECHNOLOGIES' | translate }}</span>
+  </button>
+  <button (click)="navigateToPage('/proyectos')" class="side-link">
+    <i class="fas fa-folder-open"></i><span>{{ 'NAVBAR.PROJECTS' | translate }}</span>
+  </button>
+  <button (click)="scrollToSection('experiencia')" class="side-link" [attr.data-active]="isActive('experiencia')">
+    <i class="fas fa-briefcase"></i><span>{{ 'NAVBAR.EXPERIENCE' | translate }}</span>
+  </button>
+  <button (click)="scrollToSection('certificaciones')" class="side-link" [attr.data-active]="isActive('certificaciones')">
+    <i class="fas fa-award"></i><span>{{ 'NAVBAR.CERTIFICATIONS' | translate }}</span>
+  </button>
+</ng-template>
 
-      <!-- Wordmark -->
-      <a (click)="navigateToPage('/')" class="group flex items-center gap-2.5 cursor-pointer select-none">
-        <span class="inline-flex items-center justify-center w-8 h-8 rounded-md text-sm font-bold"
-          style="background: var(--accent-soft); color: var(--accent);">&lt;/&gt;</span>
-        <span class="text-[1rem] font-bold tracking-tight" style="color: var(--text);">Jorge Castillo</span>
-      </a>
+<!-- ============ Controles inferiores reutilizables ============ -->
+<ng-template #bottomControls>
+  <!-- Disponibilidad -->
+  <div class="flex items-center gap-2 px-3 mb-3">
+    <span class="relative flex h-2 w-2">
+      <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60" style="background: var(--accent);"></span>
+      <span class="relative inline-flex rounded-full h-2 w-2" style="background: var(--accent);"></span>
+    </span>
+    <span class="text-[0.72rem] font-semibold" style="color: var(--accent);">{{ 'FOOTER.PROJECT_AVAIL' | translate }}</span>
+  </div>
 
-      <!-- Navegación desktop -->
-      <div [@fadeIn]="menuItemsState" class="hidden md:flex items-center gap-6 text-[0.875rem] font-medium">
-        <button (click)="scrollToSection('home')" class="link-ed py-1">{{ 'NAVBAR.HOME' | translate }}</button>
-        <button (click)="scrollToSection('sobre-mi')" class="link-ed py-1">{{ 'NAVBAR.ABOUT' | translate }}</button>
-        <button (click)="scrollToSection('tecnologias')" class="link-ed py-1">{{ 'NAVBAR.TECHNOLOGIES' | translate }}</button>
-        <button (click)="navigateToPage('/proyectos')" class="link-ed py-1">{{ 'NAVBAR.PROJECTS' | translate }}</button>
-        <button (click)="scrollToSection('experiencia')" class="link-ed py-1">{{ 'NAVBAR.EXPERIENCE' | translate }}</button>
-        <button (click)="scrollToSection('certificaciones')" class="link-ed py-1">{{ 'NAVBAR.CERTIFICATIONS' | translate }}</button>
-      </div>
-
-      <!-- Controles derecha -->
-      <div [@fadeIn]="menuItemsState" class="flex items-center gap-2">
-        <!-- Idioma -->
-        <div class="hidden sm:flex items-center text-xs font-medium">
-          <button (click)="switchLanguage('es')" class="px-1.5 py-1"
-            [style.color]="currentLang === 'es' ? 'var(--accent)' : 'var(--text-faint)'">ES</button>
-          <span style="color: var(--border-strong);">/</span>
-          <button (click)="switchLanguage('en')" class="px-1.5 py-1"
-            [style.color]="currentLang === 'en' ? 'var(--accent)' : 'var(--text-faint)'">EN</button>
-        </div>
-
-        <!-- Tema -->
-        <button (click)="toggleTheme()" aria-label="Cambiar tema" class="icon-btn">
-          <svg *ngIf="!isDarkMode" class="w-[1.05rem] h-[1.05rem]" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.071-7.071l-1.414 1.414M6.343 17.657l-1.414 1.414M17.657 17.657l1.414 1.414M6.343 6.343L4.929 4.929M12 6a6 6 0 100 12 6 6 0 000-12z"></path>
-          </svg>
-          <svg *ngIf="isDarkMode" class="w-[1.05rem] h-[1.05rem]" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 1021 12.79z"></path>
-          </svg>
-        </button>
-
-        <!-- Menú móvil -->
-        <button (click)="toggleMenu()" id="menu-toggle" type="button"
-          [attr.aria-label]="isMenuOpen ? 'Cerrar menú' : 'Abrir menú'" [attr.aria-expanded]="isMenuOpen"
-          class="md:hidden icon-btn">
-          <svg *ngIf="!isMenuOpen" class="w-[1.05rem] h-[1.05rem]" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-          <svg *ngIf="isMenuOpen" class="w-[1.05rem] h-[1.05rem]" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </div>
+  <div class="flex items-center justify-between px-3">
+    <!-- Idioma -->
+    <div class="flex items-center text-xs font-medium">
+      <button (click)="switchLanguage('es')" class="px-1.5 py-1" [style.color]="currentLang === 'es' ? 'var(--accent)' : 'var(--text-faint)'">ES</button>
+      <span style="color: var(--border-strong);">/</span>
+      <button (click)="switchLanguage('en')" class="px-1.5 py-1" [style.color]="currentLang === 'en' ? 'var(--accent)' : 'var(--text-faint)'">EN</button>
     </div>
 
-    <!-- Menú móvil -->
-    <div *ngIf="isMenuOpen" @mobileMenu class="md:hidden border-t py-3" style="border-color: var(--border);">
-      <div class="flex flex-col text-[0.95rem] font-medium">
-        <button (click)="scrollToSection('home')" class="text-left py-2.5" style="color: var(--text);">{{ 'NAVBAR.HOME' | translate }}</button>
-        <button (click)="scrollToSection('sobre-mi')" class="text-left py-2.5" style="color: var(--text);">{{ 'NAVBAR.ABOUT' | translate }}</button>
-        <button (click)="scrollToSection('tecnologias')" class="text-left py-2.5" style="color: var(--text);">{{ 'NAVBAR.TECHNOLOGIES' | translate }}</button>
-        <button (click)="navigateToPage('/proyectos')" class="text-left py-2.5" style="color: var(--text);">{{ 'NAVBAR.PROJECTS' | translate }}</button>
-        <button (click)="scrollToSection('experiencia')" class="text-left py-2.5" style="color: var(--text);">{{ 'NAVBAR.EXPERIENCE' | translate }}</button>
-        <button (click)="scrollToSection('certificaciones')" class="text-left py-2.5" style="color: var(--text);">{{ 'NAVBAR.CERTIFICATIONS' | translate }}</button>
-        <div class="flex items-center gap-3 pt-3 mt-2 border-t text-sm" style="border-color: var(--border);">
-          <button (click)="switchLanguage('es')" [style.color]="currentLang === 'es' ? 'var(--accent)' : 'var(--text-faint)'">ES</button>
-          <button (click)="switchLanguage('en')" [style.color]="currentLang === 'en' ? 'var(--accent)' : 'var(--text-faint)'">EN</button>
-        </div>
-      </div>
+    <!-- Redes + tema -->
+    <div class="flex items-center gap-1.5">
+      <a href="https://github.com/VCL-tt" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="icon-btn" style="width:2rem;height:2rem;"><i class="fab fa-github text-[0.85rem]"></i></a>
+      <a href="https://www.linkedin.com/in/jcastillov15" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="icon-btn" style="width:2rem;height:2rem;"><i class="fab fa-linkedin-in text-[0.85rem]"></i></a>
+      <button (click)="toggleTheme()" aria-label="Cambiar tema" class="icon-btn" style="width:2rem;height:2rem;">
+        <svg *ngIf="!isDarkMode" class="w-[0.95rem] h-[0.95rem]" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.071-7.071l-1.414 1.414M6.343 17.657l-1.414 1.414M17.657 17.657l1.414 1.414M6.343 6.343L4.929 4.929M12 6a6 6 0 100 12 6 6 0 000-12z"></path></svg>
+        <svg *ngIf="isDarkMode" class="w-[0.95rem] h-[0.95rem]" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 1021 12.79z"></path></svg>
+      </button>
     </div>
   </div>
-</nav>
+</ng-template>
+
+<!-- ===================== SIDEBAR (desktop) ===================== -->
+<aside class="hidden lg:flex fixed left-0 top-0 h-screen w-60 flex-col z-40"
+  style="background: var(--bg-elev); border-right: 1px solid var(--border);">
+
+  <!-- Logo -->
+  <div class="px-5 py-6">
+    <a (click)="navigateToPage('/')" class="flex items-center gap-2.5 cursor-pointer select-none">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-md text-sm font-bold flex-shrink-0"
+        style="background: var(--accent-soft); color: var(--accent);">&lt;/&gt;</span>
+      <span class="min-w-0">
+        <span class="block text-[0.95rem] font-bold tracking-tight leading-tight" style="color: var(--text);">Jorge Castillo</span>
+        <span class="block text-[0.72rem] leading-tight" style="color: var(--text-faint);">{{ 'HOME.TITLE' | translate }}</span>
+      </span>
+    </a>
+  </div>
+
+  <!-- Navegación -->
+  <nav class="flex-1 px-4 space-y-1 overflow-y-auto">
+    <ng-container *ngTemplateOutlet="navLinks"></ng-container>
+  </nav>
+
+  <!-- Inferior -->
+  <div class="py-4 border-t" style="border-color: var(--border);">
+    <ng-container *ngTemplateOutlet="bottomControls"></ng-container>
+  </div>
+</aside>
+
+<!-- ===================== TOPBAR (móvil) ===================== -->
+<div class="lg:hidden fixed top-0 left-0 w-full z-40 flex items-center justify-between h-14 px-4 border-b backdrop-blur-md"
+  style="background: color-mix(in srgb, var(--bg) 90%, transparent); border-color: var(--border);">
+  <a (click)="navigateToPage('/')" class="flex items-center gap-2 cursor-pointer">
+    <span class="inline-flex items-center justify-center w-8 h-8 rounded-md text-sm font-bold" style="background: var(--accent-soft); color: var(--accent);">&lt;/&gt;</span>
+    <span class="text-[0.95rem] font-bold" style="color: var(--text);">Jorge Castillo</span>
+  </a>
+  <div class="flex items-center gap-2">
+    <button (click)="toggleTheme()" aria-label="Cambiar tema" class="icon-btn">
+      <svg *ngIf="!isDarkMode" class="w-[1.05rem] h-[1.05rem]" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.071-7.071l-1.414 1.414M6.343 17.657l-1.414 1.414M17.657 17.657l1.414 1.414M6.343 6.343L4.929 4.929M12 6a6 6 0 100 12 6 6 0 000-12z"></path></svg>
+      <svg *ngIf="isDarkMode" class="w-[1.05rem] h-[1.05rem]" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 1021 12.79z"></path></svg>
+    </button>
+    <button (click)="toggleMenu()" id="menu-toggle" type="button" [attr.aria-label]="isMenuOpen ? 'Cerrar menú' : 'Abrir menú'" class="icon-btn">
+      <svg *ngIf="!isMenuOpen" class="w-[1.05rem] h-[1.05rem]" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      <svg *ngIf="isMenuOpen" class="w-[1.05rem] h-[1.05rem]" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ===================== DRAWER (móvil) ===================== -->
+<div *ngIf="isMenuOpen" class="lg:hidden fixed inset-0 z-50">
+  <div @fade class="absolute inset-0 bg-black/40" (click)="closeMenu()"></div>
+  <aside @drawer class="absolute left-0 top-0 h-full w-72 flex flex-col"
+    style="background: var(--bg-elev); border-right: 1px solid var(--border);">
+    <div class="px-5 py-5 flex items-center justify-between">
+      <a (click)="navigateToPage('/')" class="flex items-center gap-2.5 cursor-pointer">
+        <span class="inline-flex items-center justify-center w-9 h-9 rounded-md text-sm font-bold" style="background: var(--accent-soft); color: var(--accent);">&lt;/&gt;</span>
+        <span class="text-[0.95rem] font-bold" style="color: var(--text);">Jorge Castillo</span>
+      </a>
+      <button (click)="closeMenu()" aria-label="Cerrar" class="icon-btn">
+        <svg class="w-[1.05rem] h-[1.05rem]" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <nav class="flex-1 px-4 space-y-1 overflow-y-auto">
+      <ng-container *ngTemplateOutlet="navLinks"></ng-container>
+    </nav>
+    <div class="py-4 border-t" style="border-color: var(--border);">
+      <ng-container *ngTemplateOutlet="bottomControls"></ng-container>
+    </div>
+  </aside>
+</div>

@@ -1,5 +1,5 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component, EventEmitter, Input, Output, HostListener, ElementRef, Inject, PLATFORM_ID, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, HostListener, ElementRef, Inject, PLATFORM_ID, OnInit, OnDestroy, NgZone, ChangeDetectorRef } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { trigger, transition, style, animate, state } from '@angular/animations';
@@ -42,10 +42,23 @@ import { trigger, transition, style, animate, state } from '@angular/animations'
       transition(':leave', [
         animate('200ms ease-in', style({ opacity: 0, transform: 'translateY(-20px)' }))
       ])
+    ]),
+    trigger('drawer', [
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)' }),
+        animate('260ms cubic-bezier(0.35, 0, 0.25, 1)', style({ transform: 'translateX(0)' }))
+      ]),
+      transition(':leave', [
+        animate('200ms ease-in', style({ transform: 'translateX(-100%)' }))
+      ])
+    ]),
+    trigger('fade', [
+      transition(':enter', [ style({ opacity: 0 }), animate('200ms ease-out', style({ opacity: 1 })) ]),
+      transition(':leave', [ animate('200ms ease-in', style({ opacity: 0 })) ])
     ])
   ]
 })
-export class NavbardComponent implements OnInit {
+export class NavbardComponent implements OnInit, OnDestroy {
 
   isMenuOpen: boolean = false;
   isDropdownOpen: boolean = false;
@@ -57,10 +70,17 @@ export class NavbardComponent implements OnInit {
 
   currentLang: string = 'es';
 
+  // Sección activa (scrollspy)
+  activeSection: string = 'home';
+  private spyObserver?: IntersectionObserver;
+  private readonly spyIds = ['home', 'sobre-mi', 'tecnologias', 'experiencia', 'certificaciones'];
+
   constructor(
     private elementRef: ElementRef,
     private router: Router,
     private translate: TranslateService,
+    private zone: NgZone,
+    private cdr: ChangeDetectorRef,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.translate.setDefaultLang('es');
@@ -79,6 +99,42 @@ export class NavbardComponent implements OnInit {
     // Mostrar navbar inmediatamente para mejorar la percepción de velocidad
     this.navbarState = 'visible';
     this.menuItemsState = 'visible';
+
+    if (isPlatformBrowser(this.platformId)) {
+      // Scrollspy: resalta la sección visible en el sidebar
+      setTimeout(() => this.setupScrollSpy(), 300);
+    }
+  }
+
+  private setupScrollSpy(): void {
+    this.spyObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.target.id) {
+            // IntersectionObserver corre fuera de la zona de Angular:
+            // forzamos la actualización dentro de la zona para refrescar la vista.
+            this.zone.run(() => {
+              this.activeSection = entry.target.id;
+              this.cdr.markForCheck();
+            });
+          }
+        });
+      },
+      { rootMargin: '-45% 0px -50% 0px', threshold: 0 }
+    );
+
+    this.spyIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) this.spyObserver!.observe(el);
+    });
+  }
+
+  isActive(id: string): boolean {
+    return this.activeSection === id;
+  }
+
+  ngOnDestroy(): void {
+    this.spyObserver?.disconnect();
   }
 
   scrollToSection(sectionId: string): void {

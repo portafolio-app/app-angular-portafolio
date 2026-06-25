@@ -1,7 +1,8 @@
 <div class="min-h-screen">
   <app-navbard [isDarkMode]="isDarkMode" (themeToggle)="toggleTheme()"></app-navbard>
 
-  <main class="container-ed pt-28 pb-16">
+  <div class="lg:pl-60">
+  <main class="container-ed pt-20 lg:pt-12 pb-16">
     <!-- Breadcrumb -->
     <nav class="flex items-center gap-2 text-[0.8rem] mb-6" style="color: var(--text-faint);">
       <button (click)="goToProjects()" class="link-ed inline-flex items-center gap-1.5">
@@ -83,4 +84,5 @@
   </main>
 
   <div class="container-ed pb-16"></div>
+  </div>
 </div>

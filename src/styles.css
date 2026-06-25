@@ -84,6 +84,10 @@ h1, h2, h3, h4 {
   line-height: 1.15;
 }
 
+/* Componentes standalone como bloque (cajas correctas para layout/scrollspy) */
+app-hero, app-about-me, app-stack-tecnologico, app-experiencia,
+app-certificaciones, app-footer, app-card-proyectos { display: block; }
+
 p { color: var(--text-muted); }
 
 ::selection { background: var(--accent); color: #fff; }
@@ -254,6 +258,40 @@ p { color: var(--text-muted); }
 
 /* Regla fina */
 .rule-ed { height: 1px; background: var(--border); border: 0; }
+
+/* Enlace del sidebar */
+.side-link {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 8px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease;
+  position: relative;
+}
+.side-link i { width: 1.15rem; text-align: center; font-size: 0.95rem; }
+.side-link:hover { background: var(--surface); color: var(--text); }
+.side-link[data-active="true"] {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+.side-link[data-active="true"]::before {
+  content: "";
+  position: absolute;
+  left: -0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 1.1rem;
+  border-radius: 0 3px 3px 0;
+  background: var(--accent);
+}
 
 /* Cifras destacadas */
 .stat-num { font-size: 1.85rem; font-weight: 700; line-height: 1; color: var(--accent); }

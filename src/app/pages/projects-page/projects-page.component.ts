@@ -12,7 +12,8 @@ import { ThemeService } from '../../core/services/ThemeService';
   imports: [CommonModule, RouterModule, NavbardComponent, FooterComponent, CardProyectosComponent],
   template: `
     <app-navbard [isDarkMode]="isDarkMode" (themeToggle)="toggleTheme()"></app-navbard>
-    <main class="container-ed pt-28 pb-16 min-h-screen">
+    <div class="lg:pl-60">
+    <main class="container-ed pt-20 lg:pt-12 pb-16 min-h-screen">
       <header class="mb-8">
         <a routerLink="/" class="inline-flex items-center gap-2 text-[0.82rem] link-ed mb-5">
           <i class="fas fa-arrow-left text-xs"></i> Inicio
@@ -31,6 +32,7 @@ import { ThemeService } from '../../core/services/ThemeService';
     </main>
     <div class="container-ed pb-16">
       <app-footer></app-footer>
+    </div>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
