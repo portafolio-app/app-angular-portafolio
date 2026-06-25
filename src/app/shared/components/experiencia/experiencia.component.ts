@@ -34,12 +34,8 @@ export class ExperienciaComponent {
       type: 'work',
       current: true,
       description: 'EXPERIENCE.ITEMS.SINAPSIS.DESCRIPTION',
-      achievements: [
-        'EXPERIENCE.ITEMS.SINAPSIS.ACHIEVEMENTS.0',
-        'EXPERIENCE.ITEMS.SINAPSIS.ACHIEVEMENTS.1',
-        'EXPERIENCE.ITEMS.SINAPSIS.ACHIEVEMENTS.2'
-      ],
-      technologies: ['Java', 'Spring Boot', '.NET', 'PostgreSQL', 'Docker', 'REST APIs']
+      achievements: [],
+      technologies: []
     },
     {
       id: '1',
