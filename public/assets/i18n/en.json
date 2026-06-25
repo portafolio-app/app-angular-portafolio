@@ -201,20 +201,45 @@
     "EMPTY_TITLE": "No certifications found",
     "EMPTY_DESC": "I will add more certifications soon.",
     "ITEMS": {
-      "ML_TENSORFLOW": {
-        "TITLE": "Machine Learning Specialization with TensorFlow and Keras",
-        "ISSUER": "DMC Institute",
-        "DESCRIPTION": "Comprehensive Machine Learning specialization using TensorFlow and Keras. Includes neural networks, deep learning, natural language processing, and computer vision."
+      "BACHILLER": {
+        "TITLE": "Bachelor in Computer and Systems Engineering",
+        "ISSUER": "Universidad Privada Antenor Orrego (UPAO)",
+        "DESCRIPTION": "Bachelor's degree conferred on March 31, 2026. Strong foundation in algorithms, databases, networks, software engineering, and IT management."
       },
       "SOFT_ARCH": {
-        "TITLE": "SOFTWARE ARCHITECTURE Program",
-        "ISSUER": "CodiGo / TECSUP",
-        "DESCRIPTION": "Intensive Software Architecture bootcamp with Java, covering design patterns, microservices, cloud-native architecture, and enterprise development best practices."
+        "TITLE": "Software Architecture",
+        "ISSUER": "TECSUP",
+        "DESCRIPTION": "Specialization in scalable system design: microservices, clean architectures (Hexagonal/Onion), DDD, design patterns, and cloud-native practices. Credential E-282216."
+      },
+      "AWS_CCP": {
+        "TITLE": "AWS Certified Cloud Practitioner (CLF-C02)",
+        "ISSUER": "Udemy",
+        "DESCRIPTION": "AWS cloud fundamentals: core services (EC2, S3, IAM), pricing and billing models, security, and the AWS Well-Architected Framework."
       },
       "TS_PLATZI": {
         "TITLE": "TypeScript Certification",
         "ISSUER": "Platzi",
-        "DESCRIPTION": "Comprehensive TypeScript certification, covering advanced types, interfaces, generics, decorators, and best practices for developing robust and scalable applications."
+        "DESCRIPTION": "Advanced types, interfaces, generics, decorators, and best practices for building robust, scalable applications with TypeScript."
+      },
+      "ML_TENSORFLOW": {
+        "TITLE": "Deep Learning Specialization with TensorFlow and Keras",
+        "ISSUER": "DMC Institute",
+        "DESCRIPTION": "Deep Learning specialization with TensorFlow and Keras: neural networks, computer vision, and natural language processing."
+      },
+      "SPRING_BOOT": {
+        "TITLE": "Java: Spring Boot - The Definitive Guide",
+        "ISSUER": "Udemy",
+        "DESCRIPTION": "Backend development with Java and Spring Boot: REST APIs, Spring Security, JPA/Hibernate, and building scalable enterprise applications."
+      },
+      "ANGULAR_PRO": {
+        "TITLE": "Angular Pro: Take Your Foundations to the Next Level",
+        "ISSUER": "Udemy · Fernando Herrera",
+        "DESCRIPTION": "Advanced Angular concepts: RxJS, Signals, state management, standalone components, optimization, and server-side rendering (SSR)."
+      },
+      "ANGULAR_ZERO": {
+        "TITLE": "Angular: From Zero to Expert",
+        "ISSUER": "Udemy · Fernando Herrera",
+        "DESCRIPTION": "Comprehensive Angular course from the fundamentals: components, routing, forms, API consumption, and application architecture."
       }
     }
   },
