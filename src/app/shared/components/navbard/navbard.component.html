@@ -22,31 +22,34 @@
 
 <!-- ============ Controles inferiores reutilizables ============ -->
 <ng-template #bottomControls>
-  <!-- Disponibilidad -->
-  <div class="flex items-center gap-2 px-3 mb-3">
-    <span class="relative flex h-2 w-2">
-      <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60" style="background: var(--accent);"></span>
-      <span class="relative inline-flex rounded-full h-2 w-2" style="background: var(--accent);"></span>
-    </span>
-    <span class="text-[0.72rem] font-semibold" style="color: var(--accent);">{{ 'FOOTER.PROJECT_AVAIL' | translate }}</span>
-  </div>
-
-  <div class="flex items-center justify-between px-3">
-    <!-- Idioma -->
-    <div class="flex items-center text-xs font-medium">
-      <button (click)="switchLanguage('es')" class="px-1.5 py-1" [style.color]="currentLang === 'es' ? 'var(--accent)' : 'var(--text-faint)'">ES</button>
-      <span style="color: var(--border-strong);">/</span>
-      <button (click)="switchLanguage('en')" class="px-1.5 py-1" [style.color]="currentLang === 'en' ? 'var(--accent)' : 'var(--text-faint)'">EN</button>
+  <div class="px-4 space-y-3.5">
+    <!-- Disponibilidad -->
+    <div class="flex items-center gap-2">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60" style="background: var(--accent);"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2" style="background: var(--accent);"></span>
+      </span>
+      <span class="text-[0.72rem] font-semibold" style="color: var(--accent);">{{ 'FOOTER.PROJECT_AVAIL' | translate }}</span>
     </div>
 
-    <!-- Redes + tema -->
-    <div class="flex items-center gap-1.5">
-      <a href="https://github.com/VCL-tt" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="icon-btn" style="width:2rem;height:2rem;"><i class="fab fa-github text-[0.85rem]"></i></a>
-      <a href="https://www.linkedin.com/in/jcastillov15" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="icon-btn" style="width:2rem;height:2rem;"><i class="fab fa-linkedin-in text-[0.85rem]"></i></a>
-      <button (click)="toggleTheme()" aria-label="Cambiar tema" class="icon-btn" style="width:2rem;height:2rem;">
-        <svg *ngIf="!isDarkMode" class="w-[0.95rem] h-[0.95rem]" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.071-7.071l-1.414 1.414M6.343 17.657l-1.414 1.414M17.657 17.657l1.414 1.414M6.343 6.343L4.929 4.929M12 6a6 6 0 100 12 6 6 0 000-12z"></path></svg>
-        <svg *ngIf="isDarkMode" class="w-[0.95rem] h-[0.95rem]" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 1021 12.79z"></path></svg>
-      </button>
+    <div class="rule-ed"></div>
+
+    <!-- Idioma + tema + redes -->
+    <div class="flex items-center justify-between">
+      <div class="flex items-center text-xs font-semibold">
+        <button (click)="switchLanguage('es')" class="px-1.5 py-1" [style.color]="currentLang === 'es' ? 'var(--accent)' : 'var(--text-faint)'">ES</button>
+        <span style="color: var(--border-strong);">/</span>
+        <button (click)="switchLanguage('en')" class="px-1.5 py-1" [style.color]="currentLang === 'en' ? 'var(--accent)' : 'var(--text-faint)'">EN</button>
+      </div>
+
+      <div class="flex items-center gap-1.5">
+        <a href="https://github.com/VCL-tt" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="icon-btn" style="width:2.1rem;height:2.1rem;"><i class="fab fa-github text-[0.9rem]"></i></a>
+        <a href="https://www.linkedin.com/in/jcastillov15" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="icon-btn" style="width:2.1rem;height:2.1rem;"><i class="fab fa-linkedin-in text-[0.9rem]"></i></a>
+        <button (click)="toggleTheme()" aria-label="Cambiar tema" class="icon-btn" style="width:2.1rem;height:2.1rem;">
+          <svg *ngIf="!isDarkMode" class="w-[0.95rem] h-[0.95rem]" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.071-7.071l-1.414 1.414M6.343 17.657l-1.414 1.414M17.657 17.657l1.414 1.414M6.343 6.343L4.929 4.929M12 6a6 6 0 100 12 6 6 0 000-12z"></path></svg>
+          <svg *ngIf="isDarkMode" class="w-[0.95rem] h-[0.95rem]" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 1021 12.79z"></path></svg>
+        </button>
+      </div>
     </div>
   </div>
 </ng-template>
